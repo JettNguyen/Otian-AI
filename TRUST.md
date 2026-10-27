@@ -4939,6 +4939,67 @@ old. Archie Mobile keeps the bullets in view under a long draft's cut (`cardNote
 phone with no change there" is no longer the whole story. What it names and its boundaries are
 unchanged.
 
+*Amended October 26, 2026 (Archie `82b01683`, in no release yet): a price nobody gave is now a
+blank, so Send waits on it.* Where the line under an email draft only named an amount nothing given
+held, code now leaves it in the draft as a blank, "[$140, check the price]", which holds Send like
+any other, on email and text cards alike. On an email card it is also first under **Check these
+before you send it.**, saying where it was looked for.
+
+**Proposed addition, Jett's to approve:** "If a draft your agent writes quotes a price that isn't in
+what you typed, your lists, your files, or the email it answers, Archie leaves the price in brackets
+for you to check, like [$140, check the price], and the draft won't send until you fill it in. A
+draft written by itself, that you didn't ask for, may only quote a price already in that email or
+text conversation."
+
+**Why it's true:**
+
+- **What counts as given.** `prices_nobody_gave` in
+  `crates/archie-runtime/src/email/replies/added.rs` reads each dollar amount in the draft's own
+  words and accepts one that appears in what was given, or is worked out from it: a share of a
+  given amount (50% of $2,960), a given price times a count, a total of the draft's own accepted
+  amounts, or one taken from another (the balance after a deposit). What it is checked against
+  depends on who asked. A draft the owner asked for in chat, or pressed Draft for: what they typed,
+  what was read that turn, the email answered, the profile, memory, every entry on their lists and
+  their small files (24KB or less, `crates/archie-runtime/src/kept_in_writing.rs`), and the draft
+  already on the card when it revises one. A draft the mail watch or the text watch wrote by itself:
+  that email or text conversation only (`parse_triage` in `email/replies/triage.rs`, `priced_from`
+  in `texts/replies/triage.rs`), because a price on the owner's own sheet is still theirs to decide
+  to quote. That is the week run's "never quote a price to a customer unless i wrote it down".
+- **How it is marked.** `mark_prices` in the same file. A rewrite, another version, or a redraft
+  with what was looked up keeps a held price held, unless the owner's words for the change or the
+  lookup name it (`keep_marks`, in both lanes).
+- **What the card says.** On an email card the line leads with "$450: I found this price nowhere in
+  what you typed, your lists or your files". On one the watch drafted, it is "$140 is in your own
+  lists or files, but nobody has said to quote it in this email", or "$140: I found this price
+  nowhere in this email thread, your lists or your files" (`line_for_marks`, set in `deliver` in
+  `email/replies/card.rs` and on the Draft press in `email/replies/actions.rs`). A text card has no
+  such line; its Send names the blank, as before.
+- Tests: `a_price_nobody_gave_is_left_as_a_blank_that_holds_send`,
+  `a_quote_worked_out_from_the_sheet_is_not_held_and_a_made_up_charge_is` and
+  `marks_stay_on_the_price_they_mark` in `added.rs`;
+  `the_watch_leaves_a_price_nobody_said_to_quote_as_a_blank_and_send_waits` and
+  `a_draft_names_what_nobody_gave_it` in `email/replies/tests.rs`;
+  `a_price_nobody_gave_in_a_text_reply_is_a_blank_that_holds_send` in `texts/replies/tests.rs`.
+- **Cost.** None: it is code, run on a draft that has a dollar amount in it. A held price adds
+  about 5 tokens where the card's words come back into the conversation.
+
+**The boundaries.**
+
+- ⛔ **The boundary "Code reads only amounts, days, and times ... The line names; it never holds
+  Send" is now half wrong.** A price nobody gave holds Send. A day or a time nobody gave is still
+  only named, and only on an email card. A reason, a promise, or a feature is still not read by
+  code at all. Never "Archie checks every detail in a draft."
+- ⛔ **The boundary "'Check before sending' is on email cards the agent drafts in chat only" is now
+  half wrong.** A mail watch draft holding a price has the line, naming that price only. A text has
+  no line; Send waits and says why.
+- ⚠️ **Dollar amounts only.** "140 dollars" in words, or a number with no dollar sign, is not read
+  as a price.
+- ⚠️ **Any match counts.** A number written anywhere the draft is checked against counts as given,
+  even when it is the price of something else, so a made-up price that happens to match is not
+  held. Never "Archie checks your prices against your price list."
+- ⚠️ **A long document is not read for it.** Files over 24KB are checked only when the agent read
+  them on that turn, so a price from a long price book the agent read yesterday is held.
+
 ### ✅ When the AI company fails, Archie asks it once more, says whether anything was saved or sent, and puts Try again under the reply: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -12974,6 +13035,114 @@ on `trust/` and diff it against the last version.** A page gets edited for lengt
 for a new feature, and the paragraph nobody is defending is the one that quietly loses a clause.
 
 ---
+
+### 🚧 A change you did not ask for is offered, not made: BUILT 2026-10-26, in no release yet
+
+*Built October 26, 2026 (Archie `04825592` and `adeb3ce4`, in no release yet).*
+
+**Proposed wording, Jett's to approve:** "When you tell your agent to change one thing, it changes
+that. If it also wants to move something you didn't mention, like a client to Past client, it asks
+first with two buttons, Change it or Keep it. And when a payment could belong to either of two
+entries, it asks which one before marking anything paid."
+
+**Why it's true:**
+
+- **Stages and other pick-one columns.** At the one place every list change passes
+  (`execute_tools` in `crates/archie-runtime/src/gateway/turn.rs`), a `records_update` that moves a
+  pick-one column (a stage, a status) to a value the owner's own words do not name, on a turn that
+  also makes a move they did name, has that column taken out (`unnamed_moves` and `without` in
+  `crates/archie-runtime/src/gateway/unasked.rs`). The rest of the change is made, and the model is
+  told what was left as it was and to offer it with two buttons (`offer_instead`). The owner's words
+  are their message and, when they said yes, the message they said yes to. "Mark it closed" names
+  Closed. Test: `a_stage_moved_beside_the_one_asked_for_is_offered_not_made`, Megan's "Henderson
+  funded and recorded yesterday. Please mark it closed.", which closes the deal and leaves Pat and
+  Linda Henderson on Active.
+- **Which payment.** A payment written to one entry while another entry of the same name, not yet
+  paid, fits what was said as well is refused, and the model is told to ask which, with the two as
+  the choices (`guessed_payment`). Where the two differ by a date, an amount, or a word the owner
+  used, the one they named goes through. Test:
+  `a_payment_on_one_of_two_matching_entries_waits_for_which`, Emily's two Harlan rentals and Kathy's
+  $300 check.
+- **The owner's word that a payment came is taken.** Waiting On 1.3.13
+  (`data/marketplace/skills/waiting-on.json`) marks it paid when the owner says so and writes whose
+  word it was in the notes, where it used to refuse without a check number (Kyle's Zimmerman
+  check). Someone else's word in an email is still not enough.
+- **Cost.** The code checks cost nothing. The skill's sentence adds 38 tokens on turns routed to
+  Waiting On (Archie's `docs/COST-MEASURED.md`, section 46).
+
+**The boundaries.**
+
+- ⛔ **Never "your agent never changes anything without asking."** A change the owner did name is
+  made at once, with its Undo, as before, and so is a report read into the change it means ("Sam
+  dropped the 2 units at Maple" marks them on site). Only the extra move beside a named one is held.
+- ⚠️ **Pick-one columns only.** A date, a number, or words changed beside the asked-for change are
+  not held.
+- ⚠️ **A routine's or the mail watch's changes are not this.** The check reads the words a person
+  typed in the chat. A button they pressed is their choice and goes through as pressed.
+
+### 🚧 When your agent looks something up, it is handed the newest note and any day ahead in the notes: BUILT 2026-10-26, in no release yet
+
+*Built October 26, 2026 (Archie `45ebb748`, in no release yet).*
+
+**Proposed wording, Jett's to approve:** "Each time your agent looks up a customer, a deal or
+anything else on your lists, it is handed the newest line of that entry's notes and any date still
+ahead that the notes mention, so a deadline it told you about yesterday is still in front of it
+today."
+
+**Why it's true:** `add_latest_word` in `crates/archie-runtime/src/records.rs`. Notes are written as
+a dated line at the end, and a list shows the first 200 characters of a long one. A lookup that
+returns 3 entries or fewer now carries `latest_note`, the last line of a note that was cut, and
+`records_get` or such a lookup carries `dates_ahead_in_notes`: each line naming a date from today
+on, with that day spelled out (`dates_written` in `crates/archie-runtime/src/schedule.rs`). Tests:
+`a_deadline_in_a_deals_notes_comes_with_the_deal_the_next_day` (Megan's Wells title deadline) and
+`the_newest_line_of_a_long_note_comes_with_the_entry` (Kyle's Zimmerman check). Cost: 0 to 64
+tokens on a lookup, measured, and nothing on any other turn (Archie's `docs/COST-MEASURED.md`,
+section 45).
+
+**The boundaries.**
+
+- ⛔ **Never "your agent's answers stay the same from day to day" or "it never forgets a
+  deadline."** It is handed the line; it can still answer without it.
+- ⚠️ **The entry's own notes only.** A reminder or a to-do about the deal is not brought with it.
+- ⚠️ **Dates written as dates.** "October 21", "10/21" and "2026-10-21" are read; "Friday" or
+  "next week" in a note is not, since it counts from the day the note was written.
+- ⚠️ **A deadline already met is still named** while its day is ahead, if the note still says it.
+  The newest line beside it is what says it was met.
+- ⚠️ **A list of more than 3 entries carries neither**, so a question about every deal reads each
+  deal's notes as before.
+
+### 🚧 "undo it" is answered with what was actually changed, each with its Undo: BUILT 2026-10-26, in no release yet
+
+*Built October 26, 2026 (Archie `0b0ce599`, in no release yet).*
+
+**Proposed wording, Jett's to approve:** "Type 'undo that' and your agent tells you exactly what it
+changed the last time you asked it for something, with an Undo button beside each change. Nothing
+is put back until you press it."
+
+**Why it's true:** `crates/archie-runtime/src/gateway/undo_answer.rs`, called from
+`handle_message_attributed` in `crates/archie-runtime/src/gateway/turn.rs` before any AI call. A
+message from the owner that asks for an undo and nothing else ("undo it", "whatever you just did,
+undo it", "can you put it back?") is answered from the journal: the newest job the owner asked for
+in the last day, each change in its own words, a draft by what its card says now, anything sent as
+"That went out, so it cannot be taken back.", and "I haven't changed anything for you in the last
+day, so there is nothing to undo." when nothing changed. List entries and memory notes go on the
+line under the reply with their Undo, which runs the journal's own (`journal_undo_step` in
+`src-tauri/src/journal.rs`) in Archie and in Archie Mobile alike. Tests: three in `undo_answer.rs`,
+and `undo_it_is_answered_from_the_journal_with_no_ai_call` in
+`crates/archie-runtime/tests/pipeline.rs`, which checks that no request reached the AI. Cost: none;
+the turn makes no AI call.
+
+**The boundaries.**
+
+- ⛔ **Never "Archie can undo anything."** A sent email or text is gone. A calendar event, a file, or
+  mail filed away is named with its Undo on the agent's Jobs tab, not on the line.
+- ⚠️ **The last job asked for in the last day only.** Older work is on the Jobs tab. A routine's or
+  the mail watch's work is not "what you just did".
+- ⚠️ **A bare request only.** "Undo the Henderson change" names what to undo and goes to the agent
+  as before, which can still get it wrong. So does a teammate's "undo it" on Archie for Teams.
+- ⚠️ **Not on a chat app's line.** Telegram, Slack, Discord, Matrix and iMessage draw no line, so
+  there the answer points to the Jobs tab.
+
 
 ## Known Weaknesses — disclose, don't hide
 

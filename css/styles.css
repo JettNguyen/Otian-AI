@@ -628,13 +628,10 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  /* Visible by default, with the animation fading in on top. The reverse (opacity: 0 held visible
-     by `forwards`) made the whole page's visibility depend on an animation running to completion,
-     so any renderer that skips CSS animations would get a blank page out of a healthy 200. Chrome
-     renders both forms fine, so this is defence in depth rather than a fix for an observed bug,
-     but nothing is gained by having "can you see the site at all" rest on an animation. */
-  opacity: 1;
-  animation: pageLoad 0.4s ease;
+  /* No fade on arrival. The body used to fade in from nothing over 0.4s, so every click from one
+     page to the next blinked dark first, and in the docs side list that is every click. Jett
+     turned it down on October 27, 2026. The browser already holds the old page on screen until
+     the new one can paint, which is the smooth part; a fade only added the blink. */
 }
 
 body::before {
@@ -650,11 +647,6 @@ body::before {
     radial-gradient(circle at 86% 10%, var(--bg-wash-two) 0%, transparent 38%);
   pointer-events: none;
   z-index: -1;
-}
-
-@keyframes pageLoad {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }
 
 img,

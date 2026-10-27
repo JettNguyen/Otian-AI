@@ -934,20 +934,20 @@ checkbox in `src/app/agent-detail.tsx`. Web search is bumped to Balanced rather 
 
 **The nine tenths is measured, not modelled.** Sixteen test agents (thirteen one-person, three
 Archie for Teams with guests), each used by a simulated person over several sessions on a real key,
-with every agent forced to Economy, averaged $0.0033 a reply on Claude Haiku 5.5. The same sixteen
-on Balanced as shipped averaged $0.0330 on Sonnet 5 and $0.0320 on Sonnet 5.5, so a forced Economy
-reply is about a tenth of a Balanced one. That includes the web searches the checkbox cannot move
-off Balanced, which were 47% of the Economy bill. Economy runs Haiku 5.5 and Balanced Sonnet 5.5
-from Archie `7f1014d6` (2026-10-08), **which was in no release when this was written**, so the wording waited on a branch for the
-release that carries it.
+with every agent forced to Economy, averaged $0.0033 a reply on Economy's newer model. The same
+sixteen on Balanced as shipped averaged $0.0330 on Balanced's older model and $0.0320 on its newer
+one, so a forced Economy reply is about a tenth of a Balanced one. That includes the web searches
+the checkbox cannot move off Balanced. Both settings run their newer models from Archie `7f1014d6`
+(2026-10-08), **which was in no release when this was written**, so the wording waited on a branch
+for the release that carries it.
 
 **What it said before, and why it moved.** "About two thirds off the monthly cost", from
 `crates/archie-runtime/examples/cost_bench.rs` run with `--live --force-fast` against a
-twelve-skill agent on 2026-08-10: forced Economy on Claude Haiku 4.5 came to 27% to 32% of forced
-Balanced at the 2026-09-12 sheet (18% to 21% at the sheet of the day, "four fifths" until
-2026-09-12). Haiku 5.5 costs about a quarter of what Haiku 4.5 did per reply,
-so that figure undersold the checkbox once Economy moved. The unforced dial on that agent saved 4%
-to 7% on Haiku 4.5, and still saves little on an agent whose add-ons pick Balanced. *(Amended
+twelve-skill agent on 2026-08-10: forced Economy came to 27% to 32% of forced Balanced at the
+2026-09-12 sheet (18% to 21% at the sheet of the day, "four fifths" until 2026-09-12). An Economy
+reply costs about a quarter of what it did then, so that figure undersold the checkbox once Economy
+moved. The unforced dial on that agent saved 4% to 7% then, and still saves little on an agent
+whose add-ons pick Balanced. *(Amended
 October 13, 2026: the pricing page's Economy column no longer prices the dial alone. It said $20 to
 $41 at Economy against $22 to $41 at Balanced for moderate use, which was the dial alone; it now
 says $1 to $2, $4 to $7 and $11 to $15, an estimate, and says those need "Use this for every skill"
@@ -1032,7 +1032,7 @@ and one live run, and the page says nothing about why: the method is the part th
 On 2026-10-08 the Economy column moved again, when Economy began running a newer model in Archie
 `7f1014d6`, on two measured runs of sixteen test agents,
 and the Balanced column did not, because Balanced's newer model measured the same per reply. The
-page says the figures were measured again in October, and which models run is not a method.
+page says the figures were measured again in October.
 *(Amended October 13, 2026: the whole table moved, on measurements made on the models each setting
 runs now: 648 replies from the October 11 and 12 journey rounds, 8 scheduled tasks and 162 emails
 from our own agent's usage log, and the October 7 simulator's sixteen test agents for the light row
@@ -1056,11 +1056,9 @@ reply costs less than it would if it came with every one of them." On the site u
 `skills-marketplace/browse/`. Jett's to reword; the claim is what is checked here, not the words.
 
 **Why it's true:** an add-on reaches a reply only on an agent that has it
-(`crates/archie-runtime/src/gateway/turn.rs`), and the router only
-chooses among installed skills. The last two tools that rode every agent regardless, flights and
-video, are carried only when an installed skill uses them since Archie commit `ea957de1` (built
-2026-09-25, in 0.3.1 and every release since; before it, those two were the exception to this sentence). The
-app says the same on its own Marketplace screen (`src/app/marketplace.tsx`, Archie `c7121365`).
+(`crates/archie-runtime/src/gateway/turn.rs`), with no exception since Archie commit `ea957de1`
+(built 2026-09-25, in 0.3.1 and every release since). The app says the same on its own Marketplace
+screen (`src/app/marketplace.tsx`, Archie `c7121365`).
 
 **The boundaries:**
 - ⛔ **Never describe what an add-on adds to a reply.** The rule in the entry above governs: the
@@ -1081,7 +1079,7 @@ another closely, $0.13 to $0.19 when it starts from nothing, measured on agents 
 and several add-ons, at Balanced." The pricing page carries one sentence of it and links to the
 table. *(Amended October 13, 2026. It read "$0.01 when it follows another closely, up to $0.11 when
 it starts from nothing, measured on an agent with twelve add-ons and everything connected" from the
-August bench. Measured on Sonnet 5.5 in the October 11 and 12 journey rounds, a reply that follows
+August bench. Measured in the October 11 and 12 journey rounds, a reply that follows
 another averaged $0.036 over 648 replies, and of the 11 replies that started from nothing on the
 larger agents, 10 cost $0.126 to $0.184 and one $0.27. See FACTS.md's `$0.04`, `$0.13` and `$0.19`
 rows. The compare pages' note now says Archie was
@@ -1090,11 +1088,11 @@ measured in October 2026.)*
 **Why it's true:** every third-party figure is the company's own published price or rate, read on
 the date in FACTS.md; the derived ones (a Copilot reply that takes two actions, a Zapier activity,
 a Lindy ask) show their arithmetic in the page's Sources fold and in FACTS.md. Ours is the
-Archie repo's twelve-add-on bench, at Anthropic's sheet of 2026-09-12. Balanced runs Claude Sonnet 5.5 from Archie
-`7f1014d6` (2026-10-08): the same reply at its published rates comes to $0.0088 when it follows
-another closely (computed, still $0.01 printed) and the same $0.1063 when it starts from nothing,
-and a reply measured the same on it,
-so both figures stood until October 13, 2026, when the amendment above replaced them.
+Archie repo's twelve-add-on bench, at Anthropic's sheet of 2026-09-12. Balanced moved to a newer
+model in Archie `7f1014d6` (2026-10-08): the same reply at that model's published rates comes to
+$0.0088 when it follows another closely (computed, still $0.01 printed) and the same $0.1063 when
+it starts from nothing, and a reply measured the same on it, so both figures stood until
+October 13, 2026, when the amendment above replaced them.
 
 **Required clauses, do not drop them.** (1) Say the units are different sizes of work: a credit,
 an action and a reply are not the same thing, and the companies say so. (2) Beside the figure for a reply from nothing, say
@@ -8646,9 +8644,9 @@ Clear all, and a box to add one by hand (`agent_memory_add`, `agent_memory_edit`
 `agent_memory_remove`, `agent_memory_clear`).
 
 **The boundaries:**
-- ⛔ **Never say it remembers everything.** The carried lane is deliberately small, because it is
-  read on every message and a longer one would cost the owner more on each. The archive is the honest version of
-  "nothing is thrown away", and it is searched by matching words, not by a model.
+- ⛔ **Never say it remembers everything.** The carried lane is deliberately small. The archive is
+  the honest version of "nothing is thrown away", and it is searched by matching words, not by a
+  model.
 - ⛔ **Never say Otian AI can see it.** The file is in the agent's folder on the owner's own
   computer, like everything else in the bundle.
 - ⛔ **Never describe the recall as the agent choosing to look something up.** There is no tool for
@@ -9401,9 +9399,9 @@ to read it.
 agent real files and checks the bytes it sends back, never a model's grade: 17 cases, 44 checks,
 covering a figure changed, a row added, a formula read, a sentence, a bullet and a table cell in
 Word, a price and a bullet on a slide, a line added to a .csv, .md and .json, a PDF and an .xls
-read, a Numbers file refused, and five files made and sent. Balanced (Sonnet 5.5) passed 44 of 44.
-Economy (Haiku 5.5) passed 38 of 44; its three failing cases were fixed in code and passed all 24
-checks on two reruns. Reading costs a little more.
+read, a Numbers file refused, and five files made and sent. Balanced passed 44 of 44. Economy
+passed 38 of 44; its three failing cases were fixed in code and passed all 24 checks on two reruns.
+Reading costs a little more.
 
 **Boundaries:**
 - ⛔ **Never say it edits the file on your computer, or in your folders.** Adding a file to an agent
@@ -11082,8 +11080,8 @@ there. Run it now asks for the routine on the same lane as the Routines tab's Ru
   tab still says it missed.
 - ⛔ **Never "it works while your computer is off".** This is what it says after, not what it does
   during.
-- ⛔ **Never "it costs nothing".** The message makes no AI call, but the agent reads it again with
-  everything else it said, so the replies after it cost a little more.
+- ⛔ **Never "it costs nothing".** The message makes no AI call, but the replies after it cost a
+  little more.
 - ⚠️ **Only what the owner had on, and would have heard from**: a routine that is on and sends a
   message. A Silent routine is never named, a due-date routine with nothing due now is not named,
   and a routine that ran late on wake (inside its morning, afternoon or evening) is not named,
@@ -13331,8 +13329,8 @@ plus at most five passages of 400, never the samples themselves (`writing_style:
 in `texts/replies/triage.rs`, so Text Replies' row decides it. The owner's own texts still set length,
 capitals, punctuation and emoji and win where the two disagree; the note lends word choice and warmth,
 never an email's greeting, sign-off or length. The note adds roughly $0.15 to $0.38 a month at 9.6
-texts a day, from Fast on Haiku 4.5 to Balanced on Sonnet 5; from Archie
-`7f1014d6`, where Economy runs Haiku 5.5, the Fast end is about $0.02. Tests in `texts/replies/tests.rs`.
+texts a day, from Fast to Balanced; from Archie `7f1014d6`, where Economy runs a newer model, the
+Fast end is about $0.02. Tests in `texts/replies/tests.rs`.
 
 **What is kept, approved now:** "If you let Archie read your sent mail, it keeps the parts you wrote
 and a short description on this computer, and in backups you make, until you clear them"
@@ -13528,7 +13526,7 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
 - ⛔ **The phone connects nothing.** It says where to connect on the computer.
 - ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
 - ⚠️ **A search is "about 2 to 4 cents", counting the pages it brings back** (FACTS.md; measured 1.6 to
-  4.3 cents on Sonnet 5). The app and the phone say so since
+  4.3 cents). The app and the phone say so since
   Archie 9f888e61 and archie-mobile 49f31d9, and the site's submit page since this sync; "about a cent"
   was the search fee alone and is never quoted as a search's cost again. Deep Research: "about 50 cents
   a run", up to 20 searches; never "a few cents".
@@ -15774,7 +15772,7 @@ instead. A question with none of those can still reach the researcher."
   three of the journey tests sent all twelve school questions to the researcher, and all twelve
   answers quoted scores.
 - **Measured on the October 10 journey run's own messages, before the check in code** (`cf255232`'s
-  commit message, Haiku 5.5): the owner's questions sent to the researcher fell from 54 of 66 to 8
+  commit message): the owner's questions sent to the researcher fell from 54 of 66 to 8
   of 66, 42 of 44 web questions still went there, and the existing gate cases went from 93.4% to
   91.4%, pooled over two passes. Eleven of the run's cases joined the gate
   (`router_cases_journeys.json`).

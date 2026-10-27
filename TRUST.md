@@ -432,11 +432,11 @@ the homepage price band, how-it-works, the compare pages, the pricing page's des
 says in its own words that "routines and the inbox watch are not in these journeys and come on top"
 (`~/agent-journeys/2026-10-12-round-three/cost.md`, summarized in Archie's
 `docs/agent-ux/journeys/2026-10-12-findings.md`), and the card is shown exactly when an owner turns
-mail or texts on. Its cold-start price ($0.0964) also averaged in two turns that were only partly
-cold; replies that start from nothing measured a median of $0.14. The new ends are the light row's
+mail or texts on. Its price for a reply that starts from nothing ($0.0964) also averaged in two
+turns that only partly did; replies that start from nothing measured a median of $0.14. The new ends are the light row's
 floor at Balanced ($13) and 10 messages a day on an agent with email and lists, with its scheduled
 tasks and an inbox watched at the 24 emails a day our own agent averaged ($30.16, rounded up to $31).
-The arithmetic is Archie's `docs/COST-MEASURED.md` section 29 and FACTS.md's `$13` and `$31` rows.
+The arithmetic is in FACTS.md's `$13` and `$31` rows.
 Never "it costs $13", never "under $31", and never on a page without "usually" and "a month". The
 pricing page's table was rebuilt on the same measurements the same day, so the two now agree.)*
 
@@ -509,7 +509,7 @@ on our account for that one person, without touching their license or the rest o
 
 - `stripe-webhook/credits.js`, `rewriteForTrial`: sets Anthropic's `metadata.user_id` from a tag
   the relay chose. `metadata` is not in `FORWARDED_FIELDS`, so a client cannot set it or forge
-  somebody else's. Metadata is not prompt text and costs no tokens.
+  somebody else's. Metadata is not prompt text and costs nothing.
 - `stripe-webhook/index.js`, the `/trial/v1/messages` route: the tag is `trialHash("user:" + uid)`,
   the same salted, truncated sha256 as the device and IP stamps. It is kept on `credits/{uid}` as
   `relay_tag`, written inside the hold transaction the call already makes, so a tag Anthropic reports
@@ -726,29 +726,26 @@ benchmarked them. We have not. Say what moves, not what performs.
 `d525f04b`: the free credits and the plan's AI run on Claude Sonnet 5.5, and one short kind of call
 on the Claude Haiku the app asks for.** `TRIAL_MODEL` in `stripe-webhook/index.js` now defaults to
 `claude-sonnet-5-5` (it was Sonnet 5). `modelForCall` in `stripe-webhook/credits.js` lets a call run
-on the Haiku the app asked for only when the model is a priced Claude Haiku, asks for at most 256
-tokens back, and sends under about 20,000 (`LIGHT_MAX_OUTPUT_TOKENS`, `LIGHT_MAX_INPUT_TOKENS`),
-which is the call Archie makes to decide which of an agent's skills a message is for. Archie asks
-for Claude Haiku 5.5 there from 0.3.7 on; 0.3.6 asks for Claude Haiku 4.5, which is metered at its
-own price ($1 / $5). Everything else runs on the pinned model, whatever the app asked for, an
-Economy agent's own turns included. Each call is metered at its own model's list price (`ratesFor`:
-$2 / $10 a million tokens for Sonnet 5.5, $0.10 / $0.50 for Haiku 5.5), and the test "a short haiku
-call runs as asked, and everything else runs on the pinned model" in
-`stripe-webhook/credits.test.js` pins the split. Priced again on the October 11 journeys' own turns,
-which ran on Sonnet 5 (Archie `docs/COST-MEASURED.md` section 27.2), the $2 of free credits covers
-about five first evenings instead of about four and a half.
+on the Haiku the app asked for only when the model is a priced Claude Haiku and the call is short,
+both in what it sends and in what it asks back. Archie asks for Claude Haiku 5.5 for that call from
+0.3.7 on; 0.3.6 asks for Claude Haiku 4.5, which is metered at its own price ($1 / $5). Everything
+else runs on the pinned model, whatever the app asked for, an Economy agent's own turns included.
+Each call is metered at its own model's list price (`ratesFor`: $2 / $10 for Sonnet 5.5, $0.10 /
+$0.50 for Haiku 5.5), and the test "a short haiku call runs as asked, and everything else runs on
+the pinned model" in `stripe-webhook/credits.test.js` pins the split. Priced again on the October 11
+journeys' own turns, which ran on Sonnet 5, the $2 of free credits covers about five first evenings
+instead of about four and a half.
 
 - ⛔ **Never name Sonnet 5.5 on a page before that deploy**, and check Render first: a `TRIAL_MODEL`
   set there overrides the new default.
 - ⚠️ **"Claude Sonnet usage" in the plan's sentence stays true; never "every call runs on Sonnet".**
-  The skill-picking call runs on Haiku, at Haiku's price.
+  One short kind of call runs on Haiku, at Haiku's price.
 - ⚠️ **The pricing page's light, moderate and heavy months for the plan's $25 were priced at Sonnet
-  5's rates** (FACTS.md, the `$25` row). The October 11 turns priced at Sonnet 5.5's rates, with the
-  router on Haiku 5.5, came out cheaper (a mean of $0.0307 a turn against $0.0352), but those turns
-  ran on Sonnet 5, and Sonnet 5.5 may write more or less for the same turn; round three of the
-  journeys measures it. Measure again before quoting a new number. *(Amended October 13, 2026:
-  round three measured it, and the pricing page's rows were rebuilt on Sonnet 5.5's own turns
-  (Archie's `docs/COST-MEASURED.md` section 29). "Is $25 enough?" now reads "light use fits, and
+  5's rates** (FACTS.md, the `$25` row). The October 11 turns, priced at the new models' rates, came
+  out cheaper (a mean of $0.0307 a turn against $0.0352), but those turns ran on Sonnet 5, and
+  Sonnet 5.5 may write more or less for the same turn; round three of the journeys measures it.
+  Measure again before quoting a new number. *(Amended October 13, 2026: round three measured it,
+  and the pricing page's rows were rebuilt on Sonnet 5.5's own turns. "Is $25 enough?" now reads "light use fits, and
   moderate and heavy use exceed $25": the light row is $13 to $22 at Balanced, and moderate use
   passes $25 on its replies and scheduled tasks alone, before any mail, which the plan does not
   read.)*
@@ -880,8 +877,8 @@ than the provider's invoice, and it says so on the screen. The authoritative bil
 provider's own dashboard."
 
 **Why it's true:** `build_usage_sink` (`src-tauri/src/usage.rs:21-40`) appends one JSONL line
-per LLM call to a per-agent log on local disk: provider, model, fresh input, cached input,
-cache-write, output, and web-search counts. Cost is derived by multiplying those counts by a
+per LLM call to a per-agent log on local disk: provider, model, input, output, and web-search
+counts. Cost is derived by multiplying those counts by a
 local price table in the same file, which the module's own doc comment calls "an **estimate**;
 the estimate is token-accurate, only the prices are approximate." The `SpendingPanel`
 (`src/app/auth.tsx:76-160`) reads it back for this month / all time, by provider and by agent,
@@ -907,21 +904,20 @@ dial for every target. The flag is `AgentBundleManifest::force_model_tier`, writ
 checkbox in `src/app/agent-detail.tsx`. Web search is bumped to Balanced rather than broken
 (`resolve_model_forced`, same file line 699).
 
-**The nine tenths is measured, not modelled:** Archie `docs/COST-MEASURED.md` section 21.6. Sixteen
-test agents (thirteen one-person, three Archie for Teams with guests), each used by a simulated
-person over several sessions on a real key, with every agent forced to Economy, averaged $0.0033 a
-reply on Claude Haiku 5.5. The same sixteen on Balanced as shipped averaged $0.0330 on Sonnet 5 and
-$0.0320 on Sonnet 5.5 (section 21.5), so a forced Economy reply is about a tenth of a Balanced one.
-That includes the web searches the checkbox cannot move off Balanced, which were 47% of the
-Economy bill. Economy runs Haiku 5.5 and Balanced Sonnet 5.5 from Archie `7f1014d6` (2026-10-08),
-**which was in no release when this was written**, so the wording waited on a branch for the
+**The nine tenths is measured, not modelled.** Sixteen test agents (thirteen one-person, three
+Archie for Teams with guests), each used by a simulated person over several sessions on a real key,
+with every agent forced to Economy, averaged $0.0033 a reply on Claude Haiku 5.5. The same sixteen
+on Balanced as shipped averaged $0.0330 on Sonnet 5 and $0.0320 on Sonnet 5.5, so a forced Economy
+reply is about a tenth of a Balanced one. That includes the web searches the checkbox cannot move
+off Balanced, which were 47% of the Economy bill. Economy runs Haiku 5.5 and Balanced Sonnet 5.5
+from Archie `7f1014d6` (2026-10-08), **which was in no release when this was written**, so the wording waited on a branch for the
 release that carries it.
 
 **What it said before, and why it moved.** "About two thirds off the monthly cost", from
 `crates/archie-runtime/examples/cost_bench.rs` run with `--live --force-fast` against a
-twelve-skill agent on 2026-08-10: forced Economy on Claude Haiku 4.5 came to 27% of forced Balanced
-on a warm turn and 32% on a cold one at the 2026-09-12 sheet (18% and 21% at the sheet of the day,
-"four fifths" until 2026-09-12). Haiku 5.5 costs about a quarter of what Haiku 4.5 did per reply,
+twelve-skill agent on 2026-08-10: forced Economy on Claude Haiku 4.5 came to 27% to 32% of forced
+Balanced at the 2026-09-12 sheet (18% to 21% at the sheet of the day, "four fifths" until
+2026-09-12). Haiku 5.5 costs about a quarter of what Haiku 4.5 did per reply,
 so that figure undersold the checkbox once Economy moved. The unforced dial on that agent saved 4%
 to 7% on Haiku 4.5, and still saves little on an agent whose add-ons pick Balanced. *(Amended
 October 13, 2026: the pricing page's Economy column no longer prices the dial alone. It said $20 to
@@ -932,8 +928,7 @@ manifests in the Archie repo's `data/marketplace/skills/` declare `"tier": "bala
 that day. The page's own sentence is "most skills in the store pick Balanced". With only the dial
 on Economy those skills stay on Balanced, and what that costs has not been measured, so no page
 prints a figure for it. The inbox watch is the exception: it runs on the dial itself (`on_the_owners_dial` in
-Archie's `crates/archie-runtime/src/email/mod.rs`), so its Economy figure needs no checkbox. Archie
-`docs/COST-MEASURED.md` section 29.)*
+Archie's `crates/archie-runtime/src/email/mod.rs`), so its Economy figure needs no checkbox.)*
 
 **Do not drop the trade either:** on the same runs Economy still graded below Balanced on honesty
 (3.7 against 4.1 out of 10). Nothing requires a page to print that, but never write that the
@@ -978,10 +973,8 @@ screen.
 
 **Boundaries, and one of them is a number.**
 
-- **No figure for the saving may be quoted anywhere, by anybody, yet.** What is known is read off
-  the code, not off a bench: the seven groups run from roughly 235 to 1,825 tokens of tool
-  descriptions carried on every interactive turn. Nobody has run a live agent for a month with
-  switches off and priced it. Until `cost_bench` does, the claim is "a little less", and "a little
+- **No figure for the saving may be quoted anywhere, by anybody, yet.** Nobody has run a live agent
+  for a month with switches off and priced it. Until `cost_bench` does, the claim is "a little less", and "a little
   less" is the ceiling.
 - **Never call this a safety feature in general.** One of the eight is about safety and seven are
   about an ability not being wanted. The web switch's own claim is the one in the websites section.
@@ -1003,13 +996,13 @@ A change reaches these figures once it has been measured, not before."
 
 **Why it's true:** the AI account is the owner's own and Otian takes no cut of it (the custody
 claims above), and the Archie repo carries a cost rule in its `CLAUDE.md` that a change raising
-what an ordinary reply costs has to earn it out loud, with `docs/COST-MEASURED.md` as the record
-every published figure is read from. The figures on the pricing page move only on a measurement,
+what an ordinary reply costs has to earn it out loud, and every published figure is read from a
+measured record kept with the Archie code. The figures on the pricing page move only on a measurement,
 which is the standing rule on that page since 2026-08-26. On the evening of 2026-09-12 the rows
 moved for the scheduled reports and the inbox watch, on a price read off the provider's own sheet
 and one live run, and the page says nothing about why: the method is the part that is withheld.
 On 2026-10-08 the Economy column moved again, when Economy began running a newer model in Archie
-`7f1014d6`, on two measured runs of sixteen test agents (`docs/COST-MEASURED.md` 21.6 and 21.7),
+`7f1014d6`, on two measured runs of sixteen test agents,
 and the Balanced column did not, because Balanced's newer model measured the same per reply. The
 page says the figures were measured again in October, and which models run is not a method.
 *(Amended October 13, 2026: the whole table moved, on measurements made on the models each setting
@@ -1017,13 +1010,12 @@ runs now: 648 replies from the October 11 and 12 journey rounds, 8 scheduled tas
 from our own agent's usage log, and the October 7 simulator's sixteen test agents for the light row
 and the Economy column, which the page calls estimates. The August bench, which the rows had been
 scaled from, priced a reply that follows another closely at a third of what October measured.
-Archie `docs/COST-MEASURED.md` section 29. The page says what was measured and what is an
+The page says what was measured and what is an
 estimate; it still says nothing about why a reply costs what it does.)*
 
 **Required clauses, and one ban.** Say that we do not publish how, and say what moves the table.
-**Never describe a mechanism on the site**: not what is kept between replies, not how the tool
-list is handled, not the order scheduled reports run in, nothing about which text sits where in
-what Archie sends. Jett's direction of 2026-09-12: the outcomes are public, the methods are the
+**Never describe a mechanism on the site**: nothing about how Archie keeps what a reply or a
+scheduled report costs down. Jett's direction of 2026-09-12: the outcomes are public, the methods are the
 company's. The Archie repo is private, so never write "published with the source"; "kept with the
 Archie code" is the approved form. Comparisons with what other agents cost go on the compare
 pages, sourced and dated like every other third-party figure, with at most a sentence of it on
@@ -1035,9 +1027,8 @@ the pricing page.
 reply costs less than it would if it came with every one of them." On the site under the heading of
 `skills-marketplace/browse/`. Jett's to reword; the claim is what is checked here, not the words.
 
-**Why it's true:** an add-on reaches a reply only on an agent that has it. The toolkit a reply
-carries is put together per message from what that agent has installed and connected
-(`crates/archie-runtime/src/gateway/turn.rs`, where the belt is assembled), and the router only
+**Why it's true:** an add-on reaches a reply only on an agent that has it
+(`crates/archie-runtime/src/gateway/turn.rs`), and the router only
 chooses among installed skills. The last two tools that rode every agent regardless, flights and
 video, are carried only when an installed skill uses them since Archie commit `ea957de1` (built
 2026-09-25, in 0.3.1 and every release since; before it, those two were the exception to this sentence). The
@@ -1063,18 +1054,18 @@ and several add-ons, at Balanced." The pricing page carries one sentence of it a
 table. *(Amended October 13, 2026. It read "$0.01 when it follows another closely, up to $0.11 when
 it starts from nothing, measured on an agent with twelve add-ons and everything connected" from the
 August bench. Measured on Sonnet 5.5 in the October 11 and 12 journey rounds, a reply that follows
-another averaged $0.036 over 648 replies, and of the 11 replies that started from nothing on agents
-over 30,000 tokens, 10 cost $0.126 to $0.184 and one $0.27. Archie `docs/COST-MEASURED.md` section
-29; FACTS.md's `$0.04`, `$0.13` and `$0.19` rows. The compare pages' note now says Archie was
+another averaged $0.036 over 648 replies, and of the 11 replies that started from nothing on the
+larger agents, 10 cost $0.126 to $0.184 and one $0.27. See FACTS.md's `$0.04`, `$0.13` and `$0.19`
+rows. The compare pages' note now says Archie was
 measured in October 2026.)*
 
 **Why it's true:** every third-party figure is the company's own published price or rate, read on
 the date in FACTS.md; the derived ones (a Copilot reply that takes two actions, a Zapier activity,
-a Lindy ask) show their arithmetic in the page's Sources fold and in FACTS.md. Ours is
-`docs/COST-MEASURED.md` section 14.5 in the Archie repo: the twelve-add-on bench shape, warm and
-cold-and-writes, at Anthropic's sheet of 2026-09-12. Balanced runs Claude Sonnet 5.5 from Archie
-`7f1014d6` (2026-10-08): the same tokens at its published rates come to $0.0088 warm (computed,
-still $0.01 printed) and the same $0.1063 cold, and a reply measured the same on it (section 21.7),
+a Lindy ask) show their arithmetic in the page's Sources fold and in FACTS.md. Ours is the
+Archie repo's twelve-add-on bench, at Anthropic's sheet of 2026-09-12. Balanced runs Claude Sonnet 5.5 from Archie
+`7f1014d6` (2026-10-08): the same reply at its published rates comes to $0.0088 when it follows
+another closely (computed, still $0.01 printed) and the same $0.1063 when it starts from nothing,
+and a reply measured the same on it,
 so both figures stood until October 13, 2026, when the amendment above replaced them.
 
 **Required clauses, do not drop them.** (1) Say the units are different sizes of work: a credit,
@@ -2506,9 +2497,7 @@ shows the same counts."
   never again, so steps somebody turns off stay off.
 - **From chat.** `records_arrange_list` turns steps on or off and puts a list in the sidebar or
   takes it out, at the owner's word. A guest cannot use it (`acts_as_owner` in `turn.rs`).
-- **Cost.** About 168 tokens of tool on each chat turn of an agent that has a list, read at the
-  cached price on a warm turn, and nothing for the steps themselves (Archie's
-  `docs/COST-MEASURED.md` section 22).
+- **Cost.** The steps themselves cost nothing.
 
 **The boundaries.**
 
@@ -2685,19 +2674,14 @@ sheet. Change any of it by asking." What changed:
   entry).
 - **The dump log.** On a message about a dump log, a disposal log or trip tickets, when no list keeps
   one, the agent is handed a Dump log list's columns to offer once and make on a yes (`dump_log_note`
-  in `crates/archie-runtime/src/records.rs`; `data/lists/dump_log.json`). About 150 tokens below the
-  cache line, on those messages only.
-- **Cost.** The rules grew by a clause and a fourth setup's rules were added; the 96 to 145 token
-  range below has not been measured again (Archie's `docs/COST-MEASURED.md` section 25, which counts
-  the October 10 round's other costs, leaves the rules out).
+  in `crates/archie-runtime/src/records.rs`; `data/lists/dump_log.json`).
 
 **Amended October 12, 2026: rules reworded, and a list added** (Archie `968ec6b2`, on the
 `journey-fixes` branch, in no release yet; nothing here may be said on a page until a release
 carries it):
 
 - **Real estate's third rule** now ends "An ad names the brokerage, which is not the team: leave
-  [Brokerage] until the owner says which." (about 22 tokens more on every turn of a real estate
-  agent, cached). The business details entry says how a brokerage gets kept.
+  [Brokerage] until the owner says which." The business details entry says how a brokerage gets kept.
 - **The event trailer setup has a Prices list** (What it is, Price, Per: Event, Extra day, Mile or
   Each, and Notes), and its first rule now reads "Prices come from the Prices list. When a price is
   not on it, ask the owner and add it there, rather than estimating one." The list starts empty.
@@ -2744,9 +2728,6 @@ sheet. Change any of it by asking."
 - **Checks.** A test makes every list of every setup through the chat code and checks its steps
   (`every_setup_list_is_made_and_shows_its_stages`), and another refuses the word job anywhere in a
   setup, since the Jobs tab means the agent's own work (`no_setup_calls_the_work_a_job`).
-- **Cost.** About 178 tokens more on the interview's starter call, once per agent, and 96 to 145
-  tokens of rules on every turn of an agent a setup matched, read at the cached price on a warm
-  turn (Archie's `docs/COST-MEASURED.md` section 23).
 
 **Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5`, `594d1d35`, `f51a371d` and `60ba7d48`,
 on main and in no release; nothing about it may be said on a page until a release carries it). One
@@ -2765,8 +2746,7 @@ client, and a lead is called or texted, only when there is a record that they ag
 contacted; cold email to a business needs no agreement first, but every marketing email names the
 business and carries its postal address and a way to stop getting them; and a client is never promised how many sales, cases, or
 appointments their leads will turn into, only past numbers with whose they are, the owner's own
-numbers counting as a source. Its rules are inside the
-96 to 145 tokens above. Tested by three personas, one per model (`scripts/agent-sim/l05-lead-gen`,
+numbers counting as a source. Tested by three personas, one per model (`scripts/agent-sim/l05-lead-gen`,
 `l06-lead-gen-ads`, `l07-lead-gen-appointments`), and by five that must not match it: a lawyer and
 a roofer who buy leads, a sales rep, a social media agency, and a household (`l08` to `l11`, `p26`). Written from how the work runs in general, never
 from any one client's business.
@@ -2846,8 +2826,6 @@ appraisal and loan approval dates."
   date column of that list, filled or not, so a missing inspection date can be put in under Change
   before Add (`draft` in `crates/archie-runtime/src/gateway/drafted.rs`). An empty column shows on no
   entry's line. Test: `every_date_column_is_on_the_card`. The phone's card reads the same columns.
-- **Cost.** About 17 tokens more in the lists' columns, cached, on an agent with the real estate
-  lists (Archie's `docs/COST-MEASURED.md` section 28). Internal, never on the site.
 - ⚠️ **Dates, not reminders.** Nothing watches these dates or warns before one. Never say Archie
   tracks contingency deadlines or tells you when an inspection is due; the agent answers about them
   when asked, from the list.
@@ -2929,7 +2907,7 @@ and ends with where to find the whole guide in Archie and a link to this page."
 
 - **When.** `asks_where_it_goes` in `crates/archie-runtime/src/gateway/privacy.rs`, called near the
   top of `handle_message_attributed` in `gateway/turn.rs`, after a yes or no to a waiting card of
-  entries and ahead of the first-run interview and of the router, so it uses neither an interview
+  entries and ahead of the first-run interview and of any AI call, so it uses neither an interview
   turn nor a call. The owner's own message only (`is_owner`
   and `person_typed`), outside the window's workshop and any skill a watcher woke. It takes a message
   of 30 words or fewer that is a question (a question mark, or a first word of where, who, what, how,
@@ -2959,8 +2937,7 @@ and ends with where to find the whole guide in Archie and a link to this page."
   (`crates/archie-runtime/tests/pipeline.rs`) checks the reply and that no request to the model
   carried the question. Its own line in the technical log, "Answered where their information goes
   from the guide", carries only whether the agent runs on our AI.
-- **Cost.** None (`docs/COST-MEASURED.md`, section 27.1, the row "1.6 Where an owner's information
-  goes").
+- **Cost.** None.
 
 **Boundaries for this paragraph** (the ones below still hold):
 
@@ -3295,7 +3272,7 @@ know: on the strip under every page during the trial, and on the Account page un
   `src/money.ts`, and FACTS.md. And the strip's "about N more answers" divides by what the owner's
   own last ten messages took off the balance (`credits_left` in
   `crates/archie-runtime/src/gateway/credits_left.rs`), read off the balance the service sends back
-  on every answer, where it divided by the ledger's count of answers, which counts the router and
+  on every answer, where it divided by the ledger's count of answers, which counts
   background calls too and promised about 2.25 times what was left on round three of the journey
   tests. Until a message has been measured since the app started, it falls back to the ledger.
   - ⚠️ **Still a forecast.** One long document read costs ten short questions; never "you have
@@ -3386,7 +3363,7 @@ calendar work the whole time."
   trial strip at the bottom of the window reads the balance again the moment the card arrives
   (`TrialStrip` in `src/app/update-banners.tsx`), so the two agree.
 - **Picked up when the AI is back.** `money_out::note` hands the agent the kept messages with their
-  times, below the cache line, on the first owner message that gets through (`gateway/turn.rs`), at
+  times on the first owner message that gets through (`gateway/turn.rs`), at
   most 20, newest last, each cut at 600 characters, and the file is emptied only after that turn has
   answered. On that turn the agent is told to answer the newest message first, then each kept one
   that still needs an answer. The housekeeping tick in `worker.rs` also starts a turn on its own
@@ -3703,7 +3680,7 @@ Connections tab with the sign-in ready."
   `gateway/turn.rs` beside `unbacked_integrations` and the three fixed answers: no calendar, no
   mailbox, and a mailbox that never allowed reading). After the reply is delivered, `opens_for`
   puts the one the reply names under it, and only when the reply names the Connections tab (test
-  `a_reply_that_names_the_connections_tab_gets_the_button_for_what_it_names`). It costs no tokens.
+  `a_reply_that_names_the_connections_tab_gets_the_button_for_what_it_names`). It costs nothing.
 - **What it opens.** For a calendar or email, Email, calendar, files with the chooser already open:
   Reconnect on an account that has not given what was asked for, or Connect an account when none
   is there (`ask` on `GoogleConnect` in `src/app/connect.tsx`, wired in `src/app/agent-detail.tsx`).
@@ -4051,9 +4028,7 @@ it is answering."
   ordinary route and is one of the day's 20. "Setting Archie up does not cost a day" (the free-tier
   entry, line 2595) stays true of the questions themselves.
 - ⚠️ **A first message that asks for a job costs one extra AI reply,** the interview's, which is
-  thrown away (the comment in `handle_message_attributed`: "one extra routed reply, and only on the
-  turn it happens"). Not yet measured: Archie's `docs/COST-MEASURED.md` section 25 names it and does
-  not count it.
+  thrown away, and only on that turn (the comment in `handle_message_attributed`). Not yet measured.
 - ⚠️ **It lets go after 12 messages** (`OnboardingState::MAX_TURNS`), after a second job, or on Stop
   the questions. What was said by then is kept. Never "it learns everything about your business".
 - ⛔ **Never "nothing goes on without your yes."** Team Starter, Researcher included, goes on a new
@@ -4170,9 +4145,7 @@ For Archie for Teams, it asks where you keep your customers and jobs.
   asked, their words are written as its personality, as before (`write_interviewed_voice`). The
   matcher that installed the nearest ready-made personality is gone, and the agent is told to say
   that the Personality tab is where to change it (`CONDUCTOR_TAIL`).
-- **Cost.** The interview's instructions are 123 tokens shorter (121 on Archie for Teams), the pass
-  after each interview turn is 113 longer, and the call that matched a ready-made personality (about
-  3,800 tokens, once an interview) is gone (Archie `docs/COST-MEASURED.md` section 27.1). Internal,
+- **Cost.** The call that matched a ready-made personality, once an interview, is gone. Internal,
   never on the site.
 - **Tests:** `the_interview_ends_with_the_way_in_to_where_their_work_is_kept` in
   `crates/archie-runtime/tests/pipeline.rs`; `the_way_in_follows_where_the_work_is_kept`, the five
@@ -4237,9 +4210,7 @@ Up Boss, the goodbye offers to connect it, and your agent brings your people in 
   starters (`bring_in_starter` in `gateway/onboarding.rs`, put under the goodbye in
   `gateway/turn.rs`).
 - **The goodbye's words match.** The interview's closing instructions (`CONDUCTOR_TAIL`) say Follow
-  Up Boss is read once it is connected on the Connections tab, under Apps. That paragraph goes from
-  163 to 195 tokens, on interview turns only, cached (counted with `count_tokens`; Archie's
-  `docs/COST-MEASURED.md` section 27.1). Internal, never on the site.
+  Up Boss is read once it is connected on the Connections tab, under Apps.
 - **Tests:** `follow_up_boss_is_connected_rather_than_exported` and
   `the_way_in_follows_where_the_work_is_kept` in `gateway/onboarding.rs`.
 - ⚠️ **The first-run window draws no Connect Follow Up Boss button**, for the reason it draws no
@@ -4437,13 +4408,7 @@ for commission in the first minute answered "I did not come to hand that over".
   a plain text file. A backup carries it, as it carries every agent bundle
   (`crates/archie-domain/src/transfer.rs`).
 - **Cost.** Filling and the receipt are code and cost nothing. The block adds its own words to every
-  message, four short lines at most; the question, the synthesis field and the memory pass's label
-  add a little once per agent and per memory call. The fix plan estimated about 80 cached tokens a
-  turn. Counted since in Archie's `docs/COST-MEASURED.md` section 25: 85 tokens for a typical block
-  (a name, three prices, a phone number, how messages are signed) and about 290 at the cap of four
-  160-character values (`DETAIL_MAX` in `crates/archie-domain/src/setup.rs`), on every turn once
-  the interview is over, read at the cached price on a warm turn, and 104 more on each memory pass,
-  which runs once per twenty messages.
+  message, four short lines at most.
 
 **The boundaries.**
 
@@ -4548,10 +4513,7 @@ handed those entries instead."
   list holds and fewer are on it, the note ends "Only 25 of about 300 rentals are entered, so say
   this covers only those." (`partly_entered`). Test:
   `an_empty_or_partly_entered_list_is_never_read_as_complete`.
-- **Cost.** Nothing on any other message. On a money question about 50 tokens plus 50 a billed row
-  below the cache line (247 with four, counted October 10, 2026; Archie's `docs/COST-MEASURED.md`
-  section 25 and the comment on `owed_note`), and about 150 for the Invoices columns when they are
-  offered.
+- **Cost.** Nothing on a message that is not a money question.
 
 **The boundaries.**
 
@@ -4654,10 +4616,7 @@ were whole: owners with nothing entered were told nothing was due. What changed,
   `gateway/worker.rs`; Archie `756ea25b`; test `a_failed_turn_keeps_its_saves_and_forgets_its_reads`).
   A turn that only read gets no line at all. Before this, a refused turn listed four lists under
   Looked at beneath "Your free credits are used up" (the comment on `forget_reads`).
-- **Cost.** The line and the sentence under it are code and cost no tokens. The list's size rides in
-  the model's result of each list search or count: a few tokens a read (Archie's
-  `docs/COST-MEASURED.md` section 27.1), and the `empty` or `partly_entered` sentence only when it
-  applies. Not measured on its own.
+- **Cost.** The line and the sentence under it are code and cost nothing.
 
 **Proposed wording, Jett's to approve:** "When your agent saves something to one of your lists,
 Archie says so under its reply, like Saved in Rentals: Harlan Remodeling, with Open to see the list
@@ -4680,7 +4639,7 @@ your lists, each with Undo."
   `inbox_census` as Mail, counted where the result says how many came back (an `inbox_read` with no
   list in it counts as one); and each `drive_read` as Drive, counted by the files it asked for.
   `run_target_attributed` (`gateway/turn.rs`) calls it only for a call that did not fail and was not
-  refused. No model writes the line, it costs no tokens, and it cannot name a save that did not
+  refused. No model writes the line, it costs nothing, and it cannot name a save that did not
   happen. Amended October 11, 2026 (Archie `bd8d9848` and `92912cfa`, in no release yet): the other
   half is caught too. A reply that says it saved something to a list, on a turn that wrote nothing,
   gets a correction under it, with Save it (or, where no button can be drawn, the words to reply),
@@ -4787,7 +4746,7 @@ on its build): a note the agent kept in its memory is named too.* A turn whose `
 succeeded gets a line under its reply, in Archie and in Archie Mobile: "Saved to memory: prefers
 texts after 6pm", with Open (Memory on the agent's Knowledge tab; on the phone, the Memory screen
 over Documents) and Undo. It is written by code from the call itself (`keep_note` in
-`crates/archie-runtime/src/gateway/kept.rs`), costs no tokens and no AI call, and names the note in
+`crates/archie-runtime/src/gateway/kept.rs`), costs nothing and makes no AI call, and names the note in
 the words memory holds, with "From something you did not write:" in front when the turn had read
 somebody else's writing. Undo takes the note out through the journal (`memory_unsave` in
 `src-tauri/src/journal.rs`, `unsave` in `crates/archie-runtime/src/memory.rs`), the same Undo the
@@ -4856,12 +4815,12 @@ addresses you sent mail to in the last two weeks, on this computer."
 
 **Why it's true:** each check of a mailbox splits its new mail in two (`split_by_who_waits` in
 `crates/archie-runtime/src/email/poller.rs`). Mail from an address in the owner's recent list is
-read at once; the rest is read together after one shared wait of up to about five minutes, then
+read at once; the rest is read after one shared wait of up to about five minutes, then
 handled in arrival order as before (`email::sort_ahead`). The list is `email/wrote-to.json` in the
 agent's folder (`email/correspondents.rs`): each address the owner wrote to and when, from replies
 sent off a card on any account and from the Sent copies the Gmail watch already receives, skipping
 messages to more than 10 people, dropping entries after 14 days, at most 500 addresses. Nothing in
-it leaves the computer. Jett's call, October 13, 2026 ("batch, but not urgent mail").
+it leaves the computer. Jett's call, October 13, 2026.
 
 **Boundaries:**
 - ⛔ **Never "Archie knows which mail matters to you"** or "important mail first". It knows one
@@ -4902,8 +4861,7 @@ AI reads a customer's email as that customer's. Only matched mail carries that s
 - ⛔ **Never "mail from your customers is read first"** or "the people on your lists skip the wait".
   Only somebody the owner wrote to in the last 14 days is read first, as before. Everybody else the
   watch knows shares the wait of a few minutes.
-  Sending them ahead was built, measured and turned down on cost (Archie `docs/COST-MEASURED.md`
-  section 44).
+  Sending them ahead was built, measured and turned down on cost.
 - ⛔ **The boundary "It knows one thing: whether you wrote to the sender in the last 14 days" is now
   true of the wait only.** For how the email is read, the watch also knows the owner's lists and
   team. Still never "Archie knows which mail matters to you" or "important mail first": it knows
@@ -4947,14 +4905,13 @@ keeps about you is listed under the draft as Check before sending."
   that the user told you something, or put a fact, reason, or promise in a draft for them to send,
   unless it is in the User context or Memory sections of this prompt or in the messages of this
   conversation", and adds "a draft leaves a blank like [her school] for any detail they do not
-  hold". It is folded into the sentence that was already there, as the cost rule asks. Test:
+  hold". It is folded into the sentence that was already there. Test:
   `the_agent_is_told_not_to_invent_a_recollection`. The live probe `draftblank` in
   `scripts/prompt-core-ab.py` asks for a note to text Marcia Peterson congratulating her
   granddaughter on starting college, and flags a reply that names a school with no bracket in it.
   Probed live on October 11, 2026 on Haiku 5.5 and Sonnet 5.5, no draft invented the school under
   the old sentence or the new one, 12 drafts each; what changed is that Sonnet twice in three said it
-  had kept the note general and asked where she is going (Archie's `docs/COST-MEASURED.md`, the
-  paragraph on 1.4, Archie `df34c9d1`).
+  had kept the note general and asked where she is going (Archie `df34c9d1`).
   Until October 12, 2026 it said "a fact about anyone", which left out reasons, promises and terms:
   round three of the journey tests had drafts saying "Thursday the 15th is a little tight on our end"
   and "well within our service area", which nobody had said (Archie `48631f80`).
@@ -5013,12 +4970,8 @@ keeps about you is listed under the draft as Check before sending."
   address (`finish_draft` in `email/replies/draft.rs`), when the profile holds them (the entry "Your
   business's name, prices, phone number and sign-off"). One it does not hold stays a blank and holds
   Send. It fills them in the owner's chat replies too, which have no Send.
-- **Cost.** 42 tokens in the core prompt, above the cache line, on every turn of every agent, read
-  from the cache after the first (Archie's `docs/COST-MEASURED.md`, section 27.1, item 1.4). The
-  check on Send is code and costs nothing, and cutting the signature off adds nothing. The October 12
-  wording adds about 3 tokens to that sentence, and `added` about 120 cached tokens across the two
-  draft tools on an agent with a mailbox that can send (section 28, B.12); the check under the draft
-  is code.
+- **Cost.** The check on Send is code and costs nothing, and cutting the signature off adds nothing.
+  The check under the draft is code.
 
 **The boundaries.**
 
@@ -5229,8 +5182,7 @@ sends your message again, so you don't have to type it again."
   Stop and Start on the agent's page when an agent keeps restarting itself (`gateway_start` in
   `src-tauri/src/commands/gateway_lifecycle.rs`).
 - **Cost.** Nothing on a turn that works. On one that fails, at most one more call of the request
-  that failed (`docs/COST-MEASURED.md`, section 27.1, item 1.6, "Ask again once"). Who gets the
-  button and what a failed wake says are code, and add nothing.
+  that failed. Who gets the button and what a failed wake says are code, and add nothing.
 
 **The boundaries.**
 
@@ -5323,9 +5275,7 @@ it in the same reply."
   `a_first_list_can_take_its_rows_on_the_turn_it_is_made`), and `do_new_list` in
   `crates/archie-runtime/src/records.rs` tells the agent "If they told you what goes on it, add each
   one now with records_create; otherwise tell them it is ready and ask for the first entry."
-- **Cost.** The check is code: no tokens and no call. The first-list tool is about 280 tokens on the
-  tools of an agent with no list, cached after its first turn, and gone into the ordinary row tools
-  once a list exists (`docs/COST-MEASURED.md`, section 27.1, item 1.3).
+- **Cost.** The check is code: it costs nothing and makes no call.
 
 **The boundaries.**
 
@@ -5437,10 +5387,8 @@ them as somebody new."
   keeps it, and a lead lands on both lists there (Jett's call: leave those agents as they are).
   Archie Mobile's gray chip has not been seen on a phone. Never "Lead Desk works for every
   business".
-- **Cost.** Nothing on any other message. About 150 tokens with every group empty, plus about 12 a
-  name, below the cache line on a message about calls (270 with ten names, counted October 10, 2026;
-  Archie's `docs/COST-MEASURED.md` section 25 and the comment on `call_list_note`). Since Archie
-  `387c76c0`, empty People and Deals get the shorter empty note in place of the 150.
+- **Cost.** Nothing on a message that is not about calls. Since Archie `387c76c0`, empty People and
+  Deals get a shorter note saying so.
 
 **The boundaries.**
 
@@ -5518,9 +5466,7 @@ typed in. You press Send. If they said stop, it won't write one."
   after they have said it is fine; asked to write one, write it and say whether they have." An
   agent set up earlier gets the new words once, where the old ones still stand
   (`profile_with_rule_changes`, the setups entry).
-- **Cost.** About 130 tokens on the tools of an agent with such a list, cached, and 12 more in the
-  real estate rules; the button and the consent line are code (Archie's `docs/COST-MEASURED.md`
-  section 28, B.16).
+- **Cost.** The button and the consent line are code.
 
 **The boundaries.**
 
@@ -5626,7 +5572,7 @@ your reminders, and your agent's routines. Press one on the computer and that li
   there is no calendar read and no reminder waiting, the agent is told to say so and to offer to add
   entries or bring in a spreadsheet (`empty_lists_note`); with no dated list at all, no calendar and
   no reminder waiting, it is told to say nothing here keeps days rather than calling the days open.
-  The note sits below the cache line, so it is paid for on that turn only. Test:
+  The note is paid for on that turn only. Test:
   `an_empty_answer_says_why_it_is_empty`.
 - **Amended October 12, 2026: what is under way, and what has no date** (Archie `3c4ab109`, in no
   release yet). On a question about today or later, the note adds two sections after the days.
@@ -5717,13 +5663,11 @@ your reminders, and your agent's routines. Press one on the computer and that li
   the schedule today?" (home trades), "What's on the route today?" and "Which rentals end this week?"
   (portable restrooms), and "What's closing this month?" (real estate).
 - **Tests.** The eleven in `schedule.rs` are the ones named above. Not run for this entry.
-- **Cost.** Nothing on a message the words do not match. On one they do, about 60 tokens plus about
-  25 a line below the cache line, at most 40 lines (so about 1,060 tokens, before the late to-dos and
-  the what-is-free part, which that figure leaves out), and one calendar request for each calendar
-  account of the person asking. That is the module note's estimate, carried into the Archie repo's
-  `docs/COST-MEASURED.md` section 27.1, and it has not been measured. On a turn routed to a skill that
-  needs the calendar, a note that already holds the calendar means the turn is no longer made to open
-  with a calendar read (`forced` in `turn.rs`), which the module note says usually saves a model call.
+- **Cost.** Nothing on a message the words do not match. On one they do, the agent is handed the
+  note, and one calendar request goes out for each calendar account of the person asking. On a turn
+  for a skill that needs the calendar, a note that already holds the calendar means the turn is no
+  longer made to open with a calendar read (`forced` in `turn.rs`), which the module note says
+  usually saves a model call.
 
 **The boundaries.**
 
@@ -5938,9 +5882,9 @@ list keeps them all."
   code, so the rows never pass through what the AI writes; an import card still up for that file
   closes with "They are on the card below." (`close_for_file`). The tool names that source only on an
   agent holding a spreadsheet (`holds_a_spreadsheet`), and while an import card is up, the agent is
-  told so below the cache line and told never to type its rows into a tool (`waiting_note`). Before
+  told so and told never to type its rows into a tool (`waiting_note`). Before
   this, an agent asked to add a dropped file typed its rows into a tool call, which the free credits'
-  2,048-token reply limit cut off every time (round three of the journey tests, October 12, 2026).
+  reply limit cut off every time (round three of the journey tests, October 12, 2026).
   Test: `a_spreadsheet_given_in_a_chat_goes_on_the_card_by_code`.
 - **From an answer about an empty list.** When every list a reply read was empty, the line under it
   says "Your Rentals list is empty, so this is not from your records." with Add and Import, which
@@ -5969,10 +5913,8 @@ list keeps them all."
   what it sees of any list or document: the rows the agent reads to answer a later message, and the
   file's name, kind and size in the list of documents the agent is shown on every message
   (`render_manifest` in `crates/archie-runtime/src/knowledge.rs`).
-- **Cost.** No AI call and no tokens, for an import or for its card, or for the card of rows its
-  Add puts up. The agent's own read of a dropped file is one tool call with a short result, and the
-  tool's description grows by about 18 tokens on an agent holding a spreadsheet; the note that an
-  import card is up is about 70 tokens on those turns only (Archie `docs/COST-MEASURED.md`, 28). A file sent with words that
+- **Cost.** No AI call and no cost, for an import or for its card, or for the card of rows its
+  Add puts up. The agent's own read of a dropped file is one tool call with a short result. A file sent with words that
   only ask for it to come in no longer starts a turn, which it did until October 11; any other
   words start the same turn they always did.
 
@@ -6173,8 +6115,8 @@ list as one job that one Undo takes back."
   the card or put up a corrected one (`on_the_card` in `drafted.rs`). One more entry the owner
   dictates while a card waits still goes in at once, the rule for one entry. Test:
   `an_entry_on_a_waiting_card_is_not_added_on_its_own`.
-- **What the agent is told while a card waits.** On each turn in that conversation, below the cache
-  line (`waiting_note`, added in `run_target_attributed`): "WAITING ON A CARD in this conversation,
+- **What the agent is told while a card waits.** On each turn in that conversation
+  (`waiting_note`, added in `run_target_attributed`): "WAITING ON A CARD in this conversation,
   not added yet: 12 for Rentals from your photo. They press Add on it, or tell you yes to all of it:
   then call records_propose_rows with that list and add_waiting_card true. If they correct an entry
   or want some left off, call it again with the whole corrected set for that list, which replaces
@@ -6202,12 +6144,8 @@ list as one job that one Undo takes back."
   the card is in the chat ("press Add or Not now on it") and opens the chat, where it used to say to
   approve it on the computer (archie-mobile `efa1f16`). Open on the phone goes to Lists, not to the
   one list.
-- **Cost.** The tool is 251 tokens on the belt of every agent with a list (238 before
-  `add_waiting_card`), read from the cache on a warm turn, and the waiting note is 110 tokens with
-  one card (86 before), below the cache line, only on a turn in a conversation with a card waiting
-  (counted with `count_tokens` on October 11, 2026; Archie's `docs/COST-MEASURED.md` section 27.1).
-  What it buys: a page of entries in one call, where `records_create` took one call an entry, at
-  most ten a turn, with the whole conversation sent again each round. Putting the card up, Add, Not
+- **Cost.** A page of entries takes one call, where `records_create` took one call an entry, at
+  most ten a turn. Putting the card up, Add, Not
   now, a plain yes, and Approve are code with no AI call; a yes the agent hears is answered on the
   turn it is already taking. Reading a photo is that photo's own AI call, as it is for any photo. It
   runs on the free credits too (`credit_policy` in `crates/archie-runtime/src/tool_policy.rs`).
@@ -6355,12 +6293,6 @@ say yes. Your agent reads Follow Up Boss; it does not change anything there."
   `crates/archie-runtime/src/gateway/prompt.rs`, set by `brings_in` in `gateway/turn.rs`, Archie
   `f545284f`), so it never answers that Follow Up Boss is not connected. On a turn without the tool,
   Follow Up Boss is named in the list of other connected services, as read by nothing installed.
-- **Cost.** The tool is on the belt only in a conversation, on an agent that can keep lists, with
-  Follow Up Boss connected: 216 tokens, or 281 with a shared Google Sheet as well, cached with the
-  rest of the belt on a warm turn. The line naming Follow Up Boss as connected is 36 tokens, in place
-  of a 12-token entry in the list of other connected services, or of that whole block (about 225
-  tokens) when Follow Up Boss is the only service. Counted with `count_tokens` on October 11, 2026
-  (Archie's `docs/COST-MEASURED.md` section 27.1). Internal, never on the site.
 - **Tests:** in `follow_up_boss.rs`, `a_person_becomes_a_row_the_import_can_match`,
   `a_deal_named_like_an_address_is_its_address`, `an_open_task_becomes_a_to_do_named_with_its_person`,
   `pages_follow_the_next_mark_and_stop_at_a_thousand`, `a_refused_read_is_said` and
@@ -6454,9 +6386,6 @@ added until you press Add or say yes."
   same `guess_columns`, so "Cell" fills Phone and First and Last name become one name.
 - **The same card.** As for Follow Up Boss: one card, Add as one job with one Undo, entries already
   on the list taken off before the first 200, and asking again brings the next ones.
-- **Cost.** 227 tokens on the belt in a conversation on an agent that can keep lists and has a
-  Sheet shared, or 281 with Follow Up Boss as well, cached on a warm turn (counted with
-  `count_tokens`; Archie's `docs/COST-MEASURED.md` section 27.1). Internal, never on the site.
 - **Tests:** `a_sheet_goes_on_the_list_the_owner_named` and
   `a_list_with_no_column_for_any_of_it_is_said` in `bring_in.rs`;
   `a_table_of_text_becomes_a_sheet_by_the_files_rules` and
@@ -6524,8 +6453,7 @@ did not; Undo puts both back. Each unit can say which rental it is on."
   from `say_list_size` in `crates/archie-runtime/src/records.rs`), and while fewer are entered,
   "Only 25 of about 300 units are entered, so an answer from this list covers only those. Say so."
   The who-owes, not-billed-yet, deposit and who-to-call notes end with a sentence to the same effect
-  (`partly_entered`: "Only 25 of about 300 rentals are entered, so say this covers only those."). A
-  few tokens on each list read (Archie's `docs/COST-MEASURED.md` section 27.1). Test:
+  (`partly_entered`: "Only 25 of about 300 rentals are entered, so say this covers only those."). Test:
   `an_empty_or_partly_entered_list_is_never_read_as_complete`.
 - **Unit 31.** `rows_named` matches a row whose title reads as a code (three words at most, ending in
   a digit: S-31, Trailer 4, INV-1042) by the code squeezed to letters and digits, or by its number of
@@ -6553,8 +6481,8 @@ did not; Undo puts both back. Each unit can say which rental it is on."
   `70831b8a`), so it shows no banner and cannot fold. Never "Archie merges duplicates for you".
 - ⚠️ **Where both rows have a value, the kept row's wins.** Only long notes are joined. Say "anything
   the other had that this one did not", never "combines everything".
-- ⚠️ **Finding a row by its code only helps the agent find it.** The row is named below the cache
-  line (`rows_named_note`); nothing stops a wrong row being changed.
+- ⚠️ **Finding a row by its code only helps the agent find it.** The row is named to the agent in a
+  note (`rows_named_note`); nothing stops a wrong row being changed.
 - ⚠️ **Rented to is a link like any column,** filled by the agent from chat or by the owner. Nothing
   fills it from a rental by itself, and a list made before keeps its columns.
 
@@ -6990,7 +6918,7 @@ Clear all, and a box to add one by hand (`agent_memory_add`, `agent_memory_edit`
 
 **The boundaries:**
 - ⛔ **Never say it remembers everything.** The carried lane is deliberately small, because it is
-  read on every message and the owner pays for those tokens. The archive is the honest version of
+  read on every message and a longer one would cost the owner more on each. The archive is the honest version of
   "nothing is thrown away", and it is searched by matching words, not by a model.
 - ⛔ **Never say Otian AI can see it.** The file is in the agent's folder on the owner's own
   computer, like everything else in the bundle.
@@ -7560,8 +7488,7 @@ archie-mobile `parity-p4`: `041b4ec`, `1e97706`):
   A pie's bullets carry each slice's share. `plain.rs` is also what a phone alert's text is made
   from, so an alert for a reply with a chart reads as the numbers too.
 - **The agent is told in the sentence that already taught the block**, in `save_file`'s
-  description (`ALLOWED` in `export.rs`): "For a chart, in a reply too". It was worded so the whole
-  request counts the same as before on Sonnet 5.5, Haiku 5.5 and Opus 5.
+  description (`ALLOWED` in `export.rs`): "For a chart, in a reply too".
 - **A line that is not a number is not dropped.** "Q2, not in yet" is printed under the picture and
   carried in the list, rather than leaving a quarter missing with nothing to say so.
 
@@ -7653,9 +7580,7 @@ covering a figure changed, a row added, a formula read, a sentence, a bullet and
 Word, a price and a bullet on a slide, a line added to a .csv, .md and .json, a PDF and an .xls
 read, a Numbers file refused, and five files made and sent. Balanced (Sonnet 5.5) passed 44 of 44.
 Economy (Haiku 5.5) passed 38 of 44; its three failing cases were fixed in code and passed all 24
-checks on two reruns. Reading costs a little more: a plain list of 80 expenses went from 2,235
-tokens to 2,410 (the row numbers), and a twelve-month plan made mostly of formulas from 1,037 to
-1,306.
+checks on two reruns. Reading costs a little more.
 
 **Boundaries:**
 - ⛔ **Never say it edits the file on your computer, or in your folders.** Adding a file to an agent
@@ -7716,8 +7641,7 @@ sends anything."
   inbox for offers to introduce, and names at most one person to write to, with the note drafted.
   It also says once, three weeks after the last application, that the hunt has gone quiet.
 
-**What it costs:** Job Hunt's instructions grew from 6,874 to 10,620 characters, about 1,150 tokens
-on a turn that is answered with Job Hunt and nothing on any other turn. Bringing the file in makes
+**What it costs:** nothing on a turn Job Hunt does not answer. Bringing the file in makes
 no AI call.
 
 **Boundaries:**
@@ -7756,7 +7680,7 @@ under them, which the Tab and Eden review caught.
 
 **Boundaries:**
 - ⛔ **Never "free pictures" and never on our credits.** A picture is billed to the AI account that
-  draws it, in tokens, at a rate that moves with the provider's own quality setting
+  draws it, at a rate that moves with the provider's own quality setting
   (`images.rs`, the `usage` field). No page prints a price per picture; FACTS.md has none.
 - ⚠️ **What you ask for goes to OpenAI or Google**, whichever draws it, even when your agent
   otherwise thinks with Claude. A page that says pictures come from your own computer is wrong.
@@ -8229,9 +8153,8 @@ names the button by its own name on the page, the computer running Archie and th
 - ❌ Never describe this entry as driving **applications**. Since 0.3.4 a Mac's applications are
   the other half of Computer control, which has its own entry below with its own wording and its own
   boundaries: say them from there. On Windows, websites are the whole of it.
-- ❌ **Never put a cost figure on it, and never recommend it to someone choosing on price.** One
-  page serialized to about 6,000 tokens in the only measurement that exists, a job is many reads,
-  and the owner pays for every one on their own key. Nothing measures a whole job yet, so there is
+- ❌ **Never put a cost figure on it, and never recommend it to someone choosing on price.** A job
+  is many reads of whole pages, and the owner pays for every one on their own key. Nothing measures a whole job yet, so there is
   no number to publish (Archie repo, `docs/OPEN-THREADS.md`).
 - ❌ Never imply it has been proven against every site. **Two of the three gaps this bullet named
   closed on 2026-09-16 and the wording had to change with them**, which is this file's own rule
@@ -8255,7 +8178,7 @@ site is laid out. Next time it uses that site, it already knows its way."
 
 - **Why it's true:** `screen/tools.rs` (`JobState::practice`, set once on `screen_open` and not
   changeable mid-job), `screen/guard.rs` (`practice_typing_stop`: a search box is the only field
-  that may be typed in), and `screen/notes.rs`, which caps the note at about 300 tokens and is read
+  that may be typed in), and `screen/notes.rs`, which caps the note's length and is read
   back on the call that opens that site and on no other.
 - ❌ **Never say a practice run makes a site safe, or that it "tests" anything.** It is a look
   around. Every one of the five stops is what it always was on the real errand afterwards.
@@ -8433,9 +8356,7 @@ the picture in the approval card shows which button it means.
   above, and cannot run a command.
 - ❌ **Never say it sends email or texts through Mail or Messages.** Both are refused; the email
   lane's rule that nothing is sent without a press stands unchanged.
-- ❌ **Never a cost figure**, for the Websites entry's reason: nothing measures a whole job yet. What
-  is measured: about 40 tokens of tools with applications switched on, and a look at a small app's
-  window at 185 to 400 tokens.
+- ❌ **Never a cost figure**, for the Websites entry's reason: nothing measures a whole job yet.
 - ❌ **Never "works while your Mac is locked"** until it has been tried.
 - ❌ **Never name an application as supported.** One real job ran in Premiere Pro, through its menus
   and its name box by key presses, and one in TextEdit. That is two jobs, not a list.
@@ -8571,7 +8492,7 @@ on disk. Still no model call anywhere in it.
   connect an AI account of the owner's own: "on the Setup tab in Archie or Response quality in Archie
   Mobile, under AI account: pick one, paste its key, and press Connect (Save, on the phone)", with
   the Connections tab named too when no mailbox is connected (`mail_note`). It is said under the
-  list, so it never rides the agent's history. Test:
+  list, so the agent never reads it again. Test:
   `on_archies_own_ai_the_first_list_says_once_that_email_is_not_read`.
 - **Every agent has the row** on the Routines tab, on the computer (`MorningListRow` in
   `src/app/routines.tsx`) and in Archie Mobile (`MorningListRow` in `src/screens/Routines.tsx`), with
@@ -10866,8 +10787,7 @@ email or a time on your calendar, and it looks before it rewrites."
 - ⚠️ **Saving is not sending.** Send on the card is still the only thing that sends. Do not let a
   sentence about the pop-up imply otherwise.
 - ⚠️ **Cost, internal only, never on the site.** A rewrite that looks something up costs about one
-  ordinary agent turn more (about $0.03 on Balanced, `docs/COST-MEASURED.md` section 21). Every
-  rewrite also carries the agent's notes, up to about a thousand tokens. An ordinary chat turn is
+  ordinary agent turn more (about $0.03 on Balanced). An ordinary chat turn is
   unchanged.
 - ⚠️ **Older pieces keep the old way.** A card drawn before this build, an older phone app, or a
   phone paired with an older computer gets the old Edit it until both sides have this build.
@@ -10982,7 +10902,7 @@ saying nothing was sent, and its Send, anywhere it still shows, sends nothing."
   change the tab to Chat; it opens the same pop-up over Now (`editWaiting` in
   `src/app/agent-detail.tsx`). Archie Mobile's Now already did.
 - **Cost.** No AI call and no prompt text. A job reading back a replaced draft's state is told
-  "they wrote again and a newer draft replaced it, nothing was sent", about 12 tokens, only then
+  "they wrote again and a newer draft replaced it, nothing was sent", and only then
   (`draft_now` in `crates/archie-runtime/src/gateway/tools_work.rs`).
 
 **The boundaries.**
@@ -11289,10 +11209,9 @@ plus at most five passages of 400, never the samples themselves (`writing_style:
 `email/replies/tests.rs`. **Texts** go through the same gate: `owner_text_style` and `triage_system`
 in `texts/replies/triage.rs`, so Text Replies' row decides it. The owner's own texts still set length,
 capitals, punctuation and emoji and win where the two disagree; the note lends word choice and warmth,
-never an email's greeting, sign-off or length. About 510 more input tokens a text read on Fast and 670
-on Balanced, roughly $0.15 to $0.38 a month at 9.6 texts a day on Haiku 4.5 and Sonnet 5; from Archie
-`7f1014d6`, where Economy runs Haiku 5.5, the Fast end is about $0.02 (computed: 1.3 times the tokens
-at a tenth of the price). Tests in `texts/replies/tests.rs`.
+never an email's greeting, sign-off or length. The note adds roughly $0.15 to $0.38 a month at 9.6
+texts a day, from Fast on Haiku 4.5 to Balanced on Sonnet 5; from Archie
+`7f1014d6`, where Economy runs Haiku 5.5, the Fast end is about $0.02. Tests in `texts/replies/tests.rs`.
 
 **What is kept, approved now:** "If you let Archie read your sent mail, it keeps the parts you wrote
 and a short description on this computer, and in backups you make, until you clear them"
@@ -11482,7 +11401,7 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
 - ⛔ **The phone connects nothing.** It says where to connect on the computer.
 - ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
 - ⚠️ **A search is "about 2 to 4 cents", counting the pages it brings back** (FACTS.md; measured 1.6 to
-  4.3 cents on Sonnet 5, Archie `docs/COST-MEASURED.md` section 20). The app and the phone say so since
+  4.3 cents on Sonnet 5). The app and the phone say so since
   Archie 9f888e61 and archie-mobile 49f31d9, and the site's submit page since this sync; "about a cent"
   was the search fee alone and is never quoted as a search's cost again. Deep Research: "about 50 cents
   a run", up to 20 searches; never "a few cents".
@@ -12584,9 +12503,7 @@ for this."
   Archie for Teams (`with_agent_column` in `crates/archie-runtime/src/gateway/onboarding.rs`, test
   `teams_lists_say_whose_each_row_is`).
 - **The reply.** A teammate's note tells the agent to answer about their own work rather than the
-  whole business unless asked: 31 tokens on a teammate's turn, measured on Sonnet 5.5 and Haiku 5.5,
-  above the cache line in the note that already differs between the owner and a teammate
-  (`shared_agent_note` in `gateway/prompt.rs`).
+  whole business unless asked (`shared_agent_note` in `gateway/prompt.rs`).
 - **What Dana can see** counts the rows each teammate sees, "Deals (3 of 9)", on both apps (Archie
   `src-tauri/src/teammate_view.rs`; archie-mobile `src/guests.ts`).
 
@@ -13551,8 +13468,7 @@ instead. A question with none of those can still reach the researcher."
   of 66, 42 of 44 web questions still went there, and the existing gate cases went from 93.4% to
   91.4%, pooled over two passes. Eleven of the run's cases joined the gate
   (`router_cases_journeys.json`).
-- **Cost.** About 135 router tokens a message (`cf255232`; Archie's `docs/COST-MEASURED.md` section
-  25). The check in code (`fc5d5e63`) makes no call and adds no tokens (section 27.1). A message it
+- **Cost.** The check in code (`fc5d5e63`) makes no call and costs nothing. A message it
   keeps is answered by the agent's own turn in place of the researcher's search; the difference
   between the two has not been measured.
 
@@ -14717,9 +14633,9 @@ Fixed in place: Groq's free tier stays recommended without a caveat because Groq
 is unconditional, and Google's now says which tier trains.
 
 ⛔ **Superseded 2026-08-30, and for a reason that has nothing to do with training: Groq's free tier
-cannot run Archie, so the site no longer recommends it anywhere.** That tier allows 8,000 tokens a
-minute, and one turn sends 10,000 to 17,500 because the agent's own instructions travel with every
-message. A free Groq key therefore pastes in, validates green, and then fails on everything the
+cannot run Archie, so the site no longer recommends it anywhere.** That tier's cap on what can be
+sent in a minute is below what a single turn sends, because the agent's own instructions travel
+with every message. A free Groq key therefore pastes in, validates green, and then fails on everything the
 person sends. Measured against the live API on 2026-08-29 against two agents, one with eleven
 skills and one with two; the small one is still nearly twice the cap, so there is no agent small
 enough. Three pages carried the claim, all now corrected: `archie/pricing/`, `faq/`, and

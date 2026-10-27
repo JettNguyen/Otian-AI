@@ -13277,6 +13277,62 @@ the turn makes no AI call.
 - ⚠️ **Notes and tags are not offered.** GoHighLevel notes cannot be read back to be put back, and a
   tag is the usual way a GoHighLevel workflow is started.
 
+### 🚧 A screen reader hears what your agent is doing and then its answer, in Archie and Archie Mobile: BUILT 2026-10-27, in no release yet, not yet heard by a person who uses one
+
+*Built October 27, 2026 (Archie `0e2ef244`, `655d96ae`, `ffe729b6` and `94b6eb1f`; Archie Mobile
+`578475e` and `58417e0`; in no release yet).*
+
+**Proposed wording, Jett's to approve:** "If you use VoiceOver, TalkBack or another screen reader,
+Archie says when your agent starts working and what it is doing first, then reads the answer as soon
+as it is done. Every button has a name, and buttons like Send and Undo can be reached and pressed
+without seeing the screen."
+
+**Why it's true:**
+
+- **On the computer:** `src/app/announce.ts` decides what is said, and `src/app/conversation.tsx`
+  says it through a live region: "Dana is working", then the turn's first status line once (for
+  example "Searching your email"), nothing for the steps in between, and "Dana said:" with the answer
+  the moment the turn ends. The runtime tells the window which line is a status and when the turn is
+  over: `first_status_of` in `crates/archie-runtime/src/gateway/worker.rs`, `Channel::first_status`
+  in `crates/archie-net/src/channel.rs`, and `settled`, which the mirror in
+  `crates/archie-net/src/mirror.rs` now passes on, so it reaches the window on an agent with a chat
+  app connected too. A card reads as one group named by its heading, and a press says what happened
+  ("Sent", or "Taken back off" and the list's name). The talk screen (`src/app/talk.tsx`) is the shared
+  dialog, keeps focus inside, says "Getting ready", "Listening" and "Working it out" once each, and
+  has a Stop button the Tab key reaches. Four form fields that had only placeholder text have labels
+  (`admin.tsx`, `connect.tsx`, `skill-setup.tsx`).
+- **On the phone:** Archie Mobile's `src/announce.ts` says the same words, and the computer sends the
+  first status line beside the turn it belongs to (`stamp_turns` in `src-tauri/src/phone.rs`). Every
+  button has a name, and none sits inside another, which can hide it from a screen reader. On the
+  talk screen, Stop is an action on the status line.
+- **A check keeps it fixed:** Archie Mobile's `scripts/check-accessibility.mjs` runs in `npm run
+  check` and fails on any button or switch with no name, followed through Archie's own components to
+  every place they are drawn, and on any button inside another. Run on the code before this, it
+  found all 10 unnamed buttons and 5 nested ones.
+- **Tests:** `src/app/announce.test.mjs` and Archie Mobile's `src/announce.test.ts` (the first status
+  once, the steps skipped, the answer at the end),
+  `a_first_status_is_a_step_or_a_guess_and_never_the_answer_arriving`,
+  `the_end_of_a_turn_and_its_first_status_reach_the_window` and
+  `a_running_turn_carries_its_first_status_line_and_an_ended_one_does_not`.
+- **Cost:** none. No AI call and no prompt text. The phone gets one more relay write on a turn that
+  says a status.
+
+**The boundaries.**
+
+- ⛔ **Never "fully accessible", "works with every screen reader" or "WCAG compliant".** Nobody has
+  listened with VoiceOver on a Mac or an iPhone, or with TalkBack, yet. Until somebody who uses one
+  has, the most that may be said is that Archie was built for screen readers.
+- ⚠️ **It says the first step, not every step.** A long turn is quiet between its first status line
+  and its answer, on purpose: reading every edit queued a backlog in front of the answer.
+- ⚠️ **On the talk screen, the answer is the agent's own voice.** The screen reader reads it only when
+  it is too long to speak.
+- ⚠️ **A teammate's phone on Archie for Teams guesses the end of a turn** after 12 quiet seconds,
+  because it is not told directly (the Archie repo's `docs/OPEN-THREADS.md`).
+- ⚠️ **The phone does not move focus after a press.** It says what happened and leaves focus where
+  it was.
+- ⚠️ **The chat apps draw their own screens.** How Telegram, Slack, Discord, Matrix or iMessage read
+  Archie's messages aloud is theirs.
+
 
 
 ## Known Weaknesses — disclose, don't hide

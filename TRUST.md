@@ -440,6 +440,32 @@ The arithmetic is in FACTS.md's `$13` and `$31` rows.
 Never "it costs $13", never "under $31", and never on a page without "usually" and "a month". The
 pricing page's table was rebuilt on the same measurements the same day, so the two now agree.)*
 
+*(Amended October 17, 2026, Archie `709acbc2`, not in a release yet: for somebody with no AI account
+of their own, the plan choice starts on this plan, and the screen after a trial says where the
+trial's leftover AI went. By Jett's call that day, with no AI account saved the choice opens on
+monthly with Include the AI on; somebody with one saved starts where everybody did before, on
+yearly with it off (`PlanChoice` and its `ownAiKey` in `src/app/auth.tsx`, the same chooser behind
+the screen after a trial and the trial strip's Get a plan). The Plan card on the screen after a
+trial now says which of the two needs an AI account: "$30 a month: on an AI account of your own",
+"$59 a month: the AI included, nothing to set up", and "No daily limit, up to 10 agents". A free
+trial that ended on its fourteen days with AI left on it says so before anything else: "The $1.62
+of free AI that was left ended with the trial. Everything you set up is still here."
+(`leftOverLine`, said only when a cent or more was left, and never on the owner's own AI account or
+a plan). On that screen, under the choice on both of its steps and for everybody who meets it: "Not
+sure which to pick? Email questions@otianai.com." (`NotSurePick` in `PaywallScreen`, the app's own
+support address; not under the trial strip's chooser). On round four of the journey tests an owner
+with no AI account came back after her trial to yearly preselected and Include the AI off, and the
+$1.62 left from her trial had no way to be used and nothing said what became of it (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`, and the fix plan's D.8). The billing service still
+ends what is left at day 14, unchanged, by the same call. There is no test runner for this screen;
+typecheck and lint only.
+- ⛔ Never "your credits carry over", "your unused credits are added to your plan", or anything
+  that says leftover free AI is kept after the trial's fourteen days. The screen says it ended.
+- ⛔ Never say Archie picks the plan for you, or that the choice it starts on is the one to take.
+  It is where the switch starts, the price is beside it, and the person presses the plan they want.
+- ⚠️ Somebody with an AI account saved still starts on yearly with Include the AI off, and Archie
+  for Teams has no plan with the AI included, so nothing changed there.)*
+
 **Approved wording, replaced 2026-09-03:** "That usage runs on our Anthropic account, so what you
 write to your agent passes through our server on the way to Anthropic. It writes down what each
 request cost and never what it said, we keep no copy, and we use none of it for anything. Email and text replies are the two things it
@@ -1859,6 +1885,18 @@ Until then, Remove it takes it back."
   phone waits until the computer running Archie is on and Archie is open.
 - ⚠️ **Not yet pressed on a real phone against a sleeping computer.** Tested in code on both sides.
 
+**Amended October 17, 2026: Working and Stop go when the work does** (Archie `93c051b5`, merged into
+main as `b65729ea`, in no release yet; nothing here may be said on a page until a release carries
+it). On round four of the journey tests an owner wrote "Ember still says Working with a Stop button,
+so I'll wait" (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`). On the computer, a message
+no turn sent (a mail card, the morning list, a routine's report) no longer brings Working and the
+Stop button back; it only keeps a Working that is already showing on screen a moment longer, and
+otherwise clears the line that says the agent is taking a while (`onMessage` and `thinkingRef` in
+`src/app/conversation.tsx`). Archie Mobile's Stop already follows the computer's own flag for a turn
+running, so it needed no change.
+- ⚠️ **Not watched in a window yet,** and the findings could not say how much of the report was the
+  screen capture rather than the app. Never "Working always clears" until someone has watched it.
+
 ### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release (not in the iPhone's 1.0), and never watched
 
 *Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.5's `2afe4589`, and
@@ -2697,6 +2735,74 @@ carries it):
 - ⚠️ **Never say the rule makes ads compliant.** It is what the agent is told, like the fair housing
   rule; the owner checks the ad.
 
+**Amended October 17, 2026: the brokerage the owner named, and whose rules they are** (Archie
+`579d82e9`, on main and in no release yet; nothing here may be said on a page until a release
+carries it):
+
+- **Real estate's third rule** now ends "An ad names the brokerage, which is not the team: use the
+  one the profile, memory or conversation names, and leave [Brokerage] only when none does." (about
+  13 tokens more than the October 12 wording, on every turn of a real estate agent, cached). On
+  round four of the journey tests an owner named her brokerage, the agent saved it as a note, and
+  the next ad still said [Brokerage]. Two `rule_changes` carry the new words to a profile holding
+  either older wording, and `profile_with_rule_changes` (`crates/archie-domain/src/setup.rs`) now
+  applies several changes to one rule in a single pass; it read the record of what it had already
+  offered after writing to it, so a second wording was skipped (tests
+  `a_rule_reworded_twice_and_the_old_heading_both_catch_up` and
+  `the_brokerage_rule_reaches_both_older_wordings`). The business details entry says how a brokerage
+  named in chat is now kept.
+- **The rules say whose they are.** The heading above them in the profile reads "Rules of the work
+  (from Archie's setup; the owner can change them):" where it read "Rules of the work:"
+  (`RULES_HEADING` in `setup.rs`), about 12 tokens on every turn of an agent a setup matched,
+  cached. An agent set up earlier gets the new heading once, at its next start
+  (`catch_up_with_setup` in `crates/archie-runtime/src/gateway/onboarding.rs` now always runs the
+  catch-up, so an agent whose setup has no reworded rule still gets it).
+- ⚠️ **"Use the one it names" is what the agent is told.** Code fills [Brokerage] only from the
+  business details (that entry's "Filled in by code"); a brokerage said in the conversation and not
+  kept reaches a draft only if the model writes it in.
+
+**Amended October 17, 2026: a Customers list for restroom companies, the columns owners asked for,
+and the day each person was added** (Archie `8e05808d`, with `99e0273c` for the first answer,
+`fd747fc8` for the route rule, and `1f37008d` and `ffd8d224` for the Lists screen, the phone and the
+line under a reply, merged into main as `ec88be1c` and `b65729ea`; in no release yet, so nothing
+here may be said on a page until a release carries it). On round four of the journey tests a
+restroom owner's customer file went onto Rentals and lost its contact, phone and notes, Stops had
+no count, order or truck ("Then what is it for"), People had no day added, so lead counts were
+wrong, and Bookings had nowhere to say when the deposit was paid (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed addition to the wording, Jett's to approve:** "A portable restroom company also starts
+with a Customers list. Stops keep how many units, the stop's number and the truck; a real estate
+agent's People keep the day each person was added, filled in for you; Deals keep a closing time and
+notes; and Bookings keep the day the deposit was paid."
+
+- **Customers** (Customer, Contact, Phone, Site address, Units, Rate, Notes) in
+  `data/setups/portable-restrooms.json`, also in its `new_lists`, so an agent set up before gets it
+  once at its next start and never again after the owner deletes it (`records::catch_up_with_setup`;
+  a test proves both).
+- **New columns,** reaching older lists once by the catch-up above: Stops gained Unit count, Stop
+  number and Truck (not "Units", which the what's-on note would read as units taken); People gained
+  Added on; Deals gained Closing time and Notes; Bookings gained Deposit paid on.
+- **Added on is filled by code** with today's date when a new person is added with it blank, however
+  they come in: by the agent, from a file in the chat, from Follow Up Boss, with Add or Import on the
+  Lists screen, or with Add in Archie Mobile (`fill_added_on` in `crates/archie-domain/src/records.rs`,
+  called from `crates/archie-runtime/src/records.rs` and from `records_record_create` and
+  `records_import_apply` in `src-tauri/src/commands/knowledge_records.rs`). A file's own Created or
+  Date added column, and a Follow Up Boss person's created day, fill it instead.
+- **The lists come with the first answer** that names one of the four lines of work ("I run a
+  porta-potty company") instead of waiting a second turn (`names_a_setup` in
+  `crates/archie-runtime/src/gateway/onboarding.rs`).
+- **The restroom route rule** now reads "put it on the route before the day it ends, on a day and at
+  a time its driver works, as the owner's notes say", with a `rule_changes` entry for agents set up
+  before (the entry on a stop moved onto a busy day).
+- **Cost.** In the cached list columns: about 72 tokens on a restroom agent (Customers 58, Stops 14),
+  14 on real estate and 6 on event trailers; the route rule is about 17 more on every turn of a
+  restroom agent, cached. Internal, never on the site.
+- ⚠️ **People added before the column arrived stay blank.** Never "Archie knows when every lead came
+  in", and never that it reads Follow Up Boss's history: only a person's created day comes over.
+- ⚠️ **Closing time is free text,** not checked against a calendar or the closing date.
+- ⚠️ **A new restroom agent starts with four lists, one an empty Customers.** Jett has not yet chosen
+  between keeping that and making Customers only for older agents and first imports.
+
 **Approved wording, once it is in a release:** "Tell Archie you rent out portable toilets, run a
 plumbing or heating company, or sell homes, and it starts with the lists that work runs on:
 Rentals, Units and Stops; Work orders, Estimates and Customers; or People, Deals and Listings. It
@@ -2717,9 +2823,10 @@ sheet. Change any of it by asking."
   simulated owners (`scripts/agent-sim/l01` to `l04` in the Archie repo, October 9, 2026): the
   portable restroom company, the plumbing office and the solo realtor each matched theirs and used
   its lists for the day's work, and the mobile dog groomer matched none and got a drafted list.
-- **The rules.** Written under the business profile (`user.md`) headed "Rules of the work:"
-  (`profile_with_rules`), which is on the Personality tab under Who this agent serves, where the
-  owner can change or remove them. The agent reads the profile on every turn. In the simulated
+- **The rules.** Written under the business profile (`user.md`) headed "Rules of the work:" (a
+  longer heading from Archie `579d82e9`, in the October 17 amendment above) (`profile_with_rules`),
+  which is on the Personality tab under Who this agent serves, where the owner can change or remove
+  them. The agent reads the profile on every turn. In the simulated
   runs the realtor's agent declined to text a lead who had not agreed to texts and to state a
   home's value, and, once the fair housing rule said it holds when the owner asks (`0fd0f068`),
   declined to call a town "a great family neighborhood with good schools" in three runs of three.
@@ -2949,7 +3056,9 @@ and ends with where to find the whole guide in Archie and a link to this page."
   describe) get an ordinary answer from the model, as before.
 - ⚠️ **Narrow on purpose.** A message that also asks for something ("Where does my data go? Also add
   milk to my list"), one about losing things ("Are my notes safe if I uninstall Archie?"), "Where did
-  my notes go?", and anything over 30 words go to the model.
+  my notes go?", and anything over 30 words go to the model. (From Archie `9246effd`, in no release
+  yet, the first of those goes to the model with the guide's answer beside it: the October 17
+  amendment below.)
 - ⚠️ **The answer is the copy built into the app.** The Resources page shows the catalog's copy,
   which reaches installed apps from main with no release (this entry's italic line), so after the
   guide changes, the chat's answer catches up only with a release.
@@ -3020,7 +3129,12 @@ and when, where that goes, what it never does, and how to switch it off."
   `a_question_about_what_connecting_email_means_is_taken`). "What do you see in my inbox?" is a job
   and goes to the agent.
 - ⚠️ **The every-few-minutes reading needs one of those two add-ons.** Never say Archie watches every
-  inbox it is connected to.
+  inbox it is connected to. *Amended October 17, 2026 (Archie `a1f7b7c3`, in no release yet):* it
+  also needs the owner's yes, given on the card that asks or with the Watch my inbox switch (the
+  entry "When your agent starts reading your mail"); an agent that was reading before that release
+  counts as having said yes. The guide's line and `MAIL_PLAINLY` in `src/app/vocab.ts` now say it
+  too: "If you add Email Manager or Package Tracker and press Start reading my mail when your agent
+  asks, it also reads new mail in your inbox every few minutes" (Archie `fd01377b`).
 - ⚠️ **"Never deletes" is about the agent, and filing is not deleting.** With the tidy box checked it
   moves mail between folders; never say it leaves the mailbox exactly as it found it.
 - ⚠️ **"Sends only with Let it send replies checked" was not true on Gmail with the tidy box checked,
@@ -3034,6 +3148,69 @@ and when, where that goes, what it never does, and how to switch it off."
   in the sentence: a Gmail account connected before that release with tidying on and sending off
   can still send until it is reconnected once, and a send still always waits for the owner's press.
   Outlook was never affected, because its send permission is asked for only when the box is checked.
+
+**Amended October 17, 2026: a plain yes or no first, and none of your mail on our AI** (Archie
+`9246effd`, on main and in no release yet. The two guides' new lines reach installed apps with the
+next push to Archie's main, as above; the answers in code, the prompt's sentences and the chooser's
+lines arrive with the release that carries them. This site's page changed the same day.)
+
+**Proposed wording, Jett's to approve:** "Ask your agent whether your information is used for
+training, or where it goes, and the answer opens with a plain yes or no for the AI company it uses
+and the way it is connected. Ask how long anything is kept and it points you to each company's
+policy. On our AI, your agent reads none of your mail."
+
+- **The first sentence is chosen in code** (`direct_line` in
+  `crates/archie-runtime/src/gateway/privacy.rs`) from the AI company and the route, and every claim
+  in it is the guide's. Asked about training: "No." for Anthropic, OpenAI and Groq, and always on
+  our AI, which sends it on to Anthropic; "Not on a paid account." for Google (Gemini) and Mistral;
+  "We don't know." for xAI; "Yes." for DeepSeek; each followed by what that company says. Otherwise
+  the route: "What you type, and what it reads for you, goes to Anthropic through our server, which
+  keeps no copy; your lists and files are kept on this computer.", or "What you type, and what it
+  reads for you, goes from this computer straight to OpenAI on your own account; your lists and
+  files are kept on this computer." with the owner's own company named. The guide's paragraphs
+  follow as before. Test: `the_answer_opens_with_a_direct_line`.
+- **How long, only when asked.** The guide's How long paragraph (the phone mailbox's clock, and a
+  link to the privacy policy's table for the rest) is added only when the question asks how long,
+  or names keeping, retention, a carrier, insurance, compliance or HIPAA (`asks_how_long`).
+- **A question inside another request.** A message that asks where its information goes and also
+  asks for something else still goes to the agent, now with the guide's answer below the cache line
+  for that turn and the instruction to answer that part from it, opening with its first sentence
+  and adding nothing it does not say (`touches_where_it_goes` and `guide_note`; the owner's typed
+  turns only; about 330 tokens on that turn and nothing on any other). Test:
+  `a_mixed_message_carries_the_guide_for_its_turn`.
+- **Mail on our AI.** The guide's paragraph about our AI now says "Your agent reads no email or
+  texts on our AI." where it said "Email and text replies never run on our AI." The old sentence
+  named replies and left the reader to wonder about the rest, while an agent on the free credits or
+  a plan with the AI included reads no mail at all, asked or on its own (the plan entry, and its
+  October 12 amendment `ef9b94a1`, which takes the mail tools off). The connect-email guide's Where
+  it goes line now reads "from this computer straight to the AI company on your own AI account, the
+  way everything it thinks about does. On our AI (free credits, or a plan with the AI included) it
+  reads none of your mail, so none of it reaches our server.", replacing "through our server only on
+  our AI, which keeps no copy" in the October 12 amendment above, and the chooser's copy
+  (`MAIL_PLAINLY` in `src/app/vocab.ts`, held to the guide by
+  `the_chooser_shows_the_guides_lines`) says the same. Asked in the chat what connecting email
+  means, an agent on our AI opens "Right now this agent runs on our AI (the free credits, or a plan
+  with the AI included), so it reads none of your mail: not when you ask, and not on its own. To
+  change that, connect an AI account of your own on this agent's Setup tab, under AI account."
+  (`OUR_AI_READS_NO_MAIL` and `mail_answer`). Until this, that answer said Email Manager reads new
+  mail every few minutes, which it never does on our AI. The guide is 793 words by
+  `scripts/guide-lengths.py`, under its 800.
+- **The prompt's route sentence.** On the free credits it now says what the plan's says, that our
+  server keeps no copy, and both add that mail and texts are never read this way (`plumbing_note_for`
+  in `gateway/prompt.rs`, test `starter_credits_are_named_as_somebody_elses_account`): about 30
+  tokens more on every turn of an agent on the credits and about 12 on the plan, cached.
+- **This site's page** (`trust/where-your-information-goes/`) now says the agent reads no email or
+  texts on our AI, and where to connect an AI account of your own to change that, where it said
+  "Email and text replies never run on our AI".
+- ⛔ **The direct line is what each AI company says, not something we checked.** Never present "No."
+  as Otian's guarantee. xAI's answer is "We don't know", and DeepSeek's is "Yes".
+- ⛔ **No answer states how many days anything is kept,** beyond the phone mailbox's clock the guide
+  already gives. The rest is linked: the companies' policies and our privacy policy's table.
+- ⚠️ **An AI service at an address the owner typed in** gets no direct line and no code answer, as
+  before.
+- ⚠️ **"Reads none of your mail" is about an agent on our AI.** Once an AI account of the owner's
+  own is connected, from that agent's next start it reads what the connect-email lines say. Never
+  "Archie never reads your mail".
 
 ### Account choices stay visible, and Google Drive has its own waiting state: BUILT October 20, 2026, not released yet
 
@@ -3274,9 +3451,56 @@ know: on the strip under every page during the trial, and on the Account page un
   `crates/archie-runtime/src/gateway/credits_left.rs`), read off the balance the service sends back
   on every answer, where it divided by the ledger's count of answers, which counts
   background calls too and promised about 2.25 times what was left on round three of the journey
-  tests. Until a message has been measured since the app started, it falls back to the ledger.
+  tests. Until a message has been measured since the app started, it falls back to the ledger
+  (no longer so from Archie `bf7333dd`: the amendment below).
   - ⚠️ **Still a forecast.** One long document read costs ten short questions; never "you have
     exactly N answers".
+- **Amended October 17, 2026 (Archie `bf7333dd`, with `dba8e834` and `9d0eb465` for routines and
+  `1bb8a155` for the Account page, in no release yet): one count of answers left, and Teams priced
+  for the whole team.**
+  - **One number, worked out in one place.** `answers_left` in
+    `crates/archie-runtime/src/gateway/credits_left.rs` is the only estimator. The strip shows what
+    it returns (`credits_live` in `src-tauri/src/auth.rs` hands it over; `TrialStrip` in
+    `src/app/update-banners.tsx` no longer works out a count of its own), and the agent's answer to
+    "how much is left" and the line under a reply when only a few are left read the same function.
+    On round four of the journey tests there were two: an owner read "about 40" on the strip under a
+    reply that said "about 37", and watched the strip go up after a message.
+  - **How it is worked out.** What the balance fell by from the start of one owner message to the
+    start of the next is what that message cost, with any routine or teammate in between, since
+    they spend from the same balance. The average of the last ten is what one more is likely to
+    cost; before any has been measured, four cents (`FIRST_GUESS_MICROS`). The last ten, and the
+    count last said, are kept in `answer_costs.json` in Archie's data folder on the computer (ten
+    numbers and a count, nothing about what was said), so a restart starts from them. Rounded the
+    way the strip always said it: exact to 10, then to the five below up to 40, then to the ten
+    below.
+  - **It never goes up unless the balance did.** The count said is remembered beside the balance it
+    was said at, and a later one is never higher for the same or a lower balance (`settle`, test
+    `the_count_never_rises_unless_the_balance_did`). So a cheaper run of messages cannot make the
+    count climb with nothing added; a refill or a plan can.
+  - **Archie for Teams, priced for the team.** The strip's four Teams sentences now say "$99 a month
+    or $999 a year for your whole team, not per person or per agent" (`TEAM_PRICE` in
+    `update-banners.tsx`), for example "After that, Archie for Teams is $99 a month or $999 a year
+    for your whole team, not per person or per agent, on an AI account of your own that you pay for
+    directly." The agent's own price answer says the same and adds that everybody who messages the
+    agents is covered, that one plan runs up to 50 agents, and what that comes to with an AI
+    account: "so about $112 to $130 a month in all" (`money_answer.rs`, totals from
+    `data/prices.json`). On round four owners read "$99 a month" as per person or per agent and
+    worked out a bill several times too high. The Account page's Your plan row on Archie for Teams
+    says it the same way: "No plan yet. Archie for Teams is $99 a month or $999 a year for your
+    whole team, not per person or per agent, on an AI account of your own that you pay for
+    directly." (`NoPlanRow` in `src/app/account.tsx`, Archie `1bb8a155`).
+  - **Routines wait for the last few answers.** When only the part kept for the owner's questions is
+    left, the strip adds ", kept for what you ask, so routines are paused" after the count, and the
+    line under a reply adds "Routines are paused, so these go to what you ask." (the out-of-AI
+    entry's October 17 amendment says what pauses and when).
+  - ⚠️ **Still a forecast, and it can sit still.** Never "exactly N answers", and never that the
+    count moves with every message: rounding and the rule against going up mean it can stay put
+    while the balance falls a little. A long idle stretch with several routines makes one interval
+    large and can lower the count for the next ten messages.
+  - ⚠️ **The account's, not an agent's.** Every agent on the account spends from one balance, so the
+    count is one number for all of them, and one agent's turn measures what another spent between.
+  - ⚠️ **"For your whole team" is the plan, not the AI.** Archie for Teams still thinks on an AI
+    account of the owner's own, billed by that company; say both halves together.
 
 *Amended October 27, 2026 (Archie `3ba19e57` and `afaf0a8d`, in no release yet): the strip after
 the trial.* Once a free trial is over with no plan, the window stays open and the strip is the line
@@ -3347,7 +3571,12 @@ calendar work the whole time."
   in every build today, as the business details entry says of sealing). The first kept message in a
   conversation gets `money_out::said` and the card (`Channel::money_out`, `MoneyOut` in
   `crates/archie-net/src/channel.rs`); every later one gets "Saved. I'll pick it up when the AI is
-  back." (`SAVED`). No model is called for any of it, because the refusal comes before one runs. A
+  back." (`SAVED`). From Archie `8d5f4e9a` (in no release yet) that is for a later message that asks
+  for something; a later question gets "I can't answer that until the AI is back on October 18. I
+  kept it and will answer it then." (`cant_answer_yet`; the day only where it is known, "tomorrow"
+  for the day's pause, and no day for the free credits), and the first reply opens "Not done yet.",
+  or "I can't answer that yet." for a question (the October 17 amendment below). No model is called
+  for any of it, because the refusal comes before one runs. A
   photo is not kept as a photo: the call that would read it is refused too, so what is kept is its
   caption and a line saying it could not be read (`crates/archie-runtime/src/vision.rs`).
 - **The card.** `InAppChannel::money_out` (`crates/archie-net/src/inapp.rs`) records it on the chat
@@ -3430,8 +3659,6 @@ calendar work the whole time."
     plan; "what do we charge for a unit?" is the owner's own price list and goes to the agent.
     Never "ask your agent anything about billing".
   - ⚠️ **The owner only, typed.** A teammate's question about the plan goes to the agent as before.
-  - ⚠️ **The refill day is not in the code answer.** A plan's refusal names it on the card; the code
-    answer says the month's AI is used up without the day.
 - **Amended October 12, 2026 (Archie `c04ee588`, archie-mobile `7aa9315`, in no release yet): the
   plan's month says nothing more is charged, and a dated message can be added by hand.** On the plan
   with the AI included, the reply now opens "This month's AI on your plan is used up. Nothing more is
@@ -3463,7 +3690,8 @@ calendar work the whole time."
   kept, and the owner is told who.** On a shared agent (Archie for Teams, or an agent with guests), a
   teammate's message that meets the owner's AI running out used to get "my page in Archie shows what
   it is", a page they cannot open, and was dropped. Now the teammate is told "I kept your message and
-  let Megan know, and I'll answer it once the AI is back"; the owner gets one line in their own
+  let Megan know, and I'll answer it once the AI is back" (other words from Archie `8d5f4e9a`: the
+  October 17 amendment below); the owner gets one line in their own
   conversation ("Dana wrote to me, and I could not answer. Your free credits are used up.") with the
   card under it, which raises an alert on the computer while Archie is in the background; and the
   message is answered by a turn of the teammate's own when the AI is back, with what they may do
@@ -3476,6 +3704,269 @@ calendar work the whole time."
   - ⚠️ **A teammate removed before the AI is back is not answered**, and what they sent goes.
   - ⚠️ **A turn that runs out part way keeps nothing**, for a teammate as for the owner: it asks
     them to tell the owner and send it again.
+- **Amended October 17, 2026 (Archie `8d5f4e9a`, `dba8e834` and `bb302238`, archie-mobile
+  `cf5c4b6`, in no release yet): a question gets an answer, the day comes back, routines wait for
+  the last few answers, and a teammate hears it as a teammate.** From round four of the journey
+  tests (Archie `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, D.3 to D.7 and C.7).
+  - **Proposed wording, replacing the one above, Jett's to approve:** "When the free credits or your
+    plan's AI for the month run out, your agent says so once, with the ways to keep going and what
+    each costs. What you send after that is kept: it says nothing was done yet, a question is told
+    when it will be answered, and once the AI is back it answers what you sent. Your lists and
+    calendar work the whole time."
+  - **What was asked for, first.** The first kept message's reply now opens "Not done yet.", or "I
+    can't answer that yet." when the message was a question, before what ran out (`said` in
+    `money_out.rs`). A later question gets "I can't answer that until the AI is back on October 18.
+    I kept it and will answer it then." (`cant_answer_yet`): the day when it is known, "tomorrow"
+    for the day's pause, and no day for the free credits, which come back only through something the
+    owner does. Anything else later still gets "Saved. I'll pick it up when the AI is back." A
+    message counts as a question by its words (`money_out::asks`, read the way the money answer
+    reads them), so "can you book the van" with no question mark is a job. Tests:
+    `a_kept_question_is_told_when_it_will_be_answered`, and the pipeline's
+    `what_is_sent_while_the_ai_is_out_is_kept_and_picked_up`.
+  - **The plan's month keeps its day.** The card built for a plan's month takes the refill day from
+    the account's own reading when the refusal's sentence gave none (`card` in `money_out.rs`, from
+    `credits_left::refill_day`, which `trial_status` feeds), so the money answer says it too, where
+    until now only the card did. Its words are now "This month's AI on your plan is used up. Nothing
+    more is charged, and it comes back by itself on October 18." (was "Nothing more is charged for
+    it"), after "Not done yet." when something is kept.
+  - **More money questions are answered in code.** A question with "ok", "so", "well" or the like in
+    front now matches (`question_words`). How much is left, how many answers, when it refills, or
+    whether the AI is used up or running low is answered with the count and the day and no prices:
+    "The AI I think with has about 12 more answers left. The free trial ends on October 24, whatever
+    is left." or "... This month's AI on your plan comes back by itself on October 18."
+    (`asks_about_the_ai`, `credits_left::status`; test
+    `how_much_is_left_is_the_count_and_the_day_with_no_prices`). "Do I need anything else besides
+    the plan?" is answered too (`asks_what_else_is_needed`). The owner asking why it stopped is
+    answered when only a teammate's message is kept (`held_anywhere`; test
+    `why_it_stopped_is_answered_when_only_a_teammate_was_kept`).
+  - **Never "the cheapest way is free".** The price answer says "On an AI account of your own,
+    Archie itself costs nothing for 20 jobs a day; that company bills you, usually $13 to $31 a
+    month.", then the plans, then what an AI account is: "An AI account is a pay-as-you-go account
+    with the company that makes the AI (Anthropic for Claude, OpenAI for ChatGPT). It is separate
+    from a ChatGPT or Claude chat subscription." That full answer is said once a day in each chat
+    and a short line after (`full_paragraph_owed`; a restart of Archie costs one more full one). On
+    Archie for Teams it says "for your whole team, not per person or per agent" where it said "no
+    seat count" (the costs entry's October 17 amendment). On the plan with the AI included it says
+    what the plan covers and the one way past it, and never lists the plans; when that plan's month
+    is what ran out, it ends with one line, "Only if it can't wait: an AI account of your own,
+    usually $13 to $31 a month, billed by that company." The money card and the chat-app words say
+    "Archie itself costs nothing on it for 20 jobs a day" beside the same sentence about what an AI
+    account is (`moneyWays` in `src/app/money-words.ts`, archie-mobile `src/money.ts`, `ways` in
+    `money_out.rs`); the AI account panel says the pay-as-you-go part too (`src/app/connect.tsx`).
+    Test: `the_price_is_said_in_full_once_a_day_and_never_as_free`.
+  - **Routines wait for the last few answers** (Jett's call, October 17, 2026; `dba8e834`). On the
+    free credits or the plan with the AI included, a routine due to run on its own skips its run
+    once only the part kept for the owner's questions is left: three answers at the current rate,
+    and never less than 15 cents (`keeping_for_questions` in `credits_left.rs`, the check in
+    `handle_routine_message` in `gateway/routines.rs`). The owner is told once, in their own
+    conversation: "**Standup** did not run at 7:58 AM, so the last of the AI is kept for your
+    questions. Routines run again when your plan's AI comes back on October 18." (on the free
+    credits it names Get a plan and the AI account instead) (`paused_for_questions`,
+    `tell_routines_paused`; test
+    `a_routine_skipped_for_the_last_of_the_ai_says_which_and_what_brings_it_back`). On round four a
+    morning standup spent what was left before the owner had asked anything.
+  - **A teammate hears it as a teammate** (C.7). The teammate whose message meets the owner's AI
+    running out is now told "Ember is paused until Megan turns it back on. Nothing is wrong with your
+    phone or your account. Nothing was done yet; your message is saved and Ember will do it once
+    it's back." ("until October 18" for a plan's month whose day is known, "until tomorrow" for the
+    day's pause, "answer it" for a question, and the owner's first name only), and anything later
+    "Not done yet. Saved for when Ember is back." (`teammate_said` and `teammate_said_again`; the
+    pipeline's `a_teammate_who_runs_out_is_kept_and_the_owner_is_told`). The owner is still told in
+    their own conversation, as above; the teammate's line no longer says so.
+  - ⛔ **Never "routines never use up your credits".** They run as before until only the last few
+    answers are left. Never on an AI account of the owner's own, which this does not touch, and a
+    Run now press still runs.
+  - ⚠️ **Told once, until the balance goes up.** A restart of Archie may tell once more, and the
+    note is not sent during quiet hours: the next routine skipped after them says it.
+  - ⚠️ **"The last few" is a forecast,** worked out from what recent messages cost (the costs entry's
+    October 17 amendment), so it can come early or late on an unusual day.
+  - ⚠️ **"Until Megan turns it back on" is the wording for anything only the owner can fix.** Never
+    promise a teammate a time unless the line names a day.
+  - ⚠️ **Still matched by words.** A money question worded another way is kept like any other
+    message while the AI is out, and answered once it is back.
+  - ⚠️ **"Free" still appears beside the AI account it needs.** "Archie is free on your own AI
+    account" and "free for 20 jobs a day" stay on the strip, the Account page's Your plan row and
+    the schedule's words, as the costs entry quotes them; only the agent's own price answer, the
+    money card and the chat-app words moved to "Archie itself costs nothing on it". The rest were
+    left as they are on October 17, because each names the AI account beside it.
+
+### 🚧 Pressing Not now under an offer is answered at once, with no AI, and what it offered is dropped: BUILT 2026-10-17, in no release yet
+
+**Built October 17, 2026 (Archie `ab9ff8ba`, with `9d0eb465` for its pipeline test), and in no
+release yet.** Say nothing about it on a page until a release carries it. Archie Mobile has no
+commit for it: the press goes through the computer, and the answer reaches the phone like any
+reply.
+
+**Proposed wording, Jett's to approve:** "Press Not now, No thanks, Skip or Cancel under something
+your agent offered, and Archie answers "Okay, left it." on the spot, without asking the AI, and drops
+what the card was offering."
+
+**Why it's true:**
+- **Which presses.** `is_bare_decline` in `crates/archie-runtime/src/decide.rs`. The press has to
+  say a decline in its label or its words (not now, not today, not yet, maybe later, later, leave
+  it, no thanks, skip, cancel, don't, keep it, decline, pass), and nothing else may ride with it:
+  its words are only the words a decline is made of, or the no of a row code writes (a staged
+  change, an add-on, a skill or routine to keep), which names what it turns down. A plain "No" does
+  not count, because under "Do you have kids?" it is an answer. Test:
+  `a_bare_decline_is_told_apart_from_an_answer_and_from_a_no_with_more_in_it`.
+- **The answer, in code.** The press handler in `crates/archie-runtime/src/gateway/worker.rs`
+  replies `LEFT_IT`, "Okay, left it.", with no model call. What a turn would have dropped is
+  dropped the same way: every change staged in that chat expires, as it does on any message, a
+  waiting question about opening an address or searching the web is forgotten, and the saved
+  proposal behind that card is settled the way the discard tool settles it. The press and the
+  answer go into the conversation like any exchange. Not during the first interview, whose buttons
+  are answers about the owner's life. Pipeline test:
+  `a_bare_no_press_is_answered_in_code_with_no_model_call`.
+- **Why.** On round four of the journey tests each Not now ran a whole model turn, $0.004 to $0.017
+  on the free credits, to say "okay" (Archie `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, D.2).
+- **Cost.** One model turn fewer for each such press. The pair it leaves in the conversation is
+  about 8 tokens, where the model's reply was 20 to 60.
+
+**Boundaries:**
+- ⛔ **Never "pressing a button costs nothing".** Only a bare decline is answered without the AI;
+  any other press is a turn like a typed message.
+- ⚠️ **A plain "No" that answers a question still goes to the agent,** and so does a no with more in
+  it ("Not now, remind me Friday").
+- ⚠️ **It reads words.** A button whose words are only decline words but meant something else would
+  get "Okay, left it." The list is short, and the label has to say a decline, not only no.
+- ⚠️ **What the card offered is dropped,** with anything else staged in that chat, as the agent's own
+  turn would drop it. Never "nothing changes when you press Not now".
+
+### 🚧 A press shows as the button you pressed, over a line of the card it answered, and Confirm names the change: BUILT 2026-10-17, in no release yet
+
+*Archie `67e0ebaf` and `5bb63ccb` and archie-mobile `8708e35`, merged into main as Archie
+`150e66ef` and archie-mobile `c461cdb`; in no release or build. Nothing below may be said on a
+page until a release carries it.*
+
+A press goes to the agent as a sentence in the owner's name, and on round four of the journey tests
+that sentence read as words the owner never typed: "I never saw that proposal" (the comment in
+`src/app/conversation.tsx`; the fix plan after round four, F.2). Jett's rule since October 9, 2026 is
+that a press shows as a press.
+
+**Proposed wording, Jett's to approve:** "A button you press shows in your side of the conversation
+as that button, pressed, over the first words of the card it answered, with what it told your agent
+underneath. Confirm says the change it confirms, in the words of the card."
+
+**Why it's true:**
+- **Confirm names the change.** `confirm_sentence` in `crates/archie-runtime/src/decide.rs`, used by
+  `approval_choices`, sends "Yes, " and the change's own summary ("Yes, SMS to Dana Miller: running
+  late." in its test). With no summary, or one over 150 characters (`CONFIRM_SUMMARY_CHARS`), it
+  says "Yes, go ahead and apply the {kind} you proposed." as before.
+- **The window remembers the press.** Which button was pressed on which card is noted before the
+  press is delivered (`note_press` in `src-tauri/src/inapp.rs`), and the sentence it becomes carries
+  the card's first words and the button's label (`press_answered`, `ReplyingTo::pressed`). Archie
+  draws "Pressed" and the button in its own color over a one-line quote of the card, with the
+  sentence under it (`src/app/conversation.tsx`); Archie Mobile draws the same with `PressedButton`
+  in archie-mobile `src/ui.tsx`.
+- **A button cannot add a second request.** A button whose sentence carries a second thing to do
+  that its label does not say ("Book the 5 pickups" sending "Book the 5 pickups and text Dana the
+  route") is refused when the agent offers it (`claim_in_send` and `extra_clause` in `decide.rs`),
+  as a plan in the first person already was.
+- **Cost.** About 15 to 30 tokens more in the owner's message on a Confirm press, then in history.
+  Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **What a chat app shows (corrected October 17, 2026).** This said a chat app shows the sentence
+  alone. It also wrote "→ " and the label into the agent's own message, which an owner read as the
+  agent's words changing after she had read them. See the amendment below.
+- ⚠️ **The second-request check matches words,** so a label that rewords its own second clause could
+  be refused, and a second request worded with the label's words could pass. It is tested on the
+  round four cases.
+- ⚠️ **The phone's half has never been seen on a phone.**
+
+**Amended October 17, 2026: a press never changes your agent's words** (Archie `49769623`, in no
+release yet). **Claim:** "Pressing a button never changes the words of your agent's message. In
+Archie and Archie Mobile your press shows on your side of the conversation; on Telegram, Slack and
+Discord the button you pressed stays on the card with a tick."
+- **Why it's true:** `Channel::card_pressed` and `MsgAction::held` in
+  `crates/archie-net/src/channel.rs` put the card's words back exactly as drawn; the mirror's
+  `card_pressed` and `InAppChannel::heard_press` (`mirror.rs`, `inapp.rs`) and `pressed_elsewhere`
+  (`src-tauri/src/inapp.rs`) draw a press made on a chat app in Archie and Archie Mobile as the
+  owner's, the button pressed over the card. Tests: `a_press_leaves_the_cards_words_exactly_as_they_were`,
+  `a_press_leaves_the_agents_words_as_they_were_on_both_surfaces`,
+  `a_press_keeps_the_cards_words_and_holds_the_button_pressed` (pipeline). On the second replay after
+  round four a teammate pressed Set it to 4 and said "a message further up now reads differently
+  than when I first saw it".
+- ⚠️ **The agent's own question cards only.** Cards Archie writes in code (a reminder, a time to
+  move, drafted entries, an email or text draft) still change their own status line when pressed, and
+  a sent draft says a line under the message that came with it, without changing that message (the
+  entry "A sent draft says it went, beside the agent's message").
+- ⚠️ **On Telegram and Slack the ticked button can still be pressed;** it says so and does nothing.
+  Signal, iMessage and Matrix have no buttons. Never seen on a real chat app or phone.
+
+### 🚧 Your agent's words for its own parts: "Who has what" for Who's Got This's list, the names on your columns, and no "skill" or "specialist" in replies: BUILT 2026-10-17, in no release yet
+
+*Archie `91bcf0f3`, merged into main as `150e66ef`; in no release.
+Nothing below may be said on a page until a release carries it.*
+
+On round four of the journey tests replies carried words from inside Archie: "Handoffs", "for_who
+is now Dana", "skill" and "specialist" (the fix plan after round four, F.4).
+
+**Proposed wording, Jett's to approve:** "Who's Got This keeps its list as Who has what. When a list
+is renamed in Archie's store, your agent's copy takes the new name too, unless you renamed it
+yourself."
+
+**Why it's true:**
+- **The list.** Who's Got This (`data/marketplace/skills/whos-got-this.json`, version 1.0.4) names
+  its list Who has what; the list's key stays `handoffs`, so nothing on it moves.
+- **A store rename reaches an agent.** When an add-on's new version renames a list,
+  `apply_skill_refresh` in `crates/archie-core/src/bundle/skills.rs` renames the agent's copy if it
+  still has the name it was installed with, and leaves a name the owner gave it alone (test
+  `a_catalog_rename_reaches_a_list_its_owner_never_renamed`). Before, no list was ever renamed by an
+  update, so this now applies to any add-on whose list name changes.
+- **Changes are named by the column's label.** A change to an entry hands the agent what changed by
+  the names on the list's own columns, `"changed": {"For": "Dana"}`, so the reply says For and never
+  the key `for_who` (`crates/archie-runtime/src/records.rs`, test
+  `an_update_names_what_changed_by_the_columns_label`).
+- **No "skill" or "specialist".** The agent is told to say what a specialist did ("I looked it up
+  online") and never its name or either word (`gateway/tools_specialist.rs` and `gateway/turn.rs`),
+  where it used to be told to say "skill".
+- **Cost.** About 26 tokens fewer on agents with specialists, about 6 more on Who's Got This's
+  turns, and 10 to 20 in each update's result. Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **"No skill or specialist" is what the agent is told,** not a filter on what it writes. Never
+  "Archie never uses technical words".
+- ⚠️ **A list the owner renamed keeps their name,** and a list whose columns they changed but whose
+  name they did not is still renamed.
+
+### 🚧 Messages sent from a phone get short answers, first line first: BUILT 2026-10-17, in no release yet
+
+*Archie `d3355764`, merged into main as `150e66ef`; in no release.
+Nothing below may be said on a page until a release carries it.*
+
+On round four of the journey tests replies were too long for the car or the cab: "If it keeps being
+that wordy on a phone with one bar I'd give up" (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed wording, Jett's to approve:** "Text your agent from your phone and it answers in the
+first line and keeps it to about three short lines."
+
+**Why it's true:** on a message a person typed from a phone, the agent is told "They are on a phone.
+Answer in the first line and keep the whole reply to about three short lines; no headings."
+(`PHONE_NOTE` in `crates/archie-runtime/src/gateway/turn.rs`). Which messages count is answered by
+where the message came from: Archie Mobile, a teammate's phone, or a chat app (`on_a_phone` in
+`crates/archie-net/src/inapp.rs` and `mirror.rs`). The Operator personality (1.0.3) no longer ends
+every report with an ordering line when nothing needs ordering ("If nothing does, leave the line
+out."). About 28 tokens on phone turns only, below the cache line. Internal, never on the site.
+
+**Boundaries:**
+- ⛔ **An instruction, not a limit.** Nothing cuts a reply, so never "phone answers are three lines".
+  Say "keeps it short".
+- ⚠️ **Typed messages only,** not a press, a routine or a watch. Messages typed at the desk are
+  answered as before.
+- ⚠️ **A chat app counts as a phone,** because the app cannot tell where it is being read.
+
+**Amended October 17, 2026 (late): every route, and the answer before the hello** (Archie `b677ab9b`
+and `de6df52f`, in no release yet). The note did not reach a specialist that answers the person
+itself, so the researcher's school answer to a teammate in the car ran 219 words; it does now
+(`phone_note_for` in `gateway/turn.rs`, `answer_from_the_web` in `gateway/tools_specialist.rs`). A
+teammate's first answer used to open with "I'm Ember, Megan's assistant in Archie."; the answer leads
+and that line goes under it (`signed` in `gateway/worker.rs`). The wording is unchanged: a longer
+one was sent to Haiku 5.5 and Sonnet 5.5 beside it and made answers longer, not shorter.
+- ⛔ **No number about how short phone answers are, yet.** Neither replay after round four carried
+  the note (the test's simulator never said a message came from a phone; it does now), so nothing
+  has measured it on a journey.
 
 *Amended October 27, 2026 (Archie `b5c6e57b`, `30821825`, `3ba19e57` and `afaf0a8d`, archie-mobile
 `9370d36`, in no release yet).*
@@ -3763,6 +4254,29 @@ release carries it).
   reply (`turn.rs`; a calendar skill is also left off the router there, `waits_on_a_calendar` in
   `gateway/routing.rs`; test `an_agent_with_lists_answers_a_calendar_question_without_a_calendar`).
   An agent with no lists keeps the fixed answer. The AI writes that reply, so its words vary.
+
+**Amended October 17, 2026: Connect my calendar after setup** (Archie `99e0273c`, merged into main
+as `ec88be1c`, in no release yet; nothing here may be said on a page until a release carries it).
+An agent with lists and no skills told its owner nothing could be booked and gave them nothing to
+press (the code's note on the fix plan after round four, B.6).
+
+**Proposed addition to the wording, Jett's to approve:** "With no calendar connected, Connect my
+calendar also shows under your agent's reply when you mention your Google, Outlook or iCloud
+calendar, or when the reply says no calendar is connected yet."
+
+- **On offer on every owner turn with no calendar,** after setup, not only where a skill declares
+  one (`could_open` in `gateway/turn.rs`, beside `unbacked_integrations`).
+- **The owner naming a calendar app** (Google Calendar, Outlook, iCloud, Apple's, a shared calendar,
+  gcal or ical) puts it under the reply whatever the reply says (`names_a_calendar_app`, matched by
+  whole words, so "medical" and "typical" do not count).
+- **A reply that says no calendar is connected** gets it with no tab named ("No calendar is
+  connected yet, so I can't see Thursday"; `says_none_connected` and `pick` in `gateway/kept.rs`).
+- **The instructions name the button** where it is drawn: "the Connect my calendar button just below
+  your reply" in place of the tab directions (`CALENDAR_FIX_BELOW`), about the same length, so about
+  0 tokens. Internal, never on the site.
+- ⚠️ **The owner's turns only,** and the boundaries above still hold: Archie Mobile shows where on
+  the computer to press, a chat app gets words, and the owner still signs in.
+- ⚠️ **A calendar named with no app** ("my calendar") is left to the reply's words.
 
 ### ✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
@@ -4292,6 +4806,58 @@ file in** (Archie `8f162301`, in no release; nothing here may be said until a re
 - ⚠️ **Never opened from a real mailbox yet.** The test drives a saved file; Gmail and Outlook
   handing one over has not been seen.
 
+**Amended October 17, 2026: fixed buttons, more than one pick, a way in for each, and setup ends when
+the interview does** (Archie `99e0273c`, `03f74e1d` and `32ae931c`, merged into main as `ec88be1c`,
+and archie-mobile `8ae9a3f`, merged as `cae16c8`; in no release or build yet, so nothing here may be
+said on a page until a release carries it). On round four of the journey tests 0 of 18 first
+evenings offered a calendar under the last question, and owners who kept customers in one place and
+jobs in another could bring in only one (the code's notes on the fix plan after round four, B.5).
+
+**Proposed wording, Jett's to approve, in place of this entry's once a release carries it:** "The
+last of your agent's first questions is where you keep your work today, with buttons: a
+spreadsheet, paper or a notebook, your Google or Outlook calendar, or something else. Pick as many as
+apply. When it says goodbye, it gives you a way to bring in each of the first two: add the
+spreadsheet or the file your other software exports, add a photo of a page, or connect your
+calendar. If your spreadsheet is on another computer, a button tells you how to get it here."
+
+- **The buttons are code's, not the AI's** (`records_choices` in
+  `crates/archie-runtime/src/gateway/onboarding.rs`): A spreadsheet, Paper or a notebook, Google or
+  Outlook calendar, and Something else. On a real estate agent, Follow Up Boss takes Paper's place,
+  because four answers and the way out are all a phone fits (`decide::MAX_CHOICES`). The same buttons
+  go under the question that follows a job done first. This replaces the boundary "The AI words the
+  question" above for the buttons; the AI still words the question.
+- **More than one pick.** Each press is answered in code with no AI call, "Anywhere else, or is that
+  all?", with the places not yet picked, That's all, and Something else (`answers_a_place`). The
+  places are kept in order (`also_kept_in`, `kept_in()` and `add_kept_in` on `OnboardingState` in
+  `crates/archie-domain/src/onboarding.rs`).
+- **A way in for each place, two at most** (`ways_in` and `MAX_WAYS_IN`), with the sentence beside
+  the buttons written by code, so the two cannot disagree. This replaces "One button, for four
+  answers out of seven" above: a spreadsheet gets Add the spreadsheet and It's on another computer;
+  Follow Up Boss named and not connected gets Connect Follow Up Boss and Add a file from Follow Up
+  Boss; other software, Add the exported file; paper, Add a photo of a page; a calendar not yet
+  connected, Connect my calendar; real estate kept in their head, Tell me your open deals.
+- **It's on another computer** replaces "Someone else has it", drawn as a button beside Add the
+  spreadsheet. Pressed, it sends "My spreadsheet is on another computer. How do I get it to you?" as
+  the owner's message, and code answers it as before (`answers_someone_else_has_it`; the old words
+  are still answered, for goodbyes already on screen). Archie Mobile sends the same line as the
+  owner's (`onSay` in archie-mobile `src/screens/Chat.tsx`). Where a chat app reads the
+  conversation, it is an answer to press.
+- **Setup ends with the next message.** In the first-run window, the first message the owner sends
+  after the interview is over ends setup and shows the agent's page, sidebar and Lists included
+  (`interviewOver` and `endTheRun` in `src/app/setup-flow.tsx`). Before, setup stayed on screen
+  until the next launch.
+- **Cost.** The interview's closing instructions are about 90 tokens shorter on each interview turn,
+  since code writes the buttons and the way-in sentence; the pass after each turn is about 9 longer
+  (Archie's notes on the fix plan after round four). Internal, never on the site.
+- ⛔ **Never "a teammate can send the spreadsheet from Archie Mobile".** The fix plan proposed that
+  line for Archie for Teams and it was left out, because a teammate's Archie Mobile has no + beside
+  its message box (`Chat.tsx` gives the button only to the owner).
+- ⚠️ **Real estate's row has no Paper or a notebook.** Something else still takes it in their own
+  words.
+- ⚠️ **A correction adds a place rather than replacing one.** "Actually not paper" does not take
+  paper off.
+- ⚠️ **Two ways in at most.** A third place gets no button under the goodbye.
+
 ### ✅ Your business's name, prices, phone number and sign-off, kept and used in what your agent writes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
@@ -4447,6 +5013,46 @@ for commission in the first minute answered "I did not come to hand that over".
   the profile in a turn, so the goodbye's receipt, the agent page's card and the phone's row all say
   where on the computer it is changed (archie-mobile `cab000e`). Never say telling the agent changes
   them; the memory pass may pick a correction up later, once that message has left the last twenty.
+  **One exception from Archie `579d82e9` (in no release yet): the brokerage**, below. "No tool lets
+  the agent change the profile in a turn" stops being true with the release that carries it.
+
+**Amended October 17, 2026: a brokerage the owner names in chat is kept for drafts** (Archie
+`579d82e9`, on main and in no release yet; nothing here may be said on a page until a release
+carries it).
+
+**Proposed addition, Jett's to approve, once a release carries it:** "When you tell your agent your
+brokerage and it saves it, drafts and ads use it from then on. A real estate agent leaves
+[Brokerage] only when nothing you have said or kept names one."
+
+- **The keep.** When the agent saves a memory note that names a brokerage in so many words
+  ("Megan's brokerage is Keller Williams Realty", "Brokerage: eXp Realty"), the memory tool also
+  writes it into the business details' Brokerage line, through the same merge Keep for every draft
+  uses (`brokerage_named` and `execute_memory_tool` in
+  `crates/archie-runtime/src/gateway/tools_memory.rs`, `keep_owner_details`), and tells the agent
+  it is kept for drafts. Only when the name is in what the owner (or a teammate allowed to act as
+  the owner) typed that turn (`grounded_in`, against the typed words the remember dispatch in
+  `gateway/turn.rs` passes), and never on a turn that read text somebody else wrote. Test:
+  `a_remembered_brokerage_is_kept_for_drafts`. On round four of the journey tests an owner named
+  her brokerage, the agent saved it as a note, and the next ad still said [Brokerage], because
+  blanks are filled from the business details and a note is not read for them.
+- **The rule beside it.** Real estate's third rule now tells the agent to use the brokerage the
+  profile, memory or conversation names (the setups entry's October 17 amendment).
+- **The sign-off.** A draft no longer ends with the business name or the brokerage twice: the
+  sign-off stripper takes a last line that is the business name or the brokerage off before the
+  signature goes on (`strip_written_sign_off_with` in
+  `crates/archie-runtime/src/email/replies/triage.rs`, Archie `54aa9b38`; test
+  `the_business_name_and_brokerage_come_off_the_end`).
+- **Cost.** About 20 tokens of tool result on a memory save that keeps a brokerage, and nothing on
+  any other turn.
+- ⛔ **Never "tell your agent any detail and it is kept."** It is the brokerage only, and only from
+  the owner's own typed words on that turn. A name said three messages ago and saved now is not kept
+  this way (the memory pass and Keep for every draft still can).
+- ⚠️ **It depends on the agent saving the note.** The keep runs inside the memory tool; an agent
+  that answers without saving anything keeps nothing.
+
+**Amended October 18, 2026: the sign-off follows how you last closed** (Archie `765d8dfe`, in no release yet). **Claim:** "Drafts sign off the way you last did when you wrote an email yourself in Archie ("Warmly,", "Thank you,"), not with a fixed "Best,"."
+- **Why it's true:** `closing_for` and `keep_closing` in `crates/archie-runtime/src/email/replies/draft.rs`, `closing_in` in `triage.rs`.
+- ⛔ **Learned only from emails you wrote on a draft card and sent.** Never from your Sent folder. Until then it is "Best,".
 
 ### ✅ Ask who owes you money, and your agent answers from your lists, the chat and its notes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -4525,6 +5131,8 @@ handed those entries instead."
   billed.
 - ⚠️ **A deposit is a step, not a payment record.** A booking owes its deposit because its Booking
   stage is before Deposit paid; nothing records the money arriving. Never "tracks deposits paid".
+  (From Archie `1620441a`, in no release yet, the Deposit column is read too: the October 17
+  amendment below. Still never "tracks deposits paid".)
 - ⚠️ **Word-matched.** A question worded without those words gets an ordinary answer, without the
   gathered list.
 - ⚠️ **On a shared agent** the note is built on a teammate's turn too, from lists teammates can
@@ -4538,6 +5146,35 @@ handed those entries instead."
   (`ListRead::seen` after `lists_seen` in `crates/archie-runtime/src/records.rs`, said by
   `partly_entered`). Test: `a_teammates_notes_say_what_was_left_out_and_name_no_ones_else`.
 - ⚠️ **Nothing new on either screen.** The answer reaches the phone like any reply.
+
+**Amended October 17, 2026: deposits read the Deposit column, not only the stage** (Archie
+`1620441a`, on main and in no release yet; nothing here may be said on a page until a release
+carries it).
+
+**Proposed addition, Jett's to approve:** "Ask who still owes a deposit and Archie reads each
+booking's stage and its Deposit column. A booking marked Booked with no deposit written down is
+named as exactly that."
+
+- **The column too.** `deposit_rows` in `crates/archie-runtime/src/records.rs` now also returns a
+  row whose stage is past the deposit step while its Deposit is blank and its price is filled in,
+  from today on, marked as unwritten, and `deposit_note` says it as "marked Booked, no deposit
+  written down, December 5 (in 49 days), price $1200". At the Deposit paid step itself the stage
+  stands, because that is the owner's word. When nothing is owed, the note names the two columns it
+  read ("each one is at or past the deposit step, and none marked past it has its Deposit blank")
+  where it used to tell the agent "Say so plainly". The deposit question now gets the earlier lines
+  of the chat and the notes that name a deposit, as the who-owes question already did
+  (`deposit_lines_in`, wired in `gateway/turn.rs`). The morning list shows such a booking as
+  "marked Booked, no deposit written down" (`crates/archie-runtime/src/morning.rs`).
+- **Why.** On round four of the journey tests an answer read the stage alone and said no deposits
+  were outstanding over a $1,200 booking with no deposit written down (Archie
+  `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, A.1).
+- **Cost.** About 30 tokens more on the note, and about 40 for each booking named this way, on
+  deposit questions only, below the cache line.
+- ⛔ **Never "Archie knows who paid a deposit."** When nothing is written, it does not know; it says
+  what the list says. A deposit paid and never written down still reads as not written down.
+- ⚠️ **Only lists shaped like the trailer setup's Bookings:** a Deposit column and a stage with a
+  step that names the deposit. A booking whose day has gone is not named this way, and a booking
+  with no price filled in is not either.
 
 ### ✅ Under a reply, what your agent saved and what it read, with Open and Undo, and What it keeps at the top of Knowledge: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -4740,6 +5377,68 @@ your lists, each with Undo."
   - ⚠️ **Archie's own conversation.** An Undo is pressed there or on the phone, which mirrors it; a
     chat app's conversation is not told.
 
+**Amended October 17, 2026: a list the agent made, and a date it left blank** (Archie `03f74e1d` and
+`74757234` for the made list, `e716864f` for the blank, merged into main as `ec88be1c` and
+`b65729ea`, and archie-mobile `8ae9a3f` and `97d1c15`; in no release or build yet, so nothing here may
+be said on a page until a release carries it). On round four of the journey tests a new list was
+said to be in the sidebar while the sidebar showed nothing (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed addition to the wording, Jett's to approve:** "When your agent makes a new list, the line
+under its reply says so, with Open beside it, and the list is on the agent's page under Lists."
+
+- **The made list.** A list made this turn gets its own line, "Made the list Dump log", with Open
+  and no Undo, once per list (`made_row` in `crates/archie-runtime/src/gateway/kept.rs`, `KeptRow`'s
+  `made`), drawn in `src/app/conversation.tsx` and archie-mobile `src/kept.tsx`. It is drawn for
+  `records_new_list` and for a list `records_bring_in` made. The agent is told where the list is:
+  "On this agent's page in Archie, under Lists. The Open link under this reply goes there."
+  (`pin_new_list` in `gateway/tools_records.rs`), or on the Knowledge tab, under Lists, when the
+  sidebar has no room. A list made from the chat's spreadsheet card is put in the sidebar too, and
+  the card, edited in place, says where in words with no Open ("Made the list Customers. It is on
+  this agent's page in Archie, under Lists.", `import_offer.rs`).
+- **A date left blank.** Where a new entry's date was left blank because nothing said it (the entry
+  on asking before clearing a field), the line says so beside the saved entry, after any "my
+  reading": "Closing is my reading; Last contact left blank" (`left_blank` on `KeptRow` in
+  `crates/archie-net/src/channel.rs`; `savedNote` in `src/app/lists.ts` and archie-mobile
+  `src/words.ts`, tested in archie-mobile `src/kept.test.ts`). Added on, which the create fills
+  itself, is never called left blank (`still_blank` in `gateway/turn.rs`).
+- ⚠️ **The phone's half is in no build yet,** so never say Archie Mobile shows either line until a
+  build carrying `8ae9a3f` and `97d1c15` is out.
+
+**Amended October 17, 2026: "Read:" opens what was read** (Archie `bad77446` and archie-mobile
+`974f9da`, merged into main as Archie `150e66ef` and archie-mobile `c461cdb`; in no release or build,
+so nothing here may be said on a page until a release carries it). On round four of the journey
+tests the Looked at line read as jargon or did not tie out: "I do not know what those counts are
+for", a file name like how-i-work.md "means nothing to me", and "36 matched" under a 33-account
+answer with no way to see which (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed addition to the wording, Jett's to approve:** "Under a reply, Read: names the lists and
+files your agent looked at and what it looked for. Press a list and it opens on just the entries
+that answer used, with Show all to see the rest."
+
+- **The words.** "Looked at:" is now "Read:", and a list says what was asked of it: "your 4 deals (1
+  fit the question)", "your 69 rentals (36 with Rate 95)", "your file How I work", and for a list
+  barely started, "the 1 entry on Bookings, the only one entered so far" (`lookedLabel` in
+  `src/app/lists.ts` and archie-mobile `src/words.ts`; the filter in words from `filter_said`, a
+  file's name from `file_said`, and `only_so_far`, all in `crates/archie-runtime/src/gateway/kept.rs`).
+- **The press.** A list opens on the matched entries alone, under "The 36 rentals Ember read for
+  this answer." with Show all (`readForThis` in `lists.ts`, `showOnly` in `src/app/records.tsx`);
+  Archie Mobile opens its Lists on the same entries (`kept.tsx`, `ListPage.tsx`). A file opens on
+  Knowledge. The ids travel on the line (`LookedAt` in `crates/archie-net/src/channel.rs`), at most
+  50 (`LOOKED_IDS`): past that the opened list says "50 of the 64 rentals Ember read for this
+  answer."
+- ⚠️ **What a read matched, not what the AI weighed.** The entries are the ones the agent's search
+  returned; never "shows exactly what the AI used to answer".
+- ⚠️ **On the phone, only entries the phone has can show.** A read that matched the whole list opens
+  the whole list.
+- ⚠️ **The phone's half has never been seen on a phone.**
+
+**Amended October 18, 2026: the line names entries, says all of a list was checked, and says if it matches your file** (Archie `edfee5d7`, merged as `442ab1f0`; archie-mobile `afa0dca`, merged as `37a4a2b`, in no release yet). **Claim:** "Under every answer, Archie names what it read: the entries themselves when it found three or fewer ("Bookings: Laura Henderson"), or that it checked the whole list ("all 70 entries on Bookings"), and whether that list matches your spreadsheet ("matches bookings.xlsx")."
+- **Why it's true:** `note`, `titles_of`, `matched_file` and `keep_read` in `crates/archie-runtime/src/gateway/kept.rs`; `LookedAt` in `crates/archie-net/src/channel.rs`; `lookedLabel` in `src/app/lists.ts` and archie-mobile `src/words.ts`, so both apps say the same words. Reads are separated by "; ", and one entry opened by its id reads "People: Jenna Holt", the same shape as the named ones.
+- ⛔ **Not a citation of each sentence.** It names what this turn's tools and Archie's own notes read, at most 8 reads. A fact from memory or from the conversation is not on it.
+- ⚠️ **"Matches bookings.xlsx" means the last look at the file matched,** not that the file was reread this second.
+- **What the earlier wording got wrong.** "Your 70 bookings" was read as a count of the owner's bookings, not of what Archie checked. It replaces the "Looked at: all 14 rentals" wording quoted above.
+
 *Amended October 26, 2026 (Archie `c83c00ca` and `4b18ea01`, archie-mobile `c33fb26`; RELEASED in
 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11 and the Archie Mobile half waiting
 on its build): a note the agent kept in its memory is named too.* A turn whose `remember` call
@@ -4780,7 +5479,86 @@ archie-mobile's `src/kept.test.ts`. What the line says it saved, and its Undo, a
 - ⚠️ **Shut by default.** Anybody describing the line should say what it read is one press away,
   not that every read is listed under every answer.
 
-### ✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14
+### 🚧 A line over the message box says what changed and what went out today: BUILT 2026-10-18 (Archie `ee4e8260`, `5a7ffc8c`, `7cd3a478`; archie-mobile `e6a171f`, `6fc955a`, merged as `63c427a`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Over the message box, on the computer and on Archie Mobile, one line says what changed and what went out today: "Today: 4 changes, 1 sent". Press it for the list: each change with Open and Undo, each time a list changed to match your spreadsheet, each email or text that went out with when you pressed Send, and what Archie did on its own (your morning list, mail it read and left alone, a routine's changes). When nothing went out, it says "Nothing has gone out today."" An approved change reads "Changed ..." in that list.
+
+**Why it's true:**
+- `crates/archie-runtime/src/today.rs` and `crates/archie-domain/src/today.rs`; `today_record` in `src-tauri/src/commands/screen.rs`; `today` in `src-tauri/src/phone.rs`; `src/app/today.tsx` and `src/app/conversation.tsx`; archie-mobile `src/today.ts`, `src/today-list.tsx` and `src/screens/Chat.tsx`. No AI call.
+
+**Boundaries:**
+- ⛔ **Never "everything that happened today".** It lists what Archie recorded: changes made through Archie (a chat, a card, an import, a routine, a teammate's turn). Not edits typed into the Lists screen by hand, and not mail sent from the owner's own mail app.
+- ⚠️ **Today on the computer's clock.** Sends are Archie's own email and text cards; a GoHighLevel message or other approved change is a job on the Jobs tab, not a "sent" line.
+- ⚠️ **Past 25 in a part, the rest are on the Jobs tab.** Undo is offered only where the Jobs tab offers it.
+- ⚠️ **A teammate's phone does not show the line.** On the phone, Open goes to the list, not the entry, and Show on a send works only while its card is still on this computer.
+- ⚠️ **Seen by simulated owners on the computer only.** The journey harness reads it through the same `today_record` since Archie `0f4621d2`, and the October 18 night replay ran with it. The phone list's Open, Undo and Show are not pressed there.
+- **A list matched to a spreadsheet from the import screen counts once** on its first match (Archie `284aaf70`, test `a_first_match_is_one_change` in `today.rs`): before, the import and its first reread were two changes for one press.
+
+### 🚧 Your agent asks before it clears something already filled in, leaves a new entry's date blank rather than guess one, and a question adds nothing on its own: BUILT 2026-10-17, in no release yet
+
+*Archie `e716864f`, merged into main as `b65729ea` (with `ffd8d224` for Added on), and archie-mobile
+`97d1c15`, merged as `1f03302`; in no release or build yet. Nothing below may be said on a page until
+a release carries it.*
+
+The October 12 guard held a filled date changed with nothing behind it, and only dates (the October
+12 amendment of the entry just above, and the removals row in the table of homepage lines). A field
+emptied the same way went through, so a driver, a note or a phone number could go with nobody
+asking, and a new entry was given a day on the agent's reading (the fix plan after round four, E.4).
+
+**Proposed wording, Jett's to approve:** "Your agent asks before it clears something already filled
+in on your lists. When it adds an entry and nothing you said gives a date, it leaves that date blank
+and says so, rather than guess. And asking about an entry, like "can you add Dana to my people?",
+puts it on a card to add with one press instead of adding it."
+
+**Why it's true:**
+- **A clear waits for the owner.** On a message a person typed, a change that would empty a filled
+  column is not made unless their words name the column (its name, or what it holds now), or they
+  said to clear something right after the agent's message named it, which is how "Clear it" pressed
+  under the question reads (`clears_nobody_asked` in `crates/archie-runtime/src/gateway/turn.rs`).
+  The agent is told "Not changed. Driver says Mike, and nothing they said asks to clear it." and to
+  ask with Clear it and Keep Mike (`ask_before_clearing`); any other change in the same message is
+  made.
+- **A new entry's unsaid date is left blank.** A date column nothing the person said, said yes to,
+  or the turn read gives is taken out of a new entry (`without_unsaid_dates`), and the agent is told
+  to say "Left Last contact blank: nothing said when." (`mark_left_blank`). The line under the reply
+  says the same (the entry on what the line under a reply says). Added on, which the create fills
+  with today by design, is not counted (`still_blank`). **Amended October 17, 2026** (Archie `cda478ef`, in no release
+  yet): that blank holds for the rest of the turn. An update in the same turn that tries to fill it
+  with a day nothing gave is held the same way (`left_blank_here` and `still_left_blank` in
+  `gateway/turn.rs`; pipeline test `a_day_left_blank_stays_blank_for_the_turn`), because on the
+  replay after round four the agent left Ends blank and then filled it one step later with its own
+  guess. A later turn, or a day something read since gives, can still fill it.
+- **A question adds nothing on its own.** On a message that ends in a question mark
+  (`asks_a_question`), a new entry goes on the same card a photo's entries do, from "your message",
+  and one press adds it; a watch for someone's answer is offered with Watch for their answer and No
+  thanks instead of being set (`WATCH_ON_A_QUESTION`).
+- **Tests:** `a_new_entry_leaves_a_day_nobody_gave_blank` and
+  `a_filled_column_is_not_cleared_unless_they_asked` in `turn.rs`;
+  `an_entry_asked_about_goes_on_a_card` in `crates/archie-runtime/tests/pipeline.rs`; archie-mobile
+  `src/kept.test.ts` for the line.
+- **Cost.** Only when one fires: about 49 tokens for a held clear, 47 for a held watch and 24 for the
+  left-blank line, on the turn it happens. Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **On a message a person typed.** A routine, a mail or text watch, or a file read on its own is
+  not held this way.
+- ⚠️ **A blank on an entry already there can still be filled** on the agent's reading, and is marked
+  "my reading", as the October 12 amendment says: the owner asked for that entry to change. Never
+  "your agent never guesses a date".
+- ⚠️ **"Names the field" is a word match.** Saying the column's name or what is in it counts as
+  asking to clear it.
+- ⚠️ **A question adds nothing new; it can still change.** A change to an entry already there, on a
+  message that is a question, is made as before, with Undo. Only a new entry and a watch wait.
+- ⚠️ **A question is a question mark.** "Can you add Dana to my people" typed with no question mark
+  is a request and adds her.
+
+**Amended October 18, 2026: Archie keeps your answer about what a month means** (Archie `e137a969`, merged as `442ab1f0`, in no release yet). **Claim:** "Tell Archie once what "a month" means for your rentals (4 weeks, or the same date next month) and it stops asking."
+- **Why it's true:** `crates/archie-runtime/src/month_means.rs` keeps the answer in a file beside the agent's memory, and `which_length` in `gateway/turn.rs` reads it before it holds a write; the writes beside a told month are made again at once (`1d842056`).
+- ⚠️ **The owner's answer only, per agent.** A teammate cannot set it. "Monday" said on a Monday is still asked every time. An agent with no memory folder never keeps an answer.
+
+### ✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to ask first, in no release yet
 
 *Archie `61b8efde`, on the `journey-fixes` branch, in no release yet. Nothing below may be said on a
 page until a release carries it.*
@@ -4805,6 +5583,148 @@ setting every cycle, so it stops at the next one. Test `stop_watching_turns_the_
 - **What the earlier version got wrong.** The watch began in silence: turning on a skill that reads
   mail started it, and nothing in the conversation said an inbox was now being read or how to stop
   it (the fix plan after round three, B.22).
+
+**Amended October 17, 2026: it asks first, and reads nothing until you say yes** (Archie `a1f7b7c3`,
+with `ce74fb62` for the check behind "already reading", on main and in no release yet; nothing here
+may be said on a page until a release carries it, and until then the wording above is what 0.3.9 and
+0.3.10 do). Jett's call, October 17, 2026: mail watching asks first, and owners already watching are
+not asked again.
+
+**Proposed wording, Jett's to approve, once a release carries it:** "Your agent reads your mail only
+after you say yes. When it has an email account and a skill that reads mail, it asks once in the
+chat, with Start reading my mail and Not now under it. Say yes and that message turns into the one
+that says which inboxes it is reading and how often, with Stop watching. If you said Not now, the
+Watch my inbox switch on the agent's Skills tab, under Email Manager, starts it later."
+
+**Why it's true:**
+- **Nothing is read before a yes.** `EmailWatcherConfig::agreed`
+  (`crates/archie-domain/src/automation.rs`) starts empty, so adding Email Manager or Package Tracker
+  is not a yes. Each cycle `agreement` in `crates/archie-runtime/src/email/poller.rs` decides: a yes
+  reads; Not now reads nothing; nobody asked yet sends the card once (`ask_to_watch`, marked in
+  `email/watch-asked.json`, and a send that fails takes the mark off so it asks again); and an
+  install that was reading before (a watch record with a cursor, `agreed_given`, with
+  `Bundle::mail_read_before` in `crates/archie-core/src/bundle/accounts.rs` answering the same
+  question for the app) is written down as yes and goes on reading, unasked.
+- **The card** is a message of its own, held while a turn is running in its chat (the entry below
+  on messages that wait). Its words come from `ask_words`: "Ember can read new mail in
+  sam@example.com as it arrives and tell you here when something needs an answer. Only you see it.
+  Nothing is sent unless you press Send." With no Email Manager it says "for the skills you added
+  that use email" in place of the part about telling you; with a mailbox given to a teammate on
+  Archie for Teams, "Mail from a mailbox you gave to someone goes only to them, and the rest only to
+  you." in place of "Only you see it."
+- **The presses** are answered in code with no AI (`answer_the_ask` in
+  `crates/archie-runtime/src/email/replies/actions.rs`). Start reading my mail writes the yes, turns
+  Watch my inbox on, and edits the card in place into the notice above, with Stop watching. Not now
+  writes the no and edits the card to "I won't read your mail. To have me start, open this agent's
+  Skills tab in Archie, open Email Manager, and switch on Watch my inbox." On a chat app with no
+  buttons the two labels are taken as typed words, only while the card waits.
+- **The switch says the same.** Watch my inbox (`src/app/email.tsx`) shows on only with the yes,
+  and turning it on gives the yes; the app reads an install that was already reading as yes
+  (`email_watcher_get` in `src-tauri/src/commands/integrations.rs`). The agent's own line about what
+  it does unasked names mail only once mail is read (`mail_watch_on` in `gateway/turn.rs`, on the
+  poller's rule).
+- **Tests:** `nothing_is_read_before_a_yes_and_an_earlier_watch_stands_for_one`,
+  `the_watch_asks_once_in_a_card_of_its_own`, `the_ask_waits_while_a_turn_is_running_in_its_chat`
+  and `a_mailbox_given_to_someone_is_not_promised_as_only_yours` in `poller.rs`;
+  `the_asking_card_is_answered_in_code_by_the_owner` and
+  `the_asking_cards_words_answer_it_only_while_it_waits` in `email/replies/tests.rs`;
+  `a_cursor_is_what_says_mail_was_read_before` in archie-core; `a_fresh_agent_is_asked_on_the_first_poll`
+  in `poller.rs` (Archie `aaf067a8`: `ask_to_watch` makes the `email` folder before writing its mark,
+  so a new agent is asked on the first check rather than one check later).
+- **What is kept, and where.** The answer is one more setting, `agreed`, in the agent's
+  `email/watcher.json` beside the other watch settings and written the same way, with no mail in
+  it. The card's marker, `email/watch-asked.json`, holds a chat id and a message id. Nothing new
+  leaves the computer: the card goes wherever a message from the agent goes, Archie Mobile included.
+- **Cost.** No AI call added. Until the yes, an agent carries about 100 fewer tokens on every turn,
+  because its line about what it does unasked leaves mail out. Internal, never on the site.
+
+**Boundaries of the amendment:**
+- ⚠️ **An agent already reading mail before this release is not asked.** Its earlier reading stands
+  for the yes. Never "every owner is asked before anything is read" without that.
+- ⚠️ **The card goes once the owner has a chat with the agent.** An agent nobody has written to yet
+  reads nothing and asks nothing until then.
+- ⚠️ **The owner's to answer**, or someone allowed to act as the owner; anybody else's press is
+  refused. On Archie for Teams the owner's yes covers every connected mailbox, one given to a
+  teammate included (whose mail still goes only to that teammate). Never "each person agrees for
+  their own mailbox": that is an open decision for Jett, not what the code does.
+- ⚠️ **Not on the free credits or the plan with the AI included,** unchanged: mail is not read there
+  at all.
+- ⚠️ **Asked once.** Not now is not asked again, and the way back is the switch. Typed "start
+  reading my mail" on a chat app that draws buttons goes to the AI, which has no tool for it, so
+  never "just tell it to start".
+- ⛔ Never "it asks before reading each email" or "it asks every time".
+- **What the earlier version got wrong.** In 0.3.9 and 0.3.10, adding a skill that reads mail
+  started the watch at once, and the notice arrived on the watch's own clock, which could put it in
+  the middle of an answer the agent was writing.
+
+### 🚧 What your agent sends on its own waits until it has finished answering you: BUILT 2026-10-17, in no release yet
+
+*Archie `a1f7b7c3`, merged as `b65729ea`, on main and in no release yet. Nothing below may be said on
+a page until a release carries it.*
+
+On round four of the journey tests the mail watch's notice ("I'm reading new mail in ... now, every
+minute") sat between an owner's question and its answer, on every journey that ran long (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`; the fix plan after round four, E.1).
+
+**Proposed wording, Jett's to approve:** "Messages your agent sends without being asked, like the
+morning list, a card about new mail or a text, or a routine's report, wait until it has finished
+answering you."
+
+**Why it's true:**
+- **One check, at every send nobody asked for.** `turn_running_in` in
+  `crates/archie-runtime/src/gateway/worker.rs` reads `chat_in_flight.json`, counting only this
+  run's own entries, so a marker left by a run that died holds nothing. `holding_unprompted_in` is
+  that or quiet hours. Sends that come round again on the next tick wait with it: the card asking to
+  read mail and the older notice (`email/poller.rs`), the morning list and the spend note (the
+  worker's house tick), catch-up lists (`catchup.rs`), and held text cards (`texts/replies/card.rs`
+  and `mod.rs`). Sends written once wait with `wait_out_the_turn`: a card from the inbox sort
+  (`email/replies/card.rs`) and a routine's report (`gateway/routines.rs`). Neither can run inside
+  the turn it waits on, because mail and routine runs are tasks of their own.
+- **Test:** `the_ask_waits_while_a_turn_is_running_in_its_chat` (`email/poller.rs`).
+- **Cost.** None: no AI call and no prompt words. Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **A message written once waits five minutes at most** (`TURN_WAIT_CAP`), then goes, answer or
+  no answer.
+- ⚠️ **Reminders and scheduled sends are not held.** A reminder the owner set and a reply they
+  scheduled go at the minute they asked for.
+- ⚠️ **Per chat.** It waits on a turn in the chat it is going to; a turn in another chat, or on a
+  teammate's, does not hold it.
+- ⛔ Never "it never interrupts you". It waits for an answer to finish; it still arrives unasked,
+  and a reminder can land mid-answer.
+
+### 🚧 A message your agent sends on its own says so, and what it is: BUILT 2026-10-17, in no release yet
+
+*Archie `63a2528e` and archie-mobile `481d46d`, merged into main as Archie `150e66ef` and
+archie-mobile `c461cdb`; in no release or build. Nothing below may be said on a page until a
+release carries it.*
+
+A routine's report otherwise arrived looking like an answer to whatever was said last (the note on
+`Channel::sent_on_its_own` in `crates/archie-net/src/channel.rs`; the fix plan after round four,
+F.6).
+
+**Proposed wording, Jett's to approve:** "When your agent sends something without being asked, a
+line over it says so and what it is: "Sent on its own at 6:30 AM: your morning list.""
+
+**Why it's true:**
+- **Which messages.** A new message in the owner's own conversation that is not part of an answer
+  to something they said (`record_agent` in `src-tauri/src/inapp.rs`, the same test the alert on
+  the computer already used) is stored as sent on its own (`Entry::on_its_own`).
+- **What it is called.** Just before the send, the runtime names it (`Channel::sent_on_its_own`): a
+  routine by its name (`gateway/routines.rs`), "your morning list", or "a reminder you set"
+  (`gateway/worker.rs`). Anything else gets the line with no name: "Sent on its own at 9:14 AM."
+- **Drawn on both,** over the first message of a run sent on its own (`onItsOwnLine` in
+  `src/app/conversation.tsx`, and in archie-mobile `src/when.ts`, carried to the phone by
+  `src-tauri/src/phone.rs`). Test `a_message_sent_on_its_own_says_so_and_what_for`.
+- **Cost.** None: no AI and no prompt words. Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **A card from the mail or text watch, and a cost note, carry no name,** only "Sent on its own".
+- ⚠️ **The owner's own conversation in Archie and Archie Mobile.** A chat app has no such line, and
+  a teammate's conversation is not marked.
+- ⚠️ **A name not used within 60 seconds is dropped** (`ON_ITS_OWN_FOR`), so it cannot land on a
+  later message; that message then gets the line with no name.
+- ⚠️ **The phone's half has never been seen on a phone.**
 
 ### 🚧 Mail from people you write to is read first, and other mail can take a few minutes: BUILT 2026-10-13 (Archie `9a99e47e`), RELEASED in 0.3.9, 2026-10-14, never run on a real inbox
 
@@ -4979,9 +5899,15 @@ keeps about you is listed under the draft as Check before sending."
   is a sentence in the prompt, and a model can still write a guess as if it were known. What code
   guarantees is narrower: a blank in square brackets on an email or text card stops Send, and on an
   email card, an amount, a single day, or a time nothing given holds is named under the draft.
-- ⛔ **Never "Archie flags anything your agent made up" (amended October 12, 2026).** Code reads
-  only amounts, days, and times. A reason, a promise, or a term is on the line only when the agent
-  lists it in `added`, and nobody has yet seen whether it does (Archie's `docs/OPEN-THREADS.md`).
+- ⛔ **Never "Archie flags anything your agent made up" (amended October 12 and October 17, 2026).**
+  Code reads amounts, days and times, and since October 17 (Archie `cda478ef`, in no release yet) a
+  short list of stock reasons when nothing given holds their words: something came up, on our end, a
+  conflict, a change of plans, unforeseen circumstances, short-staffed, running behind, an emergency,
+  under the weather, and a few more. It reads them on any email draft, a vendor's as much as a
+  customer's (`STOCK_REASONS` and `reasons_in` in `crates/archie-runtime/src/email/replies/added.rs`),
+  because on the replay after round four a note to a septic company said "Something has come up on
+  our end" and the line was empty. Any other reason, promise or term is on the line only when the
+  agent lists it in `added`, and nobody has yet seen whether it does (Archie's `docs/OPEN-THREADS.md`).
   The line names; it never holds Send.
 - ⚠️ **"Check before sending" is on email cards the agent drafts in chat only.** Not on texts, not
   on drafts the mail watch writes on arrival, and not in a message written into the chat to copy.
@@ -5012,6 +5938,80 @@ keeps about you is listed under the draft as Check before sending."
 - ⚠️ **It names the blank and fills nothing.** Beyond the owner's own three, only the person
   pressing Edit it fills a blank. Never "Archie fills in the details for you."
 - ⚠️ **Cost, internal only, never on the site.**
+
+**Amended October 17, 2026: deadlines, requests and terms; Take out what you added; and your own
+words go out as you wrote them** (Archie `54aa9b38`, on main and in no release yet; nothing here may
+be said on a page until a release carries it). From round four of the journey tests, where a draft
+told a bride the date was "still open to other couples", a rule of the owner's that nobody had asked
+to pass on, and the owner's own words on a card went out signed twice (Archie
+`docs/agent-ux/journeys/2026-10-17-fix-plan.md`, G.1).
+
+**Proposed wording, replacing the first one above, Jett's to approve:** "When your agent writes
+something for you to send, it is told not to put in a fact, reason, promise, deadline, request or
+term that isn't in your conversation or in what it keeps about you, and your own rules (a hold, a
+deposit cutoff) are yours to apply, not lines for a customer. If a draft names something under
+Check before sending, press Take out what you added and Archie rewrites it without those. Words you
+write on a card yourself go out as you wrote them, signed once."
+
+- **The rule, as it reads now.** The recall rule in `build_system_prompt`
+  (`crates/archie-runtime/src/gateway/prompt.rs`) reads "NEVER say you remember something, or that
+  the user told you something, or put a fact, reason, promise, deadline, request or term in a draft
+  for them to send, unless it is in the User context or Memory sections of this prompt or in the
+  messages of this conversation; a rule of theirs (a hold, a deposit cutoff) is theirs to apply, not
+  a line for a customer unless they ask.", and a draft leaves a blank like [her school] "only for a
+  detail none of these hold", so a detail said in the conversation goes in as said. That replaces
+  the sentence quoted under Why it's true. The `added` field in both draft tools now says it is
+  optional and rare, that a reason, deadline, request, promise or term nobody gave stays out of the
+  body, and to name only what the reply cannot do without.
+- **Take out what you added.** A card with a Check before sending line has a button, "✂️ Take out
+  what you added", after Edit it (`pending_buttons` in `email/replies/card.rs`). It is the same
+  rewrite Rewrite it for me makes, asked to "Take out what you added that I never told you: {the
+  items}. Leave everything else as it is." (`take_out_instruction` and the `"takeout"` verb in
+  `email/replies/actions.rs`), and on a chat app with no buttons the typed "take out what you added",
+  "take it out", "take those out" or "take that out" does the same. It is live only on a waiting card
+  with something on the line. Test: `a_card_with_additions_offers_to_take_them_out`.
+- **Your words, signed once.** When the owner puts their own words on a card (Use my words in the
+  pop-up, or words typed in a chat app), the card remembers they are the owner's (`owner_wrote` on
+  `PendingEmailAction` in `crates/archie-domain/src/automation.rs`). A draft call that comes back
+  with the same words (compared without the signature or a sign-off, spacing and capitals ignored:
+  `same_email` in `email/replies/draft.rs`) changes nothing, clears the Check before sending line,
+  and tells the agent "Nothing changed: the card reads exactly as the user wrote it, and it is still
+  waiting for them to press Send. Do not say you changed it." The conversation no longer records
+  the owner's change as an instruction ("Use my words for the reply to Dana:"), which the agent took
+  as a request to send the words again; it records "(I changed the words on the reply to Dana
+  myself, on its card.)" with the words on the agent's side (`theirs_reported` in
+  `email/replies/actions.rs`). Tests: `the_owners_own_words_are_never_signed_twice` and
+  `words_typed_in_use_my_words_are_reported_not_repeated`.
+- **Sign-offs.** The sign-off stripper now also takes off a last line that is a name with a title
+  after it ("Sarah Whitfield, Realtor", "Sarah | Broker"), a name line with a title line under it,
+  and a last line that is the business name or the brokerage, before the signature goes on
+  (`strip_written_sign_off_with` in `email/replies/triage.rs`; tests
+  `a_name_with_a_title_after_it_is_a_sign_off` and
+  `the_business_name_and_brokerage_come_off_the_end`).
+- **Cost.** The rule is about 34 tokens more on every turn of every agent, above the cache line and
+  read from the cache after the first (the plan estimated 29), and the `added` wording about 12
+  more across the two draft tools on an agent with a mailbox that can send. Take out what you added
+  is one AI call, the same one Rewrite it for me makes, and only on the press. Estimated from
+  characters and not yet measured with `scripts/prompt-core-ab.py`; internal, never on the site.
+- ⛔ **Never "Archie takes out anything your agent made up."** The button takes out what the line
+  names, and the line still names only amounts, days and times by code, plus whatever the agent
+  lists in `added`. It is one AI rewrite, and it can miss.
+- ⛔ **Never "your words are never changed."** They are never signed again by a draft call with the
+  same words. A draft call with different words still replaces them, as a rewrite you asked for
+  should, and Put the old one back forgets whose the earlier words were.
+- ⚠️ **The button is where the line is:** email cards the agent drafts in chat. Not texts, and not
+  drafts the mail watch writes on arrival.
+- ⚠️ **The sign-off stripper reads the shape of a line,** a name and a title, the business name, or
+  the brokerage. An unusual sign-off can still stay in, with the signature added after it.
+
+**Amended October 18, 2026: a stock reason is sent back, promises are named, and a send time needs your word** (Archie `765d8dfe`, merged as `b9d3bec9`, in no release yet). **Claim:** "Before a draft reaches you, Archie sends it back once if it gave a stock excuse you never gave ("something has come up on our end"), and has it written without one. A promise, price, day or time you did not give is listed under the draft as Check before sending, with where it came from. Archie only offers a send time on a draft when you named a day or time yourself."
+- **Why it's true:** `send_back`, `STOCK_REASONS`, `PROMISES` and `added_by_code` in `crates/archie-runtime/src/email/replies/added.rs`; `added_here` in `email/replies/draft.rs`; `timed_send_needs_a_person` in `draft.rs` and `names_a_time` in `added.rs`. Code reads amounts, days, times, ten kinds of stock reason and six kinds of promise.
+- ⛔ **Never "nothing invented reaches a draft".** The send-back happens once a turn, and a reason kept on the retry is named on the line, never removed. Promises are named, never removed or refused. Anything else on the line depends on the model naming it.
+- ⚠️ **Email drafts only.** Text drafts have no Check before sending line. The send-time check reads that your words name a day or a time, not that the time was meant for sending; nothing is set until you press the time on the card.
+- **What the earlier version got wrong.** From October 17 the model almost never named its own additions, because the `added` field told it they were rare. Code now names what it can read.
+- **Since tonight (Archie `2720e87d` and `e3ead45b`, merged as `47b1ff7b`, in no release yet): Take out what you added cuts only what nothing Archie read says.** A price from your price sheet or a day from your lists stays (`to_take_out` in `email/replies/added.rs`, `take_out_instruction` in `actions.rs`, the button in `card.rs`). The line keeps a caveat over a source.
+- ⛔ **Never "Take out removes everything Archie made up".** It reads the agent's own label on each item, so an item the agent wrongly says came from your price sheet stays. Five items at most, code's finds first, and facts with a source fall off first.
+- **What that got wrong before.** On the finished replay the press sent the whole line back and cut a real pickup day.
 
 *Amended October 26, 2026 (Archie `b7bdeb53`, archie-mobile `a60f01e`, in no release yet): the
 "Check before sending" line has new words.* An email card now ends "**Check these before you send
@@ -5296,6 +6296,76 @@ it in the same reply."
   `acts_as_owner`).
 - ⚠️ **Cost, internal only, never on the site.**
 
+**Amended October 17, 2026: a correction that names nothing goes back once** (Archie `69a0c98a`,
+on main and in no release yet). A boundary more than a claim, written down so nobody makes the
+stronger one.
+
+- **What code does.** In the final reply of a typed turn, where an earlier answer is in the
+  conversation, a reply that takes part of it back ("One correction:", "my mistake", "I was wrong",
+  or "can't verify" and "was wrong" beside a word about the earlier answer such as "earlier" or "I
+  said") is sent back once with "Not sent: you took back part of an earlier answer without rereading
+  it. Read where it came from. If it agrees, leave it; if not, name the item and the right value."
+  It goes out as written when the turn read something and every sentence taking something back
+  names an item (a number, or a capitalized name) (`takes_back_unread` and `TOOK_BACK_UNREAD` in
+  `crates/archie-runtime/src/gateway/turn.rs`). On round four of the journey tests an owner was told
+  "only 6" deletions were staged when 69 were, and an anniversary that came from a code note was
+  taken back as made up, each on a turn that had read nothing (Archie
+  `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, A.6 to A.8). The same pass made history say how
+  many calls it left out and record the lists a code note read, so the next turn has what the
+  earlier one had.
+- ⛔ **Never "Archie never takes back a true answer" or "every correction is checked."** It is one
+  reread, caught by the words above. A retraction worded another way passes, and the reread can
+  still end in a wrong correction that names an item.
+- ⚠️ **It costs one more model call when it fires,** and a correction about something with no
+  number and no capitalized name ("the pickup was wrong") goes back once even after a read.
+
+**Amended October 17, 2026: the button names the list, and a save from earlier in the hour counts**
+(Archie `67e0ebaf`, merged into main as `150e66ef`; in no release, so
+nothing here may be said on a page until a release carries it). On round four of the journey tests
+an owner was told the people waiting on her were saved, pressed Save it, and "Save that to my lists
+now." put a task on Tasks; another reply was corrected about a save made one message earlier, and
+the owner read the correction as Archie losing it (the notes in
+`crates/archie-runtime/src/gateway/claimed.rs`).
+- **The button says where.** When the claim named a list, the correction and its button name it:
+  "Press Save to People to save it now.", and the press sends "Save that to my People list now."
+  (`save_it` and `correction`). With no list named it is Save it, as before.
+- **An earlier save counts.** A list write in a job the same person asked for in the last hour,
+  still not undone, keeps the correction off (`saved_lately`, reading the record of jobs).
+- ⚠️ **"The last hour" is by the record of jobs, which carries no chat,** so a save the same person
+  asked for elsewhere in that hour also keeps it quiet. It errs toward saying nothing.
+
+**Amended October 18, 2026: a take-back that rests on nothing is cut** (Archie `4ef02832`, merged as `442ab1f0`, in no release yet). **Claim:** "When Archie takes back an earlier answer without anything it read saying otherwise, the take-back is removed before you see it, and you get the answer to what you asked." It replaces the send-back above for that case, and it is checked on the retry's reply too.
+- **Why it's true:** `shaky_take_back`, `without_take_back` and `held_note` in `crates/archie-runtime/src/gateway/turn.rs`, with `gateway/kept.rs`.
+- ⛔ **A correction that rests on something read this turn still goes out** (Jett's call). Never "Archie never corrects itself", and never that its earlier answers are right: only that a retraction nothing supports is not sent.
+- **Since tonight (Archie `0b69c487` and `197422df`, merged as `1cffd325`, in no release yet):** it also covers a reply with buttons under it, and the buttons go too when they would act on the cut take-back. Each take-back in a reply is judged on its own, so a correction that rests on something read stays even when another one beside it is removed (`take_back_fate`, `rests_on_nothing_at`, `acts_on_the_cut` and `still_asks` in `gateway/turn.rs`).
+- ⛔ **Take-backs are recognized by their wording, so not every one is caught.** Never "Archie never takes back a right answer". A "not on the list" take-back is still removed even when the whole list was read, because absence is not treated as evidence.
+
+### 🚧 A web link Archie could not have read is cut back to the site's front page: BUILT 2026-10-18 (Archie `851dd5eb`, merged as `442ab1f0`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "If a reply holds a web link Archie never read or found in a search, it is cut back to the site's front page."
+
+**Why it's true:**
+- `unread_links_to_sites` in `crates/archie-runtime/src/outbound.rs`, called through `read_behind` in `gateway/turn.rs`, with no AI call.
+
+**Boundaries:**
+- ⛔ **It checks the site, not the page.** A deep link on a site that appeared in a search or a page read stays whole even if that exact page was not opened. It does not check that the site exists. Never "every link Archie sends works".
+- ⚠️ **A short host name that appears in unrelated text keeps its path.** The check errs toward leaving a link alone.
+
+### 🚧 Archie asks about a late pickup at most once a day per rental in a chat: BUILT 2026-10-18 (Archie `1cffd325`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Archie asks you about a late pickup for a rental at most once a day in the same chat, unless you bring that rental up."
+
+**Why it's true:**
+- `pickup_once` in `gateway/turn.rs`, with `pickup_asks` and `late_rows` in `crates/archie-runtime/src/gateway/asked.rs`.
+
+**Boundaries:**
+- ⚠️ **One chat and one day on this computer's clock.** It applies only to rentals past their end date whose stage says the units are still out, and the rental must be named by customer or site (or pointed back to right after being named).
+- ⚠️ **The statement that a rental is late still goes out.** Never "Archie never repeats a question".
+
 ### ✅ Who to call, worked out from People and Deals, and a word when somebody may already be on a list: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -5458,7 +6528,9 @@ typed in. You press Send. If they said stop, it won't write one."
   (`src/app/conversation.tsx`). The phone gets it as `texts` (`src-tauri/src/phone.rs`) and draws
   Open in Messages, which opens the phone's own Messages to that number with the words typed in
   (`smsLink` in archie-mobile `src/sms.ts`, `src/screens/Chat.tsx`). No number on the list, no
-  button. Pipeline test: `a_first_text_comes_with_a_button_and_what_the_list_says`.
+  button (RETIRED from Archie `2705e822` and archie-mobile `290a613`, in no release yet: with no
+  number there is a button, as the October 17 amendment below says). Pipeline test:
+  `a_first_text_comes_with_a_button_and_what_the_list_says`.
 - **Why it was built.** Round three of the journey tests (October 12, 2026): realtors asked for a
   text to a lead and got an email every time, because a text Archie drafts was only ever a reply to
   a text that came in.
@@ -5478,6 +6550,40 @@ typed in. You press Send. If they said stop, it won't write one."
 - ⚠️ **Only where a list keeps a Texting column,** which is the real estate setup's People today. A
   chat app gets the words and no button.
 - ⚠️ **The consent line is the agent saying the tool's sentence,** so it can come out reworded.
+
+**Amended October 17, 2026: someone on no list still gets the text, with the consent line** (Archie
+`2705e822` and archie-mobile `290a613`, on main and in no release; nothing here may be said on a page
+until a release of Archie carries it, and the phone's half until an Archie Mobile build with it is on
+the App Store).
+
+**Proposed addition to the wording, Jett's to approve:** "Ask for a first text to someone who isn't
+on your lists and your agent still writes it, says nothing shows they agreed to texts, tells you to
+ask them first, and offers to add them to your list."
+
+- **Not on a list.** The tool used to refuse when the name was on no list that keeps a Texting
+  column. Now it writes the text and says "Kristen isn't on your lists, so nothing says they agreed
+  to texts. Ask first, by phone or email, and then send it.", puts the button under the reply (to the
+  number when what was given as the name is a phone number, and to nobody otherwise), and tells the
+  agent to offer to add them to the list that keeps texting consent (`not_on_a_list` in
+  `crates/archie-runtime/src/gateway/first_text.rs`; test
+  `a_first_text_to_somebody_on_no_list_is_still_written`). On round four of the journey tests a
+  realtor had to ask twice for a first text to a new lead, and another waited on a phone number
+  (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`).
+- **On a list with no number.** The text and the consent line as before, then "People has no phone
+  number for Jenna, so add it there, or pick them in Messages when you send it.", and the button.
+- **The button with no number.** On the computer it copies the text, as before. On the phone it
+  opens Messages with the words typed in and nobody in To (`sms:&body=` on an iPhone, `sms:?body=`
+  on Android: archie-mobile `src/sms.ts`, `src/screens/Chat.tsx`, tests in `src/sms.test.ts`).
+- **Cost.** About 90 tokens of tool result where the refusal was about 50, on a first text to
+  someone on no list only.
+- ⛔ **Never "Archie checks consent for anyone you text."** For someone on no list nothing is known,
+  and the reply says so. Said stop on the list still means no text and no button.
+- ⚠️ **Adding them to the list is an offer the agent makes in words,** not a button, and nothing is
+  added until the owner says yes.
+- ⚠️ **The phone's link with nobody in To has not been tried on a real phone.**
+- ⚠️ **The tool is still only on an agent with a list that keeps a Texting column,** the real estate
+  setup's People today. On any other agent a text asked for is written in words with no button, as
+  before.
 
 ### ✅ Ask what's on, what's due, or what's free on some days, and Archie hands your agent your lists, calendar, and reminders for those days first; your agent hears when a booking it saves puts a trailer or a unit in two places; and the Calendar shows the dates on your lists: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -5529,6 +6635,17 @@ your reminders, and your agent's routines. Press one on the computer and that li
   "Today, October 12" and "Monday, October 19" as buttons (`which_day` in `gateway/turn.rs`, for
   list entries, reminders, calendar events and to-dos). Tests: `todays_own_name_said_bare_is_both_days`
   and `a_week_out_for_todays_own_name_is_asked_about`.
+- **Amended October 17, 2026: a length** (Archie `cda478ef`, in no release yet). On a list entry with
+  a start and an end column, a length said with the start ("for 3 weeks", "10 days") counts as giving
+  the end, so the end that many days or weeks on is written. "For a month" or "for 2 months" has two
+  readings, so the write is held once a turn and the agent is told to ask with three buttons spelled
+  in code: "4 weeks, to November 13", "A month, to November 16" and "No end date yet" (`length_said`
+  and `range_keys` in `schedule.rs`; `which_length` and `dates_nobody_gave` in `gateway/turn.rs`).
+  Only list entries, on a message a person typed: not calendar events, reminders or to-dos. The start
+  has to be one the person gave or the entry had, and after the one hold a new entry's end is left
+  blank. The other list writes in the same step wait with it (Archie `dab34fe0`, `month_held_in`), so
+  nothing is half saved while the owner picks; a second try at them later in the same turn is not
+  held. Never "Archie always asks about dates".
 - **What it reads.** `schedule_note`: every list the agent may read (`list_collections` in
   `crates/archie-runtime/src/records.rs`) that has a date looking ahead or coming round every year
   (`days_of`). A column's own name decides first: one with a word for what already happened
@@ -5693,18 +6810,27 @@ your reminders, and your agent's routines. Press one on the computer and that li
 - ⚠️ **A trailer booking is one day, its Event date.** The trailer setup's Bookings keep that one
   date and no delivery or pickup day, so two bookings clash only when they share the date. Never pair
   the setup's rule "A trailer holds one booking at a time, from delivery to pickup" with this as if
-  code held it. Rentals, with Starts and Ends, are compared over the whole stretch.
+  code held it. Rentals, with Starts and Ends, are compared over the whole stretch. **Amended October 17,
+  2026** (Archie `cda478ef`, in no release yet): a booking whose stage says the thing is still out
+  (Delivered, Out, On site, Pickup due, In use and the like) holds it from its date until it is
+  marked Picked up or Returned, when it has no end or its end has passed. So a long-term rental
+  marked Delivered is not free next month (`still_out` and `booked_days` in `schedule.rs`). A Booked
+  trailer booking is still one day, so never "a trailer is held from delivery to pickup" for one
+  nobody has marked Delivered.
 - ⚠️ **Free is worked out from bookings, not from where a thing is.** A trailer whose Status says Out
   at an event, but that no booking names on those days, counts as free (the test's T5); only a status
   that says it needs work is set apart. Where bookings give a count, it is how many and not which
-  ones, and a quoted booking is not in the count.
+  ones, and a quoted booking is not in the count. Since October 17, 2026 the what-is-free note, the double-booking
+  check, the counts a write hands back, the what's-on note and the restroom morning list all read a
+  still-out booking the same way (above).
 - ⚠️ **What is free needs a day and the thing's name.** "Which trailers are free?" with no day gets no
   note at all, and "What's free Saturday?" names no list of things, so it gets the what's-on note
   without the what-is-free part.
 - ⚠️ **Word-matched, and typed only.** "Am I around Friday?" has no schedule word and gets an
   ordinary answer. Nothing for a routine, a mail or text watch, a specialist, or the first interview:
-  never "your morning message lists your bookings" (the morning list, 3.3 in the retention plan, is
-  not built).
+  never "your morning message lists your bookings" from this entry. (Corrected October 17, 2026: this
+  said the morning list was not built. It is, as its own entry, built in code from a line of work's
+  lists rather than by this note, and only an event trailer company's lists bookings.)
 - ⚠️ **Which dates count is read off names.** A column's own name decides first, and a bare Date goes
   by its list's name, so a list the names misread shows an old date or hides a coming one: a column
   called Last day is left off, and a date that records what happened under a name with none of the
@@ -5744,6 +6870,138 @@ your reminders, and your agent's routines. Press one on the computer and that li
   a list with nothing on it, which trailers were free was worked out row by row and came out wrong, and
   the Calendar tab said "Nothing on" under a Saturday full of bookings, because it drew only calendars
   (the module note in `schedule.rs` and the header of `src/app/calendar.tsx`).
+
+**Amended October 17, 2026: rentals past their end, lists of finished entries, what is free after a
+booking, and a price is never a count** (Archie `85ccfc56`, `22f0d3d1` and `95134087`, on main and
+in no release yet; nothing here may be said on a page until a release carries them). From round
+four of the journey tests (Archie `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, A.2, A.3, A.5 and
+E.8).
+
+**Proposed additions to the wording, Jett's to approve:** "Ask what's on and Archie names rentals
+that have passed their end date and are still open, with the stop dated for each." And: "After your
+agent adds or changes a booking, Archie counts what is left from your lists: how many units can go
+out, and how many are free on the busiest day of that booking."
+
+- **Past its end and still open.** On a question about today or later, a new section of the
+  what's-on note: an open row on a list with a start and an end, whose end is before today and
+  before the days asked about. Five at most, then how many more. Each names the next entry dated on
+  or after its end on another dated list that is about it, found by a column linking to it or by
+  the same site, customer, place, address, location or venue, as in "pickup stop Fri Oct 16 on
+  Stops", or says "nothing on another list is dated for it" (`list_lines` and `next_for` in
+  `crates/archie-runtime/src/schedule.rs`). Such a rental used to fall in no section, so the agent
+  ran its own one-day query and spoke for the week.
+- **A list whose entries are all done is not empty.** Where every entry on a dated list is finished,
+  the note says so, "Tasks: 1 entry, already done, none due these days.", where it used to read as a
+  list with nothing on it (`schedule.rs`).
+- **What is free after a booking.** When the agent's own add or change touches a list that books or
+  counts things (a things list such as Units or Trailers, or a booking list that names or counts
+  them), the tool result carries the count from the lists: "Units: 4 can go out (5 on the list, 1
+  marked as needing work). On Mon Oct 12, rentals take 3 of them, so 1 unit is free that day."
+  (`counts_after` in `schedule.rs`, `say_counts` in `crates/archie-runtime/src/records.rs`). Skipped
+  when the things list is empty. On round four a yard of 74 units was spoken of after two were
+  promised as if none had been, because the agent did the arithmetic from a count read earlier.
+- **A price is never a count.** A number column counts another list's things only when its name
+  matches that list and it is not a money column (price, amount, deposit, rate, cost, total, fee,
+  paid, balance), so Bookings' Price is no longer read as how many of a Prices list a booking takes
+  (`counts` in `schedule.rs`; test `a_price_is_never_read_as_a_count_of_the_prices_list`). On round
+  four that misreading sent the owner "bookings take 1200 prices at once". A list the owner made with
+  no status column is still counted (`95134087` took back a requirement, added the same day, that a
+  counted list keep one).
+- **Cost.** Below the cache line, on the turns they serve: about 8 tokens for the past-its-end
+  heading and 45 to 50 a row, about 13 for each all-done list, and about 50 on each add or change
+  of a list that books or counts things.
+- ⛔ **Never "Archie knows what is in the yard."** It counts what the lists say: a unit marked as
+  needing work is set apart, and a unit out on a job nobody wrote down counts as free. Only the
+  agent's own add and change carry the count, not a card's Add, an import, or the Lists screen.
+- ⚠️ **The stop is found by a link or a matching name.** A pickup written under a different site or
+  customer name than the rental's is not found, and the line then says nothing on another list is
+  dated for it.
+- ⚠️ **Only lists with a start and an end.** A rental with one date, or a list with no end column, is
+  never past its end in this sense.
+
+**Amended October 18, 2026: one free figure after a write, and rentals still out under their own heading** (Archie `ea630860`, in no release yet). **Claim:** "After the agent adds or changes a booking, or changes one of the things booked (marks a unit for repair), it is handed how many can go out and how many are free that day, counted by code, and both kinds of change give the same figure." And: "A booking kept by one date whose trailer or unit is still out from before the days asked about is listed under "Out since before these days and not marked back", with the day it went out."
+- **Why it's true:** `counts_after_on`, `taken_on`, `booked_by`, `free_that_day` and `can_go_out` in `crates/archie-runtime/src/schedule.rs`, and `say_counts` in `records.rs` (the result's `counted_now`). The heading comes from `list_lines` and `schedule_note` in `schedule.rs` (`out_since`, `still_out`, `booked_days`); test `a_booking_still_out_holds_its_trailer_until_it_is_back`.
+- ⚠️ **Bookings that say how many do not say which.** "Free" is how many can go out minus what open bookings take that day. A unit back in the yard while its rental is still open counts as out until the rental is marked picked up. A thing marked as needing work is never counted free. The day is this computer's today.
+- ⛔ **One date says when a thing went out, never when it is due back.** Archie does not call such a booking overdue, and never "catches overdue pickups". "Still running on these days" still covers rows with a start and an end; the October 17 replay had put one-date bookings there too, and this undoes that.
+- **What the earlier version got wrong.** A write to Units said only "87 can go out", counting units already on jobs, beside "76 free today" from a Rentals write. A trailer both booked and needing work was counted out twice.
+
+### 🚧 When two or more entries match a lookup, code adds up the number columns: BUILT 2026-10-18 (Archie `ea630860`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "When Archie looks up entries on one of your lists and two or more match, code adds up the number columns (units, price) and hands the totals to the agent, so it does not add them itself."
+
+**Why it's true:**
+- `added_up`, `adds_up` and `NOT_AN_AMOUNT` in `crates/archie-runtime/src/records.rs`, with `group_sum` in `archie-domain`. No AI call, and the tool description is unchanged, so no turn costs more.
+
+**Boundaries:**
+- ⚠️ **Only when every match is in the result** (up to 200 by default), never on a page that left some out.
+- ⚠️ **Number columns only, and never an id, phone, ZIP, year, stop number, score or per-unit rate.** That is decided by the column's name, so a number column with an odd name for an id could still be added. A total some rows leave blank says how many rows it is from.
+- ⛔ **Never "Archie never gets a total wrong" or "every number is checked".** The agent is handed the total and can still say another number. The total is not on the Read line under the reply.
+
+### 🚧 When the agent looks up units that are out, code sets them against the rentals at each place: BUILT 2026-10-18 (Archie `62fd174f`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "When Archie looks up the units you have out, code counts them place by place against the rentals running there today and hands that to the agent: where the two lists agree, where they differ and by how many, and a rental starting at one of those places in the next two weeks, so the agent does not line the lists up itself."
+
+**Why it's true:**
+- `by_place`, `place_key` and `same_place` in `crates/archie-runtime/src/schedule.rs` (on the same `pools`, `booked_days` and `still_out` the free count uses), and `say_by_place` in `crates/archie-runtime/src/records.rs`, which adds it to a lookup and to a count grouped by place as `counted_by_place`. No AI call, and no tool or prompt text changed.
+- Tests: `units_out_are_counted_against_the_rentals_running_at_each_place` and `a_place_no_rental_names_is_said_and_a_list_with_no_status_still_counts` in `schedule.rs`; `a_read_of_units_out_says_them_place_by_place` in `records.rs`.
+- Why it exists: on the October 18 replay a simulated restroom owner was told two units at a job site were early, when they were from an older rental running there; the second rental at that place started that Friday.
+
+**Boundaries:**
+- ⚠️ **Only lists that count things and keep where they are:** a list of things (Units) with a place column, and a dated list (Rentals) with a number column counting them and its own place column. Trailers booked by name are not counted this way.
+- ⚠️ **Only on a lookup of two or more with one of them out,** or a count grouped by place. A look at the yard or at one unit adds nothing.
+- ⚠️ **Places match by the words typed,** with case and spacing aside. "Oak Hollow #12" and "Oak Hollow lot 12" are two places, and a unit at the first is said as out at a place no rental names.
+- ⚠️ **Bookings that say how many do not say which.** It compares counts, never unit numbers, and a delivery does not put unit numbers on Units. A difference says the lists disagree; it does not say which one is right.
+- ⚠️ **A teammate on Archie for Teams who sees only some rows does not get it.** The day is this computer's today.
+- ⛔ **Never "Archie keeps track of where every unit is" or "Archie catches every unit in the wrong place".** The agent is handed the counts and can still say something else.
+
+### 🚧 Moving a stop to a day its truck or driver is busy, or a day the job already has a stop, is held and named first: BUILT 2026-10-17, in no release yet
+
+*Archie `fd747fc8`, merged into main as `b65729ea`, in no release yet. Nothing below may be said on
+a page until a release carries it.*
+
+On round four of the journey tests a restroom owner's pickup was moved onto the morning his truck
+was in the shop for a pump seal, which was on his calendar: "That costs me trust on scheduling".
+Another owner was told her driver should beat a 4pm inspection on a day he drives evenings (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`; the fix plan after round four, E.5).
+
+**Proposed wording, Jett's to approve:** "Move a stop to a day its truck or driver is on your
+calendar for something else, or a day that job already has a stop, and your agent tells you what is
+there and asks before moving it."
+
+**Why it's true:**
+- **Checked in code before the move.** On a message a person typed, a change to an entry on a list
+  with a Driver or Truck column that moves its day reads that day's calendar, with no AI
+  (`stop_clash_held` in `crates/archie-runtime/src/gateway/turn.rs`). `stop_clash` in
+  `crates/archie-runtime/src/schedule.rs` finds a calendar event that day whose title names the
+  entry's driver or truck as a word ("Truck 1" matches "Truck 1 pump seal", not "Truck 12 tires"),
+  timed or all-day, and another entry on the same list for the same job already on that day.
+- **What the agent is told.** "Not changed. Wednesday, October 14 has "Truck 1 pump seal", 8:00am
+  to 12:00pm, on your calendar." (or "Thursday, October 15 already has Zimmerman north barns on your
+  Stops list."), then to say so in its own words and ask with Move it anyway and Pick another day.
+  The move goes through when the owner says "anyway", or when the agent's last message already named
+  what is there, so it is held once. Calendar titles are cleaned before the agent reads them
+  (`sanitize_prompt_field`).
+- **The driver's hours are the setup rule's.** Working hours are free text in the owner's notes,
+  which code cannot read, so the restroom setup's route rule now says to put a pickup "on a day and
+  at a time its driver works, as the owner's notes say" (the setups entry's October 17 amendment).
+- **Tests:** `a_stop_moved_onto_a_busy_day_names_what_is_there` (`schedule.rs`) and
+  `a_stop_moved_onto_its_jobs_day_is_held_once` (`turn.rs`).
+- **Cost.** About 49 tokens on the turn a move is held, and about 17 on every turn of a restroom
+  agent for the rule. Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **Only lists with a Driver or Truck column,** and only when a day moves. A truck is matched only
+  where the entry's Truck is filled in; with Driver alone, only the driver's name is looked for.
+- ⚠️ **The calendar match is the driver's or truck's name in the event's title.** "Mike out" names
+  Mike; "Dentist, 9am" does not, whoever it is for.
+- ⚠️ **A driver's working hours are not checked in code,** and neither are a driver's other stops
+  that day, since several a day is normal. The agent is told to follow the owner's notes.
+- ⚠️ **On a message a person typed.** A routine moving an entry is not held this way.
+- ⛔ Never "it checks your whole schedule" or "it never double-books a truck".
 
 ### ✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
@@ -5942,7 +7200,8 @@ list keeps them all."
   never used to change that entry. Imported again after an entry was changed on the list (a new
   stage, say), a row comes back in as a second entry unless it still matches by a unique column, by
   address and date, or by a name with the same phone or email. Never "merges" or "updates your
-  list".
+  list". Since October 18, 2026 (in no release yet) a list can instead be kept matched to the file,
+  which does update it: the entry "A list can stay matched to the spreadsheet you keep".
 - ⚠️ **A cell that does not fit is left blank, and named.** A word in a number column ("call"), a
   date that is not a real date (a day-first date such as 15/10/2026 is one), or a choice the list
   does not offer is left blank on a row that still comes in, and named by row and column: up to 50
@@ -5994,6 +7253,41 @@ list keeps them all."
   the card by code, and the AI is told how many and onto which list, plus up to five entries that
   need a look, each named by its title and why. Never "the AI never sees your file": it may also
   open the file to answer a question, as the boundary above says.
+
+**Amended October 17, 2026: a new list that keeps every column, offered first when the closest list
+would lose what matters** (Archie `fad553fa`, with `1f37008d` for the sidebar, merged into main as
+`ec88be1c`; in no release yet, so nothing here may be said on a page until a release carries it). On
+round four of the journey tests a restroom owner's customer file (Customer, Contact, Phone, Site,
+Units, Rate, Notes) went onto Rentals, which matched four columns by name, and lost the contact, the
+phone and the notes (the comment on `fit`).
+
+**Proposed addition to the wording, Jett's to approve:** "If your closest list has no place for the
+file's phone numbers, emails or notes, or for two or more of its columns, the card offers first to
+make a new list that keeps every column, and still offers the closest list."
+
+- **The rule** (`fit` in `crates/archie-domain/src/import.rs`): the closest list keeps too little
+  when it would drop two or more of the file's columns, or any column holding phones, emails or
+  notes, unless it plainly holds the same kind of entry: the file fills one of its dates, its
+  one-of-a-kind column, or a phone or email of its own. So a Follow Up Boss export still leads with
+  People.
+- **The card** (`offer` in `crates/archie-runtime/src/gateway/import_offer.rs`) says why and leads
+  with the new list: "customers.csv has 2 rows. Rentals is for entries with dates (Starts, Ends, and
+  Last billed on), and has no place for Contact, Phone, and Notes. A new list called Customers keeps
+  all 7 columns. Make it?", with Make a Customers list (keeps all 7), Add to Rentals (keeps 4 of 7),
+  A different list, and Just keep the file. The new list is put in the agent's sidebar and the card
+  says where ("Made the list Customers. It is on this agent's page in Archie, under Lists.").
+- **The agent can make one too.** `records_bring_in` takes a new list as its target, and when nothing
+  names a list and the closest keeps too little, it raises no card and asks
+  (`gateway/tools_records.rs`). Phone columns stay text when a list is made from a file (a fix found
+  on the way: they were turned into numbers).
+- **Cost.** About 9 tokens more in `records_bring_in`'s description and 8 in `records_new_list`'s,
+  cached, and about 60 on the turn it asks. Internal, never on the site.
+- ⚠️ **It never adds a column to a list that is already there.** The choice is the new list, the
+  closest list minus what it drops (which the card names), another list, or the file kept as it is.
+- ⚠️ **It reads column names and what the cells look like,** not what they mean. A list plainly
+  holding the same kind of entry still leads, losses named.
+- ⚠️ **The card's Make a new list has no Open under it,** because the card is edited in place; the
+  sentence names the place.
 
 *Amended October 27, 2026 (Archie `e76af7e1`, `ab17ec44`, `40b4548f` and `e60180d5`; archie-mobile
 `b875a84`; in no release yet): Import on a list in Archie Mobile, and the first rows shown before
@@ -6087,6 +7381,69 @@ on."
 - ⚠️ **Undo is on the done screen; after that it is the computer's.** The phone's job list has no
   Undo for an import, so the done line names the Jobs tab in Archie on the computer, and a teammate
   is told to ask the owner.
+
+### 🚧 A list can stay matched to the spreadsheet you keep, on this computer or in a shared Google Sheet: BUILT 2026-10-18 (Archie `0836722c` through `46829a4b`, archie-mobile `df83b5a` through `2bdde7a`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Keep your own spreadsheet. When you bring it into a list, leave Keep Units matched to
+units.xlsx checked, and Archie changes the list whenever you save the file. It works for a file on
+your computer and for a Google Sheet you've shared with your agent. Archie never changes your file,
+never takes an entry off the list without asking, and your agent knows the list is the whole list."
+
+**Why it's true:**
+- The rules are code with no AI call: `crates/archie-domain/src/follow.rs` (`plan` and `apply`: a
+  cell is written only when the file's cell changed since the last read, so an edit made in Archie
+  stays until that cell changes in the file; a row gone from the file is marked, never deleted;
+  rows added in Archie are never touched; two rows with one key, a blank key or a clash are held
+  and said), and `crates/archie-core/src/bundle/records.rs` (`match_record_collection`,
+  `set_record_collection_follows`).
+- When it reads: `crates/archie-runtime/src/follow.rs` (`check_all`, `reread`: the file's saved
+  time and size first, parsed only when either moved), on the minute tick in `gateway/worker.rs`,
+  at the start of every turn in `gateway/turn.rs` (files on this computer only), before the morning
+  list in `gateway/morning_list.rs`; a Google Sheet's modified time every 15 minutes
+  (`archie-net/src/drive.rs`, `modifiedTime`), its values only when that moved.
+- Turning it on: the import dialog (`src/app/records-import.tsx`: "Where is the spreadsheet?",
+  the box checked by default, "Archie tells the rows apart by"), with `src-tauri/src/commands/follow.rs`
+  (`start_matching`, `read_shared_sheet`) and `commands/knowledge_records.rs`
+  (`records_import_apply`); and the chat's button after rows land (`gateway/follow_offer.rs`), for a
+  file given in Archie's window or a shared Google Sheet's rows added from the card.
+- On the list: `src/app/records.tsx` and archie-mobile `src/screens/ListPage.tsx` draw one view
+  (`FollowView`), so the computer and the phone say the same sentences: what it matches and when it
+  was saved, the last change, "Changed here. units.xlsx still says Booked.", the entries no longer
+  in the file with Take them off and Keep them (Undo on the Jobs tab from either, `journal.rs`
+  `records_unfollow`, `settle_gone_recorded`), and a problem with the press that fixes it
+  (`FollowProblem::fix`).
+- What the agent is told: `say_list_size`, `partly_entered`, `do_update_scoped` and
+  `mark_not_in_their_file` in `crates/archie-runtime/src/records.rs`. Built after the
+  complete-records test (October 18, 2026): simulated owners with every list full said yes after the
+  first morning three times as often, and the reason they gave for maybe was keeping their own sheet
+  beside Archie.
+
+**Boundaries:**
+- ⛔ **Never "syncs", "two-way", "real time" or "instant".** Archie only reads the file. A file on
+  this computer is looked at every minute and at each turn while the agent runs; a Google Sheet every
+  15 minutes, before the morning list, and on Read it again or opening the list. With the agent
+  stopped the checks pause, and nothing happens while the computer running Archie is off.
+- ⛔ **Never "Archie works out how your rows match".** Code picks a column that tells rows apart;
+  the owner can pick another, or pick a row's place in the file, which comes with a warning. Two rows
+  with the same value are left out and said, never merged.
+- ⛔ **Never "any sheet in your Drive".** Only Google Sheets the owner picked on the Connections tab
+  (Add files). Never claim Follow Up Boss here: it is left out until a real account has been tried
+  and Archie is registered with it.
+- ⚠️ **The phone shows a matched list and acts on it, but cannot turn matching on** (that needs the
+  computer's file picker), find a moved file, or match the columns again. Its Take them off has the
+  same Undo as the computer's. On a teammate's phone the file's place is the owner's ("on Sam's
+  Desktop"); never claim a teammate can open or fix the file.
+- ⚠️ **Only the owner and admins can stop matching,** on the computer or a phone (Jett, October 18).
+- ⚠️ **One tab of a workbook is read** (the owner picks which; a renamed tab falls back to the
+  first). Files past 5,000 rows are read to 5,000, and then nothing is marked missing. A file over
+  20 MB is not read.
+- ⚠️ **The chat's button never appears for a file sent from the phone or a chat app** (it needs the
+  file's place on this computer), and asking in words never turns matching on: the button is the
+  way, and the agent is not told it is there.
+- ⚠️ **Not tried on a real Windows file system,** where Excel can hold a file open, nor on a file in
+  OneDrive or iCloud Drive not downloaded to this computer. Never seen with a real Google account.
 
 ### ✅ Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -6327,6 +7684,19 @@ list as one job that one Undo takes back."
   there and that this agent may write. It cannot make a list or add a column; on Archie for Teams
   making a list stays the owner's (`records_new_list` in `acts_as_owner`).
 
+**Amended October 17, 2026: an older card from the same file is replaced** (Archie `93c051b5`, merged
+into main as `b65729ea`, in no release yet; nothing here may be said on a page until a release
+carries it). On round four of the journey tests a restroom owner brought a file in again after
+saying which list it belonged on, and the first card stayed up saying "None of them is added yet"
+under the second card's "Added 69" (the code's note). A new card from a named file now retires a card
+from the same file still waiting from before the owner's last message, whatever list it was for,
+and lets go of its change, so a yes cannot add it after it says it was replaced (`put_on_card_in`
+and `same_file` in `crates/archie-runtime/src/gateway/drafted.rs`; test
+`a_card_from_the_same_file_for_another_list_is_replaced_after_a_message` in
+`gateway/tools_records.rs`).
+- ⚠️ **A named file only.** A card from "your photo" is never replaced by another photo's, and two
+  cards from one file in the same turn (one file split across two lists on purpose) both stay.
+
 ### ✅ Your agent brings your Follow Up Boss people, deals and open tasks onto your lists, on a card you check first: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11, never yet run against a real Follow Up Boss account
 
 **Released in 0.3.8 on October 11, 2026.** Its notes do not name it, because it has never run
@@ -6453,6 +7823,47 @@ say yes. Your agent reads Follow Up Boss; it does not change anything there."
   change in the release that carries them (the entry "What Archie connects to, as a guide"). A guide
   reaches installed apps when Archie's main is pushed, with no release, so the new line is written
   and held in Archie's `docs/OPEN-THREADS.md` for that push (Archie `436f314c`).
+
+**Amended October 17, 2026: a file from Follow Up Boss instead of a key, and plain words about the
+key** (Archie `99e0273c`, with `8e05808d` for the day added, merged into main as `ec88be1c`; in no
+release yet, so nothing
+here may be said on a page until a release carries it, and the first boundary above still holds). On
+round four of the journey tests the realtors' records still were not in, because Follow Up Boss
+wanted a key the owner did not have (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed addition to the wording, Jett's to approve:** "No key? Export your people from Follow Up
+Boss and send the file in your agent's chat. They come in on the same card, and nothing is added
+until you press Add. Archie only reads Follow Up Boss and never changes anything there."
+
+- **The steps on the connect screen.** Follow Up Boss's panel on the Apps list shows "No key? Send a
+  file instead." above the key's steps, with four numbered steps (`file_steps` in
+  `crates/archie-domain/src/connectors.rs`, drawn by `NumberedSteps` in `src/app/connect.tsx`):
+  open People, then All People; tick the box beside Name, press Select All, then the Export arrow;
+  tick All Columns and press Yes, Export People (the step says the account owner has to do the
+  export); then press + beside the agent's message box, choose the file, and press Send. The file
+  goes on the import card, which reads a Follow Up Boss export column for column ("Email 1", "Last
+  Activity", the name split in two) (the spreadsheet entry).
+- **Two doors wherever it is missing.** The interview's goodbye, for an owner who named Follow Up Boss
+  (`ways_in` in `gateway/onboarding.rs`), and the answer to "bring in my people" when it is not
+  connected (`not_connected` in `gateway/bring_in.rs`), both give Connect Follow Up Boss and Add a
+  file from Follow Up Boss, where before the answer sent the owner to a tab. Where no button is drawn
+  the words say both ways. On the phone the file door opens the phone's own picker.
+- **The key's line in plain words** (`grants` on its `KNOWN_SERVICES` row): "Archie only reads your
+  people, deals and tasks from Follow Up Boss, and never changes anything there. Connecting it costs
+  nothing extra in Archie. Follow Up Boss keys cannot be limited to reading, so keep this one
+  private like a password." Until this commit it warned of changes "shown to you first", which
+  Archie never makes.
+- **The day each person was added.** A person brought in by the key fills People's new Added on from
+  Follow Up Boss's `created` (the setups entry's October 17 amendment).
+- ⛔ **The export steps are written from Follow Up Boss's help pages and have never been checked on
+  a real account,** and neither have the export's column names and date format, nor `created`. Say
+  "export your people from Follow Up Boss" and never quote the menu path as tested.
+- ⚠️ **The export needs Follow Up Boss's account owner,** by the step's own words. An agent's owner
+  who is not that person has to ask whoever is.
+- ⚠️ **Still a key or a file.** No sign-in with Follow Up Boss: that waits on registering Archie as
+  a system with them, as the boundary above says.
+- ⚠️ **A file is a copy at the moment of export,** like any spreadsheet brought in. Never "stays in
+  step with Follow Up Boss".
 
 ### ✅ A Google Sheet you shared with your agent can be brought into one of your lists, on the same card: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -7210,6 +8621,56 @@ conversation you can scroll back through in Archie."
   the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where
   that was found.
 
+**Amended October 17, 2026: each of those twenty messages carries its day** (Archie `b802f511`, and
+`3794ac84` for where the day goes; in no release yet). **Claim:** "Your agent knows which day each recent message was said, so "Friday" in
+last week's message means last week's Friday."
+- **Why it's true:** `crates/archie-runtime/src/gateway/worker.rs` stores when each entry was said,
+  and `crates/archie-net/src/llm/said_on.rs` (run inside `past_calls::on_the_wire`) puts the day,
+  spelled like the day table the agent gets on every turn, after the owner's earlier message
+  whenever the conversation moved to a new day, in the shape of the sent-at stamp: "(Sent Friday,
+  October 9)". The latest message carries only its stamp. A day above the latest message made Sonnet
+  5.5 drop a change waiting for the owner's yes, 7 times in 7, in `scripts/prompt-layout-ab.py`;
+  after the words of earlier messages it changed nothing the probe measures. On the replay after round four, an agent read "I put
+  a pickup for Friday on the route" from the week before as this Friday, found nothing, and told the
+  owner it had never added a stop that was there.
+- ⚠️ **Only the twenty messages in front of it, and only ones written by this version or later.**
+  Older messages carry no day. The search above already hands back each message with its day and
+  time.
+- ⛔ **Never "Archie remembers when you said everything",** and never that it checks the dates in old
+  messages against your lists. It is told the day; what it makes of it is the model's reading.
+
+**Amended October 17, 2026: the line in the conversation sits where the agent's memory starts**
+(Archie `63a2528e` and archie-mobile `481d46d`, merged into main as Archie `150e66ef` and
+archie-mobile `c461cdb`; in no release or build, so nothing here may be said on a page until a
+release carries it). The window drew "To keep replies quick, Ember reads only newer messages"
+twenty bubbles up, and a bubble is not what the agent holds: a card or a "Saved in" line is a
+bubble, and a routine's report is two entries in its history, so on round four the line landed
+somewhere the agent's memory did not start, in a different place on every screen (the notes on
+`held_words` in `crates/archie-runtime/src/gateway/worker.rs`; Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed addition to the wording, Jett's to approve:** "A line in the conversation shows where
+your agent's memory of it starts: Ember rereads the messages below it, and can always look at your
+lists, notes, and files."
+
+- **Read off the history the agent is handed.** `held_words` reads what the agent still rereads of
+  that conversation from its own history, the shell lines those words up with the conversation on
+  screen (`remembers_from` and `oldest_held` in `src-tauri/src/inapp.rs`), and the line is drawn over
+  the oldest message it still holds. Archie asks for it when the conversation opens and after each
+  turn (`inapp_memory_edge`); Archie Mobile draws it from a `remembers_from` mark in what the
+  computer sends it (`src-tauri/src/phone.rs`).
+- **The words,** the same on both: "Ember rereads the messages below this line, and can always look
+  at your lists, notes, and files." (`memoryLine` in `src/app/conversation.tsx` and archie-mobile
+  `src/words.ts`). "Can always look at" rather than "always reads", because lists and files are read
+  when a question needs them, not on every turn.
+- ⛔ **Never "the agent forgets everything above the line".** Its notes, lists and files are still
+  there, and the search in this entry reaches further back.
+- ⚠️ **Drawn only once the history is full,** that is, once something has dropped out of what the
+  agent rereads; before that there is no line.
+- ⚠️ **Placed by matching words,** a short way at a time, so a message not on screen is passed over.
+- ⚠️ **On Archie Mobile, the owner's conversation only.** A teammate's phone gets no line.
+- ⚠️ **The phone's half has never been seen on a phone.**
+
 ### 🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `e35220a1`
@@ -7301,6 +8762,44 @@ team, each person's search covers only their own chat."
   button at all (the snapshot's `search` flag).
 - ⚠️ **Not in a release yet**, and the phone screen has not been seen on a real phone or the
   simulator. The computer's box was checked by screenshot in the journey harness, in light and dark.
+
+### 🚧 When you ask about something, Archie checks your small files for lines that mention it, with no extra AI call: BUILT 2026-10-17, in no release yet
+
+**Built October 17, 2026 (Archie `30d7c5e4`), and in no release yet.** Say nothing about it on a page
+until a release carries it. Archie Mobile has no commit for it: it runs on the computer, on any
+message typed to the agent, the phone's included.
+
+**Proposed wording, Jett's to approve:** "When you ask about something, Archie looks through your
+small files, like a price sheet or a page of notes, for lines that mention it, and hands them to
+your agent before it answers. No extra AI call is made to do it."
+
+**Why it's true:**
+- **The match.** `recall` in `crates/archie-runtime/src/knowledge.rs` takes the words worth matching
+  from the message (`memory::words_worth_matching`, the memory archive's own) and reads the agent's
+  knowledge files line by line: the 20 newest of those with at most 24 KB of text
+  (`RECALL_FILES`, `RECALL_FILE_BYTES`), lines of 300 characters or fewer. A line needs two of the
+  message's words, or the only one when the message has one, so one common word does not pull in
+  half a file. The best three lines come back, at most 360 bytes of them (`RECALL_MAX`,
+  `RECALL_BYTES`). No model and no tool.
+- **Where it goes.** `recall_note` puts them below the cache line on that turn, as lines copied as
+  written, data and never instructions, with the instruction to open the file before saying anything
+  is not in it (wired in `gateway/turn.rs`, beside the memory recall). On a message a person typed,
+  and not on a turn handed to a specialist or the first interview.
+- **Why it was built.** Memory had a recall in code and the files had none, so on round four of the
+  journey tests the agent said a late fee was not on a price sheet it had never opened, and named it
+  a turn later (Archie `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, A.4).
+- **Cost.** Nothing on a message that matches no line. On one that does, about 42 tokens plus 13 to
+  20 a line, below the cache line, on that turn only.
+
+**Boundaries:**
+- ⛔ **Never "it reads every document on every message," or that a long document is searched this
+  way.** Only small files (about 24 KB of text or less, the 20 newest of them), at most three lines a
+  message. A longer document is the agent's to open.
+- ⛔ **Never describe it as the agent choosing to look something up.** It is word comparison, the
+  memory recall's way, and it misses a line worded differently from the question.
+- ⚠️ **What it finds goes to the AI company with that message,** like everything else on the turn.
+- ⚠️ **A few lines, not the file.** The agent is told to open the file before saying something is not
+  there; whether it does is the model's.
 
 ### ✅ Your whole agent in one file, and no key is in it (SHIPPED 2026-09-02 in Archie 0.2.2; entry written 2026-09-21)
 
@@ -8487,7 +9986,7 @@ the picture in the approval card shows which button it means.
   permission), the workout post, and two Learning Library sections not yet published
   (`assets/library.json`).
 
-### ✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14
+### ✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, in no release yet
 
 The retention plan's 3.3, built before round four (the fix plan after round three, E.3 and E.4).
 
@@ -8516,6 +10015,83 @@ the first one comes, from the same setup time.
   that day (`LAST_HOUR` in `gateway/morning_list.rs`). Corrected October 18, 2026: this said "awake
   at that time", which was wrong.
 - ⚠️ The time is fixed per line of work for now; the owner can stop it, not move it.
+
+**Amended October 17, 2026: offered once there is something on it, never sent empty, and a row on
+Routines** (Archie `72e3bd2a`, `9ca537b5`, `b291f448`, `c6b15573`, `199f3ea6` and `f0399fdf`, merged
+into main as `ec88be1c`, and archie-mobile `00341bb`, merged as `cae16c8`; in no release or build
+yet, so nothing here may be said on a page until a release carries it). Jett's call, October 17,
+2026: the morning list is offered once there is something to report and is never sent empty, and
+owners who already had it keep it, minus the empty mornings. On round four of the journey tests it
+arrived unasked ("which I did not ask for"), empty ("Nothing to list this morning: People and Deals
+are empty"), or was promised by the goodbye and then taken back by the agent (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed wording, Jett's to approve, in place of the approved wording above once a release
+carries it:** "Once there is something on it, your agent offers you a morning list of the day's
+work: for a restroom company, today's stops, the rentals past their end date, and who has not been
+billed, along with today's calendar, reminders and open to-dos. It is put together on your computer
+from your own lists without asking an AI anything, so it costs nothing and cannot make anything up.
+Pick the time or say no thanks. It never arrives empty, and you can stop it with its Stop button, by
+saying so, or on the Routines tab."
+
+**What changed, and why it's true:**
+- **Offered, not switched on.** A new interview that matches a line of work writes the list down as
+  off and not yet offered (`start_unasked` in `crates/archie-runtime/src/gateway/morning_list.rs`,
+  called from `apply_onboarding_synthesis`). The first owner reply after that whose next list would
+  have something on it ends with the offer, in code (`offer` and `offer_under`): "Want a list of
+  today's stops, the rentals past their end date, and who has not been billed, here at 6:00am each
+  morning? It is built from your lists and uses none of your AI." with Yes, at 6:00am, Another time
+  and No thanks under it, each answered in code (`answer_press`). It is offered once, and not under
+  a reply that asks a question or already has buttons or a change waiting. Where a chat app draws no
+  buttons, the offer ends with the words that turn it on: say "send me the morning list".
+- **Agents set up before keep it.** A morning list file with no answer in it, or no file at all on
+  an agent whose line of work has a list, reads as on (`is_on`), because that owner's goodbye
+  promised it. A stop is still a stop.
+- **Never sent empty,** to anyone (`due`): a morning with nothing on is written down as looked at and
+  sends nothing. The list released in 0.3.9 said "Nothing to list this morning" the first morning
+  every list was empty and once a week after that. Asked for in words, it still answers, "Nothing is
+  on today" included, because that is an answer to a question.
+- **More goes on it.** Open to-dos count (due today or late, due this week, and undated ones marked
+  High or for a person) (`crates/archie-runtime/src/morning.rs`), and so does today's calendar,
+  read with five seconds to answer (`CALENDAR_WAIT`) and left off when it does not. Still no AI.
+- **The time is the owner's.** Another time offers up to three times before noon and Something else
+  for a typed one; "send me the morning list at 7am" moves it too. A time after noon is turned down
+  with a sentence saying the list only goes out before noon. This replaces the boundary just above,
+  from the release that carries it.
+- **The agent knows it is on.** Its line about what it does unasked names the morning list and its
+  Stop button (`unprompted_line`), about 32 to 39 tokens by line of work on every turn and routine
+  run of an agent with the list on, cached, and about 56 more where nothing else is listed there (the
+  function's own note). Internal, never on the site.
+- **A row on Routines,** on the computer (`MorningListRow` in `src/app/routines.tsx`, with
+  `morning_list_get` and `morning_list_set`) and in Archie Mobile (`MorningListRow` in archie-mobile
+  `src/screens/Routines.tsx`, through the `morning_list` field and `morning_list_on` op in
+  `src-tauri/src/phone.rs`): its time, what it brings, "It is built from your lists and uses none of
+  your AI.", and the switch every routine row has. Switching it counts as the offer answered.
+- **The goodbye no longer promises it** (`first_one_said` is gone), which replaces this entry's
+  "The interview's goodbye says when the first one comes".
+
+**Boundaries of the amendment:**
+- ⛔ Never "every morning your agent sends you a list" for a new agent: it is offered, and comes
+  only after a yes, and only on mornings with something on it.
+- ⚠️ **Still four lines of work only** (portable restrooms, restroom trailers for events, home
+  trades, real estate), still before noon, and still only while Archie runs on an awake computer.
+- ⚠️ **The calendar part needs a calendar that answers within five seconds;** otherwise that morning's
+  list goes without it.
+- ⚠️ **Offered once.** An offer passed over is not made again (its buttons still work later), and
+  the way back is "send me the morning list" or the Routines switch.
+- ⚠️ **The phone's row is in no build yet,** so never say Archie Mobile has it until a build that
+  carries `00341bb` is out.
+- **What the earlier version got wrong.** 0.3.9 and 0.3.10 switched it on at the interview, sent the
+  empty note, and left the agent unaware the list existed, so it could take the goodbye's promise
+  back.
+
+**Amended October 18, 2026: what needs a decision comes first, and a line under the list says what it read** (Archie `d08fe03b`, `960c7b27`, `73563b76`, merged as `cbe43370`; `faf3c7f4` for a pickup on the same day as a service; in no release yet). **Claim:** "The morning list starts with what needs your decision: a rental past its end date with no pickup booked, a bill unpaid more than 60 days, and today's work nobody has yet. Then the route and your calendar, then the rest of the money. Under the list, one line says what it read ("Read all 21 rentals and 13 stops, and your calendar."), that each list kept matched to your spreadsheet matches the file as you last saved it, and what changed since yesterday's list."
+- **Why it's true, with no AI call:** `crates/archie-runtime/src/morning.rs` (`Tier`, `billing`, `past_end`, `pickup_of`, `unclaimed`, `closing`, `since_said`, `matched` through `follow::view`); `gateway/morning_list.rs` rereads every matched list first (`check_lists`) and keeps what the last list read; `Channel::send_with_line` in `archie-net` puts the line under the list in Archie and Archie Mobile and as the last line of the message on a chat app. A pickup booked the same day as a service now counts as the pickup (`faf3c7f4`, `next_for` in `schedule.rs`).
+- ⛔ **Never "it books the pickups" or "it chases the bills".** It says which have none and how old they are, by days since billing, with the amount and the invoice number where the list keeps one.
+- ⛔ **"Nobody has it yet" reads only Who has what** (an add-on) and stops with no driver. Never "it knows everything nobody has picked up". "Needs repair" is only what is marked so on a list. The pickup is found by the same matching as the what's-on note, so a stop written for a different site name is missed by both.
+- ⛔ **Never "the agent remembers what the list read".** The line is kept out of its history on purpose. "Matches" is as of the last read of the file, just before the list; a file that could not be read says so, with what to press. "What changed" is counts of entries added, changed and taken off, not which.
+- ⚠️ **The boundary above that the owner can stop it but not move it is out of date since October 17, 2026:** Another time and "send me the morning list at 7am" move it.
+- On an event trailer agent it also compares Bookings with the owner's calendar: see the entry "The morning list and the agent say where Bookings and your calendar differ".
 
 *Amended October 26, 2026 (Archie `32a61822`, `7ebc5374` and `c67d4aed`, in no release yet): every
 agent has one, and every owner is offered it on the first evening.*
@@ -8930,6 +10506,52 @@ the list instead, as the `dd17497b` amendment says. Tests:
 - ⚠️ **The clause names what the list can say, not what every morning says.** Each part comes only
   from a list the owner keeps, and only when it has something new, as the `823a77cc` amendment says.
 
+### 🚧 The morning list and the agent say where Bookings and your calendar differ, decided without AI: BUILT 2026-10-18 (Archie `49965c01`, merged as `4ac7579f`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "On an event trailer agent, the morning list compares your Bookings list with your calendar for today and the next two weeks, and says where one has a booking the other does not, so you can say which is right. Asked what is on a day, Archie says the same."
+
+**Why it's true:**
+- `crates/archie-runtime/src/schedule/crosscheck.rs` (`differences`, `AHEAD`, `NEAR`) compares in code, with no AI call. The morning list says it first among what needs a decision (`crates/archie-runtime/src/morning.rs`), from the morning's one calendar read (`gateway/morning_list.rs`). The agent reads the same on the owner's turns in the note for the days asked (`schedule_note` in `schedule.rs`, `gateway/turn.rs`), from that turn's one calendar read, so there is no extra calendar request.
+
+**Boundaries:**
+- ⛔ **Never "catches every scheduling mistake" or "keeps your calendar in sync".** It only reads. It changes neither Bookings nor the calendar, and the owner decides which is right.
+- ⛔ **Only clear differences are said.** Silent on anything unsure: part of a name, an entry over several days, anything within two days of a booking (its delivery and pickup), done or canceled bookings, a calendar that did not answer or was cut short, and a calendar that holds none of the bookings. So an owner whose only booking moved hears nothing.
+- ⛔ **The calendar side needs the customer's whole name, or the booking's event name with their last name** (Jett, October 18, 2026; Archie `c10f6efc`, merged as `4915d3c7`). "Henderson wedding (6-stall)" counts as Laura Henderson's "Henderson wedding", so after a move it says "Your calendar has “Henderson wedding (6-stall)” on Saturday, October 17; Bookings has Laura Henderson on Saturday, October 24." When two customers with bookings in the window share that last name, the entry is left unsaid. An errand entry ("Henderson wedding delivery") or one without the event's name ("Pick up 6-stall at Henderson") is never said.
+- ⚠️ **Only a list called Bookings with a Customer column and one date a row** (the event trailers setup). Stops against a calendar is not built, nor any other list.
+- ⚠️ **Today and the next 14 days, the owner's calendar only,** and on the owner's own turns; never a teammate's calendar.
+- ⚠️ **It does not change what the agent counts as free.** A calendar hold that names nobody still does not make a trailer taken.
+
+### 🚧 Today's Calendar sends nothing on a day with nothing on your calendar, decided without AI: BUILT 2026-10-17, in no release yet
+
+*Archie `3d805aa4` (with the routine's manifest at version 1.1.6), merged into main as `ec88be1c`, in
+no release yet. Nothing below may be said on a page until a release carries it.*
+
+Today's Calendar is the store routine that reads the day's calendar each morning (`daily-briefing`).
+Its prompt said "If the day is empty, say so in one line", which paid for a whole run to send a line
+that is not news: about 24,000 tokens read and 11,000 written on the September 4 log (the code's
+own note, not measured by us).
+
+**Proposed wording, Jett's to approve:** "On a morning with nothing on your calendar, Today's Calendar
+sends nothing and uses none of your AI. Press Run now and it still answers."
+
+**Why it's true:** before any model call, `handle_routine_message` in
+`crates/archie-runtime/src/gateway/routines.rs` reads today's calendar for an unattended run of
+the store's Today's Calendar (`reads_only_todays_calendar`: slug `daily-briefing`, still pointed at
+the calendar skill alone, and installed from the store, by its `config.json`). When every calendar
+answered and nothing is on it but canceled events (`an_empty_day`), the run is logged and skipped.
+The read has 20 seconds (`EMPTY_DAY_WAIT`). Calendar requests only, no AI. Test:
+`only_the_stores_calendar_routine_is_skipped_on_an_empty_day`.
+
+**Boundaries:**
+- ⚠️ **That routine only, as the store ships it.** A routine the owner wrote with the same name, or
+  Today's Calendar pointed at more than the calendar skill, runs as before.
+- ⚠️ **Run now still runs,** empty day and all: somebody who pressed it is waiting for an answer.
+- ⚠️ **A calendar that cannot be read is not an empty day.** If one calendar does not answer, or the
+  read takes longer than 20 seconds, the run goes ahead as before.
+- ⛔ Never "your routines skip empty days": this is one routine's check, not a rule for all of them.
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the
@@ -9074,6 +10696,36 @@ tells Archie when those keys are pressed and nothing else you type."
   close dialog says so ("click Archie in the Dock, or its icon at the top right of the screen",
   `src/app/chrome.tsx`). Written into that entry on October 18, 2026, as an amendment, and applied
   there on October 19, 2026, at the 0.3.11 release.
+
+### 🚧 If Archie takes too long to open, it says so and offers Try again and Get help, on the computer and in Archie Mobile: BUILT 2026-10-17, in no release yet
+
+*Archie `51cc81fc` and archie-mobile `da44a1f`, merged as `b65729ea` and `1f03302`; in no release or
+build yet. Nothing below may be said on a page until a release carries it.*
+
+The first screen used to wait forever when the read behind it failed, because the error was thrown
+away (the fix plan after round four, E.6).
+
+**Proposed wording, Jett's to approve:** "If Archie takes longer than usual to open, it says so. After
+a minute it offers Try again and Get help, which starts an email to us with what it saw. Archie
+Mobile does the same when it cannot get your agents."
+
+**Why it's true:**
+- **On the computer** (`LoadingScreen` in `src/app/auth.tsx`, words in `src/app/helpers.ts`): after
+  15 seconds, "Still starting. The first start after an update can take a minute." After 60
+  seconds, or at once when the read fails: "Archie has not finished starting. Press Try again. If it
+  still does not open, quit Archie and open it again, or email questions@otianai.com.", with "What
+  went wrong:" and the error when there is one, Try again (the same read again, with the clock
+  started over) and Get help (an email to us with those words and the error in it). `App.tsx` no
+  longer throws the failure away. `index.html` ends every early error with what to do, including
+  the one that had nothing: "Quit Archie and open it again. If it keeps happening, reinstall it from
+  otianai.com or email questions@otianai.com."
+- **In Archie Mobile** (`Starting` in archie-mobile `App.tsx`): after 60 seconds of "Getting your
+  agents", the same sentence word for word (`NOT_STARTED` in `src/words.ts`, held to it by a test),
+  Try again and Get help (an email to questions@otianai.com).
+- ⚠️ **Not seen on a screen yet:** the app was not started to look at it. It reuses the existing
+  layout and button styles.
+- ⚠️ **The 15-second line is on the computer only.**
+- ⚠️ **It says what to do; it does not fix the start.** Never "Archie recovers on its own".
 
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
@@ -10384,6 +12036,15 @@ The unattended routine path returns
 this file used to document is closed. Guarded by test (`tools_calendar.rs:691`). *(Pointers
 refreshed 2026-08-21 after the gateway split; the behavior re-verified unchanged.)*
 
+**Amended October 17, 2026: a thank-you is not your approval** (Archie `a4d71a07`, in no release
+yet). A typed message that is only thanks ("thanks", "great, thanks", "perfect, thanks") neither
+applies nor cancels a change waiting for your word, in any of the ten places a change waits
+(calendar, to-dos, lists and the rest), and the change stays waiting (`only_thanks` and `approves`
+in `crates/archie-runtime/src/decide.rs`, `held_for_their_word` in `gateway/turn.rs`). "Ok",
+"okay" and "sounds good" on their own still approve, because after "Want me to go ahead?" that is
+what they mean. Measured before the fix: Haiku 5.5 applied a waiting to-do on a bare "thanks!" 4
+times in 4, and Sonnet 5.5 canceled it 4 times in 4 (`scripts/prompt-layout-ab.py`).
+
 **Amended 2026-08-16: the proposal carries buttons, and a tap counts as your later message.**
 Approved wording: "the proposal arrives with Confirm, Change something, and Cancel buttons; a
 tap sends the words on your behalf, so tap or typed, the approval is still a separate, later
@@ -10898,8 +12559,8 @@ email or a time on your calendar, and it looks before it rewrites."
   card's first line under its heading is "Not sent yet." (`render_card` in
   `crates/archie-runtime/src/email/replies/card.rs`). Over the message box, both apps say "1 waiting
   to send" or "2 waiting to send" while a conversation holds an email or text card whose Send is
-  still on it, and a press scrolls to the oldest (`waitingToSend` in `src/app/conversation.tsx` and
-  archie-mobile `src/screens/Chat.tsx`). Asked what is unsent, pending or promised, the agent is told
+  still on it, and a press opens the list (`waitingToSend` in `src/app/conversation.tsx` and
+  archie-mobile `src/screens/Chat.tsx`). **Corrected October 18, 2026:** "a press scrolls to the oldest" has been wrong since October 17. Both apps count the drafts waiting on their Send in that conversation, one each however many times /pending posted it, and a press opens the list; Show takes you to the newest card of each (`waitingDrafts` in `src/app/waiting.ts` and archie-mobile `src/waiting.ts`; Archie `47b1ff7b`, archie-mobile `a57c888`, in no release yet). Never that the list shows drafts in other conversations. Asked what is unsent, pending or promised, the agent is told
   to count the email drafts waiting on cards in that conversation, which it was already handed
   every turn one waits (`waiting_drafts_note` in
   `crates/archie-runtime/src/email/replies/draft.rs`).
@@ -10913,6 +12574,42 @@ email or a time on your calendar, and it looks before it rewrites."
   - **What the earlier version got wrong.** On round three of the journey tests (October 12, 2026)
     an owner asked what was still unsent and was told nothing, while two drafts waited in the same
     chat, and in sixty runs nobody opened the Dashboard, where they were listed.
+- **Amended October 17, 2026 (Archie `eadd88e3` and `7ce81a86`, archie-mobile `b52a2a8` and
+  `5a4a9d6`, merged into main as Archie `150e66ef` and archie-mobile `c461cdb`, in no release or
+  build; nothing here may be said on a page until a release carries it): "waiting to send" opens a
+  list, and words about a draft that changed go gray.** On round four of the journey tests "2 waiting to send" would
+  not open, or jumped to one draft: "I will not use a tool where I cannot see and control that"
+  (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`). This replaces "a press scrolls to the
+  oldest" above.
+  - **The list.** A press opens a list over the message box, headed "Waiting for you to press Send.
+    Nothing has gone out.", one line per draft saying who it is to and what about ("Reply to Beth
+    Morris: Files missing documents"), with the card's own Send and a Show that scrolls to the card
+    (`waitingToSend`, `waitingHeading` and `waitingLabel` in `src/app/conversation.tsx`; the same
+    words in archie-mobile `src/words.ts`, drawn in `src/screens/Chat.tsx`). Send is the card's own
+    action, so it does exactly what Send on the card does.
+  - **A draft set for a time** says so: its line ends ", goes out on its own at its time", and the
+    heading becomes "Nothing has gone out yet. Each one waits for you to press Send, unless it says
+    it goes out on its own." (`SET_FOR_LATER`, a card offering Send now and Back to draft).
+  - **Words that no longer hold go gray.** When a draft is changed and then sent, or dismissed, the
+    agent's words from the turn that first showed it are grayed out under "Out of date: you changed
+    this draft and sent it. The card below shows what went." ("above" when the card sits higher) or
+    "Out of date: you dismissed this draft." (`Channel::draft_ended` and `DraftEnd` in
+    `crates/archie-net/src/channel.rs`; `was_changed` and `words_out_of_date` in
+    `crates/archie-runtime/src/email/replies/actions.rs` and the text lane's
+    `texts/replies/actions.rs`; `words_about` and `outdated_line` in `src-tauri/src/inapp.rs`; test
+    `a_draft_that_ends_changed_grays_the_words_about_it`). Archie Mobile grays the same bubble.
+  - ⛔ **Never "nothing is ever sent without a press".** A draft set for a time goes out at that time;
+    the list marks it.
+  - ⚠️ **Email and text reply drafts in the conversation on screen,** in Archie and Archie Mobile;
+    the one-conversation boundary above still holds.
+  - ⚠️ **A draft sent as written is not grayed,** since what was said about it is still true. A
+    change taken back with Put the old one back counts as unchanged.
+  - ⚠️ **Which words go gray is worked out by position:** the run of the agent's messages around the
+    card that first showed the draft, with no pause longer than three minutes, stopping at the
+    owner's own messages. Cards from before this build carry no mark tying a draft to its first
+    card, so a draft posted again after a change grays only the words beside the card that was
+    pressed.
+  - ⚠️ **The phone's half has never been seen on a phone.**
   - **Amended October 26, 2026 (Archie `792109e8`, archie-mobile `a60f01e`, in no release yet): counted by
     draft everywhere.** "2 waiting to send" over the message box, the Now tab in Archie, Now and its
     Needs you in Archie Mobile, and the Chat badge in the sidebar count one per draft, whatever version
@@ -10922,12 +12619,76 @@ email or a time on your calendar, and it looks before it rewrites."
     thing waiting to send` in both apps' `waiting` tests, `the_waiting_list_holds_one_card_per_draft`,
     `unread_is_what_arrived_since_the_owner_last_answered_or_looked`. The boundary "One conversation's
     count" still holds.
+
 - **What the earlier version got wrong.** Pressing Edit it swapped the card for a card of three,
   which the window then showed at the bottom as a new message, and Use my words sent your whole
   edited reply into the chat as if you had typed it to the agent, then posted the changed draft as
   a second card under it. Rewrite it for me could not see anything but the draft and the one
   message, so "mention the invoice I sent her" came back as "did you get a chance to look at the
   invoice?" with nothing from the invoice in it.
+- **Amended October 17, 2026: the cursor opens above your name** (Archie `82bc74ac`, Archie Mobile
+  `4139018`, in no release or build yet). **Claim:** "When you edit a draft, the cursor starts at the
+  end of the letter, above your name, and if some of your words end up under your name, a button
+  moves them up." On the computer the box opens on the whole letter and grows to fit it. Why it's
+  true: `src/app/sign-off.ts` and `src/app/edit-sheet.tsx` in Archie, `src/sign-off.ts` and
+  `src/screens/EditDraft.tsx` in Archie Mobile, the same rule copied in both and kept to the closing
+  words the runtime strips (`CLOSINGS` in `crates/archie-runtime/src/email/replies/triage.rs`; a test
+  fails if they drift). On the replay after round four the box opened partway down with the cursor
+  after the signature, and the owner's sentence went under her name on a note to a bride.
+  - ⛔ **It never moves anything on its own,** and it checks nothing else in the letter. The line and
+    the button show only when words sit under the sign-off, and Save works either way.
+  - ⚠️ **The phone's half has never been seen on a phone.**
+
+### 🚧 /pending moves a waiting card to the bottom instead of copying it: BUILT 2026-10-18 (Archie `47b1ff7b`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Type /pending and everything still waiting on you is posted again at the bottom. The earlier copy says it was replaced by the newest card, and its buttons go."
+
+**Why it's true:**
+- `retire_old_copy` and `post_again` in `crates/archie-runtime/src/decide.rs`, called by every lane /pending posts: email drafts and new emails (`resend_open_cards` in `email/replies/actions.rs`), text drafts, catch-up lists (`resend_open` in `catchup.rs`), proposed row changes (`email/upkeep.rs`) and questions with buttons (`gateway/worker.rs`). Tests such as `pending_retires_the_old_card_and_an_old_press_does_not_send_twice`.
+
+**Boundaries:**
+- ⚠️ **Not on Signal or iMessage, which cannot edit,** nor in the window when its chat app is one of those. There the old copy stays and a press on it is answered once.
+- ⛔ **Never "a draft can never be sent twice" as a general claim.** What holds is that every copy of a draft is one record, and a sent record answers "Already handled.".
+
+### 🚧 A sent draft says it went, beside the agent's message: BUILT 2026-10-17 (Archie `97a4935f`), CHANGED 2026-10-18 (Archie `8a6ce92a`, archie-mobile `42501d7`), in no release yet
+
+**Claim:** "When you press Send on an email your agent drafted, Archie says it went, under the message
+your agent wrote with the draft: "Sent to Ace Septic at 8:01am." Your agent's own words are never
+changed. On Telegram, Slack, Discord and Matrix it comes as a short message of its own."
+
+**Why it's true:**
+- Each draft card shown in a turn is tied to the reply that came with it
+  (`crates/archie-runtime/src/gateway/card_reply.rs`). Sending it, by a press anywhere or by Send
+  later firing, writes one line (`say_it_went` and `sent_line` in
+  `crates/archie-runtime/src/email/replies/actions.rs`), named from the email's From name when it had
+  one, its time spelled by `clock_face`, with the day when the send comes on a later day.
+- Archie keeps the line beside the message, never in it (`Entry.under` in `src-tauri/src/inapp.rs`),
+  and draws it under the bubble in the out-of-date line's ink (`src/app/conversation.tsx`). Archie
+  Mobile gets it on its own (`src-tauri/src/phone.rs`, `team_phone.rs`) and draws it the same way
+  (archie-mobile `src/screens/Chat.tsx`). A chat app gets a new message (`Channel::add_line` in
+  `crates/archie-net/src/channel.rs`, routed by `mirror.rs`). A test checks the agent's message stays
+  byte-identical, on screen and in the history the agent rereads.
+- On the replay after round four the card turned to Sent while the message beside it still said the
+  draft was ready to send. On the second replay owners noticed a message they had already read
+  changing under them, which is why Jett had the line moved out of the message on October 18.
+
+**Boundaries:**
+- ⛔ **Never say the agent's message updates or changes to say it was sent.** The October 17 version
+  of this entry did: it said the line goes in the message and that chat apps get the message edited.
+  Neither is true now.
+- ⛔ **Never "Archie confirms it arrived".** The line says Archie sent it, not that it was delivered
+  or read.
+- ⚠️ **Email drafts shown in a chat turn only.** A text (iMessage) draft card, a draft the mail watch
+  wrote on its own, and a catch-up list line get no such line.
+- ⚠️ **Signal and iMessage get no extra line,** because the sent card itself arrives there as a new
+  message saying Sent.
+- ⚠️ **On Slack, Discord and Matrix the line can make the phone buzz** (only Telegram sends it
+  silently), including for a send that went at a time the owner picked.
+- ⚠️ **The line is for the owner and never goes into the agent's history.** The agent keeps "an
+  email reply went out" for a pressed or typed Send, not for one that went at a scheduled time.
+- ⚠️ **Never seen on a real chat app or a real phone.**
 
 *Amended October 26, 2026 (Archie `b7bdeb53`, `792109e8`, `85282adb` and `37b512e0`, archie-mobile
 `a60f01e`, in no release yet): one draft, one card.*
@@ -11265,6 +13026,12 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
   it; "replies only" is no longer a limit to repeat.]*
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
+**Amended October 18, 2026: every send is recorded with when Send was pressed and who pressed it** (Archie `1a1c2546` through `2aec2291`, merged as `ee4e8260`, in no release yet). **Claim:** "Every email or text you send from an Archie card is recorded with when you pressed Send and who pressed it, on the Jobs tab, and Archie can tell you what went out when you ask."
+- **Why it's true:** `record_sent` and `sent_said` in `crates/archie-runtime/src/journal.rs`; `file_the_send` in `email/replies/actions.rs` (both send paths) and `texts/replies/actions.rs`; `line` in `gateway/tools_work.rs`.
+- ⚠️ **Sends from October 18, 2026 on.** A send set for later is recorded when it goes, as "the time you picked". Nothing is sent without a press (unchanged).
+- ⚠️ **One job per send on the Jobs tab,** so its week bars, "you asked" count and a teammate's changes count include sends.
+- **What the earlier version got wrong.** The drafting job kept saying "Drafted a reply for you to send" with no trace of the send.
+
 *Amended October 26, 2026 (Archie `inbox-catches`, in no release yet): a name with no email behind it
 is looked for through the owner's lists.* When the agent drafts a new email to a person by name and
 no From or To line in the mailbox names them, it looks on the owner's lists for a row where that
@@ -11329,6 +13096,12 @@ like the owner does its work.
   like the owner. The samples go each time the owner presses Read my writing, not once. Never say the
   passages stay on the computer.
 - ⚠️ **Never "learns as you go."** It learns only when the owner presses Read my writing.
+
+**Amended October 18, 2026: Write like me is offered on the card, and the card words show on the How you write tab** (Archie `765d8dfe`, merged as `b9d3bec9`; `36197b91` and `0dcd20be`, in no release yet). **Claim:** "After you write your own words on a second draft, the card offers Write like me; one press turns it on and Archie drafts the way you wrote those replies. The replies it learned from are listed on the How you write tab."
+- **Why it's true:** `wrote_by_hand` and `turn_on_from_cards` in `crates/archie-runtime/src/writing_style.rs`; the `likeme` arms in `email/replies/actions.rs` and `texts/replies/actions.rs`; `offer_style` in `crates/archie-domain/src/automation.rs`. The card words are written to the samples file and drawn in `src/app/writing-style.tsx`.
+- ⛔ **Offered once, and only on an agent whose writing has never been read.** Only the agent's owner can press it. It never reads the Sent folder; that still asks on the Knowledge tab.
+- ⚠️ **When Archie reads your Sent folder to learn how you write, it skips only what it drafted for you,** never words you put on a card with Use my words (`mark_as_drafted` in `email/replies/actions.rs`, `record_drafted` in `writing_style.rs`; Archie `1a1c2546`, merged as `ee4e8260`, in no release yet). A rewrite you asked for is still Archie's wording and is still skipped.
+- ⚠️ **It starts from the drafts you wrote in Archie, word for word,** and the press restarts the agent, so a turn running on that agent in another chat is cut off. A skill set to "Its own" or "Off" under Which skills write like me ignores the note.
 
 ### 🚧 Acuity Scheduling: your agent reads it, and cancels or moves an appointment when you say yes: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a for reading, 769eed7d..5417c884 for cancel and move), IN THE CATALOG for Archie 0.3.1 and later, never run against a real account
 
@@ -11734,7 +13507,7 @@ add: "A reply with a blank still in it won't send until you fill it in."
 | **"Your agent does the work. You say the word."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. (⚠️ 2026-10-08: to-dos changed as well. Checking one off and editing one now happen at once, each with an undo that puts it back through Todoist or Google Tasks, built on Archie's `agent-sim` branch (`f0e7020a`) and in no release yet; deleting one still waits for a yes.) (⚠️ October 19, 2026: calendar changes too, once the owner turns it on. From 0.3.11, which carries Archie `bad38c32`, a new or moved event on the owner's own main calendar that nobody else is on happens at once, with an undo, after the owner presses Yes, and stop asking. This row's own scope, a reply that reaches somebody else, is untouched, because a covered change reaches nobody.) An email-only sentence was underselling a product-wide property. (⚠️ 2026-09-29: the record half of that was not true at 0.3.1, where a list edit ran at once with an undo. In 0.3.2 only removing a row waits: `5b51b70b` made edits wait and `139029ac` put them back to at once the same day. See the lists rows below.) ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
 | **"Replies and calendar moves wait for your yes."** | ✅ **True now (0.3.1), and the homepage heading (`#mine-heading`) since 2026-09-29**, narrowed from the lists form below the same day at Jett's ruling. A reply that reaches somebody else waits: the row above holds the code pointers. A calendar move waits: the Calendar changes entry above (`tools_calendar.rs`, staged on the turn that proposes it and applied only on a later one). The figure under the heading draws those two lanes and no third, and the line under it, "No setting turns that asking off", is scoped by this heading and says nothing without it. The four blog posts that carried the lists form now carry this one (`your-ai-agents-messages-go-out-under-your-name`, `say-maybe-to-your-ai-and-it-hears-do-it`, `your-ai-agent-should-bother-you-more-not-less`, `ai-built-my-workout-program`). ⛔ Never shorten it to "everything waits for your yes", and never let it stand for a purchase, which the Buying entry says it must never cover. The personal edition page carries the same scope as "Replies and calendar changes wait for your approval." ⛔ **Retired from the site October 19, 2026**, ahead of the release that carries Archie `bad38c32`, in which a calendar move on the owner's own calendar can stop waiting, so the heading and "No setting turns that asking off" under it would both be false that day. The homepage, the personal edition page, the four blog posts and every other page that carried this form or its "calendar changes" twin now carry the row below. |
 | **"Nothing goes out in your name until you say yes, and no setting turns that asking off."** | ✅ **Approved October 19, 2026: true of 0.3.10, and true of 0.3.11, released the same day with Archie `bad38c32`.** Jett decided on October 18 to ship that build and narrow the site's claim to what still has no off switch; this is the claim the site used to make about "replies and calendar changes", cut to what no setting in either build can change. **What waits:** a reply, an email or a text (the "does the work" row above holds the pointers: no tool can send a text, the mail send function has one caller behind the Send action, and a timed send is refused unless the person asked for it in that turn); a message through a connected CRM (`ghl.rs`, staged); a press on a website that sends, submits or finalizes something (the Websites entry); on the calendar, deleting an event, inviting anyone (from 0.3.11, the first release that can invite), or changing one somebody else is on (the Calendar changes entry); and, from 0.3.11 on an agent with Call businesses switched on, a phone call to a business, which dials only when the owner presses Place the call on its card. **Why no setting skips it, in both builds:** 0.3.10 has no switch that skips any asking. The one 0.3.11 carries, Yes, and stop asking, covers one kind of change, `AllowKind::OwnCalendar`: `lane` in `crates/archie-runtime/src/always_allow.rs` is a match over every kind of staged change with no catch-all arm, and every lane but the calendar is never (to-dos, lists and rows, the CRM, connected services over HTTP, add-ons, Drive, documents), test `only_the_calendar_lane_may_ever_be_covered_and_every_other_says_why_not`; `calendar_kind` refuses a deletion, a guest, and an event somebody else is on, test `everything_the_plan_excludes_still_asks`. A reply, an email and a text are not staged changes at all, and nothing in 0.3.11 reaches their Send. **Forms approved for pages:** (1) this sentence, or its first half as a heading or a promise line ("Nothing goes out in your name without your yes"), on a page that also names what waits, which is the "does the work" row's own condition; (2) "No setting lets your agent send a reply, an email or a text in your name without your yes."; (3) for the calendar, the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes."; (4) **from 0.3.11, which carries `7d102231`**, an invitation may join the list (0.3.10 cannot invite anybody, so a page that names 0.3.10 leaves it out): "No reply, email, text or invitation goes out in your name without your yes." The compare pages say it in their own form: "only Archie works on your own computer and asks before anything goes out in your name, with no off switch" (the compare hub entry). (5) On the homepage only, the approval section's heading names the two people its figure draws, "Sam and Dana hear nothing before your yes.", over "No setting turns this off.": the figure's lanes are a reply to Sam and a move of the 2:00 that Dana is on, and both wait in either build. The heading says nothing without that figure, so it never moves to a page that does not draw it, and the figure never gets a lane for an event nobody else is on. (6) Where the question is whether the agent changes the calendar on its own (the `llms.txt` answer), the Calendar changes entry's routine sentence may sit beside (3): "a routine running on its own can't change your calendar at all". ⛔ **"In your name" carries the scope**, exactly as in the row above: never "nothing goes out without your yes", which the banned rows forbid, because the agent's answers to you and the searches it runs at an AI company leave without one. ⛔ Never say or imply that something else can be set to skip the asking. The switch is described only in its own entry's words ("Your agent can stop asking about changes to your own calendar", after the Calendar changes entry), written at the 0.3.11 release. ⚠️ It never stands for a purchase (the Buying entry), and never for a list edit, an add, or a to-do checked off, which happen at once with an undo. ⚠️ Deleting means an event here. A to-do and a row on one of the agent's lists also wait to be deleted, but never write "it never deletes anything without asking". **Live from October 19, 2026** on `index.html` (the hero line, the meta description, and the approval section's heading, figure and the line under it), `archie/personal/`, `archie/pricing/`, `archie/moving-from-openclaw/`, `how-it-works/`, `faq/`, `compare/` and its five comparison pages, `compare/questions-to-ask/`, `trust/`, `trust/details/`, `learn/the-approval-gate/` (its lede only; later that day the page was held with 1.2 and 1.5 until Jack re-records them, in the video library entry's October 19 note), the questionnaire (`js/questionnaire.js`, the How hands-on step, which takes (3) beside the email line it already had), `llms.txt` (from `scripts/gen-discovery.py`), the voice rule's example heading in `CLAUDE.md`, and six blog posts, each edited in place with its date unchanged, the way they were narrowed on September 29, 2026: the four named in the row above, plus `ai-agents-underrated` ("A good one asks before anything goes out in your name") and `you-asked-for-a-small-fix`, which takes (3). `say-maybe-to-your-ai-and-it-hears-do-it` lost its dentist example for a reply to Dana, because the dentist is the kind of event that release can move without asking. *Applied October 19, 2026, at the 0.3.11 release, on Jett's yes to ship calls in it, from a note added the same day:* a call fits this claim. The voice says it is calling for the owner, and nothing dials until the owner presses Place the call on its card, which no setting skips (`calls::press`, held by `only_the_press_can_dial`; `always_allow.rs` has no lane for calls), so a call is in "What waits" above. No form above names a call; a page that wants to say so uses the calls entry's own words. |
-| **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo (amended October 11, 2026: from the release that carries Archie `70831b8a`, many entries the agent read off a photo, a page, or the calendar wait on one card until the owner presses Add or says yes; the entry on cards); removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). (Amended October 12, 2026, Archie `dcc0ae03` and archie-mobile `0747d37`, in no release yet: on a message a person typed, an edit that would write over a date already on an entry with a day that nothing they said, nothing they said yes to, and nothing read that turn gives is not made, and the agent is told to ask with "Change it to ...", "Keep ..." and "Not sure"; a blank date filled that way is written, and the line under the reply says it is the agent's reading, "Closing is my reading", in Archie and Archie Mobile (`dates_nobody_gave` in `gateway/turn.rs`, `KeptRow::my_reading`). ⛔ Never "your agent never guesses a date": it reads days off words by code (`schedule::names_day`), only dates are checked, and a blank is still filled.) **On no page yet**: the homepage heading stayed "Replies and calendar moves wait for your yes." until Jett decided whether removals join it (October 19, 2026: that heading is retired for the in-your-name row above, and removals are still on no page). "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
+| **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo (amended October 11, 2026: from the release that carries Archie `70831b8a`, many entries the agent read off a photo, a page, or the calendar wait on one card until the owner presses Add or says yes; the entry on cards); removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). (Amended October 12, 2026, Archie `dcc0ae03` and archie-mobile `0747d37`, in no release yet: on a message a person typed, an edit that would write over a date already on an entry with a day that nothing they said, nothing they said yes to, and nothing read that turn gives is not made, and the agent is told to ask with "Change it to ...", "Keep ..." and "Not sure"; a blank date filled that way is written, and the line under the reply says it is the agent's reading, "Closing is my reading", in Archie and Archie Mobile (`dates_nobody_gave` in `gateway/turn.rs`, `KeptRow::my_reading`). ⛔ Never "your agent never guesses a date": it reads days off words by code (`schedule::names_day`), only dates are checked, and a blank is still filled.) (Amended October 17, 2026, Archie `e716864f`, in no release yet: a clear of a filled column nobody named now waits too, and asks; a new entry's date nothing gave is left blank and said, while a blank on an entry already there is still filled on the agent's reading; and on a message that is a question a new entry goes on a card. The entry "Your agent asks before it clears something already filled in". The ⛔ above still holds.) **On no page yet**: the homepage heading stayed "Replies and calendar moves wait for your yes." until Jett decided whether removals join it (October 19, 2026: that heading is retired for the in-your-name row above, and removals are still on no page). "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
 | ~~"Replies, calendar moves and your agent's edits to your lists wait for your yes."~~ | ⛔ **Never shipped: reversed before the release.** Found 2026-09-30: this row said it was approved "for the first release that carries Archie `5b51b70b`", and 0.3.2 carries it, but it also carries `139029ac` from the same day, which put edits back to happening at once. Published on the strength of this row, the sentence would have been false on the day it went up. What the row went on to say still explains the two words: In that build an edit to a row on one of the agent's lists, checking one off, or removing one waits for the owner's yes, and a routine that tries is refused and reports what it would have changed (`gateway/tools_records.rs`, `RECORDS_GATE`). Two limits, both ruled by Jett on 2026-09-29, and two words carry them. **"edits"** leaves out adding a row, which still happens at once (a row they did not want is one tap to remove), so never widen it to "changes to your lists" or "anything on your lists". **"your agent's"** leaves out Package Tracker, whose status updates from shipping emails are made by the app below the agent's tools (`email/packages.rs`, `on_email`) and stay automatic, because a yes on every "out for delivery" is noise; Package Tracker's own copy must say its rows update on their own. When the release ships, the homepage figure gets its third lane back (a to-do checked off, never an add) (⚠️ 2026-10-08: not a to-do checked off either, since that now happens at once with an undo; a deleted to-do is the one that still waits) and the four blog posts may take the same wording. |
 | ~~"Replies, calendar moves and changes to your lists wait for your yes."~~ | ⛔ **FALSE in 0.3.1, and retired 2026-09-29.** The homepage heading from 2026-09-27 (Jett's voice pass, replacing "Your agent does the work. You say the word.", a two-sentence aphorism) and in four blog posts until the narrowing. Found by the Learning Library claim check: at the 0.3.1 release (`09c5cb5e`) `records_update` and `records_delete` run at once with an undo and a routine may update a row unattended (`gateway/tools_records.rs`, `dispatch_records_tool`), and Task Manager, which every new agent starts with, keeps its tasks in such a list; only edits to existing Todoist or Google Tasks items were staged. Jett chose to change the app, and `5b51b70b` does, but the sentence stays false as written even then, because adding a row does not wait. Use the row above at that release. |
 
@@ -12160,7 +13933,8 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
 - **The agent.** `team_line` in `crates/archie-runtime/src/gateway/prompt.rs` adds one line to the
   note a shared agent is given. On the owner's turns: everyone else, with what they do, their email
   and phone, and an instruction not to ask the owner for anything written there. On a teammate's
-  turns: everyone, the owner first, by name and what they do, with no email or phone. A dozen people
+  turns: everyone, the owner first, by name and what they do, with no email or phone (their own
+  are added by `own_details_note`, see the boundaries). A dozen people
   at most, and nothing at all while nobody's card has anything on it. Test:
   `the_team_is_named_with_contact_details_only_for_the_owner`.
 - **One name for one person.** A teammate's messages reach the agent under the name the owner wrote,
@@ -12175,7 +13949,12 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
 
 **Boundaries:**
 - ⛔ Never that teammates can get each other's emails or phone numbers from the agent. Those are
-  written into the owner's turns only, and shown on the computer's rows to the owner.
+  written into the owner's turns only, and shown on the computer's rows to the owner. Since October 18, 2026
+  (Archie `940605c9` and `54593f0d`, merged as `d9ae56a2`, in no release yet) a teammate's own phone
+  and email are also told to the agent on that teammate's own turns (`own_details_note` in
+  `gateway/prompt.rs`, added in `gateway/turn.rs`, below the cache line, so `team_line` still carries
+  none), and on theirs alone. Never anyone else's: the agent still gives one teammate nothing of
+  another's.
 - ⛔ Never that Archie sends the invite. It shows a message to copy, and the owner sends it however
   they like.
 - ⛔ Never that the phone adds people or edits what is written about them. Letting someone in,
@@ -12299,6 +14078,62 @@ theirs and the ones nobody is named on."
 - What it replaced: adding someone needed a chat app on the agent, so an agent kept in the window
   could not be shared at all (the ⚠️ in the entry above).
 
+**Amended October 17, 2026: how a teammate gets in, said where the owner adds them** (Archie
+`ccc66ecc` and archie-mobile `3a6935d`, on main and in no release yet). **The wording above is still
+waiting for Jett's yes, and so is this amendment's:** nothing here may be said on a page until he
+approves it and a release of Archie carries it, and the phone's half until an Archie Mobile build
+with it is on the App Store.
+
+**Proposed wording, Jett's to approve (an addition to the one above, not yet approved):** "To add a
+teammate, press Add someone. Archie makes a link; they open it on their phone, get Archie Mobile, and
+talk to your agent there. There's no account or password to make."
+
+- **The line under Add.** Under the end-of-setup Add buttons and in the Add someone dialog, under
+  "Who are you adding?": "Add makes a link for that person. They open it on their phone to get
+  Archie Mobile and talk to Ember there, with no account or password to make. They see the team's
+  lists and what you share. You can read what they ask." (`add_line` beside `answer_add` in
+  `crates/archie-runtime/src/gateway/onboarding.rs`, `addLine` in `src/app/team.ts`, shown in
+  `src/app/access.tsx`; on the phone `src/screens/People.tsx` and `src/people.ts`). Each sentence
+  checked against the code: no account or password, because the phone signs in with the link alone
+  (the joining bullet above); the team's lists, because every teammate reads the lists on every
+  setting (`RowScope`); and what they ask, because the team card and Who can message it open their
+  conversation.
+- **The invite message** the owner copies now says "There's no account or password to make" on both
+  apps (`phoneInviteMessage` in `src/app/team.ts`, and archie-mobile's copy).
+- **From the end of setup.** The first questions on Archie for Teams now ask for "the first name and
+  job of each" person, and the goodbye always ends with Add buttons: one per name heard, or "Add
+  someone" when no name was heard (`add_someone_choice`, on Archie for Teams with room for
+  teammates). A press in Archie's window or on the owner's phone is answered in code with a button,
+  "Make Jason's link" or "Add someone", that opens Add someone with the name filled in (the `team`
+  door, `Opens::team` in `gateway/kept.rs`); the link is made there, because its key goes in this
+  computer's Keychain. In a chat app, which draws no such button, the press makes that person's code,
+  as before. Tests: `the_add_line_says_what_add_does`, and `opens_key` in `src-tauri/src/phone.rs`.
+- **The agent's own sentence** for an unshared agent on Archie for Teams names Add someone, the Setup
+  tab and Archie Mobile (about 33 tokens more on those owner turns, cached).
+- ⛔ **Never that the link opens Archie Mobile directly.** It opens a page on this site that sends
+  them to the store and then into the app, as "Where a tapped link lands" above says. The fix plan's
+  first wording ("It opens Archie Mobile on their phone") was not true, and the line was corrected
+  before it shipped.
+- ⚠️ **On an agent reached through a chat app, Add from the end of setup makes a code, not a link.**
+  The link is made in Archie's window or on the owner's phone.
+- ⚠️ **"They see the team's lists" includes every row naming nobody,** unless the owner sets that
+  teammate to only rows with their name (the own-rows entry's October 17 amendment).
+
+### 🚧 On Archie for Teams, the owner hears what a teammate saved, and a teammate's phone gets the text button and the card: BUILT 2026-10-18 (Archie `9c347a52` and `4d8e389a`, merged as `d9ae56a2`; archie-mobile `9f6a317`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "When someone on your team tells Archie something that adds to or changes one of your lists, you get a message saying what they saved, on your computer and your phone, and under the teammate's reply they see "Mike gets a notice about this."" And: "A teammate on Archie Mobile gets the same button to copy a text or open it in Messages, and the same card for list rows Archie drafted, that the owner gets."
+
+**Why it's true:**
+- The notice: `crates/archie-runtime/src/gateway/told.rs` and `gateway/worker.rs`; the line under the reply is drawn from `crates/archie-net/src/{channel,inapp,mirror}.rs`; the alert and push are the existing unprompted path in src-tauri.
+- The phone: `buttons_and_cards` and `card_gate` in `src-tauri/src/team_phone.rs`; archie-mobile `src/teammate.ts` and `src/drafted.tsx`.
+
+**Boundaries:**
+- ⛔ **List saves only** (rows a turn kept), never mail, drafts or calendar changes, and never about the owner's own turns. Only when the teammate's reply was delivered.
+- ⛔ **A notice after the fact, not an approval step.** Never that the owner can undo from the notice.
+- ⚠️ **The teammate's card has no Undo.** A teammate answers only a card from their own conversation, and only if they are allowed to change lists. On a chat app there is no button, and Archie now says so instead of promising one (062721ba; an earlier reply promised a button that never came).
+
 ### ✅ On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
@@ -12350,7 +14185,9 @@ have set it; the line now says they can (`REMINDERS_LINE_GUEST` in `gateway/prom
 owner can set one for a teammate by name ("remind Jason at 3 to call Ellen"): it goes to that
 teammate's own chat with the agent (`teammate_named` in `gateway/tools_reminders.rs`).
 - ⛔ Never that the owner can remind a teammate who has not messaged the agent privately. Until
-  they have, nothing is set and the agent says why.
+  they have, nothing is set and the agent says why. (From Archie `53dc6a5f`, in no release yet, it
+  is set and held for them: the October 17 amendment below. Still never that it reaches them before
+  they have messaged the agent.)
 - ⛔ Never "assign a to-do to a teammate". A to-do stays on the owner's list.
 
 **Amended October 12, 2026 (Archie `edd5231f`, in no release yet): the people named in the interview
@@ -12372,6 +14209,34 @@ in `gateway/worker.rs`). Only six digits after `/start` count, against the same 
 budget.
 - ⛔ Never "a link on every chat app". Discord, Slack and the rest still send the code.
 - ⛔ Never "no login": the teammate still needs their own Telegram account.
+
+**Amended October 17, 2026 (Archie `53dc6a5f`, archie-mobile `10562ad`, in no release yet): a
+reminder for somebody who has not joined yet is held for them.** Nothing here may be said on a page
+until a release carries it.
+
+**Proposed addition, Jett's to approve:** "Ask Archie to remind a teammate who hasn't joined yet,
+and it holds the reminder for them. Until they join, it comes to you."
+
+- **Who counts.** A `reminder_set` whose `for` names somebody the owner named in the first
+  questions, somebody with an Archie Mobile link or a code waiting, or somebody on the agent who has
+  not yet written to it in a chat of their own (`waiting_names` and `teammate_named` in
+  `crates/archie-runtime/src/gateway/tools_reminders.rs`). It is set for the owner with
+  `waiting_for` holding the name (`crates/archie-runtime/src/reminders.rs`), the agent says so, and
+  where the chat can draw it and the person is not on the agent yet, an "Add Kayla" button opens Add
+  someone with the name filled in.
+- **Handed over.** Once they are on the agent and have written to it in a chat of their own (a
+  reminder needs somewhere to go), it becomes theirs, at the next reminder call or clock tick
+  (`hand_over_waiting`, under the reminders lock). One that comes due first goes to the owner as
+  "Reminder for Kayla, who has not joined yet, so it came to you: ...". Test:
+  `a_reminder_for_somebody_not_on_yet_waits_for_them`.
+- **On both apps.** The Calendar tab and Jobs say whom it waits for (`src/app/calendar.tsx`,
+  `src/app/work-board.tsx`), and so does the phone's Calendar (archie-mobile `src/screens/Calendar.tsx`).
+- **Cost.** About 20 tokens on the `for` description, cached, on a Teams agent whose tools carry
+  `for`.
+- ⛔ **Never that it reaches them before they join and write to the agent.** Until then it is the
+  owner's, and a reminder due before then comes to the owner, labeled as theirs.
+- ⚠️ **A name nobody here goes by is refused.** The agent is told nobody by that name can message
+  the agent, to say so, and to offer to set it for the owner instead.
 
 ### ✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
@@ -12426,6 +14291,19 @@ counts. Ask the agent what your team has been doing and it tells you the same."
   well as their jobs. The owner already reads those conversations under Who can message it, and
   every teammate is told so. Tests: `the_owner_hears_what_each_teammate_asked_and_a_teammate_does_not`
   and `the_owner_asking_about_a_teammate_gets_their_record`.
+- **Amended October 17, 2026: the time of each message, the day asked about, and a button to the
+  conversation** (Archie `b121dc62` and archie-mobile `d2560fd`, in no release yet). Each quoted
+  message carries its time on this computer's clock, the time alone for today and the short day and
+  date before it otherwise (`clock_face` and `short_day_and_date` in `clock.rs`).
+  "Today" now starts at midnight, "yesterday" is yesterday, and anything else is the last two days;
+  a window with nothing in it says "They sent no messages today." (`asked_window`, `asks_by` and
+  `asked_at` in `crates/archie-runtime/src/gateway/tools_work.rs`). The agent's replies to them are
+  not quoted; a button under the answer, "Read Tony's conversation", opens it read only on the computer
+  (`ConversationDialog` in `src/app/team-card.tsx`), and the phone says where on the computer to
+  press it, because the phone never carries anybody's words (archie-mobile `src/words.ts`). Test:
+  `a_question_about_today_reads_from_midnight`. On round four of the journey tests "What did Tony
+  ask Archie today?" got "Unclear" (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`): the
+  answer read two days and gave no times.
 
 **Boundaries:**
 - ⛔ Never that the phone shows what teammates said. It shows counts and times; the conversations
@@ -12543,6 +14421,40 @@ from the same rules your agent follows. Archie Mobile shows the same for everyon
   paragraphs about the settings (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`,
   finding 10).
 
+**Amended October 17, 2026: from the Dashboard, and before you add someone** (Archie `efc73950` and
+archie-mobile `e1b39d1`, on main and in no release yet; nothing here may be said on a page until a
+release of Archie carries it, and the phone's half until an Archie Mobile build with it is on the
+App Store).
+
+**Proposed addition, Jett's to approve:** "Before you add someone, Archie shows what they will see.
+Afterward it is one press from your team on the Dashboard, on your computer or your phone."
+
+- **From the team card.** Each row of "Your team this week" on the Dashboard has "What Tony can
+  see", which opens the same page the Setup row opens, and says how many open items are in their
+  name: "4 open items in their name" (`TeamCard` in `src/app/team-card.tsx`, `openLine` in
+  `src/app/team.ts`). An open item is a row on the agent's lists whose column saying whose a row is
+  names them, less rows ticked done or at a stage that means over (`RowScope::names_them` in
+  `crates/archie-runtime/src/records.rs`, `schedule::is_finished`, `open_items_in` in
+  `src-tauri/src/teammate_view.rs`). On the phone, a row of Your team this week opens What each of
+  them can see on that person alone and shows the same count (archie-mobile
+  `src/screens/TeamWeek.tsx`, `src/screens/TeamSee.tsx`).
+- **With nobody else on the agent,** the card stays on a claimed Archie for Teams agent and says
+  "Nobody else is on Ember yet." with an Add someone button that opens Add someone on the Setup tab,
+  on both apps. Until now the card appeared only once somebody was added.
+- **Before adding.** The Add someone dialog has "What Jason will see" (or "What they'll see"), which
+  works the page out on a copy of the roster with them on it and writes nothing (`preview_in` in
+  `teammate_view.rs`, command `access_teammate_preview`; test
+  `the_card_counts_open_items_and_add_previews_the_page`, which also checks the roster on disk is
+  untouched). The phone's add sheet asks the computer the same through the `team_preview` relay op.
+- **Cost.** No prompt text. Working out the open items reads every list on each team card refresh
+  (every 10 seconds while the Dashboard is on screen) and on each phone snapshot, on Archie for Teams
+  agents with teammates only.
+- ⛔ **The page is not a screenshot of their phone.** It lists accounts, lists, documents, reminders
+  and memory, and what they may change, worked out from the rules the agent follows, as above.
+- ⚠️ **"Open" is read off the list.** A list with no done column and no stage counts every row
+  naming them as open, and a list whose person column is a choice without their name never names
+  them.
+
 ### ✅ On Archie for Teams, a teammate asking about the work gets their own rows and the ones nobody is named on: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
@@ -12618,6 +14530,40 @@ for this."
 - What it replaced: a teammate asking how things stood got the whole office's pipeline. Tony got "a
   whole rundown that sounds like it was written for Sam", the owner (the Archie repo's
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
+
+**Amended October 17, 2026: the team's lists, and "Only rows with their name"** (Archie `1f6273a1`
+and archie-mobile `bbda80f`, on main and in no release yet; nothing here may be said on a page until
+a release of Archie carries it, and the phone's half until an Archie Mobile build with it is on the
+App Store).
+
+**Proposed addition, Jett's to approve:** "On a list with a column for whose an entry is, you can
+set a teammate to see only the entries with their name on them."
+
+- **The setting.** Under each teammate's role on Who can message it, a Sees picker: "Their rows and
+  rows with no name" (the rule above, and the default) or "Only rows with their name"
+  (`src/app/access.tsx`, command `access_set_rows_own_only`, audited; `ROWS_OWN_ONLY` in
+  `src/app/team.ts`). It is `Member::rows_own_only` in `crates/archie-domain/src/access.rs`, which
+  `AccessRoster::set_rows_own_only` refuses for the owner and for admins. The owner's phone has the
+  same choice in the person's sheet (the `people_rows` relay op), offered only when the computer
+  says it knows the setting.
+- **What it does.** `RowScope` (`own_only`, read in `sees_named` in
+  `crates/archie-runtime/src/records.rs`) leaves out, on a list with a column saying whose a row is,
+  every row that does not name them, the rows naming nobody included, and the sentences a left-out
+  row produces say why ("does not name them"). Admins never. The same scope feeds the agent's list
+  tools and notes, the teammate's phone (`src-tauri/src/team_phone.rs`), and What X can see, which
+  says it: "Only rows with their name: on a list with a column saying whose a row is, Tony sees only
+  the rows that name them." Test: the `rows_own_only` block in
+  `a_teammate_sees_their_own_rows_and_unassigned_ones`.
+- **The team's lists.** On a teammate's turn the agent is told the lists, documents and spreadsheets
+  are the team's, kept by the owner, and that a reminder belongs to whoever it is for, where it
+  called them the owner's ("Sam Delaney's Deals list") (`shared_agent_note` in
+  `crates/archie-runtime/src/gateway/prompt.rs`), about 5 tokens more on a teammate's turn.
+- ⛔ **Never call it per-row permissions, a lock, or private rows.** It is the same scope as above,
+  narrowed for one person, with the same limits: a list with no such column is not limited at all,
+  and it does not hide documents, shared files or what the agent remembers.
+- ⚠️ **The owner and admins see every row,** whatever this says.
+- ⚠️ **A row added by a teammate set this way, on a list whose person column is a choice that does
+  not list their name,** does not name them, and drops out of their own view.
 
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 

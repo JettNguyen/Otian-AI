@@ -3144,8 +3144,8 @@ and when, where that goes, what it never does, and how to switch it off."
 **Amended October 17, 2026: a plain yes or no first, and none of your mail on our AI** (Archie
 `9246effd`, RELEASED in 0.3.11, 2026-10-19. The two guides' new lines reach installed apps with the
 next push to Archie's main, as above; the answers in code, the prompt's sentences and the chooser's
-lines arrived with 0.3.11. This site's page changed the same day, on the branch that held these
-entries until October 27, 2026.)
+lines arrived with 0.3.11. This site's page was changed the same day, on a branch that was not
+merged until October 27, 2026.)
 
 **Proposed wording, Jett's to approve:** "Ask your agent whether your information is used for
 training, or where it goes, and the answer opens with a plain yes or no for the AI company it uses

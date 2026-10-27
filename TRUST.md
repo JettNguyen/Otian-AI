@@ -8484,6 +8484,120 @@ own, so a morning with only that on it still sends a list. Tests:
   reply; the list says the watch cannot tell whether the owner needs to know. Never describe it as
   the AI flagging uncertainty.
 
+*Amended October 27, 2026 (Archie `823a77cc` and `cd478474`, in no release yet): the list says what
+the owner's own lists and calendar show coming due, gone by, late, at the same time, or gone quiet,
+each once.*
+
+**Proposed wording, Jett's to approve:** "Your morning list also tells you what your own lists and
+calendar show, on the first morning it is true: a bill due in the next three days, or one whose day
+went by; an invoice past its due date; two things at once on your calendar today or tomorrow; a lead
+with no contact for a week, or a past client for three months; and a Paperwork deadline inside two
+weeks. Each line says the date, the amount or the person it came from, like "Electric, $84, due Thu
+Oct 29" or "Sam Hart: $1,120, invoice 4471, billed September 30, due October 15 (12 days late)", so
+you can check it against your list at a glance. Each one is said once, not every morning, and
+nothing is said about a list you don't keep. It is worked out on your computer from your own lists,
+without asking an AI anything."
+
+**Why it's true:** `catches` in `crates/archie-runtime/src/morning.rs` adds five parts to every
+morning list, for every line of work and for none, each only when the list or calendar behind it is
+there and has something new to say. There is no model call anywhere in it, and no prompt text.
+
+- **Bills due.** Bills & Subscriptions (`bills`), and any other list with a column named for a due
+  date beside one that holds an amount (Amount, Cost, Price or Total), headed "Due on" and the
+  list's name. Read with `due_rows` in `crates/archie-runtime/src/due.rs`, the same date arithmetic
+  and ledger keys Bill Reminders' trigger uses: said once when the date comes inside three days
+  (Bill Reminders' own notice, pinned to `data/marketplace/routines/bill-reminders.json` by
+  `a_bill_gets_the_notice_bill_reminders_gives`, or that routine's own days where it is on the
+  agent), and once more if the day goes by ("Water, $40.50, was due Mon Oct 26"). A bill rolled to
+  next month is a new date. A bill on autopay says so ("Internet, $65, due tomorrow (autopay)", and
+  once its day went by, "should have been charged Wed Oct 28 (autopay)"). A list that keeps money
+  owed to the owner (Invoices, a trade's billing, Waiting On, a friend's share) is never read as
+  bills (`keeps_money_owed` in `crates/archie-runtime/src/records.rs`). Test:
+  `a_bill_is_said_with_its_amount_and_day_once_and_again_if_it_goes_by`.
+- **Said once between the list and Bill Reminders.** A bill the routine already said is not said
+  again, and one the list said is written into the routine's own ledger once the list reached the
+  owner (`note_told` in `crates/archie-runtime/src/gateway/morning_list.rs`), so the routine has
+  nothing to send that morning. While the routine's runs are skipped before any call (the AI off
+  after the trial, or the last of Archie's own AI kept for the owner's questions), the list says the
+  bills itself and does not go by the routine's ledger (`due_routines`). Tests: `the_list_and_bill_reminders_say_a_bill_once_between_them`,
+  `a_bill_the_list_named_is_not_named_again_by_it_or_by_bill_reminders`.
+- **Paperwork deadlines.** The Paperwork list's Deadline column, which nothing watched, inside the
+  add-on's own two weeks (its rule 7) and once more if it goes by, with who it is for and the next
+  step: "Passport renewal for Emily, deadline Fri Nov 6; next step: get the photo taken". A process
+  marked Done or Abandoned says nothing (`settled`). Test:
+  `a_paperwork_deadline_is_said_inside_two_weeks_once`.
+- **Owed to you.** Money owed to the owner and late, on every list that keeps it: the lists the
+  who-owes note reads (`records::owed_rows`: Invoices, a setup's billing column, a friend's share on
+  the spending list), which now also reads an invoice's Due on, and Waiting On's money
+  (`records::waiting_owed_rows`). Said once it is past its Due on, with how late counted from that
+  date, as Waiting On's rule 8 counts it; with no Due on, once it was billed or asked 30 days ago,
+  and then never called late. Part paid is said as both numbers ("$900 of $1,800"). A reply owed with
+  no amount, and anything Paid or Dropped, says nothing. A new due date written down is said again
+  once it goes by. Tests: `an_invoice_past_due_is_said_once_with_who_and_how_much`,
+  `money_on_waiting_on_is_said_with_what_was_paid`,
+  `catches_counted_in_and_more_are_said_the_next_morning`.
+- **Leads quiet a week or more, and past clients to check in with.** From the same reading the agent
+  answers "who should I call?" with (`records::call_list`), and no new numbers: an open lead on
+  People or Your leads with no contact written down for seven days, and a past client on People for
+  90, each with the day of the last contact ("Mike Brooks, last contact September 16 (41 days)"). A
+  contact written down starts a new stretch, said again only if it goes quiet again. Tests:
+  `a_lead_gone_quiet_is_said_once_with_the_last_contact`,
+  `a_past_client_quiet_for_ninety_days_is_said_once`.
+- **Overlapping on your calendar.** From the calendar read the list already makes
+  (`schedule::crosscheck::Calendar`), today and tomorrow in the owner's zone, timed entries only, by
+  the clash check's rule in `crates/archie-runtime/src/busy.rs`: "Today: Call with Sam (2:00pm to
+  3:00pm) overlaps Dentist (2:30pm to 3:30pm)". Entries back to back, all day, canceled or said no
+  to, and the same entry on two calendars, are not two things at once. It comes first, with the
+  decisions, since only the owner knows which one gives. A pair is said again if either one moves.
+  Test: `two_things_at_once_on_the_calendar_are_said_once_with_both_times`.
+- **Each said once.** What a list named is kept beside the agent, by a key and the day it was named
+  (`Named`, in `morning_list.json`), written once the list reached the owner (`sent`) or was shown
+  to an owner who asked for it in words (`answer`); a list asked for again the same morning says the
+  same. A key is let go four months after it was named, so a debt still unpaid then is said once
+  more. A part longer than eight lines shows seven and counts the rest, and the ones counted are said
+  on the next list. Test: `what_was_named_is_kept_four_months_from_the_day_it_was_named`.
+- **A trade's own parts are not said twice.** A restroom company's Billed, not paid already says its
+  billing, so Owed to you holds only what that part does not (Waiting On's money, a friend's share);
+  a realtor's list already says who has gone quiet, so the catches leave it to that part; a trailer
+  company's deposits are never said as money owed, and a booking's price is never a bill. Tests:
+  `a_restroom_companys_billing_is_not_said_twice`, `a_realtors_quiet_leads_are_said_once_in_the_list`,
+  `a_deposit_owed_is_said_once`.
+- **Never sent empty, never padded.** A catch is news on its own, so a morning with only a bill due
+  sends the list; a morning whose catches were all said already, with nothing else on, sends
+  nothing; and an owner with no bills list hears nothing about bills, not even that there is no
+  list. Test: `an_ordinary_owners_morning_has_its_catches`, the whole list for an owner with bills,
+  invoices, a leads list and a busy calendar.
+
+**Boundaries:**
+- ⛔ **Never "it reads your email for bills" or "it finds unpaid invoices in your inbox".** Mail is
+  not read for any of this. It reads only the owner's own lists and the calendar the list already
+  reads. (Waiting On fills its own list from sent mail, with the AI; that is the Waiting On entry's
+  claim, not this one's.)
+- ⛔ **Never "your agent noticed" or "the AI caught it".** Nothing in it comes from the AI: every line
+  is a row or a calendar entry, said by code.
+- ⛔ **Never "it reminds you every day until it's paid".** Each catch is said once: a bill or a
+  deadline twice at most (when it comes close, and if its day goes by), and a debt once more four
+  months on if it is still unpaid.
+- ⛔ **Never "it keeps track of all your bills" or "it knows who owes you".** Only what is written on
+  a list, with a date and an amount. A bill, an invoice or a person on no list is never said, and no
+  line says a list is missing.
+- ⛔ **Nothing arrives while the computer sleeps.** The list goes out once Archie is running and the
+  computer is awake between its time and noon, as before, and a list slept through past noon is
+  offered on wake (the October 26 amendment). A bill whose day went by while the computer was off is
+  said on the next list that goes out.
+- ⛔ **Never "it tells you when anyone goes quiet".** Only People and Your leads, by the call list's
+  own rules. Not Friends and family (Stay in Touch keeps its own rhythm for each person), a trade's
+  Customers, or lead generation's Clients.
+- ⚠️ **Two things at once is today and tomorrow, timed entries only**, on the calendars the list
+  reads. An invitation the owner said no to is left out only when their own address is on it.
+- ⚠️ **After a free trial ends with no plan, the catches still come**, since none of it needs the AI.
+  Bill Reminders does not run then, and the list says the bills on its own.
+- ⚠️ **Money is said in dollars**, with a dollar sign, as the restroom list's billing always was.
+- ⚠️ **On Archie for Teams** it reads the agent's lists the way the morning list always has, and goes
+  only to the owner's own chat.
+- ⚠️ **It asks no AI to make it.** Say that much and stop: nothing about what its words cost on later
+  turns, or how Archie keeps that down.
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the

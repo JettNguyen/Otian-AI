@@ -4832,8 +4832,7 @@ name as the whole of one column, or is named for the company the sender's addres
 on the agent, by the address on their card; and the two-week list of addresses the owner wrote to,
 as before. The match rides into the read as one sentence from the owner's records ("The sender, from
 the user's records: Billing, writing from Tyler Lumber's address, on their Customers list."), so the
-AI reads a customer's email as that customer's. That sentence is 26 to 42 tokens, and only matched
-mail carries it. A matched sender's mail in Promotions, Social or Forums is read like any other
+AI reads a customer's email as that customer's. Only matched mail carries that sentence. A matched sender's mail in Promotions, Social or Forums is read like any other
 (`should_skip_for` in `crates/archie-runtime/src/email/poller.rs`). Tests:
 `a_customer_writing_from_the_company_address_is_known_as_that_customer`,
 `news_from_the_people_an_owner_keeps_reaches_the_morning_list`,
@@ -4841,7 +4840,7 @@ mail carries it. A matched sender's mail in Promotions, Social or Forums is read
 
 - ⛔ **Never "mail from your customers is read first"** or "the people on your lists skip the wait".
   Only somebody the owner wrote to in the last 14 days is read first, as before. Everybody else the
-  watch knows shares the wait of a few minutes (`a_customer_on_a_list_shares_the_half_price_wait`).
+  watch knows shares the wait of a few minutes.
   Sending them ahead was built, measured and turned down on cost (Archie `docs/COST-MEASURED.md`
   section 44).
 - ⛔ **The boundary "It knows one thing: whether you wrote to the sender in the last 14 days" is now
@@ -5051,8 +5050,7 @@ text conversation."
   `the_watch_leaves_a_price_nobody_said_to_quote_as_a_blank_and_send_waits` and
   `a_draft_names_what_nobody_gave_it` in `email/replies/tests.rs`;
   `a_price_nobody_gave_in_a_text_reply_is_a_blank_that_holds_send` in `texts/replies/tests.rs`.
-- **Cost.** None: it is code, run on a draft that has a dollar amount in it. A held price adds
-  about 5 tokens where the card's words come back into the conversation.
+- **Cost.** None: it is code, run on a draft that has a dollar amount in it.
 
 **The boundaries.**
 
@@ -8976,9 +8974,8 @@ there. Run it now asks for the routine on the same lane as the Routines tab's Ru
   tab still says it missed.
 - ⛔ **Never "it works while your computer is off".** This is what it says after, not what it does
   during.
-- ⛔ **Never "it costs nothing".** The message makes no AI call, but it sits in the agent's history
-  like anything the agent said, so the turns after it carry it (74 to 135 tokens, until it ages out;
-  the Archie repo's `docs/COST-MEASURED.md` section 43).
+- ⛔ **Never "it costs nothing".** The message makes no AI call, but the agent reads it again with
+  everything else it said, so the replies after it cost a little more.
 - ⚠️ **Only what the owner had on, and would have heard from**: a routine that is on and sends a
   message. A Silent routine is never named, a due-date routine with nothing due now is not named,
   and a routine that ran late on wake (inside its morning, afternoon or evening) is not named,
@@ -13466,8 +13463,7 @@ entries, it asks which one before marking anything paid."
   (`data/marketplace/skills/waiting-on.json`) marks it paid when the owner says so and writes whose
   word it was in the notes, where it used to refuse without a check number (Kyle's Zimmerman
   check). Someone else's word in an email is still not enough.
-- **Cost.** The code checks cost nothing. The skill's sentence adds 38 tokens on turns routed to
-  Waiting On (Archie's `docs/COST-MEASURED.md`, section 46).
+- **Cost.** The code checks cost nothing.
 
 **The boundaries.**
 
@@ -13494,9 +13490,7 @@ returns 3 entries or fewer now carries `latest_note`, the last line of a note th
 `records_get` or such a lookup carries `dates_ahead_in_notes`: each line naming a date from today
 on, with that day spelled out (`dates_written` in `crates/archie-runtime/src/schedule.rs`). Tests:
 `a_deadline_in_a_deals_notes_comes_with_the_deal_the_next_day` (Megan's Wells title deadline) and
-`the_newest_line_of_a_long_note_comes_with_the_entry` (Kyle's Zimmerman check). Cost: 0 to 64
-tokens on a lookup, measured, and nothing on any other turn (Archie's `docs/COST-MEASURED.md`,
-section 45).
+`the_newest_line_of_a_long_note_comes_with_the_entry` (Kyle's Zimmerman check).
 
 **The boundaries.**
 
@@ -13619,9 +13613,8 @@ the turn makes no AI call.
   the owner's phone, the owner; in a chat app, somebody who may say yes to GoHighLevel changes on
   that agent (`NOT_YOURS` in `crm_undo.rs` answers anybody else). A teammate's own phone cannot press
   it (`Presser::Teammate`).
-- **No cost on an ordinary turn.** No prompt text and no AI call. The answer to a change made at once
-  is 44 tokens shorter than the staged answer, and the turn that would have carried the yes is not
-  needed (`docs/COST-MEASURED.md`, section 47).
+- **No cost on an ordinary turn.** It adds no AI call, and a change made at once needs no second
+  turn for a yes.
 
 **The boundaries:**
 
@@ -13774,8 +13767,6 @@ back on their own once you have one."
   copy of the deadline (`trialRefuse` with `trial_expired` in `stripe-webhook/index.js`), and the
   Firestore rules refuse the phone relay on theirs (`hasLiveTrial` in `firestore.rules`). Neither was
   changed.
-- **Cost:** no AI call anywhere in it. A warning goes into that one agent's history, up to 295
-  tokens with its label on later turns until it ages out (Archie `docs/COST-MEASURED.md` section 48).
 
 **The boundaries.**
 

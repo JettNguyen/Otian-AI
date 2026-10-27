@@ -2738,8 +2738,7 @@ carries it):
 `579d82e9`; RELEASED in 0.3.11, 2026-10-19):
 
 - **Real estate's third rule** now ends "An ad names the brokerage, which is not the team: use the
-  one the profile, memory or conversation names, and leave [Brokerage] only when none does." (about
-  13 tokens more than the October 12 wording, on every turn of a real estate agent, cached). On
+  one the profile, memory or conversation names, and leave [Brokerage] only when none does." On
   round four of the journey tests an owner named her brokerage, the agent saved it as a note, and
   the next ad still said [Brokerage]. Two `rule_changes` carry the new words to a profile holding
   either older wording, and `profile_with_rule_changes` (`crates/archie-domain/src/setup.rs`) now
@@ -2750,8 +2749,7 @@ carries it):
   named in chat is now kept.
 - **The rules say whose they are.** The heading above them in the profile reads "Rules of the work
   (from Archie's setup; the owner can change them):" where it read "Rules of the work:"
-  (`RULES_HEADING` in `setup.rs`), about 12 tokens on every turn of an agent a setup matched,
-  cached. An agent set up earlier gets the new heading once, at its next start
+  (`RULES_HEADING` in `setup.rs`). An agent set up earlier gets the new heading once, at its next start
   (`catch_up_with_setup` in `crates/archie-runtime/src/gateway/onboarding.rs` now always runs the
   catch-up, so an agent whose setup has no reworded rule still gets it).
 - ⚠️ **"Use the one it names" is what the agent is told.** Code fills [Brokerage] only from the
@@ -2791,9 +2789,6 @@ notes; and Bookings keep the day the deposit was paid."
 - **The restroom route rule** now reads "put it on the route before the day it ends, on a day and at
   a time its driver works, as the owner's notes say", with a `rule_changes` entry for agents set up
   before (the entry on a stop moved onto a busy day).
-- **Cost.** In the cached list columns: about 72 tokens on a restroom agent (Customers 58, Stops 14),
-  14 on real estate and 6 on event trailers; the route rule is about 17 more on every turn of a
-  restroom agent, cached. Internal, never on the site.
 - ⚠️ **People added before the column arrived stay blank.** Never "Archie knows when every lead came
   in", and never that it reads Follow Up Boss's history: only a person's created day comes over.
 - ⚠️ **Closing time is free text,** not checked against a calendar or the closing date.
@@ -3171,11 +3166,10 @@ policy. On our AI, your agent reads none of your mail."
   link to the privacy policy's table for the rest) is added only when the question asks how long,
   or names keeping, retention, a carrier, insurance, compliance or HIPAA (`asks_how_long`).
 - **A question inside another request.** A message that asks where its information goes and also
-  asks for something else still goes to the agent, now with the guide's answer below the cache line
-  for that turn and the instruction to answer that part from it, opening with its first sentence
-  and adding nothing it does not say (`touches_where_it_goes` and `guide_note`; the owner's typed
-  turns only; about 330 tokens on that turn and nothing on any other). Test:
-  `a_mixed_message_carries_the_guide_for_its_turn`.
+  asks for something else still goes to the agent, now with the guide's answer handed to it for
+  that turn and the instruction to answer that part from it, opening with its first sentence and
+  adding nothing it does not say (`touches_where_it_goes` and `guide_note`; the owner's typed turns
+  only). Test: `a_mixed_message_carries_the_guide_for_its_turn`.
 - **Mail on our AI.** The guide's paragraph about our AI now says "Your agent reads no email or
   texts on our AI." where it said "Email and text replies never run on our AI." The old sentence
   named replies and left the reader to wonder about the rest, while an agent on the free credits or
@@ -3195,8 +3189,7 @@ policy. On our AI, your agent reads none of your mail."
   `scripts/guide-lengths.py`, under its 800.
 - **The prompt's route sentence.** On the free credits it now says what the plan's says, that our
   server keeps no copy, and both add that mail and texts are never read this way (`plumbing_note_for`
-  in `gateway/prompt.rs`, test `starter_credits_are_named_as_somebody_elses_account`): about 30
-  tokens more on every turn of an agent on the credits and about 12 on the plan, cached.
+  in `gateway/prompt.rs`, test `starter_credits_are_named_as_somebody_elses_account`).
 - **This site's page** (`trust/where-your-information-goes/`) now says the agent reads no email or
   texts on our AI, and where to connect an AI account of your own to change that, where it said
   "Email and text replies never run on our AI".
@@ -3821,8 +3814,7 @@ what the card was offering."
   `a_bare_no_press_is_answered_in_code_with_no_model_call`.
 - **Why.** On round four of the journey tests each Not now ran a whole model turn, $0.004 to $0.017
   on the free credits, to say "okay" (Archie `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, D.2).
-- **Cost.** One model turn fewer for each such press. The pair it leaves in the conversation is
-  about 8 tokens, where the model's reply was 20 to 60.
+- **Cost.** One model turn fewer for each such press.
 
 **Boundaries:**
 - ⛔ **Never "pressing a button costs nothing".** Only a bare decline is answered without the AI;
@@ -3870,8 +3862,6 @@ underneath. Confirm says the change it confirms, in the words of the card."
   that its label does not say ("Book the 5 pickups" sending "Book the 5 pickups and text Dana the
   route") is refused when the agent offers it (`claim_in_send` and `extra_clause` in `decide.rs`),
   as a plan in the first person already was.
-- **Cost.** About 15 to 30 tokens more in the owner's message on a Confirm press, then in history.
-  Internal, never on the site.
 
 **Boundaries:**
 - ⚠️ **What a chat app shows (corrected October 17, 2026).** This said a chat app shows the sentence
@@ -3932,8 +3922,6 @@ yourself."
 - **No "skill" or "specialist".** The agent is told to say what a specialist did ("I looked it up
   online") and never its name or either word (`gateway/tools_specialist.rs` and `gateway/turn.rs`),
   where it used to be told to say "skill".
-- **Cost.** About 26 tokens fewer on agents with specialists, about 6 more on Who's Got This's
-  turns, and 10 to 20 in each update's result. Internal, never on the site.
 
 **Boundaries:**
 - ⚠️ **"No skill or specialist" is what the agent is told,** not a filter on what it writes. Never
@@ -3963,7 +3951,7 @@ Answer in the first line and keep the whole reply to about three short lines; no
 where the message came from: Archie Mobile, a teammate's phone, or a chat app (`on_a_phone` in
 `crates/archie-net/src/inapp.rs` and `mirror.rs`). The Operator personality (1.0.3) no longer ends
 every report with an ordering line when nothing needs ordering ("If nothing does, leave the line
-out."). About 28 tokens on phone turns only, below the cache line. Internal, never on the site.
+out.").
 
 **Boundaries:**
 - ⛔ **An instruction, not a limit.** Nothing cuts a reply, so never "phone answers are three lines".
@@ -4287,8 +4275,7 @@ calendar, or when the reply says no calendar is connected yet."
 - **A reply that says no calendar is connected** gets it with no tab named ("No calendar is
   connected yet, so I can't see Thursday"; `says_none_connected` and `pick` in `gateway/kept.rs`).
 - **The instructions name the button** where it is drawn: "the Connect my calendar button just below
-  your reply" in place of the tab directions (`CALENDAR_FIX_BELOW`), about the same length, so about
-  0 tokens. Internal, never on the site.
+  your reply" in place of the tab directions (`CALENDAR_FIX_BELOW`).
 - ⚠️ **The owner's turns only,** and the boundaries above still hold: Archie Mobile shows where on
   the computer to press, a chat app gets words, and the owner still signs in.
 - ⚠️ **A calendar named with no app** ("my calendar") is left to the reply's words.
@@ -4861,9 +4848,6 @@ calendar. If your spreadsheet is on another computer, a button tells you how to 
   after the interview is over ends setup and shows the agent's page, sidebar and Lists included
   (`interviewOver` and `endTheRun` in `src/app/setup-flow.tsx`). Before, setup stayed on screen
   until the next launch.
-- **Cost.** The interview's closing instructions are about 90 tokens shorter on each interview turn,
-  since code writes the buttons and the way-in sentence; the pass after each turn is about 9 longer
-  (Archie's notes on the fix plan after round four). Internal, never on the site.
 - ⛔ **Never "a teammate can send the spreadsheet from Archie Mobile".** The fix plan proposed that
   line for Archie for Teams and it was left out, because a teammate's Archie Mobile has no + beside
   its message box (`Chat.tsx` gives the button only to the owner).
@@ -5056,8 +5040,7 @@ brokerage and it saves it, drafts and ads use it from then on. A real estate age
   signature goes on (`strip_written_sign_off_with` in
   `crates/archie-runtime/src/email/replies/triage.rs`, Archie `54aa9b38`; test
   `the_business_name_and_brokerage_come_off_the_end`).
-- **Cost.** About 20 tokens of tool result on a memory save that keeps a brokerage, and nothing on
-  any other turn.
+- **Cost.** Nothing on a turn that does not keep a brokerage.
 - ⛔ **Never "tell your agent any detail and it is kept."** It is the brokerage only, and only from
   the owner's own typed words on that turn. A name said three messages ago and saved now is not kept
   this way (the memory pass and Keep for every draft still can).
@@ -5181,8 +5164,7 @@ named as exactly that."
 - **Why.** On round four of the journey tests an answer read the stage alone and said no deposits
   were outstanding over a $1,200 booking with no deposit written down (Archie
   `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, A.1).
-- **Cost.** About 30 tokens more on the note, and about 40 for each booking named this way, on
-  deposit questions only, below the cache line.
+- **Cost.** Nothing on a message that is not a deposit question.
 - ⛔ **Never "Archie knows who paid a deposit."** When nothing is written, it does not know; it says
   what the list says. A deposit paid and never written down still reads as not written down.
 - ⚠️ **Only lists shaped like the trailer setup's Bookings:** a Deposit column and a stage with a
@@ -5564,8 +5546,7 @@ puts it on a card to add with one press instead of adding it."
   `a_filled_column_is_not_cleared_unless_they_asked` in `turn.rs`;
   `an_entry_asked_about_goes_on_a_card` in `crates/archie-runtime/tests/pipeline.rs`; archie-mobile
   `src/kept.test.ts` for the line.
-- **Cost.** Only when one fires: about 49 tokens for a held clear, 47 for a held watch and 24 for the
-  left-blank line, on the turn it happens. Internal, never on the site.
+- **Cost.** Nothing on a turn where none of them happens. Internal, never on the site.
 
 **Boundaries:**
 - ⚠️ **On a message a person typed.** A routine, a mail or text watch, or a file read on its own is
@@ -5660,8 +5641,7 @@ Watch my inbox switch on the agent's Skills tab, under Email Manager, starts it 
   `email/watcher.json` beside the other watch settings and written the same way, with no mail in
   it. The card's marker, `email/watch-asked.json`, holds a chat id and a message id. Nothing new
   leaves the computer: the card goes wherever a message from the agent goes, Archie Mobile included.
-- **Cost.** No AI call added. Until the yes, an agent carries about 100 fewer tokens on every turn,
-  because its line about what it does unasked leaves mail out. Internal, never on the site.
+- **Cost.** No AI call added. Internal, never on the site.
 
 **Boundaries of the amendment:**
 - ⚠️ **An agent already reading mail before this release is not asked.** Its earlier reading stands
@@ -6021,11 +6001,8 @@ write on a card yourself go out as you wrote them, signed once."
   (`strip_written_sign_off_with` in `email/replies/triage.rs`; tests
   `a_name_with_a_title_after_it_is_a_sign_off` and
   `the_business_name_and_brokerage_come_off_the_end`).
-- **Cost.** The rule is about 34 tokens more on every turn of every agent, above the cache line and
-  read from the cache after the first (the plan estimated 29), and the `added` wording about 12
-  more across the two draft tools on an agent with a mailbox that can send. Take out what you added
-  is one AI call, the same one Rewrite it for me makes, and only on the press. Estimated from
-  characters and not yet measured with `scripts/prompt-core-ab.py`; internal, never on the site.
+- **Cost.** Take out what you added is one AI call, the same one Rewrite it for me makes, and only
+  on the press. Internal, never on the site.
 - ⛔ **Never "Archie takes out anything your agent made up."** The button takes out what the line
   names, and the line still names only amounts, days and times by code, plus whatever the agent
   lists in `added`. It is one AI rewrite, and it can miss.
@@ -6611,8 +6588,6 @@ ask them first, and offers to add them to your list."
 - **The button with no number.** On the computer it copies the text, as before. On the phone it
   opens Messages with the words typed in and nobody in To (`sms:&body=` on an iPhone, `sms:?body=`
   on Android: archie-mobile `src/sms.ts`, `src/screens/Chat.tsx`, tests in `src/sms.test.ts`).
-- **Cost.** About 90 tokens of tool result where the refusal was about 50, on a first text to
-  someone on no list only.
 - ⛔ **Never "Archie checks consent for anyone you text."** For someone on no list nothing is known,
   and the reply says so. Said stop on the list still means no text and no button.
 - ⚠️ **Adding them to the list is an offer the agent makes in words,** not a button, and nothing is
@@ -6943,9 +6918,6 @@ out, and how many are free on the busiest day of that booking."
   four that misreading sent the owner "bookings take 1200 prices at once". A list the owner made with
   no status column is still counted (`95134087` took back a requirement, added the same day, that a
   counted list keep one).
-- **Cost.** Below the cache line, on the turns they serve: about 8 tokens for the past-its-end
-  heading and 45 to 50 a row, about 13 for each all-done list, and about 50 on each add or change
-  of a list that books or counts things.
 - ⛔ **Never "Archie knows what is in the yard."** It counts what the lists say: a unit marked as
   needing work is set apart, and a unit out on a job nobody wrote down counts as free. Only the
   agent's own add and change carry the count, not a card's Add, an import, or the Lists screen.
@@ -7035,8 +7007,6 @@ there and asks before moving it."
   at a time its driver works, as the owner's notes say" (the setups entry's October 17 amendment).
 - **Tests:** `a_stop_moved_onto_a_busy_day_names_what_is_there` (`schedule.rs`) and
   `a_stop_moved_onto_its_jobs_day_is_held_once` (`turn.rs`).
-- **Cost.** About 49 tokens on the turn a move is held, and about 17 on every turn of a restroom
-  agent for the rule. Internal, never on the site.
 
 **Boundaries:**
 - ⚠️ **Only lists with a Driver or Truck column,** and only when a day moves. A truck is matched only
@@ -7324,8 +7294,6 @@ make a new list that keeps every column, and still offers the closest list."
   names a list and the closest keeps too little, it raises no card and asks
   (`gateway/tools_records.rs`). Phone columns stay text when a list is made from a file (a fix found
   on the way: they were turned into numbers).
-- **Cost.** About 9 tokens more in `records_bring_in`'s description and 8 in `records_new_list`'s,
-  cached, and about 60 on the turn it asks. Internal, never on the site.
 - ⚠️ **It never adds a column to a list that is already there.** The choice is the new list, the
   closest list minus what it drops (which the card names), another list, or the file kept as it is.
 - ⚠️ **It reads column names and what the cells look like,** not what they mean. A list plainly
@@ -8832,15 +8800,15 @@ your agent before it answers. No extra AI call is made to do it."
   message's words, or the only one when the message has one, so one common word does not pull in
   half a file. The best three lines come back, at most 360 bytes of them (`RECALL_MAX`,
   `RECALL_BYTES`). No model and no tool.
-- **Where it goes.** `recall_note` puts them below the cache line on that turn, as lines copied as
+- **Where it goes.** `recall_note` hands them to the agent on that turn, as lines copied as
   written, data and never instructions, with the instruction to open the file before saying anything
   is not in it (wired in `gateway/turn.rs`, beside the memory recall). On a message a person typed,
   and not on a turn handed to a specialist or the first interview.
 - **Why it was built.** Memory had a recall in code and the files had none, so on round four of the
   journey tests the agent said a late fee was not on a price sheet it had never opened, and named it
   a turn later (Archie `docs/agent-ux/journeys/2026-10-17-fix-plan.md`, A.4).
-- **Cost.** Nothing on a message that matches no line. On one that does, about 42 tokens plus 13 to
-  20 a line, below the cache line, on that turn only.
+- **Cost.** Nothing on a message that matches no line. On one that does, the agent is handed the
+  lines on that turn only.
 
 **Boundaries:**
 - ⛔ **Never "it reads every document on every message," or that a long document is searched this
@@ -10110,9 +10078,7 @@ saying so, or on the Routines tab."
   with a sentence saying the list only goes out before noon. This replaces the boundary just above,
   from 0.3.11.
 - **The agent knows it is on.** Its line about what it does unasked names the morning list and its
-  Stop button (`unprompted_line`), about 32 to 39 tokens by line of work on every turn and routine
-  run of an agent with the list on, cached, and about 56 more where nothing else is listed there (the
-  function's own note). Internal, never on the site.
+  Stop button (`unprompted_line`).
 - **A row on Routines,** on the computer (`MorningListRow` in `src/app/routines.tsx`, with
   `morning_list_get` and `morning_list_set`) and in Archie Mobile (`MorningListRow` in archie-mobile
   `src/screens/Routines.tsx`, through the `morning_list` field and `morning_list_on` op in
@@ -10588,8 +10554,7 @@ no release yet. Nothing below may be said on a page until a release carries it.*
 
 Today's Calendar is the store routine that reads the day's calendar each morning (`daily-briefing`).
 Its prompt said "If the day is empty, say so in one line", which paid for a whole run to send a line
-that is not news: about 24,000 tokens read and 11,000 written on the September 4 log (the code's
-own note, not measured by us).
+that is not news.
 
 **Proposed wording, Jett's to approve:** "On a morning with nothing on your calendar, Today's Calendar
 sends nothing and uses none of your AI. Press Run now and it still answers."
@@ -14024,8 +13989,8 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
   written into the owner's turns only, and shown on the computer's rows to the owner. Since October 18, 2026
   (Archie `940605c9` and `54593f0d`, merged as `d9ae56a2`, in 0.3.11) a teammate's own phone
   and email are also told to the agent on that teammate's own turns (`own_details_note` in
-  `gateway/prompt.rs`, added in `gateway/turn.rs`, below the cache line, so `team_line` still carries
-  none), and on theirs alone. Never anyone else's: the agent still gives one teammate nothing of
+  `gateway/prompt.rs`, added in `gateway/turn.rs`, so `team_line` still carries none), and on theirs
+  alone. Never anyone else's: the agent still gives one teammate nothing of
   another's.
 - ⛔ Never that Archie sends the invite. It shows a message to copy, and the owner sends it however
   they like.
@@ -14180,7 +14145,7 @@ talk to your agent there. There's no account or password to make."
   computer's Keychain. In a chat app, which draws no such button, the press makes that person's code,
   as before. Tests: `the_add_line_says_what_add_does`, and `opens_key` in `src-tauri/src/phone.rs`.
 - **The agent's own sentence** for an unshared agent on Archie for Teams names Add someone, the Setup
-  tab and Archie Mobile (about 33 tokens more on those owner turns, cached).
+  tab and Archie Mobile.
 - ⛔ **Never that the link opens Archie Mobile directly.** It opens a page on this site that sends
   them to the store and then into the app, as "Where a tapped link lands" above says. The fix plan's
   first wording ("It opens Archie Mobile on their phone") was not true, and the line was corrected
@@ -14306,8 +14271,6 @@ and it holds the reminder for them. Until they join, it comes to you."
   `a_reminder_for_somebody_not_on_yet_waits_for_them`.
 - **On both apps.** The Calendar tab and Jobs say whom it waits for (`src/app/calendar.tsx`,
   `src/app/work-board.tsx`), and so does the phone's Calendar (archie-mobile `src/screens/Calendar.tsx`).
-- **Cost.** About 20 tokens on the `for` description, cached, on a Teams agent whose tools carry
-  `for`.
 - ⛔ **Never that it reaches them before they join and write to the agent.** Until then it is the
   owner's, and a reminder due before then comes to the owner, labeled as theirs.
 - ⚠️ **A name nobody here goes by is refused.** The agent is told nobody by that name can message
@@ -14628,7 +14591,7 @@ set a teammate to see only the entries with their name on them."
 - **The team's lists.** On a teammate's turn the agent is told the lists, documents and spreadsheets
   are the team's, kept by the owner, and that a reminder belongs to whoever it is for, where it
   called them the owner's ("Sam Delaney's Deals list") (`shared_agent_note` in
-  `crates/archie-runtime/src/gateway/prompt.rs`), about 5 tokens more on a teammate's turn.
+  `crates/archie-runtime/src/gateway/prompt.rs`).
 - ⛔ **Never call it per-row permissions, a lock, or private rows.** It is the same scope as above,
   narrowed for one person, with the same limits: a list with no such column is not limited at all,
   and it does not hide documents, shared files or what the agent remembers.

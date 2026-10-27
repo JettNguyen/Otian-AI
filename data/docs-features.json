@@ -3176,6 +3176,61 @@
       "guide": ""
     },
     {
+      "id": "morning-list-ready-for-your-press",
+      "name": "Ready for your press, at the top of the morning list",
+      "area": "routines",
+      "summary": "Your morning list starts with what is ready for one press: replies already drafted for your email and texts, each with Send, Fix and Skip, what is due on Waiting On, and tomorrow's appointments with your last note and what they owe.",
+      "where": "At the top of the morning list, in your chat with your agent.",
+      "how": [
+        "Press Send, Fix or Skip under a draft. In a chat app with no buttons, type the words the list ends with, like Send 1."
+      ],
+      "limits": [
+        "Nothing is sent until you press Send.",
+        "Drafts are on it only with an AI account of your own, since your mail and texts are read only then.",
+        "Its buttons work until the next morning's list. A press on an older one sends nothing and says so.",
+        "When the computer running Archie slept overnight and nothing is ready, the list says so."
+      ],
+      "phone": "Archie Mobile shows the same list with the same buttons, and Fix opens the same edit sheet.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet. The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, in no release yet, never run on a real inbox, a real Mac's Messages or a real night"
+      ],
+      "wording": "Your morning list starts with what is ready for one press. Replies your agent already drafted for your email and texts come first, each with Send, Fix and Skip. Under them: what is due on your Waiting On list, and tomorrow's appointments with your last note on that person and anything they owe you. Nothing is sent until you press Send.",
+      "guide": ""
+    },
+    {
+      "id": "write-drafts-overnight",
+      "name": "Write drafts overnight",
+      "area": "routines",
+      "summary": "Once you say yes, your agent writes up to five drafts a night for the top of your morning list: a follow-up for what is due on Waiting On, and a reply to a text from someone new.",
+      "where": "Offered once under your morning list. The switch is on the Routines tab, under Morning list.",
+      "how": [
+        "Press Yes, write them overnight under the offer.",
+        "Or switch on Write drafts overnight on the Routines tab, under Morning list."
+      ],
+      "limits": [
+        "Only on an AI account of your own, and only once you say yes.",
+        "At most five a night. Nothing is sent until you press Send.",
+        "A follow-up is written only where Archie already has the person's email address.",
+        "The computer running Archie has to be on overnight."
+      ],
+      "phone": "Archie Mobile's Routines screen has the same switch.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet. The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, in no release yet, never run on a real inbox, a real Mac's Messages or a real night"
+      ],
+      "wording": "If you say yes, your agent writes up to five drafts a night for the top of your morning list, using your own AI account: a follow-up for what is due on your Waiting On list, and a reply to a text from someone new. Each one waits there with Send, Fix and Skip, and nothing is sent until you press Send. Your agent offers it once, under your morning list, and the switch is on the Routines tab under Morning list.",
+      "guide": ""
+    },
+    {
       "id": "missed-while-asleep-message",
       "name": "Told what was missed while asleep",
       "area": "routines",
@@ -6281,8 +6336,8 @@
       "phone": "Their phone needs Archie Mobile on an iPhone, from 1.3. The Android download does not have it yet.",
       "editions": "teams",
       "released": "0.3.9",
-      "claimable": true,
-      "hold": "",
+      "claimable": false,
+      "hold": "Its entry says nothing here may be said on a page until Jett approves the wording.",
       "unwatched": false,
       "trust": [
         "🚧 On Archie for Teams, a teammate can talk to the agent from Archie Mobile, with no chat app and no account: BUILT 2026-10-13, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"

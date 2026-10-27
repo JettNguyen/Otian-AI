@@ -3193,6 +3193,7 @@
         "Press Undo to take the note out, or Open to see it in Memory."
       ],
       "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
         "Notes kept later from older messages are not named here. They show in Memory.",
         "Undo works only while the note still reads as saved. If memory has reworded it, find it under Memory and press Forget this.",
         "Undo takes out the note only. Anything that saving it set off stays.",
@@ -3201,8 +3202,8 @@
       "phone": "Archie Mobile's half is waiting on its next build.",
       "editions": "both",
       "released": "0.3.12",
-      "claimable": false,
-      "hold": "In 0.3.12 on a Mac only, with Windows on 0.3.11, and the entry's proposed wording is still Jett's to approve.",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
       "trust": [
         "✅ Under a reply, what your agent saved and what it read, with Open and Undo, and What it keeps at the top of Knowledge: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11"

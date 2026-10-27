@@ -9864,9 +9864,9 @@ only until then.
 **Amended 2026-10-23: a teammate can have the agent use websites too, in a window of its own. BUILT
 (Archie `c85b7a9b`, archie-mobile `636e792`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with
 Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)**, so nothing
-may say it of the Windows download until a release there carries it. Cristina asked the Conduit
-agent from Slack to search the Meta Ad Library and was told the browser was not hers; Jett: the
-agent should be able to work on things even if it isn't their computer. Item 2 above was closed by
+may say it of the Windows download until a release there carries it. A teammate on a client's
+agent asked it from Slack to search the Meta Ad Library and was told the browser was not theirs. Jett:
+the agent should be able to work on things even if it isn't their computer. Item 2 above was closed by
 keeping every screen tool from a guest. It stays closed a different way now: a teammate's job runs
 in a second browser window with a profile of its own (`screen/guest-profile`), signed in to nothing,
 so no page the owner's job left open and nothing the owner signed in to can reach a teammate's chat.

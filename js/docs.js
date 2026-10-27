@@ -125,6 +125,22 @@
     });
   });
 
+  /* ---------- the guide groups in the side list ----------
+     A group opens on its own guides and is closed everywhere else. One the reader opens or closes
+     stays that way for the rest of the visit. Only a press is remembered: a page load fires
+     "toggle" for a group the page opened itself, which is not a choice. */
+  var groupsKey = "dx-side-open";
+  var chosen = {};
+  try { chosen = JSON.parse(sessionStorage.getItem(groupsKey)) || {}; } catch (e) { chosen = {}; }
+  Array.prototype.forEach.call(document.querySelectorAll(".dx-side details[data-s]"), function (d) {
+    var id = d.getAttribute("data-s");
+    if (typeof chosen[id] === "boolean") d.open = chosen[id];
+    d.querySelector("summary").addEventListener("click", function () {
+      chosen[id] = !d.open;
+      try { sessionStorage.setItem(groupsKey, JSON.stringify(chosen)); } catch (e) { /* still works, just forgets */ }
+    });
+  });
+
   /* ---------- on this page ---------- */
   var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".dx-toc a"));
   if (tocLinks.length && "IntersectionObserver" in window) {

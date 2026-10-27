@@ -515,8 +515,8 @@ function sideNav(ctx) {
   const groups = SECTIONS.map((s) => {
     const mine = guides.filter((g) => g.section === s.id);
     if (!mine.length) return "";
-    const open = mine.some((g) => "guide:" + g.id === here) || (s.id === "getting_started" && !here.startsWith("guide:"));
-    return `<li><details${open ? " open" : ""}><summary>${esc(s.label)}</summary><ul>${mine.map((g) =>
+    const open = mine.some((g) => "guide:" + g.id === here);
+    return `<li><details data-s="${s.id}"${open ? " open" : ""}><summary>${esc(s.label)}</summary><ul>${mine.map((g) =>
       `<li><a href="${D}guides/${g.id}/"${cur("guide:" + g.id)}>${esc(g.title)}</a></li>`).join("")}</ul></details></li>`;
   }).join("\n          ");
   const areaRows = areas.map((a) =>

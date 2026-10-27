@@ -5995,6 +5995,99 @@ list keeps them all."
   need a look, each named by its title and why. Never "the AI never sees your file": it may also
   open the file to answer a question, as the boundary above says.
 
+*Amended October 27, 2026 (Archie `e76af7e1`, `ab17ec44`, `40b4548f` and `e60180d5`; archie-mobile
+`b875a84`; in no release yet): Import on a list in Archie Mobile, and the first rows shown before
+Add on both screens.*
+
+**Proposed addition, Jett's to approve:** "On your phone, open the list in Archie Mobile and press
+Import beside Add row. Choose a file on your phone, or one of the Google Sheets you've shared with
+your agent, and match the columns the way you would on the computer. Before you press Add you see
+how many rows will come in, which will be left out and why, and the first three as they will look
+on the list. Undo takes it all back. The computer running Archie does the reading, so it has to be
+on."
+
+**Why it's true:**
+
+- **One import, two screens.** Three phone commands, `import_preview`, `import_plan` and
+  `import_apply` (`src-tauri/src/phone/import.rs`, from `phone.rs` on the owner's phone and
+  `team_phone.rs` on a teammate's), call the functions the window's screen calls: `open_import` and
+  `open_copy` with `preview_of_sheet` for the first look, `import_plan_of` (on `plan_import_vetted`
+  in `crates/archie-domain/src/import.rs`) and `follow::preview_of` on each change of a choice, and
+  `apply_import`, which `records_import_apply` now calls too, for Add. The rows are written once,
+  under the lists' lock, as one job on the Jobs tab, "Imported units.csv into Units", with the same
+  Undo (`records_delete_many`, and `records_unfollow` for a first match). Archie Mobile draws the
+  answers (`src/import.ts` and `src/screens/ImportForm.tsx` in archie-mobile) and reads or matches
+  nothing itself. The screen is the window's, step for step and word for word: "Where is the
+  spreadsheet?", Choose a file on this phone in place of Choose a file on this computer, Match your
+  columns with In your spreadsheet, For example and Goes into, then the counts, the rows left out,
+  the cells left blank, and the press. Tests:
+  `a_file_sent_from_the_phone_in_pieces_is_previewed_with_the_computers_plan`,
+  `a_changed_column_and_the_rows_left_out_come_back_as_the_window_shows_them`,
+  `add_writes_the_rows_once_and_undo_takes_them_back`,
+  `the_window_reads_the_agent_again_after_an_add_from_the_phone`; archie-mobile `src/import.test.ts`.
+- **A file from the phone.** Picked in the phone's own files app and checked for its kind (CSV,
+  TSV, Excel or OpenDocument, the endings `is_spreadsheet` reads) and its size before anything is
+  sent (`pickSpreadsheet` in archie-mobile `src/attach.ts`, at `FILE_MAX.document`, 10 MB), then sent
+  in 48 KB pieces the way Add files sends a document (`sendInPieces`), put back together by
+  `take_piece` under the computer's own limit for a document (`upload_cap`), and held in the
+  computer's memory, never on disk and never with the agent's documents, for 30 minutes after the
+  last press, four at most (`hold`, `copy_of`, `let_go`). Each copy is kept under the workspace, the
+  agent, the phone that sent it and an id, so one phone cannot read another's.
+- **The first rows, before the press, on both screens.** Under the counts, "How the first 3 will
+  look on Units:" and the rows Add (or the first match) would write, as written, with the date a row
+  was added filled in (`plan_for_screen` and `FollowPreview.rows` in
+  `src-tauri/src/commands/knowledge_records.rs` and `follow.rs`). The window draws them as a small
+  table (`LookOver` in `src/app/records-import.tsx`, words in `src/app/import-words.ts`); the phone
+  draws each as the list's own row with every column it fills, since a phone has no width for a
+  table. Before this the window showed counts and reasons and never a row.
+- **Only where the window would offer it.** Import shows where the computer says this agent may add
+  to the list (`require_writer` in `crates/archie-core/src/bundle/records.rs`, the window's
+  `canWrite`, sent as `import` on the list's page) and the person holding the phone may change the
+  lists; every command checks again on the computer.
+- **On Archie for Teams, never more than the window allows.** A teammate whose What teammates can do
+  is Talk is refused before anything is read ("Only Sam can change this agent's lists right now."
+  with where Sam changes that). With Talk and add to your lists or more, each row is checked by the
+  rule that decides which rows she sees (`RowScope`: `mark_theirs`, then `left_out_of_import`), and
+  one she could not see is left out with why ("it names Sam Miller under Agent, who is someone else
+  on the team, so it would not be shown to Dana Brooks"); a new column only for a teammate the agent
+  would add a column for; only the Google Sheets her own account reaches; the job filed as hers; and
+  its Undo refused if any row it would take off is one she cannot see (`import_gate` and `list_gate`
+  in `team_phone.rs`). Tests: `a_teammate_brings_in_only_what_she_could_have_added_herself` and
+  `a_teammate_imports_only_when_she_may_change_lists_and_takes_back_only_rows_she_sees`.
+
+**The boundaries.**
+
+- ⚠️ **Phone** (this replaces the boundary of that name): Archie Mobile's Lists screen has Import
+  beside Add row, and its empty list says "Have a spreadsheet of these already?" with Import it
+  (archie-mobile `b875a84`, in no build yet). The empty-list line under an answer (archie-mobile
+  `93348cd`) still only picks the file to send in the chat. **Never say the phone imports until a
+  build carries it and somebody has brought a file in on a phone**: it has been tested in code and
+  never drawn on a device.
+- ⚠️ **What the phone sends, and only to the computer.** The file, in sealed pieces through the
+  phone mailbox, as every phone command goes (the entry "Archie on your phone: an encrypted mailbox
+  we hold and cannot read"), and the choices made on the screen. What comes back, sealed the same
+  way, is the computer's answer: the file's column names, its first five rows with each cell cut to
+  80 characters, up to five of the rows the press would write, and up to 50 reasons for the rows
+  left out and the cells left blank, each with a count. Nothing goes to the AI company and nothing is
+  added to the agent's documents. Never "your file never leaves your phone": it leaves, sealed, for
+  the computer running Archie, and a chat app is never in the way.
+- ⛔ **A file from the phone is never kept matched.** It arrives as a copy taken once, so the
+  window's box is not drawn, and the screen says where it would be: "A file from this phone comes in
+  as a copy, so Units will not change when the file does." with what to do instead. Only a Google
+  Sheet shared with the agent can be kept matched from a phone (the next amendment).
+- ⚠️ **Limits:** 10 MB from Archie Mobile, not the Lists screen's 20 MB, and the phone says where to
+  bring a bigger one in: "That spreadsheet is too big to send from a phone. Up to 10 MB comes
+  through. For a bigger one, open Archie on the computer running it, and on this agent's Knowledge
+  tab, under Lists, press Import on Units." One tab (the owner picks which), 5,000 rows, as on the
+  computer.
+- ⚠️ **The computer does the work, so it has to be on, awake, and running Archie, with phone access
+  on.** A file waits in the computer's memory between presses; after 30 minutes with nothing
+  pressed, or once Archie quits, the next press says "Archie let go of that file after a while with
+  nothing pressed. Press Cancel, then Import, and pick the file again."
+- ⚠️ **Undo is on the done screen; after that it is the computer's.** The phone's job list has no
+  Undo for an import, so the done line names the Jobs tab in Archie on the computer, and a teammate
+  is told to ask the owner.
+
 ### ✅ Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

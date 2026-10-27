@@ -5951,7 +5951,6 @@ keeps about you is listed under the draft as Check before sending."
   gave.
 - ⚠️ **It names the blank and fills nothing.** Beyond the owner's own three, only the person
   pressing Edit it fills a blank. Never "Archie fills in the details for you."
-- ⚠️ **Cost, internal only, never on the site.**
 
 **Amended October 17, 2026: deadlines, requests and terms; Take out what you added; and your own
 words go out as you wrote them** (Archie `54aa9b38`; RELEASED in 0.3.11, 2026-10-19). From round four of the journey tests, where a draft
@@ -6221,7 +6220,6 @@ sends your message again, so you don't have to type it again."
   asks the owner to ask the agent to look at it.
 - ⚠️ **The "asking again" line was checked in the window only.** Whether the phone or a chat app
   shows it was not checked.
-- ⚠️ **Cost, internal only, never on the site.**
 
 ### ✅ A reply that says it saved something to your lists when nothing was saved is corrected under it, with Save it, and a new list takes its first entries at once: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -6304,7 +6302,6 @@ it in the same reply."
 - ⚠️ **The first list only.** An agent with a list already had the row tools. Making a list is still
   for the owner, or a teammate allowed to act as the owner (`records_new_list` is in
   `acts_as_owner`).
-- ⚠️ **Cost, internal only, never on the site.**
 
 **Amended October 17, 2026: a correction that names nothing goes back once** (Archie `69a0c98a`,
 RELEASED in 0.3.11, 2026-10-19). A boundary more than a claim, written down so nobody makes the

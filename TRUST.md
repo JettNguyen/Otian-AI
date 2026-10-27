@@ -3512,6 +3512,10 @@ read that it has one; the proposed wording above changes with it, to name Follow
 connected and not yet tried on a real account. The ban on "works with Follow Up Boss" stands until
 it has been.
 
+Nothing to amend. The guide (`data/marketplace/resources/what-archie-connects-to.json`) says
+GoHighLevel connects directly and where to make its token, and says nothing about whether a change
+waits, so it stays true as written.
+
 ### ✅ A plan with no AI in it asks for your AI account right after you buy it: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -10013,6 +10017,12 @@ against a real Google, Outlook or iCloud account.*
 - ⚠️ **"The Today line" is the line over the message box**, which is what the 0.3.11 notes call it
   ("with Undo over the message box").
 
+*Amended October 26, 2026 (Archie `fb93a20a`, in no release yet):* `AllowKind` still has one kind
+and the CRM lane still says why not. The GoHighLevel switch is a separate thing with its own file,
+its own screen and its own rule for who turns it on (the owner only, where the calendar's is the
+owner or an admin). ⚠️ Never describe the two as one setting, and never say the calendar entry's
+"the only lane that may be covered" of both.
+
 ### ✅ Your calendar is checked before a reply or a booking about a time: BUILT 2026-10-04 (Archie `fc1b47f5`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)
 
 *Released, checked October 6, 2026: `fc1b47f5` is an ancestor of 0.3.5's `2afe4589`. Archie for
@@ -11179,6 +11189,23 @@ add: "A reply with a blank still in it won't send until you fill it in."
 | **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo (amended October 11, 2026: from the release that carries Archie `70831b8a`, many entries the agent read off a photo, a page, or the calendar wait on one card until the owner presses Add or says yes; the entry on cards); removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). (Amended October 12, 2026, Archie `dcc0ae03` and archie-mobile `0747d37`, in no release yet: on a message a person typed, an edit that would write over a date already on an entry with a day that nothing they said, nothing they said yes to, and nothing read that turn gives is not made, and the agent is told to ask with "Change it to ...", "Keep ..." and "Not sure"; a blank date filled that way is written, and the line under the reply says it is the agent's reading, "Closing is my reading", in Archie and Archie Mobile (`dates_nobody_gave` in `gateway/turn.rs`, `KeptRow::my_reading`). ⛔ Never "your agent never guesses a date": it reads days off words by code (`schedule::names_day`), only dates are checked, and a blank is still filled.) **On no page yet**: the homepage heading stayed "Replies and calendar moves wait for your yes." until Jett decided whether removals join it (October 19, 2026: that heading is retired for the in-your-name row above, and removals are still on no page). "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
 | ~~"Replies, calendar moves and your agent's edits to your lists wait for your yes."~~ | ⛔ **Never shipped: reversed before the release.** Found 2026-09-30: this row said it was approved "for the first release that carries Archie `5b51b70b`", and 0.3.2 carries it, but it also carries `139029ac` from the same day, which put edits back to happening at once. Published on the strength of this row, the sentence would have been false on the day it went up. What the row went on to say still explains the two words: In that build an edit to a row on one of the agent's lists, checking one off, or removing one waits for the owner's yes, and a routine that tries is refused and reports what it would have changed (`gateway/tools_records.rs`, `RECORDS_GATE`). Two limits, both ruled by Jett on 2026-09-29, and two words carry them. **"edits"** leaves out adding a row, which still happens at once (a row they did not want is one tap to remove), so never widen it to "changes to your lists" or "anything on your lists". **"your agent's"** leaves out Package Tracker, whose status updates from shipping emails are made by the app below the agent's tools (`email/packages.rs`, `on_email`) and stay automatic, because a yes on every "out for delivery" is noise; Package Tracker's own copy must say its rows update on their own. When the release ships, the homepage figure gets its third lane back (a to-do checked off, never an add) (⚠️ 2026-10-08: not a to-do checked off either, since that now happens at once with an undo; a deleted to-do is the one that still waits) and the four blog posts may take the same wording. |
 | ~~"Replies, calendar moves and changes to your lists wait for your yes."~~ | ⛔ **FALSE in 0.3.1, and retired 2026-09-29.** The homepage heading from 2026-09-27 (Jett's voice pass, replacing "Your agent does the work. You say the word.", a two-sentence aphorism) and in four blog posts until the narrowing. Found by the Learning Library claim check: at the 0.3.1 release (`09c5cb5e`) `records_update` and `records_delete` run at once with an undo and a routine may update a row unattended (`gateway/tools_records.rs`, `dispatch_records_tool`), and Task Manager, which every new agent starts with, keeps its tasks in such a list; only edits to existing Todoist or Google Tasks items were staged. Jett chose to change the app, and `5b51b70b` does, but the sentence stays false as written even then, because adding a row does not wait. Use the row above at that release. |
+
+*Amended October 26, 2026 (Archie `fb93a20a` and `3994c5d8`, in no release yet, Archie for Teams
+only):* there is now a second switch, separate from Yes, and stop asking, that skips the asking for
+two kinds of GoHighLevel change. A message through a connected CRM still waits in both editions, so
+"What waits" stays true as written. Two of its sentences do not, from the release that carries
+these commits, on Archie for Teams:
+
+- ⛔ **"Every lane but the calendar is never covered" is no longer the whole story.** It stays true
+  of `AllowKind` and `lane` in `always_allow.rs`, which this does not touch, and the test that holds
+  it still passes. But a deal's stage and a contact's custom fields can be changed without a yes on
+  an Archie for Teams agent whose owner turned that kind on (`ghl_tell_after.rs`). A sentence about
+  the CRM lane names the edition or leaves the CRM out.
+- ⛔ **On Archie for Teams with a kind on, a GoHighLevel workflow can send in the owner's name
+  without a yes.** A stage move or a field change made at once can start a workflow the sub-account
+  already has, and that workflow can message the contact. So on that edition, "nothing goes out in
+  your name until you say yes, and no setting turns that asking off" needs "except a workflow your
+  GoHighLevel account runs on its own", or a scope to the personal edition.
 
 ### ✅ One agent answers one person — ENFORCED IN CODE 2026-08-20
 
@@ -13150,6 +13177,106 @@ the turn makes no AI call.
   as before, which can still get it wrong. So does a teammate's "undo it" on Archie for Teams.
 - ⚠️ **Not on a chat app's line.** Telegram, Slack, Discord, Matrix and iMessage draw no line, so
   there the answer points to the Jobs tab.
+
+### 🚧 On Archie for Teams, your agent can make a GoHighLevel change you asked for and tell you after, with Undo: BUILT 2026-10-26, in no release yet
+
+### 🚧 On Archie for Teams, the owner can let named kinds of GoHighLevel change happen at once, said under the reply with Undo: BUILT 2026-10-26, in no release yet, never run against a real GoHighLevel account
+
+**Proposed wording, Jett's to approve:**
+
+> On Archie for Teams, every GoHighLevel change waits for a yes until the agent's owner says
+> otherwise. Under the GoHighLevel connection on the Connections tab, in Archie or in Archie Mobile,
+> the owner can turn on two kinds of change: moving a deal to another stage (or marking it won, lost or abandoned), and filling in a
+> contact's custom fields. With one on, when somebody who can say yes asks for that change by name,
+> it is made right away, and the reply says what changed and what it was before, with Undo. Undo
+> puts back exactly what was there, and if somebody changed it in GoHighLevel since, it changes
+> nothing and says so. Sending a message, booking an appointment, adding a contact or a deal, adding
+> a note and adding a tag always wait for a yes.
+
+**Why it's true**, all paths in the Archie repo unless named otherwise:
+
+- **Two kinds, in one place, and only these.** `crates/archie-runtime/src/ghl_tell_after.rs` holds
+  `Kind` (`DealStage`, `ContactFields`) and `kind_of`, a match over every GoHighLevel write the agent
+  has, so a new write does not compile until somebody decides it. A deal update is covered only when
+  it changes nothing but the stage and status; a contact update only when it changes nothing but
+  custom fields. `ghl_message_send`, `ghl_appointment_book`, `ghl_contact_upsert`,
+  `ghl_opportunity_create`, `ghl_contact_note` and `ghl_contact_tag` each say in the code why they
+  always ask. Tests `with_every_kind_on_the_rest_still_wait_for_a_yes` (through the real dispatch in
+  `crates/archie-runtime/src/gateway/tools_ghl.rs`) and the `kind_of` tests in the module.
+- **Off by default, and byte for byte today's behavior while off.** The switches live in the agent's
+  own `ghl/tell_after.json`, which starts empty and is read with the vault reader; a file that
+  cannot be read turns nothing on. With every kind off, each GoHighLevel write answers exactly what
+  it answers on an agent with no file at all, stages the same proposal, and says today's words. Test
+  `with_every_kind_off_every_write_stages_exactly_as_before`.
+- **Only the owner turns one on, at the computer or on their own phone.** `ghl_tell_after_set` in
+  `src-tauri/src/commands/integrations.rs` refuses anybody but the owner sitting at the computer
+  Archie runs on (`owner_at_this_computer`, from the agent's roster). The owner's paired phone turns
+  one through the relay op of the same name in `src-tauri/src/phone.rs`, which a teammate's phone,
+  an admin's included, has no way to run (`the_gohighlevel_switches_never_reach_a_teammates_phone`).
+  Both go through one write, `ghl_tell_after_switch`, which writes the audit event
+  `ghl.tell_after_on` or `ghl.tell_after_off` that the Settings log words
+  (`a_kind_turned_on_is_written_audited_and_shown`). On the computer the switches are in
+  `src/app/ghl-tell-after.tsx`, under the GoHighLevel rows in `src/app/connect.tsx`, drawn only in
+  the Teams build (`IS_BUSINESS`); somebody else at the computer sees them disabled, with a line
+  saying only the owner can change them. On the phone they are a card on Connections
+  (`src/screens/GhlTellAfter.tsx` in archie-mobile), from the same view the snapshot carries for an
+  agent with GoHighLevel connected. The personal edition has no command, no op, no file and no
+  screen.
+- **Only a change somebody who can say yes asked for, by name.** `made_without_asking` in
+  `tools_ghl.rs` makes a change at once only on a message a person typed, from somebody who may act
+  for the owner (the owner, or a teammate the owner gave everything), and only when their own words
+  name where the deal goes ("move Dana to Proposal Sent", "mark it won") or the value a field gets
+  (`names_value` in `crates/archie-runtime/src/gateway/unasked.rs`). Anything the agent would be
+  reading into their words stages and waits, as with the switch off. A routine still never writes to
+  GoHighLevel, a turn that arriving mail starts still asks, and a teammate who may not say yes never
+  reaches the write (`turn::withheld_from`). Tests
+  `switched_on_a_deal_move_is_made_at_once_with_an_undo` and
+  `a_change_their_words_do_not_name_asks_first`.
+- **Read first, so the reply says what it was.** `make` reads the deal or the contact before it
+  writes; a record that cannot be read goes back to asking. The answer the agent reads says the
+  change is made and to say it in one sentence, and the line under the reply is written by code, not
+  the model: in Archie and Archie Mobile "Changed in GoHighLevel: moved Dana Miller's deal to
+  Proposal Sent (it was Contacted)" with Undo (`KeptLine` in `src/app/conversation.tsx`, `kept.tsx`
+  in archie-mobile, from `KeptChange` in `crates/archie-net/src/channel.rs`), and in Slack and the
+  other chat apps the same sentence with an Undo button
+  (`crates/archie-runtime/src/gateway/crm_undo.rs`). Tests
+  `a_deal_moved_at_once_says_where_it_was_and_undo_puts_it_back` and
+  `fields_set_at_once_say_what_they_held_and_undo_puts_them_back`.
+- **Undo puts back exactly what was there, and only over its own change.** The change is filed on
+  the job's journal as `ghl_change_made` (`crates/archie-domain/src/journal.rs`), with an undo that
+  holds what it set and what was there before. `put_back` reads the record again first; if anybody
+  has changed it since, it changes nothing and says "Nothing was changed: somebody moved Dana Miller's
+  deal in GoHighLevel after I did, and Undo would have undone their move." Undo runs from the line
+  under the reply, from the Jobs tab, from the owner's phone (`ghl_put_back` in
+  `src-tauri/src/journal.rs`), and from the chat-app button. Tests
+  `undo_after_somebody_moved_the_deal_changes_nothing` and
+  `undo_after_somebody_changed_a_field_changes_nothing`.
+- **Who may press Undo.** At the computer, whoever the roster gives everything the owner can do; on
+  the owner's phone, the owner; in a chat app, somebody who may say yes to GoHighLevel changes on
+  that agent (`NOT_YOURS` in `crm_undo.rs` answers anybody else). A teammate's own phone cannot press
+  it (`Presser::Teammate`).
+- **No cost on an ordinary turn.** No prompt text and no AI call. The answer to a change made at once
+  is 44 tokens shorter than the staged answer, and the turn that would have carried the yes is not
+  needed (`docs/COST-MEASURED.md`, section 47).
+
+**The boundaries:**
+
+- ⛔ **Never "auto-approve", "trust mode" or "your agent updates your CRM on its own."** It is two
+  kinds of change, each turned on by the owner, made only when somebody who can say yes named it.
+- ⛔ **Never "Undo takes it all back."** If a GoHighLevel workflow starts when a deal moves or a
+  field changes, it starts right away too, and Undo does not stop it or take back anything it sent.
+  The switch section on the computer says so under the switches.
+- ⛔ **Never "Undo always works."** It changes nothing once somebody has changed the same record in
+  GoHighLevel, or once the sub-account is no longer connected to the agent, and says which.
+- ⛔ **Not the personal edition, and not a teammate's phone.** The switches are the owner's, at the
+  computer or on the owner's own phone. A teammate's phone can neither turn one nor take one of
+  these changes back (`Presser::Teammate`); a teammate who may say yes presses Undo in the chat app.
+- ⚠️ **A value said another way still asks.** A field is changed at once only when the words name
+  its new value as written ("45", "Proposal Sent"); a date said as "next Friday" for a field that
+  takes "2026-10-30" stages and waits.
+- ⚠️ **Notes and tags are not offered.** GoHighLevel notes cannot be read back to be put back, and a
+  tag is the usual way a GoHighLevel workflow is started.
+
 
 
 ## Known Weaknesses — disclose, don't hide

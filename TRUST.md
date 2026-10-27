@@ -8700,6 +8700,26 @@ with Yes, at 7:00am, Another time and No thanks under it, as before.
 - ⚠️ **It asks no AI to make it.** Say that much and stop: nothing about what its words cost on later
   turns, or how Archie keeps that down.
 
+*Amended October 27, 2026 (Archie `6f44f9a4`, in no release yet): two parts from the mail and text
+watches, once the owner says yes to them.*
+
+**Proposed wording, Jett's to approve:** "Once you say yes to them in Email Manager or Text Replies,
+your morning list also names an email that asked to change where a payment goes, and someone you know
+who wrote two or more days ago and has not heard back from you, each once."
+
+**Why it's true:** `catches` in `crates/archie-runtime/src/morning.rs` adds "Asked to change where a
+payment goes", first with the decisions, and "Waiting on a reply from you", from what
+`crates/archie-runtime/src/catches/payment.rs` and `crates/archie-runtime/src/catches/owed.rs` kept,
+read when the list is built (`build` in `crates/archie-runtime/src/gateway/morning_list.rs`). Each
+line is said once (`Named`), written down only once the list went out. Tests:
+`a_reply_owed_and_a_payment_change_are_said_once`,
+`a_morning_list_that_failed_to_send_leaves_its_catches_for_the_next`.
+
+- ⚠️ **Only where the watch reads.** An AI account of the owner's own, the watch on, and the switch
+  on; replies owed by email only from the owner's own Gmail mailboxes. Everything else about these
+  lines is in the entry headed "Email Manager and Text Replies can watch for someone new waiting an
+  hour, replies you owe, and an email asking to change where a payment goes, once you say yes".
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the
@@ -11784,6 +11804,22 @@ to Google or Microsoft still happens on the computer."
 - ⚠️ The computer runs every one of these and must be awake, connected to the internet, and running
   Archie.
 
+*Amended October 27, 2026 (Archie `ce10fbf5`, Archie Mobile `7184cdc`, in no release and no phone
+build): the switches under Also watch for.*
+
+**Proposed wording, once both apps carry it:** "From Archie Mobile you can also turn on or off what
+Email Manager and Text Replies watch for under Also watch for."
+
+**Why it's true:** `email_watch` and `text_watch` in `src-tauri/src/phone/setup.rs` read and write
+the same switches the computer's panels do, and send whether the agent thinks on the owner's own AI
+account and has a Gmail mailbox of the owner's own, so the phone shows the rows exactly where the
+computer does (`emailCatchRows` and `textCatchRows` in Archie Mobile's `src/watches.ts`). Tests:
+`the_catches_switches_go_to_the_phone_off_until_yes_with_whether_to_show_them`, Archie Mobile's
+`src/watches.test.ts`.
+
+- ⚠️ **Shown only on an AI account of the owner's own**, as on the computer, and Text Replies' only
+  while Watch my texts is on, which stays on the computer.
+
 ### 🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, RELEASED in 0.3.10, 2026-10-17
 
 **Built October 14, 2026, at Jett's decision, and in no release yet.** Say nothing about it on a page
@@ -13842,6 +13878,175 @@ Monday in bold and "pending" set as code, and "[Open the invoices](...) to send 
 - ⚠️ **After Archie restarts, a press on an older card redraws it on the chat app in the words the
   agent wrote.** The two copies are kept only while Archie runs (the Archie repo's
   `docs/OPEN-THREADS.md`).
+
+### 🚧 Email Manager and Text Replies can watch for someone new waiting an hour, replies you owe, and an email asking to change where a payment goes, once you say yes: BUILT 2026-10-27, in no release yet, never run on a real inbox or a real Mac's Messages
+
+*Built October 27, 2026 (Archie `6f44f9a4` and `ce10fbf5`; Archie Mobile `7184cdc`; in no release
+yet).*
+
+**Proposed wording, Jett's to approve:** "On an AI account of your own, Email Manager and Text
+Replies can watch for three more things, once you say yes. If someone new to you is still waiting an
+hour after their card, Archie posts the card again at the bottom of your chat, with the reply it
+wrote. Your morning list names someone you know who wrote two or more days ago and has not heard
+back, with who, when and what it was about: "Sam Hart emailed Tuesday about "Deck estimate"; no
+reply from you since." And when an email asks to change where a payment goes, its card and your next
+morning list say so, and say to call them at a number you already have, not one from the email.
+Nothing is ever sent for you: a reply still goes only when you press Send. Archie offers these once,
+under the first card they would have changed, and each one has its own switch."
+
+As Archie says them, for an owner with a Gmail mailbox and Text Replies:
+
+> ⏳ **Dana Miller has waited an hour.** They are new to you: not on your lists, and I have not seen
+> you write to them. Here it is again, with the reply I wrote. Nothing goes until you press Send.
+>
+> 📧 **New email** from Dana Miller
+
+with the rest of the card and its own buttons (Send, Edit it, Dismiss) under it. A card for an email
+asking to change where a payment goes says, under its first line:
+
+> ⚠️ **This email asks to change where a payment goes.** Call Sam Hart at a number you already have,
+> not one from the email, and check the details with them by voice before anyone sends money.
+
+And the morning list, after the owner said yes:
+
+> **Asked to change where a payment goes**
+> - Sam Hart emailed yesterday about "Updated bank details", asking to change where a payment goes.
+>   Call them at a number you already have, not one from the email, and check the details with them
+>   by voice before anyone sends money.
+>
+> **Waiting on a reply from you**
+> - Sam Hart emailed Tuesday about "Deck estimate"; no reply from you since.
+> - Mike Brooks texted Saturday: "Does Saturday still work?"; no reply from you since.
+
+The offer, made once, under the first card one of them would have changed:
+
+> **Dana Miller is new to you:** not on your lists, and I have not seen you write to them.
+>
+> I can watch for things like this, if you want:
+> - Someone new still waiting an hour after their card: I post it again at the bottom of this chat,
+>   with the reply I wrote.
+> - Someone you know who wrote two or more days ago and has not heard back: your morning list names
+>   them.
+> - An email asking to change where a payment goes: its card says so, and so does your next morning
+>   list.
+>
+> Nothing is ever sent for you: a reply still goes only when you press Send. Turn these on?
+
+with Yes and No thanks under it. Either press changes the offer in place: "Turned on. Each one has its
+own switch if you change your mind: open this agent's Skills tab in Archie or Archie Mobile, open
+Email Manager or Text Replies, and look under Also watch for." (or "Left off. To turn any of these on
+later, ...").
+
+**Why it's true:**
+
+- **Off until the owner says yes.** Each is a switch on the watch's own settings, off out of the box:
+  `nudge_new_people`, `replies_owed` and `payment_changes` on `EmailWatcherConfig`, and the first two
+  on `TextWatcherConfig` (`crates/archie-domain/src/automation.rs`). The offer is
+  `crates/archie-runtime/src/catches/offer.rs`: written down as made before it is sent, so two cards
+  make one offer, and taken back if the send fails, so a later card makes it; never made while any of
+  the switches is on, in a chat that is not the owner's, or while quiet hours or a running answer hold
+  what is said unprompted. Yes turns on what it named, in each watch's settings, and No thanks leaves
+  everything off; only the owner can answer it. Tests:
+  `the_offer_is_made_once_and_only_a_yes_turns_anything_on`,
+  `no_thanks_leaves_everything_off_and_says_where_the_switches_are`,
+  `an_offer_that_did_not_go_is_made_under_the_next_card`, `a_guest_cannot_turn_them_on`,
+  `the_offer_is_made_once_under_the_first_card_from_someone_new`.
+- **Only on the owner's own AI account.** Every part checks `runs_through_otian`
+  (`crates/archie-runtime/src/email/poller.rs`), so on the free credits or the plan with the AI
+  included nothing is nudged, listed, warned of or offered, and the switches are not shown. Tests:
+  `on_otians_ai_nothing_is_offered`, `nothing_is_nudged_with_the_switch_off_or_on_otians_ai`,
+  `the_catches_say_nothing_when_off_or_on_otians_ai`.
+- **Someone new waiting an hour.** `crates/archie-runtime/src/email/replies/nudge.rs` and
+  `crates/archie-runtime/src/texts/replies/nudge.rs`. New, on mail, is what `email/known.rs` found
+  when the card was made: on none of the owner's lists, not one of the agent's people, and not
+  written to by the owner in the last two weeks; it is checked again at the hour, so somebody written
+  to or added to a list since is left alone. On a text, new is not in the owner's contacts, in a
+  conversation of two. A card still open an hour after it was made is posted again once, with the
+  reply it holds and its own buttons; the copy above becomes the line that says where it went. Once
+  per message (`CardCatches` on the card), written down only once the post went, and held by quiet
+  hours and by an answer being written, so a held or failed one is made later. Tests:
+  `a_new_customers_card_open_an_hour_is_posted_again_once_with_its_draft_and_buttons`,
+  `a_held_or_failed_nudge_is_made_on_a_later_check`, `somebody_written_to_in_the_hour_is_left_alone`,
+  `a_new_persons_text_open_an_hour_is_posted_again_once_and_a_contacts_is_not`,
+  `a_text_nudge_waits_out_quiet_hours`.
+- **A reply owed.** `crates/archie-runtime/src/catches/owed.rs`. Written down when a card is made for
+  somebody the owner knows (on mail, `email/known.rs` matched them; on a text, they are in the
+  contacts, in a conversation of two), and crossed off by anything that shows the owner answered: on
+  Gmail, every message the owner sends from any app arrives in the mailbox's history and the poller
+  reads it (a send on the thread, or to that person after their email); Send or Dismiss on the card;
+  and on texts, the owner's own message in that conversation from any of their Apple devices, as it
+  arrives or replayed after the watch was off. Named only for the owner's own Gmail mailboxes checked
+  in full in the last fifteen minutes, and for texts while Text Replies is on and was running in that
+  time; a stretch the watch never read (a mailbox that lost its place, a text watch starting with no
+  place kept) forgets what it had. Tests: `a_send_on_the_thread_or_to_them_crosses_it_off`,
+  `a_reply_owed_is_kept_and_crossed_off_by_a_reply_from_anywhere`, `on_outlook_no_reply_is_ever_called_owed`,
+  `a_reply_owed_is_not_said_once_answered_or_while_the_mailbox_is_not_read`,
+  `a_text_owed_is_said_until_the_owner_texts_back`.
+- **A payment change asked for in an email.** `asks_to_change` in
+  `crates/archie-runtime/src/catches/payment.rs` reads the subject and the newest part of the email,
+  never the thread quoted under it, sentence by sentence: payment details (the one word list the
+  chat's hold on passing them on reads, `PAYMENT_DETAILS`, with the other ways an email names them)
+  beside a word of change. A sentence that warns about these emails ("our wiring instructions will
+  never change by email") is left alone. The warning goes under the card's first line (`heading` in
+  `crates/archie-runtime/src/email/replies/card.rs`), on every way the card is drawn. Its call back is
+  the hold's own (`WIRING_HELD` in `crates/archie-runtime/src/gateway/turn.rs`). Tests:
+  `a_request_to_change_where_money_goes_is_caught`, `an_ordinary_invoice_or_a_fraud_notice_is_not`,
+  `a_payment_change_email_is_warned_of_on_its_card_and_the_list_and_an_invoice_is_not`,
+  `with_the_warning_off_a_payment_change_is_a_card_like_any_other`,
+  `the_hold_and_the_card_warning_say_the_same_call_back`.
+- **On the morning list, each once.** Two parts in `catches` in `crates/archie-runtime/src/morning.rs`,
+  "Asked to change where a payment goes" first, with the decisions, and "Waiting on a reply from
+  you", each line said once (`Named`) and written down as said only once the list went out
+  (`sent` in `crates/archie-runtime/src/gateway/morning_list.rs`), so a list that failed to send, was
+  held, or was skipped leaves them for the next. Dates come from `crates/archie-runtime/src/clock.rs`.
+  Tests: `a_reply_owed_and_a_payment_change_are_said_once`,
+  `a_morning_list_that_failed_to_send_leaves_its_catches_for_the_next`.
+- **On Archie for Teams.** A teammate's card is nudged in the teammate's own chat, never the owner's,
+  and the morning list names only the owner's own mailboxes. Texts are the owner's on any agent.
+  Tests: `a_teammates_card_is_nudged_in_the_teammates_chat_and_never_the_owners`,
+  `a_teammates_payment_change_stays_off_the_owners_morning_list`, `a_teammates_card_makes_no_offer`.
+- **The same switches in both apps.** Under "Also watch for" in Email Manager's and Text Replies'
+  settings on the computer (`src/app/catch-words.ts`, used by `src/app/email.tsx` and
+  `src/app/texts.tsx`) and in Archie Mobile (`src/watches.ts` and `src/screens/Watches.tsx` there),
+  in the same words, through the phone ops `email_watch` and `text_watch`
+  (`src-tauri/src/phone/setup.rs`). Tests: `src/app/catch-words.test.mjs`, Archie Mobile's
+  `src/watches.test.ts`, `the_catches_switches_go_to_the_phone_off_until_yes_with_whether_to_show_them`.
+
+**The boundaries.**
+
+- ⛔ **Only on an AI account of the owner's own.** On the free credits or the plan with the AI
+  included, mail and texts are not read at all, so none of this exists there, and nothing may suggest
+  it does.
+- ⛔ **Off until the owner says yes.** Never "it watches for these out of the box".
+- ⛔ **It never sends anything.** Never "it answers new customers for you", "it follows up for you"
+  or "never miss a lead". The nudge is the card again; a reply goes only when the owner presses Send.
+  And it is one nudge per message, an hour after the card, while the computer running Archie is awake
+  and Archie is running.
+- ⛔ **"Has not answered" cannot see everything, and the switch says so.** On Outlook and IMAP
+  mailboxes Archie reads the inbox alone, so a reply the owner sends from Outlook, their phone's mail
+  app or a webmail page is never seen, only a send from a card. So a reply owed is never named for
+  those mailboxes at all, and Replies you owe is offered on mail only with a Gmail mailbox of the
+  owner's own. Anywhere, a reply from an address or a phone number Archie does not watch, from
+  another messaging app, or said by phone or in person, is not seen. Never "it knows who you owe a
+  reply".
+- ⚠️ **A line waits rather than guess.** A mailbox not checked in full in the last fifteen minutes, or
+  a text watch not running, holds its lines for a list that can say them, and a mailbox that lost its
+  place forgets them.
+- ⛔ **Never "Archie stops wire fraud", "it catches every payment scam" or "it blocks payment
+  changes".** It is a word match on the subject and the newest part of an email the watch read, so an
+  email worded another way, new details in a picture or an attachment, or a request by phone or by
+  text gets no warning. The entry headed "New or changed payment instructions are never passed on,
+  even when the owner asks" is unchanged.
+- ⚠️ **New has a narrow meaning.** On mail, not on the owner's lists, not one of the agent's people,
+  and not written to in the last two weeks, so somebody last emailed a month ago is new again. On a
+  text, not in the contacts, which needs this Mac's contacts to be readable.
+- ⚠️ **The offer is made only where the chat shows buttons.** On an agent that talks to its owner on
+  Signal, iMessage or Matrix, it is not made, and the switches are the way to turn these on.
+- ⚠️ **The morning list's lines need the morning list on.** The switch says where to turn it on when
+  it is off.
+- ⚠️ **On Archie for Teams** a teammate's mail is nudged in the teammate's chat, and the morning list
+  reads only the owner's own mailboxes. Texts are the owner's alone.
+- ⚠️ **It asks no AI to make any of it.** Say that much and stop.
 
 ## Known Weaknesses — disclose, don't hide
 

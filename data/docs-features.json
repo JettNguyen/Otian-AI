@@ -4281,6 +4281,7 @@
         "Or press Choose files later, then press Add files on the account's row when you are ready."
       ],
       "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
         "Your agent can read only the Sheets and Docs you choose.",
         "Choose files later stops Archie waiting. It does not close the browser window or cancel Google's file window.",
         "Accounts are connected on the computer. Archie Mobile sends you there."
@@ -4288,14 +4289,15 @@
       "phone": "",
       "editions": "both",
       "released": "0.3.12",
-      "claimable": false,
-      "hold": "The entry still says not released yet. Its code (Archie 686e073d) shipped in 0.3.12 on a Mac, with Windows still on 0.3.11, so the entry needs its release line first.",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
       "trust": [
-        "Account choices stay visible, and Google Drive has its own waiting state: BUILT October 20, 2026, not released yet"
+        "Account choices stay visible, and Google Drive has its own waiting state: BUILT October 20, 2026 (Archie `686e073d` to `c9d42ff4`, archie-mobile `ca0b3a2` to `174176e`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)"
       ],
       "wording": "Choose what your agent may use before you sign in. Once your account is connected, choosing Google Drive files is a separate step that you can leave for later.",
-      "guide": ""
+      "guide": "",
+      "wording_pending": true
     },
     {
       "id": "what-archie-connects-to-guide",
@@ -5617,6 +5619,7 @@
       "where": "",
       "how": [],
       "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
         "The teammate's window is signed in to nothing, and nobody can sign it in from a chat.",
         "A teammate cannot approve a press that sends, submits, buys or finalizes something. The job stops and says where to finish it.",
         "Only on Everything you can. Your own window, your sign-ins, your apps and buying stay yours.",
@@ -5626,7 +5629,7 @@
       "editions": "teams",
       "released": "0.3.12",
       "claimable": false,
-      "hold": "Proposed wording is waiting on Jett's yes. The entry also still says in no release yet, though 0.3.12's notes name it.",
+      "hold": "A privacy or safety feature, so the docs wait for its wording to be approved (Jett, October 27, 2026). Proposed wording is still Jett's to approve.",
       "unwatched": true,
       "trust": [
         "✅ Websites: the agent using a site itself, when there is no connector \u2014 SHIPPED 2026-08-18"
@@ -5704,29 +5707,6 @@
         "src/app/company-map.tsx"
       ],
       "near": "Moving your agents into Archie for Teams when you hire"
-    },
-    {
-      "id": "teammates-get-websites-in-a-browser-window-of-their-own",
-      "name": "Teammates get websites in a browser window of their own",
-      "area": "teams",
-      "summary": "On Archie for Teams, a teammate allowed everything gets websites in a separate browser window that is not signed in to anything of the owner's.",
-      "where": "Setup tab, Who can message it: Everything you can",
-      "how": [],
-      "limits": [],
-      "phone": "",
-      "editions": "both",
-      "released": "0.3.12",
-      "claimable": false,
-      "hold": "No TRUST.md entry yet, so the site may not say it.",
-      "unwatched": false,
-      "trust": [],
-      "wording": "",
-      "guide": "",
-      "code": [
-        "crates/archie-runtime/src/gateway/tools_screen.rs",
-        "docs/SITES-AND-APPS.md"
-      ],
-      "near": "On Archie for Teams, the owner can see what each teammate can see and change"
     },
     {
       "id": "agent-menu",

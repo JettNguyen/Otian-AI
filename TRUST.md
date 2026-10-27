@@ -482,6 +482,13 @@ is never a promise about everybody's words.)*
 - ✅ The `ai_included` flag on the user document exists for support and is not a holding that
   changes the What We Hold list: it is part of "whether you have a current plan".
 
+*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* The October 12 amendment says a
+plan coming through starts again "every agent the trial's end had stopped". The trial's end stops
+none now, so a plan brings the AI back to agents that are still running: the session keeper restarts
+each one with the AI within a minute of seeing the plan (`restart_what_started_otherwise` in
+`src-tauri/src/session.rs`), and `reopen_after_plan` still starts any agent an older Archie stopped
+at the trial's end. Agents the owner switched off stay off.
+
 ### ✅ On the two lanes that run on our AI account, each person's calls carry a tag, and we can turn that AI off for one person
 
 **Added 2026-10-04. Built in the Archie repo and not yet deployed; nothing on the site says it yet.**
@@ -3276,6 +3283,24 @@ know: on the strip under every page during the trial, and on the Account page un
   - ⚠️ **Still a forecast.** One long document read costs ten short questions; never "you have
     exactly N answers".
 
+*Amended October 27, 2026 (Archie `3ba19e57` and `afaf0a8d`, in no release yet): the strip after
+the trial.* Once a free trial is over with no plan, the window stays open and the strip is the line
+that says so. As Archie says it: "Your free trial ended Friday, October 30. The reminders you set
+still go off, the morning list still comes if you have it on, and your lists and calendar still
+work. Answers, routines, and writing wait for an AI account of your own, on which Archie itself costs
+nothing for 20 jobs a day, or for a plan with no daily limit, $30 a month or $299 a year. A plan also
+brings Archie Mobile back." When the credits ran out first, it opens "Your free credits are used
+up." Archie for Teams: "... Answers, routines, writing, and Archie Mobile wait for a plan: Archie
+for Teams is $99 a month or $999 a year for your whole team, not per person or per agent, on an AI
+account of your own." With an AI account already connected, its last sentence is "With one, your
+agent thinks again, on the AI account you connected." Get a plan and Set up an AI account stay
+beside it. `trialEndedLine` in
+`src/app/trial-end-words.ts`, read by `TrialStrip` in `src/app/update-banners.tsx`, with the prices
+from `pricing.ts` as before.
+
+- ⛔ **The strip still never calls the time after the trial free.** "Itself costs nothing" belongs to
+  the AI account clause, as everywhere since round four.
+
 ### ✅ When the AI your agent thinks with runs out, it says so once, with the ways to keep going, and keeps what you send until the AI is back: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
@@ -3434,6 +3459,29 @@ calendar work the whole time."
   - ⚠️ **A teammate removed before the AI is back is not answered**, and what they sent goes.
   - ⚠️ **A turn that runs out part way keeps nothing**, for a teammate as for the owner: it asks
     them to tell the owner and send it again.
+
+*Amended October 27, 2026 (Archie `b5c6e57b`, `30821825`, `3ba19e57` and `afaf0a8d`, archie-mobile
+`9370d36`, in no release yet).*
+
+- **The line under the ways now names the reminders and the morning list.** "Without the AI, the
+  reminders you set still go off, the morning list still comes if you have it on, and your lists and
+  calendar still work." with Lists and Calendar, on the computer and the phone (`WITHOUT_AI` in
+  `src/app/money-words.ts`, built from `STILL_WORKS` so the strip says the same, and archie-mobile
+  `src/money.ts`). The proposed wording's last sentence becomes "Your reminders, your morning list,
+  and your lists and calendar work the whole time."
+- **"Not every ending shows the card" no longer holds for a free trial.** A trial that runs out by
+  its days while Archie is open leaves the agents running, and the next message meets the card,
+  refused on the computer before anything is sent. It still holds for a plan that ended.
+- **In a chat app the ways may name a web page.** For Archie's plans on an AI account of the owner's
+  own, a chat app's reply says "For no daily limit, open otianai.com/account on your phone, sign in,
+  and pick a plan" (`for_a_chat_app` in `crates/archie-runtime/src/gateway/money_out.rs`, and
+  `WHERE_TWINS` in `money_answer.rs` for the price answer). The window and Archie Mobile never do.
+  After the trial, the place to set up an AI account is named on the computer alone, because Archie
+  Mobile's Response quality cannot reach the computer then.
+- **One more code, `no_ai_account`.** A plan bought with no AI account of the owner's own behind it
+  yet used to leave every agent unable to start. Now the agents run what needs no AI, and a message
+  meets "Your plan thinks with an AI account of your own, and none is set up yet." with one way on,
+  Set up an AI account (`no_ai_refusal` in `src-tauri/src/auth.rs`).
 
 ### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -3720,6 +3768,12 @@ stopped Ember yesterday at 11:34 PM", on your computer and on your phone."
   dot change as soon as Start or Stop finishes, instead of at its next check five seconds on, and
   stopped the company map's restart from starting agents the owner had stopped: it took any answer
   from Stop as "it was running".
+
+*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* The free trial running out no
+longer stops an agent, so "Ember stopped when the free trial ended" is now written only if the
+switch above is turned off, and read only on agents an older Archie stopped. Those are started
+again once a launch to run what needs no AI (`reopen_after_plan` in `src-tauri/src/session.rs`). The
+⚠️ "Never quote the trial line as an example" stands, now for that reason as well.
 
 ### ✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
@@ -6565,6 +6619,14 @@ setting Archie up does not cost a day.
   from the next release records the new version. The draft and its reasoning are in the Archie repo,
   `docs/drafts/FREE-TIER-TERMS.draft.md`.
 
+*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* `require_access` asks one
+question now, `crate::auth::thinks`, whose answers cover the three doors this entry names and a
+fourth: after a free trial with no plan, the agents start with the AI refused.
+
+- ⛔ **The fourth door is not a tier and has no name.** It answers nothing. "The trial and the free
+  tier are two offers, not two phases of one" stands, and what follows a trial with neither is not
+  a third offer to write beside them.
+
 ### ✅ Your plan is on your Otian account, not on the computer (entry written 2026-09-21)
 
 **Written because `how-it-works/#what-you-need` listed "an Otian account" as one of three things
@@ -6673,6 +6735,14 @@ Backups section.
 - ⛔ **Never say restarting is instant or automatic.** Picking a plan back up is a checkout or the
   billing portal, and the portal is the right door for a lapsed subscriber because a fresh checkout
   bills them twice.
+
+*Amended October 27, 2026 (Archie `3ba19e57`, in no release yet).* Nothing changes for a plan. The
+`App.tsx` condition quoted under Why it's true gains `&& !auth.no_ai_parts`, which is true only after
+a free trial with no plan, never after a plan ended (`Thinks::Closed` for a lapsed plan in
+`src-tauri/src/auth.rs`).
+
+- ⛔ **Never carry the trial's ending over to a plan's.** A plan that ends still meets the paywall,
+  in the three cases this entry names.
 
 ### ✅ It answers ordinary questions too, the way any AI chat does (entry written 2026-09-18)
 
@@ -13333,7 +13403,126 @@ without seeing the screen."
 - ⚠️ **The chat apps draw their own screens.** How Telegram, Slack, Discord, Matrix or iMessage read
   Archie's messages aloud is theirs.
 
+### 🚧 When the free trial ends with no plan, Archie says so ahead of time and keeps doing what needs no AI: BUILT 2026-10-27, in no release yet
 
+*Built October 27, 2026 (Archie `b5c6e57b`, `30821825`, `07351d82`, `3ba19e57`, `afaf0a8d` and
+`226ceb55`; archie-mobile `9370d36`; in no release yet).*
+
+**Proposed wording, Jett's to approve:** "Three days before your free trial ends, and again the day
+before, your agent tells you the day and the time, in the chat app you use with it. If the trial
+ends with no plan, Archie keeps running on your computer without the AI: the reminders you set still
+go off, the morning list still comes if you have it on, and your lists and calendar still work.
+Answers, routines, and writing wait for an AI account of your own or a plan, and come back on their
+own once you have one."
+
+On Archie for Teams the last sentence is "Answers, routines, and writing wait for a plan, and come
+back on their own once you have one."
+
+**Why it's true:**
+
+- **One switch, both editions.** `NO_AI_PARTS_AFTER_TRIAL` in `crates/archie-domain/src/product.rs`
+  is true in both builds (test `the_no_ai_parts_outlive_the_trial_in_both_editions`).
+- **One answer to "what does this agent think with".** `Thinks` in `src-tauri/src/auth.rs`
+  (`decide_thinks`) is `Ai`, `NoAi` or `Closed`. `NoAi` is a free trial over by its days or its
+  credits with no plan, and (in Archie) no AI account of the owner's own; it is also a plan that
+  thinks on the owner's own AI account, bought before one is set up. Four places read it, so
+  they cannot disagree: `require_access` lets an agent start on anything but `Closed`, so a relaunch
+  after the deadline starts the agents; `gateway_start` hands a `NoAi` agent the free credits'
+  sentinel, skips the key check and the billing service's wake (both in
+  `src-tauri/src/commands/gateway_lifecycle.rs`); the session keeper (`keep_the_parts_with_no_ai`
+  in `src-tauri/src/session.rs`) corrects the cached trial flag at the deadline and restarts each
+  running agent whose start answered differently from the account now; and `AuthStatus.no_ai_parts`
+  tells the window. Tests: `an_expired_trial_keeps_the_agents_running_with_the_ai_off`,
+  `a_relaunch_after_the_deadline_starts_agents_with_the_ai_off`,
+  `a_plan_or_an_own_ai_account_brings_the_ai_back`, `a_trial_is_over_by_its_days_or_its_credits`.
+- **The AI is refused on the computer, before anything is sent.** `set_no_ai` in
+  `crates/archie-net/src/llm/trial.rs` is checked first on every call through Otian's proxy and
+  answers with the billing service's own `trial_expired` or `trial_exhausted`, so the money card,
+  the kept message and the pick-up (the entry this one follows) run unchanged. A key of the owner's
+  own is not refused by it (`after_the_trial_a_proxy_call_is_refused_here_and_an_own_key_is_not`);
+  on Archie for Teams the agent is not handed that key after the trial, because the business
+  edition thinks only with a plan.
+- **What still runs needs no AI.** A reminder goes off from its own lane, the owner's words read
+  back with no model call (`crates/archie-runtime/src/reminders.rs`), the morning list is built in code (`crates/archie-runtime/src/morning.rs`, `gateway/morning_list.rs`), and the
+  Lists and Calendar tabs are the window's own. A routine is skipped before it is built, and the
+  owner is told once in a run of Archie which one did not run and what brings routines back
+  (`waits_for_the_ai` in `crates/archie-runtime/src/gateway/routines.rs`, test
+  `a_routine_that_waits_for_the_ai_after_the_trial_says_what_brings_it_back`). The pipeline test
+  `after_the_trial_a_message_meets_the_card_and_a_reminder_still_goes_off` runs a message and a
+  reminder through a real gateway after the deadline.
+- **The window stays open.** `App.tsx` no longer puts `PaywallScreen` up when `no_ai_parts` is true,
+  and the trial strip says the day the free AI ended, what still works, what waits, and the ways on
+  (`trialEndedLine` in `src/app/trial-end-words.ts`, tests in `trial-end-words.test.mjs`), with Get a
+  plan and Set up an AI account beside it as before. A plan bought on a phone is heard the way the
+  paywall heard it, by a wait on the server (`useAccountWait` in `src/app/account-wait.ts`).
+- **The warnings.** `crates/archie-runtime/src/gateway/trial_end.rs`, sent from the agent's minute
+  tick in `gateway/worker.rs`. What was told is written in one file by account
+  (`trial_warnings.json` beside the bundles) before it is sent, and put back if the send fails, so
+  three agents send one, and a restart sends none again. An agent on a chat app goes first; one that
+  talks only in Archie's window waits 15 minutes past the mark. A computer asleep through the
+  three-day mark sends only the one-day warning, and nothing is sent at or after the end. Owed only
+  on a live free trial with no plan, and in Archie only without an AI account of the owner's own
+  (`decide_warn` in `src-tauri/src/auth.rs`). Tests:
+  `each_warning_goes_once_at_its_mark_for_the_whole_account`,
+  `a_sleep_through_the_three_day_mark_sends_only_the_one_day_warning`,
+  `a_window_only_agent_waits_for_a_chat_app_and_a_failed_send_is_put_back`,
+  `nothing_is_sent_without_the_shells_say_so_or_a_file_to_keep`,
+  `the_warnings_are_owed_only_on_a_free_trial_with_no_plan`.
+- **The words.** Built in code, with no AI call: the day by `clock::day_and_date` and the time by
+  `clock::clock_face`, never "in 3 days". A chat app hears otianai.com/account for the plans that page
+  sells to a phone (Archie at $30 a month or $299 a year, on the owner's own AI account). Archie's
+  window, which is what Archie Mobile shows, hears Get a plan on the computer instead, and a chat
+  app's message mirrored into the window is mirrored in the window's words (`Channel::send_each` in
+  `crates/archie-net/src/channel.rs`, `mirror.rs`, test
+  `a_message_said_two_ways_reaches_each_half_in_its_own_words`;
+  `the_words_follow_each_edition_and_name_the_web_page_only_on_a_chat_app`).
+- **It opens nothing that costs Otian money.** The billing service refuses an ended trial on its own
+  copy of the deadline (`trialRefuse` with `trial_expired` in `stripe-webhook/index.js`), and the
+  Firestore rules refuse the phone relay on theirs (`hasLiveTrial` in `firestore.rules`). Neither was
+  changed.
+- **Cost:** no AI call anywhere in it. A warning goes into that one agent's history, up to 295
+  tokens with its label on later turns until it ages out (Archie `docs/COST-MEASURED.md` section 48).
+
+**The boundaries.**
+
+- ⛔ **Never "Archie is free after the trial", a free plan, or a free version.** With no AI account
+  and no plan nothing answers: no replies, no routines, no writing. The free tier is a separate
+  offer with its number (20 jobs a day on an AI account of your own), and this is not a third one.
+- ⛔ **Never that Archie Mobile keeps working after the trial.** The phone relay is closed to an
+  account with no plan and no live trial, so after the end nothing reaches Archie Mobile and no
+  phone notification is sent. A plan brings the phone back; an AI account of the owner's own alone
+  does not. The phone says "Your account is not allowed to use phone access right now. It needs a
+  plan, or free credits that have not run out. To get a plan, press Get a plan at the bottom of
+  Archie's window on your computer."
+- ⛔ **Never "it keeps running in the cloud" or anything hosted.** It runs on the owner's computer,
+  only while that computer is on, awake, and running Archie. A reminder due while it sleeps goes
+  off when it wakes, and says why it is late.
+- ⛔ **Never "you are always warned three days ahead".** The warnings are sent from the computer, so
+  a computer off or asleep through both marks sends neither, and one asleep through the first sends
+  only the second. Say "your agent tells you", not "we email you": nothing is emailed.
+- ⛔ **Never on Archie Mobile, or anywhere Apple reviews, "buy on our website".** The web page is
+  named only inside a chat app, never in the window and never on the phone (Apple's rules 3.1.1(a)
+  and 3.1.3).
+- ⚠️ **The web page sells only Archie on the owner's own AI account.** The plan with the AI included
+  and Archie for Teams are bought from Get a plan in the window on the computer, and the chat app
+  says so, until the site sells them (Archie `docs/OPEN-THREADS.md`).
+- ⚠️ **Only a free trial's end.** A plan that ended still meets the paywall, as the entry on what
+  happens when a plan ends says, and so does the end of the plan with the AI included.
+- ⚠️ **Reminders already set go off; a new one cannot be asked for.** Setting one means the agent
+  reading the request, which is the AI's part, so "remind me to..." after the trial meets the card and
+  is kept, and set once the AI is back, as the entry this one follows says of anything kept.
+- ⚠️ **Once per account, on one agent.** An owner with three agents is told once, by whichever
+  reaches the mark first.
+- ⚠️ **Never to somebody who is paying, or to an Archie owner with an AI account of their own**,
+  whose end of the trial is the free tier, with the AI still answering.
+- ⚠️ **"Come back on their own" means within about a minute of Archie seeing the plan or the AI
+  account.** An AI account set up on the computer counts at once. A plan is bought in a browser, and
+  Archie hears it while Archie is open, or at its next check otherwise; the agents think again within
+  a minute of that, and what was kept while the AI was out is answered at the first check after.
+- What it replaced: at the deadline every agent stopped, reminders included, and the paywall covered
+  the window, lists and calendar with it (`close_expired_trial`, which stays for the switch turned
+  off and for the plan with the AI included). An owner on a phone heard nothing until a message their
+  agent could not answer.
 
 ## Known Weaknesses — disclose, don't hide
 
@@ -13564,6 +13753,13 @@ Your agent needs an AI account of your own either way, and you pay that company 
 The old version of this sentence ended "you can still have the fourteen days by connecting an AI
 account of your own", which was true and is no longer the whole answer: connecting one now opens the
 app whether or not the fourteen days are available.
+
+*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* The standing true sentence gains
+one: "Fourteen days free, with nothing counted. After that Archie is free on an AI account of your
+own, with a limit of 20 jobs a day. A plan is $299 a year or $30 a month, takes the limit off, and
+runs up to ten agents. With neither, Archie keeps your reminders, your morning list, and your lists
+and calendar going on your computer, and the AI waits. Your agent needs an AI account of your own
+either way, and you pay that company directly."
 
 ### ⛔ The starter credits cannot read email, and the site said they could
 

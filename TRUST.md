@@ -10164,8 +10164,8 @@ cards in the owner's chat still waiting on Send, or on Draft a reply or Dismiss
 (`waiting_for_the_morning` in `crates/archie-runtime/src/email/replies/draft.rs`), read from the cards
 on disk. Still no model call anywhere in it.
 
-- **Offered, never on by itself.** Since `72e3bd2a` (October 17, 2026), which this entry never
-  recorded, a new interview writes a line of work's list down as not on and offers it once. The list
+- **Offered, never on by itself.** Since `72e3bd2a` (October 17, 2026, the amendment above), a new
+  interview writes a line of work's list down as not on and offers it once. The list
   everyone has reads as off with no file at all (`is_on`): only a yes turns it on. Test:
   `no_agent_is_ever_sent_a_morning_list_it_was_not_asked_for`, which runs every kind of agent through
   never offered, offered and passed over, Another time, asked about, declined and stopped, each with

@@ -3533,6 +3533,37 @@ Teams' trial, and after a plan ends in Archie.*
   then what the trial's end says").
 - ⛔ **The Teams line never says what still works.** After day 14 with no plan, nothing does.
 
+*Amended October 27, 2026 (Archie `de7f59d9`, in no release yet, and not working until the billing
+service is deployed with `c97eecbb`): what the plan chooser's button opens.*
+
+- **A first-time buyer's door is the one it was.** An account with no Stripe customer opens the
+  plan's Payment Link from the chooser behind Get a plan and See plans, with nothing asked first
+  (`open_plan_door` in `src-tauri/src/auth.rs`, test
+  `a_first_time_buyer_opens_the_payment_link_and_asks_nobody`).
+- **An account that already has one is sent through the billing service**, which opens Stripe's
+  checkout on that customer for the plan picked, or Stripe's page for managing the plan when a
+  subscription is still open, and the chooser then says, as Archie says it: "Your earlier plan has
+  not ended yet, so Archie opened the page where you manage it instead of charging you for a second
+  one. If a payment is due, you can pay it there." (`PlanChoice` in `src/app/auth.tsx`; test
+  `a_returning_owners_door_asks_the_billing_service`.) Which door an account gets is read from its
+  own record at each check (`has_customer` in `crates/archie-core/src/auth.rs`), and an account not
+  read yet asks the billing service, which reads the record itself.
+- **When the billing service cannot make the checkout, nothing opens and nothing is charged**, and
+  the chooser says what to do, as Archie says it: "Archie could not open the page to pay for your
+  plan, and nothing was charged. Wait a minute, then press the Continue button again. If it still
+  does not open, email questions@otianai.com and we will help you start it." It never falls back to
+  the Payment Link, which would charge an account with a customer and grant nothing (test
+  `a_failed_route_says_what_to_do_and_never_opens_the_payment_link`).
+- **otianai.com/account does the same**, once its patch is applied: a first-time buyer's buttons
+  open the Payment Link as before, and an account with a customer gets the checkout or the portal in
+  the tab the press opened.
+- **Both editions**, through the same route, from each edition's own plan links.
+- ⛔ **Never "buy again in one click", and never that a second plan can be started beside one still
+  open.** The second is what the portal answer exists to stop.
+- ⚠️ **The price is the Payment Link's.** The billing service sells only what one of the account's own
+  active plan links sells, at that link's price, and refuses any other address. A page may say the
+  price is the same as buying the first time; never that it is set or changed anywhere else.
+
 ### ✅ When the AI your agent thinks with runs out, it says so once, with the ways to keep going, and keeps what you send until the AI is back: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
@@ -8376,6 +8407,69 @@ of the three cases."
 - The ⛔ **"Never say restarting is instant or automatic"** stands, and the strip, the card and the
   message at the end now point at Get a plan in Archie. Archie `docs/OPEN-THREADS.md` has what a
   returning owner's checkout still needs, under the same heading as above.
+
+*Amended October 27, 2026 (Archie `c97eecbb` and `de7f59d9`, in no release yet, and not on the
+billing service until it is deployed with them): a plan set to end is warned ahead, and buying again
+after one ended takes.*
+
+**Proposed wording, Jett's to approve**, one sentence in the Archie case with no AI account of your
+own, after "Your agent tells you once, in the chat app you use with it, that the plan has ended and
+what brings the AI back." in the proposed wording above: "If you stopped the plan yourself, it also
+tells you three days before it ends, and again the day before." And one at the end: "If you come back
+later, you buy a plan the same way as the first time, on the same account."
+
+**Why it's true:**
+
+- **The end date is written now.** When Stripe says a subscription is set to end (`cancel_at`, set by a
+  cancellation in the billing portal), `customer.subscription.updated` writes it to the account as
+  `license_until` and `licence_until`, in epoch milliseconds like every other end date, and writes
+  null when the cancellation is undone (`planEndsAtMs` in `stripe-webhook/subscription-events.js`,
+  `tierWriteFields` in `stripe-webhook/access-vocabulary.js`; tests in `subscription-events.test.js`,
+  `access-vocabulary.test.js` and `buy-again.test.js`). That is the date the computer was already
+  reading on a live plan (`AccountFacts::plan_end` in `crates/archie-core/src/auth.rs`, test
+  `a_canceled_plans_end_reads_from_what_the_billing_service_writes`), so the warnings three days and
+  one day ahead, which the amendment above describes, now have something to read.
+- **It decides nothing.** `decide` in `crates/archie-core/src/auth.rs`, `entitled` in
+  `firestore.rules` and `decideAccess` in the site's `js/access.js` read the date only on a granted
+  license. A plan still ends when Stripe says it has, with `customer.subscription.deleted`.
+- **A comp's own end date is never moved by a subscription.** The date is written only when the
+  license after the write is a plan, and a granted license keeps the one staff set (test "a granted
+  license's own end date is never touched").
+- **Buying again takes.** A Payment Link makes a new Stripe customer for every subscription, and the
+  billing service refuses to bind a second customer to an account, so an owner whose plan ended paid
+  and got no plan. Now an account that already has a customer buys through the billing service
+  (`POST /account/plan-checkout`, `stripe-webhook/plan-checkout.js`), which makes the checkout on the
+  customer the account already has, for the price of the Payment Link the owner picked, and the
+  webhook grants it by the same path a Payment Link's checkout takes (test "an owner whose plan ended
+  gets a session on their own customer, and paying for it grants the plan").
+- **The old subscription's late end cannot take the new plan away.** The account records which
+  subscription its plan is on (`stripe_subscription_id`), and the updated and deleted events act only
+  on that one, or when the customer has no other subscription still open (`eventActsOnPlan` in
+  `stripe-webhook/subscription-events.js`; test "a late end of the old subscription leaves the new
+  plan in place").
+
+**The boundaries.**
+
+- ⚠️ **Not before the billing service is deployed with this.** Until then the ⚠️ "Never 'you are
+  warned before your plan ends', for now" above stands, and so does the caveat that a returning
+  owner's checkout may not take.
+- ⚠️ **Once it is deployed, the ⚠️ "Never 'you are warned before your plan ends'" above becomes:**
+  warned ahead only when Stripe says the plan is set to end, which is a cancellation in the billing
+  portal. A payment that fails is still told once, when the plan ends, since Stripe sets no end ahead
+  for it. The warnings come from the computer, so a computer off or asleep through both marks sends
+  neither.
+- ⚠️ **Only where the amendment above sends them**: in Archie, to an owner with no AI account of their
+  own. An owner with one lands on the free tier and is not warned, and Archie for Teams says nothing
+  new ahead of a plan's end.
+- ⛔ **"Never say restarting is instant or automatic" stands, with its reason changed.** A fresh
+  checkout no longer bills anybody twice: an account whose subscription is still open (unpaid, say)
+  is sent to the billing portal to settle that one instead of being sold a second, and a canceled one
+  gets a new checkout on its own customer. It is still a checkout somebody completes, and the plan
+  arrives when Stripe tells the billing service, not at the press.
+- ⛔ **The takeover guard is unchanged, and never say otherwise.** An account stays bound to the
+  first Stripe customer that paid for it. A Payment Link paid on another customer is still refused
+  with no plan granted: an older Archie, or a link opened by hand. Never say a plan can be moved to
+  another Stripe customer, and never that any payment link grants a plan to any account.
 
 ### ✅ It answers ordinary questions too, the way any AI chat does (entry written 2026-09-18)
 

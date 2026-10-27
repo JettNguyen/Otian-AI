@@ -1208,7 +1208,8 @@ can reach it. The key is transmitted only as `x-api-key` to Anthropic / bearer t
 true and sufficient.
 
 **Amended October 23, 2026, for a key pasted on the phone** (Archie `359a7ca5`, archie-mobile
-`2dc8e55`, in no release of Archie yet but in Archie Mobile 1.5 on iPhone). A key typed into Archie
+`2dc8e55`; RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie
+Mobile half on iPhone in 1.5 and not on Android yet). A key typed into Archie
 Mobile reaches the computer inside a command sealed under the owner's pairing key, so it crosses
 Otian's phone mailbox on the way, sealed with a key we never receive, and is then stored in the
 Keychain like any other. "Sent to the
@@ -1954,8 +1955,8 @@ archie-mobile `04da3b6`):
   once a computer release and the phone update that carry it are both out.
 - ⚠️ **The phone still cannot connect an account or paste a key.** No secret travels through the
   mailbox, so a skill waiting on an account says to connect it at the computer. (Amended October 23,
-  2026: from Archie `359a7ca5` and archie-mobile `2dc8e55` and `4446f38`, in no release of Archie yet
-  but in Archie Mobile 1.5 on iPhone, the owner's phone can paste an AI account's key and the Bland
+  2026: from Archie `359a7ca5` and archie-mobile `2dc8e55` and `4446f38`, in Archie 0.3.12 on a
+  Mac and in Archie Mobile 1.5 on iPhone, though not yet on Windows or Android, the owner's phone can paste an AI account's key and the Bland
   key for calls, sealed like every command. Signing in to an account still happens at the computer.
   See "More of an agent's setup from the owner's phone".)
 - **The update check itself is unchanged.** It is the same plain request to the same address (see
@@ -13928,14 +13929,14 @@ invite message from your phone."
   response is a newly created teammate invite, encrypted for the paired owner.
 - The computer still runs the commands and must be awake, connected to the internet, and running
   Archie. Reset access, blocking, and approving chat-app requests remain computer-only. (Amended
-  October 23, 2026: from Archie `c8b2a4fb` and archie-mobile `d0a156a`, in no release of Archie yet
-  but in Archie Mobile 1.5 on iPhone, letting people in, Not now, blocking and unblocking are on the
+  October 23, 2026: from Archie `c8b2a4fb` and archie-mobile `d0a156a`, in Archie 0.3.12 on a Mac
+  and in Archie Mobile 1.5 on iPhone, though not yet on Windows or Android, letting people in, Not now, blocking and unblocking are on the
   owner's phone too, on Archie for Teams. Reset access stays at the computer.)
 - The earlier notes below that the phone cannot add/edit describe the existing releases, not this
   new code. The earlier OPEN-THREADS claim that a key could not travel in a relay response was too
   restrictive: responses already have end-to-end encryption under the owner's pairing key.
 
-### 🚧 More of an agent's setup from the owner's phone: letting people in, Call businesses, the AI account's key, the two watches, and whose each mailbox is: BUILT October 23, 2026 (Archie `c8b2a4fb` to `dec642f6`, archie-mobile `d0a156a` to `ae9a0b8`), in no release, the Archie Mobile half on iPhone in 1.5 (not on Android yet)
+### 🚧 More of an agent's setup from the owner's phone: letting people in, Call businesses, the AI account's key, the two watches, and whose each mailbox is: BUILT October 23, 2026 (Archie `c8b2a4fb` to `dec642f6`, archie-mobile `d0a156a` to `ae9a0b8`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)
 
 **Why it was built.** Jett, October 23, 2026: most of the time the owner is not at the computer the
 agent runs on, and these were the settings the agent kept sending them back to it for. The same day
@@ -13978,7 +13979,10 @@ to Google or Microsoft still happens on the computer."
 
 **Boundaries:**
 - ⛔ Never say any of it works from the phone until a release of Archie and an Archie Mobile build
-  both carry it. A phone newer than its computer says to update Archie on the computer.
+  both carry it. A phone newer than its computer says to update Archie on the computer. Archie
+  0.3.12 on a Mac and Archie Mobile 1.5 on iPhone do; Windows is still on 0.3.11 and the Android
+  download is still the October 5 build, so never say a Windows computer or an Android phone does
+  any of it.
 - ⛔ Never that the phone signs in to Google, Microsoft or Zoom, or reconnects an account. It shows
   which account stopped opening and says where on the computer to press Reconnect.
 - ⛔ Never that a key "never leaves your computer" or "never touches our servers". One pasted on the
@@ -15277,11 +15281,12 @@ All paths are in the Archie repo.
   them, and a voicemail it leaves names no number to call back, because the call comes from one of
   Bland's numbers.
 - ⛔ Never say it can be switched on from Archie Mobile. (Amended October 23, 2026: from Archie
-  `359a7ca5` and archie-mobile `4446f38`, in no release of Archie yet but in Archie Mobile 1.5 on
-  iPhone, it can, with the calls note above Turn on calls and the key checked with Bland first, as on
-  the computer. This line
-  stands until a release and a phone build both carry it. See "More of an agent's setup from the
-  owner's phone".)
+  `359a7ca5` and archie-mobile `4446f38`, in Archie 0.3.12 on a Mac and in Archie Mobile 1.5 on
+  iPhone, though not yet on Windows or Android, it can, with the calls note above Turn on calls and
+  the key checked with Bland first, as on the computer. A release and a phone build now both carry
+  it on a Mac and an iPhone, so this line holds for Windows and Android, and what a page may say for
+  a Mac and an iPhone is decided in "More of an agent's setup from the owner's phone", which is
+  still 🚧.)
 - ⛔ Never "calls during business hours" or "only when they're open" as a promise. A map listing's
   published hours are honored when the listing has them; otherwise the only limit is 8:00am to
   9:00pm on the business's clock, and that clock is a best reading: an area code says where a

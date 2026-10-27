@@ -35,7 +35,7 @@ only shape the checker cannot see.
 | `$24.92` | What the yearly plan works out to per month | 299 / 12 |
 | `$59` | Archie with the AI included, billed monthly | Stripe subscription price on the "Archie, AI included" product. Decided by Jett 2026-09-02: the plain month plus $29, sized so $25 of usage at list price and the card fee fit inside. The app's copy derives from `src/app/pricing.ts` in the Archie repo (`PLAN_AI_MONTHLY_CENTS`); `docs/AI-INCLUDED-PLAN.md` there has the arithmetic |
 | `$599` | Archie with the AI included, billed yearly | Same (`PLAN_AI_YEARLY_CENTS`). No per-month or savings figure is published for this plan, on purpose: two derived numbers per plan was already the drift the check exists for |
-| `$2` | The free starter credits a new install is given, spent on Anthropic usage we pay for. Lasts until it is spent or 14 days pass, whichever is first | Archie repo, `TRIAL_GRANT_MICROS` on the billing service (2,000,000 micro-dollars) and `TRIAL_DAYS` in `crates/archie-core/src/credits.rs`. Published for the first time on 2026-09-03: the Terms had described the gift without ever naming its size or its clock, so somebody whose credits expired unspent had been told the opposite of what happens |
+| `$2.80` | The free starter credits a new install is given, spent on Anthropic usage we pay for. Lasts until it is spent or 14 days pass, whichever is first | Archie repo, `TRIAL_GRANT_MICROS` on the billing service (2,800,000 micro-dollars, set in Render's environment and as the code's default on 2026-10-27, sized so a typical owner's credits last to day 7; it was $2 until then) and `TRIAL_DAYS` in `crates/archie-core/src/credits.rs`. Published for the first time on 2026-09-03: the Terms had described the gift without ever naming its size or its clock, so somebody whose credits expired unspent had been told the opposite of what happens |
 | `$25` | AI usage included each month on that plan, on Claude Sonnet, refilled each paid month with nothing carried over. **Do not print "at Anthropic's published prices" or any wording that denominates the allowance in the provider's own rate card.** It is what the meter runs on and it is what makes the plan read as reselling Anthropic rather than selling Archie with a model inside it; `docs/LEGAL-REVIEW.md` in the Archie repo has the clause it turns on | Archie repo, `PLAN_GRANT_MICROS` on the billing service (25,000,000 micro-dollars) and `PLAN_AI_ALLOWANCE` in `src/app/pricing.ts`. Against `docs/COST-MEASURED.md` at the 2026-09-12 prices: a light month fits several times over, a moderate month is half to most of it, a heavy month does not fit |
 | `$30` | Retired as a cost claim on 2026-10-08, and printed nowhere as one: it was roughly what a heavy month cost with "Use this for every skill" on, a measured $23 to $39 on Claude Haiku 4.5. Economy runs Claude Haiku 5.5 since Archie `7f1014d6`, so it no longer describes that month, and no page may print it as one. The string stays for the monthly plan above | Archie repo, `docs/COST-MEASURED.md`. Measured 2026-08-10, not modelled. The checkbox's saving is now the per-reply figure in TRUST.md, "The quality dial is a default", from section 21.6 |
 | `$61` | What a year saves against paying monthly | (30 x 12) - 299 |
@@ -130,7 +130,7 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$0.10` | Two things: a Copilot Studio reply that takes two actions, prepaid (2 + 5 + 5 = 12 credits at $0.008 is $0.096, printed rounded on the pages and exact in the Sources fold), and one Agentforce action, 20 Flex Credits | Microsoft Learn rate table; `https://www.salesforce.com/blog/flex-credits/`, "One Agentforce action consumes 20 Flex Credits ($0.10 USD)" | Checked: 2026-09-12 |
 | `$0.096` | The Copilot Studio two-action reply, prepaid, exact; Sources fold only | Our arithmetic on the two Microsoft pages above | Checked: 2026-09-12 |
 | `$0.12` | The same 12 credits pay as you go, at $0.01 each | Microsoft Learn rate table above | Checked: 2026-09-12 |
-| `$2` | Salesforce Agentforce, per conversation. The `$2` in the Money table is our starter credits; this row is theirs | `https://www.salesforce.com/agentforce/pricing/`, "$2 USD per conversation" | Checked: 2026-09-12 |
+| `$2` | Salesforce Agentforce, per conversation. Our starter credits are the Money table's `$2.80`; this row is theirs | `https://www.salesforce.com/agentforce/pricing/`, "$2 USD per conversation" | Checked: 2026-09-12 |
 | `$500` | Agentforce Flex Credits, per 100,000 | Same page, "$500 USD per 100,000 Credits" | Checked: 2026-09-12 |
 | `$5` | The prepaid credit an AI company asks for before its key works: the usual minimum at OpenAI and xAI, and "plenty to start" at Anthropic, DeepSeek and Mistral. Printed by the Archie guides that docs/ copies word for word (connect-openai, connect-xai, picking-your-ai-account), so a change is made in those guides | Each company's billing page, as the Archie repo's `data/marketplace/resources/connect-*.json` give it; the guides were last checked on August 24, 2026 (OpenAI, xAI) and October 13, 2026 (Picking your AI account) | Checked: 2026-10-27, against the guides |
 | `$13` | Claude Code, per developer per active day, Anthropic's own average across enterprise deployments | `https://code.claude.com/docs/en/costs` | Checked: 2026-09-12 |
@@ -259,12 +259,12 @@ re-counts it rather than trusting this file.
 
 ## Figures that are deliberately unpublished
 
-- **The size of the free-credit grant.** It is $2 of Anthropic usage (`TRIAL_GRANT_MICROS` in
+- **The size of the free-credit grant.** It is $2.80 of Anthropic usage (`TRIAL_GRANT_MICROS` in
   the Archie repo's `stripe-webhook/index.js`), and the app itself refuses to say so: the trial
   strip counts answers left rather than dollars left, because nobody knows what a dollar of an AI
   model buys, so the figure supports no decision the reader is trying to make (`src/app/update-banners.tsx`,
   "Why not dollars"). The site says the credits run out, and says when: the 14 days above, or the
-  credits, whichever is first. Publishing $2 here would put a number on the site that the product
+  credits, whichever is first. Publishing $2.80 here would put a number on the site that the product
   deliberately does not put on screen.
 - **The free-credit caps.** Per account, per computer, per day. The app's refusal says "claimed
   here" rather than which limit was hit, so a person probing is not told which knob to turn.

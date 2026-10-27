@@ -746,6 +746,13 @@ about five first evenings instead of about four and a half.
   passes $25 on its replies and scheduled tasks alone, before any mail, which the plan does not
   read.)*
 
+*Amended October 27, 2026 (Archie `0454900d`; Render's environment the same day).* The free credits
+are $2.80 for an owner who starts from today, up from $2: `TRIAL_GRANT_MICROS` set to 2,800,000 in
+Render's environment, live from 10:35am, and the code's default to match. Jett's October 11 call sized
+the grant so a typical owner's credits last until day 7, and $2 covered about five first evenings. An
+owner whose credits started before then keeps the $2 they were given, because
+each grant is fixed when it is made. The pricing page, the Terms of Service and FACTS.md say $2.80.
+
 ### ✅ A model on your own computer, found and checked before anything binds to it (SHIPPED 2026-09-01, Archie 0.2.2)
 
 **Added 2026-09-18, and it should have existed on 2026-09-01.** This capability shipped, and

@@ -558,6 +558,30 @@
       "near": "A microphone and Talk out loud beside Archie's message box, and where what you say goes: the window only, SHIPPED in Archie 0.3.2 on 2026-09-30"
     },
     {
+      "id": "voice-note-answer-made-to-be-read-out",
+      "name": "A voice note's written answer is made to be read out",
+      "area": "voice",
+      "summary": "Send your agent a voice note on a chat app, and the answer it writes back is made for your phone to read aloud: a table comes as one sentence a row, and a link's address goes after the answer.",
+      "where": "On a chat app like Telegram, and in Archie Mobile's notification.",
+      "how": [],
+      "limits": [
+        "It changes how the answer is written, not how your phone or your car reads it.",
+        "A typed message is answered as before, with its tables and links.",
+        "A link's address is still read, at the end of the answer."
+      ],
+      "phone": "Archie Mobile's notification says the same sentences, and the conversation keeps the answer as your agent wrote it.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet. The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "🚧 A voice note answered in writing is written for a phone to read out, on a chat app and in Archie Mobile's notification: BUILT 2026-10-27, in no release yet, not yet heard in a car"
+      ],
+      "wording": "Send your agent a voice note on a chat app like Telegram, and the answer it writes back is made for your phone to read out to you: a table comes as one sentence a row, a list as sentences, with every name, amount and date kept, and a link's address goes after the answer instead of being read out in the middle of it. Send one from Archie Mobile and the notification says the same sentences, while the conversation keeps the answer as your agent wrote it.",
+      "guide": ""
+    },
+    {
       "id": "archie-mobile",
       "name": "Archie Mobile",
       "area": "phone",
@@ -1106,6 +1130,31 @@
         "src/app/texts.tsx"
       ],
       "near": "Mail from people you write to is read first, and other mail can take a few minutes"
+    },
+    {
+      "id": "mail-and-text-watch-catches",
+      "name": "What the mail and text watches point out",
+      "area": "email",
+      "summary": "Once you say yes, Email Manager and Text Replies point out someone new still waiting an hour, a reply you owe, and an email asking to change where a payment goes.",
+      "where": "In your chat with your agent, on the reply's card, and in your morning list.",
+      "how": [],
+      "limits": [
+        "Only on an AI account of your own, and only once you say yes. Each one has its own switch.",
+        "Nothing is sent for you. A reply goes only when you press Send.",
+        "Replies you owe are found in Gmail only.",
+        "It cannot stop a payment scam. It tells you to call them at a number you already have."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet. The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "🚧 Email Manager and Text Replies can watch for someone new waiting an hour, replies you owe, and an email asking to change where a payment goes, once you say yes: BUILT 2026-10-27, in no release yet, never run on a real inbox or a real Mac's Messages"
+      ],
+      "wording": "On an AI account of your own, Email Manager and Text Replies can watch for three more things, once you say yes. If someone new to you is still waiting an hour after their card, Archie posts the card again at the bottom of your chat, with the reply it wrote. Your morning list names someone you know who wrote two or more days ago and has not heard back, with who, when and what it was about. And when an email asks to change where a payment goes, its card and your next morning list say so, and say to call them at a number you already have, not one from the email. Nothing is ever sent for you: a reply still goes only when you press Send. Archie offers these once, under the first card they would have changed, and each one has its own switch.",
+      "guide": ""
     },
     {
       "id": "mail-filed-away-and-put-back",
@@ -2259,7 +2308,7 @@
       "id": "morning-list-for-every-agent",
       "name": "Morning list for every agent",
       "area": "routines",
-      "summary": "At the end of your first evening, your agent offers a 7:00am list of today's calendar, reminders, to-dos, and email replies waiting on your Send.",
+      "summary": "At the end of your first evening, your agent offers a 7:00am list of today's calendar, reminders, to-dos, email replies waiting on your Send, and the bills, money owed and deadlines on your lists.",
       "where": "On the Routines tab, the Morning list row, on every agent.",
       "how": [
         "Press Yes, or a time, under the offer at the end of your first evening.",
@@ -2280,7 +2329,7 @@
       "trust": [
         "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14"
       ],
-      "wording": "At the end of your first evening, your agent offers to send you a list each morning: today's calendar and reminders, your to-dos, and any email replies waiting on you to press Send, at 7:00am. For a restroom company it is today's stops by driver, the rentals past their end date, and who has not been billed. It is put together without asking an AI anything, so it costs nothing and cannot make anything up. It comes only once you say yes, and a morning with nothing on, it says nothing. There is a Stop button on it.",
+      "wording": "At the end of your first evening, your agent offers to send you a list each morning at 7:00am: today's calendar and reminders, your to-dos, any email replies waiting on you to press Send, and the bills, money owed and deadlines on your lists. For a restroom company it is today's stops by driver, the rentals past their end date, and who has not been billed. It is put together without asking an AI anything, so it costs nothing and cannot make anything up. It comes only once you say yes, and a morning with nothing on, it says nothing. There is a Stop button on it.",
       "guide": ""
     },
     {
@@ -4893,6 +4942,31 @@
       "guide": ""
     },
     {
+      "id": "when-the-free-trial-ends",
+      "name": "When the free trial ends",
+      "area": "plans",
+      "summary": "Three days before your free trial ends, and again the day before, your agent tells you the day and the time in your chat app. In Archie, what needs no AI keeps running after it ends.",
+      "where": "In the chat app you use with your agent, and on the strip at the bottom of Archie's window.",
+      "how": [],
+      "limits": [
+        "After the trial, the reminders you set still go off, the morning list still comes, and your lists and calendar still work. Answers, routines and writing wait for an AI account of your own or a plan.",
+        "Archie Mobile waits for a plan.",
+        "The warnings come from your computer, so it has to be on and running Archie to send them.",
+        "On Archie for Teams, your agents stop when the trial ends, until there is a plan. Nothing is deleted."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet. The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "🚧 When the free trial ends with no plan, Archie says so ahead of time and keeps doing what needs no AI: BUILT 2026-10-27, in no release yet"
+      ],
+      "wording": "Three days before your free trial ends, and again the day before, your agent tells you the day and the time, in the chat app you use with it. If the trial ends with no plan, Archie keeps running on your computer without the AI: the reminders you set still go off, the morning list still comes if you have it on, and your lists and calendar still work. Answers, routines, and writing wait for an AI account of your own or a plan, and come back on their own once you have one.",
+      "guide": ""
+    },
+    {
       "id": "the-spend-note-in-chat",
       "name": "The spend note in chat",
       "area": "plans",
@@ -5333,6 +5407,30 @@
         "src/app/mac-glass.ts"
       ],
       "near": ""
+    },
+    {
+      "id": "screen-reader-hears-the-answer",
+      "name": "A screen reader hears what your agent is doing, then its answer",
+      "area": "app",
+      "summary": "With VoiceOver, TalkBack or another screen reader on, Archie says when your agent starts working and the first thing it is doing, then reads the answer as soon as it is done.",
+      "where": "In Archie on your computer and in Archie Mobile, with your screen reader on.",
+      "how": [],
+      "limits": [
+        "It says the first thing your agent does, then the answer. A long reply is quiet in between.",
+        "On the talk screen, the answer is your agent's own voice.",
+        "Chat apps like Telegram and Slack read their own screens in their own way."
+      ],
+      "phone": "In Archie Mobile on iPhone and Android, with VoiceOver or TalkBack on.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet. The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "🚧 A screen reader hears what your agent is doing and then its answer, in Archie and Archie Mobile: BUILT 2026-10-27, in no release yet, not yet heard by a person who uses one"
+      ],
+      "wording": "If you use VoiceOver, TalkBack or another screen reader, Archie says when your agent starts working and what it is doing first, then reads the answer as soon as it is done. Every button has a name, and buttons like Send and Undo can be reached and pressed without seeing the screen.",
+      "guide": ""
     },
     {
       "id": "opening-archie-again-brings-the-open-copy-forward-on-windows",

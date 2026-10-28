@@ -11928,8 +11928,10 @@ as one.*
   0.3.12 told the agent only that the check was unavailable. Nobody's agent on Otian's computers ran
   a Shopify search in that time, so when it started is not known. Never say Price Watch has checked
   Shopify prices without a break since 0.3.1.
-- ⚠️ **Nothing watches the page.** A second refusal would be as quiet as the first: owners would see
-  "the price check is unavailable" and nobody here would hear of it.
+- ⚠️ **Checked before each release, and not between them.** Since Archie `7f51e1d7`,
+  `scripts/check-shopify-profile.py` makes one search the way the app does and the release script
+  stops on a refusal. A refusal between two releases would be as quiet as the first: owners would see
+  "the price check is unavailable" and nobody here would hear of it until the next release.
 
 *Amended again October 28, 2026 (Archie `5d5586ec` and `d993fb95`, in no release yet).*
 

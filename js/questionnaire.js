@@ -823,8 +823,18 @@
     var bookingSection = document.getElementById('bookingSection');
     if (guidedBlock) guidedBlock.hidden = intent !== 'guided';
     if (consultingBlock) consultingBlock.hidden = intent !== 'consulting';
-    /* Both paths book the same free discovery call. */
-    if (bookingSection) bookingSection.hidden = false;
+    /* Both paths book the same free discovery call. The picker's form starts from the name and
+       address they just gave (js/booking.js reads these when a time is picked). */
+    if (bookingSection) {
+      bookingSection.hidden = false;
+      var picker = bookingSection.querySelector('.bk');
+      if (picker) {
+        picker.dataset.name = String(answers.fullName || '').trim();
+        picker.dataset.email = String(answers.emailAddress || '').trim();
+      }
+    }
+    var chatFirst = document.getElementById('chatFirst');
+    if (chatFirst) chatFirst.hidden = true;
 
     var firstName = String(answers.fullName || '').trim().split(' ')[0] || 'there';
     var nameEl = document.getElementById('thankyouName');

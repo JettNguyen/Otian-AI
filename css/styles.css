@@ -4205,6 +4205,26 @@ fieldset .checkbox-group {
   padding: 40px 24px 96px;
 }
 
+/* The line above the questions and the picker it opens, outside the questionnaire's form because
+   the picker is a form of its own (2026-10-27). Same column as .chat-flow, which then starts flush. */
+.chat-first {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+}
+
+.chat-first[hidden] {
+  display: none;
+}
+
+.chat-first + form .chat-flow {
+  padding-top: 0;
+}
+
+.chat-first .booking-container {
+  margin: 0 0 28px;
+}
+
 /* The way past the questions, above them (2026-10-04): one quiet line, so the chat still leads
    for anyone who wants it. Not .chat-skip, which is the chat's own skip-this-question button. */
 .chat-book-first {
@@ -4544,6 +4564,9 @@ fieldset .checkbox-group {
 @media (max-width: 640px) {
   .chat-flow {
     padding: 28px 16px 80px;
+  }
+  .chat-first {
+    padding: 28px 16px 0;
   }
   .chat-avatar {
     width: 36px;
@@ -4982,60 +5005,6 @@ fieldset .checkbox-group {
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 14px;
-}
-
-.cf-cream {
-  flood-color: var(--bg-card);
-}
-
-.cf-soft-strong {
-  flood-color: rgba(140, 129, 119, 0.08);
-}
-
-.availability-widget {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  background: var(--surface-soft);
-  height: 700px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent) var(--surface-hover-strong);
-}
-
-.availability-widget iframe {
-  display: block;
-  width: 100%;
-  height: 100% !important;
-  border: 0;
-  background: var(--surface-soft);
-  filter: url(#calendarCreamTintSoft);
-}
-
-html[data-theme="dark"] .availability-widget iframe {
-  filter: invert(1) hue-rotate(180deg);
-}
-
-.availability-widget::-webkit-scrollbar {
-  width: 10px;
-}
-
-.availability-widget::-webkit-scrollbar-track {
-  background: var(--surface-hover-strong);
-}
-
-.availability-widget::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 999px;
-}
-
-.availability-fallback {
-  margin-top: 10px;
-  font-size: var(--fs-sm);
-}
-
-.availability-fallback a {
-  color: var(--accent);
-  text-decoration: underline;
 }
 
 .contact-form-heading {
@@ -6503,10 +6472,6 @@ html.js .fade-up:not(.visible) {
     padding: 28px 20px;
   }
 
-  .availability-widget {
-    height: 760px;
-  }
-
   .two-col-card {
     padding: 24px;
   }
@@ -6692,7 +6657,7 @@ html.js .fade-up:not(.visible) {
 }
 
 /* ========================================
-   29. Calendar Booking Section (Questionnaire)
+   29. Booking a call (questionnaire/, contact/, setup-call/)
    ======================================== */
 .booking-section {
   margin-top: 48px;
@@ -6723,24 +6688,6 @@ html.js .fade-up:not(.visible) {
   box-shadow: var(--lift-sm);
 }
 
-.booking-frame {
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-
-.booking-container iframe {
-  display: block;
-  width: 100%;
-  height: 600px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  filter: url(#calendarCreamTint);
-}
-
-html[data-theme="dark"] .booking-container iframe {
-  filter: invert(1) hue-rotate(180deg);
-}
-
 .booking-note {
   font-size: var(--fs-base);
   color: var(--text-muted);
@@ -6760,6 +6707,289 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--accent-hover);
 }
 
+/* The picker, js/booking.js (2026-10-27). It replaced Google's booking page in a frame, which no
+   rule here could reach past a color filter. Five days in a row, the chosen day's times under
+   them, and the form under those, so a reader can change the time without losing what they typed.
+   Before the script runs it is one line with a link to Google's page, which is .bk-status. */
+.bk {
+  text-align: left;
+}
+
+.bk-status,
+.bk-zone {
+  margin: 0;
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.bk-zone {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.bk-alt {
+  margin: 6px 0 0;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.bk a {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.bk-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bk-range {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.bk-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.bk-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bk-arrow:hover {
+  border-color: var(--accent-line);
+}
+
+.bk-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  border-color: var(--border);
+}
+
+.bk-days {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.bk-day,
+.bk-time {
+  font: inherit;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition), background-color var(--transition), color var(--transition);
+}
+
+.bk-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.bk-day-wd {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.bk-day-n {
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.bk-day:hover {
+  border-color: var(--accent-line);
+}
+
+.bk-day[aria-pressed="true"] {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+}
+
+.bk-day[aria-pressed="true"] .bk-day-wd {
+  color: var(--accent-ink);
+}
+
+.bk-times {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 8px;
+}
+
+.bk-time {
+  padding: 10px 8px;
+  border: 1px solid var(--accent-line);
+  background: transparent;
+  color: var(--accent-ink);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.bk-time:hover {
+  background: var(--accent-subtle);
+}
+
+.bk-time[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text-on-accent);
+}
+
+.bk-day:focus-visible,
+.bk-time:focus-visible,
+.bk-arrow:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.bk-form {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.bk-when {
+  margin: 0 0 18px;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.bk-when:focus {
+  outline: none;
+}
+
+.bk-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+.bk-form .form-group {
+  margin-bottom: 16px;
+}
+
+.bk-opt {
+  margin-left: 6px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.bk-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.bk-msg {
+  margin: 12px 0 0;
+  font-size: var(--fs-base);
+  color: var(--danger);
+}
+
+.bk-msg:empty {
+  display: none;
+}
+
+.bk-done {
+  padding: 8px 0;
+  text-align: center;
+}
+
+.bk-done:focus {
+  outline: none;
+}
+
+.bk-done-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+}
+
+.bk-done-mark svg {
+  width: 22px;
+  height: 22px;
+}
+
+.bk-done-title {
+  margin: 0 0 8px;
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.bk-done p:last-child {
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bk-status.is-loading::before {
+    content: "";
+    display: inline-block;
+    width: 0.9em;
+    height: 0.9em;
+    margin-right: 8px;
+    vertical-align: -0.1em;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    border-right-color: transparent;
+    animation: otian-spin 0.7s linear infinite;
+  }
+}
+
+@media (max-width: 640px) {
+  .bk-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .bk-days {
+    gap: 6px;
+  }
+
+  .bk-day-n {
+    font-size: var(--fs-xl);
+  }
+}
+
 /* ========================================
    29b. Responsive Booking Section
    ======================================== */
@@ -6775,10 +7005,6 @@ html[data-theme="dark"] .booking-container iframe {
 
   .booking-container {
     padding: 16px;
-  }
-
-  .booking-container iframe {
-    height: 500px;
   }
 }
 

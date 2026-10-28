@@ -65,7 +65,8 @@ SOURCES = {
     # data: covers inline SVG-as-image and the QR code canvas export on the phone page.
     "img-src": ["'self'", "data:", "https://*.firebasestorage.app"],
     # Firestore reads, Auth token exchange, Storage uploads for submission screenshots, the
-    # billing service on Render, and the contact form.
+    # billing service on Render (which also answers the booking picker, js/booking.js), and the
+    # contact form.
     "connect-src": [
         "'self'",
         "https://*.googleapis.com",
@@ -73,12 +74,12 @@ SOURCES = {
         "https://archie-4f35.onrender.com",
         "https://formspree.io",
     ],
-    # The booking widget on /contact/ and /questionnaire/, and the Firebase Auth helper
-    # iframe (authDomain in js/account-nav.js and friends), which signInWithPopup embeds on
-    # the sign-in click. The page-load CSP sweep can never see that one: it only exists
-    # after a user gesture, which is how blocking it shipped as auth/internal-error on
-    # "Continue with Google" (found live 2026-08-16).
-    "frame-src": ["https://calendar.google.com", "https://archie-77170.firebaseapp.com"],
+    # The Firebase Auth helper iframe (authDomain in js/account-nav.js and friends), which
+    # signInWithPopup embeds on the sign-in click. The page-load CSP sweep can never see it:
+    # it only exists after a user gesture, which is how blocking it shipped as
+    # auth/internal-error on "Continue with Google" (found live 2026-08-16). Google's booking
+    # page was framed here too until 2026-10-27, when the site's own picker replaced it.
+    "frame-src": ["https://archie-77170.firebaseapp.com"],
     "form-action": ["'self'", "https://formspree.io"],
     # Nothing on this site embeds a plugin or needs to rewrite its own base URL, and both are
     # standard injection footholds.

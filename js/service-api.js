@@ -19,7 +19,8 @@ export const SERVICE_ORIGIN = "https://archie-4f35.onrender.com";
  *   kind "network"  the service could not be reached, or the attempt outran `timeoutMs`
  *   kind "http"     the service answered and refused; `status` is its code, and `message` is what
  *                   it said, so a caller can tell "this route is not deployed" (404), "this is
- *                   switched off" (503) and "this went wrong" apart from each other.
+ *                   switched off" (503) and "this went wrong" apart from each other. `body` is
+ *                   the whole answer, for a refusal that carries more than a sentence.
  */
 export async function postJson(path, body, timeoutMs = 20000) {
   const ctrl = new AbortController();
@@ -44,6 +45,7 @@ export async function postJson(path, body, timeoutMs = 20000) {
     const e = new Error(data.error || ("HTTP " + r.status));
     e.kind = "http";
     e.status = r.status;
+    e.body = data;
     throw e;
   }
   return data;

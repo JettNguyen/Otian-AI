@@ -1531,25 +1531,54 @@
       "id": "known-senders",
       "name": "Known senders",
       "area": "email",
-      "summary": "Before your agent reads an email, Archie checks whether you have the sender written down on your lists, on your agent, or as someone you wrote to lately.",
+      "summary": "Before your agent reads an email, Archie checks whether you have the sender written down on your lists, on your agent, in what you have told your agent about your work, or as someone you wrote to lately.",
       "where": "",
       "how": [],
       "limits": [
         "It changes how their mail is read. Only people you wrote to in the last 14 days skip the wait.",
         "A match by full name or by a company's address can be wrong.",
-        "One-word names are never matched.",
+        "One-word names are never matched, and a first name in your notes counts only for someone with your last name.",
         "A known sender's mail in a Gmail tab like Promotions is read, which is one more read on your AI account."
       ],
       "phone": "",
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie 08f8ef95 to 11782cd1).",
+      "hold": "In no release yet (Archie 08f8ef95 to 11782cd1, and 5c87c399).",
       "unwatched": false,
       "trust": [
         "🚧 Mail from people you write to is read first, and other mail can take a few minutes: BUILT 2026-10-13 (Archie `9a99e47e`), RELEASED in 0.3.9, 2026-10-14, never run on a real inbox"
       ],
-      "wording": "Before your agent reads an email, Archie checks whether you have the sender written down: on one of your lists, on your agent, or as someone you've written to lately. If you do, your agent reads it knowing who they are, and a Gmail tab like Promotions never keeps it from being read.",
+      "wording": "Before your agent reads an email, Archie checks whether you have the sender written down: on one of your lists, on your agent, in what you've told your agent about your work, or as someone you've written to lately. If you do, your agent reads it knowing who they are, and a Gmail tab like Promotions never keeps it from being read.",
+      "guide": ""
+    },
+    {
+      "id": "mail-updates-a-list",
+      "name": "An email offers the change to your list",
+      "area": "email",
+      "summary": "When an email says something new about an entry on one of your lists, your agent puts the change on a card, and nothing changes until you press Update.",
+      "where": "A card in your chat with your agent, after an email arrives.",
+      "how": [
+        "Read what the entry says now, what the email says, and the email's own words on the card.",
+        "Press Update to change the entry, or Leave it to keep it as it is."
+      ],
+      "limits": [
+        "Only an entry the email names by its name, like Netflix or Blue Cross. It never adds an entry.",
+        "One email is read against one entry, so an email about two units names one of them.",
+        "Each email that names an entry is one read on your AI account, up to four an hour.",
+        "Only where your chat has buttons. A chat app without them gets no card.",
+        "A card still waiting after a week is cleared."
+      ],
+      "phone": "Archie Mobile shows the same card, with Update and Leave it.",
+      "editions": "both",
+      "released": "0.2.1",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ An email that names something on your lists offers the change on a card, and nothing changes until you press Update: SHIPPED in Archie 0.2.1, August 30, 2026 (Archie `25308312`); entry written 2026-10-28"
+      ],
+      "wording": "When an email says something new about an entry on one of your lists, like a renewal date for a bill or a pickup done for a rental, your agent puts the change on a card: what the entry says now, what the email says, and the email's own words. Press Update and the entry changes; press Leave it and nothing does.",
       "guide": ""
     },
     {

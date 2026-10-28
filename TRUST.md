@@ -6021,6 +6021,107 @@ AI reads a customer's email as that customer's. Only matched mail carries that s
   email the tab rule lets through is one more read on the owner's AI account, where it used to cost
   nothing.
 
+*Amended October 28, 2026 (Archie `5c87c399`, in no release yet): the watch also knows the people
+the owner has told their agent about.*
+
+In the October 28 week run, mail from Kyle's wife was called "new to you", though the agent's notes
+said she does the billing, and a lender partner, a title company, a buyer agent and a driver the
+owners had named were each met as strangers.
+
+**Proposed wording, Jett's to approve**, in place of the October 26 wording's first sentence:
+"Before your agent reads an email, Archie checks whether you have the sender written down: on one of
+your lists, on your agent, in what you've told your agent about your work, or as someone you've
+written to lately."
+
+**Why it's true:** `Senders::notes_name` in `crates/archie-runtime/src/email/known.rs` reads the
+owner's profile (who the agent serves) and the agent's memory, both its parts, and matches the name
+the email gives when the owner's words hold the whole of it ("Kayla Rhodes is a part-time admin"),
+or hold its first name and the sender shares the owner's surname ("Jessica does billing" for Jessica
+Brooks, on Kyle Brooks's agent). A note the agent saved from an email or another outside source never
+counts. It is checked last, after the lists, the team and the two-week list. The read is told "The
+sender, from the user's records: Kayla Rhodes, named in what the user told you about their work."
+On the five week-run journeys' mail it took the senders the watch knows from 45 to 67 of 84
+(`known::tests::on_the_week_run_fixtures`). Test: `somebody_the_owner_s_own_words_name_is_known`.
+
+- ⚠️ **It matches the name an email gives itself,** as a name on a row does. Somebody using a name
+  the owner wrote down is matched as that person. What that costs is a sentence in one read, a line in
+  the morning list, and no "new to you" on their card; it never sends anything. The warning on an
+  email asking to change where a payment goes does not depend on it.
+- ⚠️ **A first name alone never matches,** unless the sender also has the owner's surname. "Jessica
+  Hale" is not Kyle's Jessica.
+
+### ✅ An email that names something on your lists offers the change on a card, and nothing changes until you press Update: SHIPPED in Archie 0.2.1, August 30, 2026 (Archie `25308312`); entry written 2026-10-28
+
+*Entry written October 28, 2026, two months after it shipped. Every release since 0.2.1 carries it
+(`25308312` is an ancestor of 0.2.1's version commit `6967e2af`). Its notes did not name it.*
+
+**Proposed wording, Jett's to approve:** "When an email says something new about an entry on one of
+your lists, like a renewal date for a bill or a pickup done for a rental, your agent puts the change
+on a card: what the entry says now, what the email says, and the email's own words. Press Update and
+the entry changes; press Leave it and nothing does."
+
+**Why it's true:** `crates/archie-runtime/src/email/upkeep.rs`, run on each email the mail watch
+reads, after every add-on that reads mail.
+
+- **Only an entry the owner already has.** No AI is called unless the email names an entry by its
+  title ("Netflix", "Blue Cross"), the longest title winning; one email is read against one entry. It
+  never adds an entry. The Package Tracker's list and the to-do list are left alone.
+- **It proposes and never writes.** The AI reads the email against that one entry, with the entry in
+  the owner's half of the prompt and the email treated as untrusted, and answers only fields the email
+  states a newer value for. Code then drops a field the list does not have, a value it would reject,
+  anything that would empty a field, and anything past six fields (`parse_changes`). The card shows
+  each field as it is and as the email says, and "From the email:" with its reason, so the owner sees
+  whose claim it is. ✅ Update writes it; ✕ Leave it does nothing; only someone who may act as the
+  owner can press either (`handle_action`). After a press the card says Updated or Left as it was.
+- **Limits in code.** One card an email, four reads an hour (`MAX_PER_HOUR`), and a card still waiting
+  after a week is cleared (`TTL_MS`). Only where the chat has buttons; a chat app with none gets no card.
+
+**The boundaries.**
+
+- ⛔ **Never "your lists update themselves" or "keeps your lists up to date automatically".** Nothing
+  changes until the owner presses Update.
+- ⛔ **Never that it reads mail against your memory or notes.** Only list entries.
+- ⚠️ **Each email that names an entry is one AI read on the owner's own account,** up to four an hour.
+- ⚠️ **An email that names two entries is read against one.** In the October 28 week run a driver's
+  "got the 2 units" named one of the two.
+- ⚠️ **The AI can misread the email.** That is why the card shows both values and the email's words,
+  and why nothing is written without the press.
+
+*Amended October 28, 2026 (Archie `5c87c399` and `d884e3e5`, in no release yet): an entry is also
+named by who it is for.*
+
+In the October 28 week run a deal is titled by its address, so "Garcia repair addendum signed" and
+"Henderson: funded and recorded" named no entry and each went on the morning list as mail Archie was
+not sure about, for all five owners.
+
+**Proposed wording, Jett's to approve:** "When an email says something new about an entry on one of
+your lists, like a deal's appraisal or a customer's payment, your agent puts the change on a card..."
+(the rest as above).
+
+**Why it's true:** when no title is in the email, `best_named` matches the family or company name in
+the entry's title or in a column saying who it is for (Client, Customer, Seller, Name, Contact,
+Rented to): "Garcia" for "Dan and Rosa Garcia", "Zimmerman" for "Zimmerman Farms"
+(`names_for_whom` in `crates/archie-runtime/src/records.rs`). Only in the subject and body, never the
+From line; only a name the owner capitalized, of four letters or more, and not a word like North or
+Lake; never the owner's own surname; and only when no other entry on that list has the name anywhere.
+When entries on two lists are named, the one sharing more of the email's other words wins
+("appraisal" takes the deal with an Appraisal column over the same couple on People). On the five
+week-run journeys' mail it took the emails read against an entry from 43 to 51. Tests:
+`a_deal_titled_by_its_address_is_named_by_its_client`,
+`a_row_s_family_or_company_name_is_the_part_mail_says`.
+
+- **An email asking to change where money goes is never read against an entry** (`row_for`): new
+  wiring instructions, bank details, an account number. The warning on its card stands, and a card
+  offering to write the new details into a deal would be the fraud's next step. Test:
+  `mail_asking_to_change_where_money_goes_names_no_row`.
+- ⚠️ **A name two entries share names neither,** so "the Henderson closing" on a list with two
+  Hendersons is not read.
+- ⚠️ **A company is told by its last word** (Farms, Plumbing, Construction and a short list more).
+  "East Texas Concrete" is not matched by name, because East is a word every email there uses.
+- **The docs row moves with the release.** Once a release carries `5c87c399`, the Archie Docs row
+  "An email offers the change to your list" says an entry is named by its name or by who it is for,
+  and that an email asking to change where money goes gets no card.
+
 ### ✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -7238,6 +7339,21 @@ there and asks before moving it."
   that day, since several a day is normal. The agent is told to follow the owner's notes.
 - ⚠️ **On a message a person typed.** A routine moving an entry is not held this way.
 - ⛔ Never "it checks your whole schedule" or "it never double-books a truck".
+
+*Amended October 28, 2026 (Archie `2c60a2a3`, in no release yet): the second answer says who
+picks the day.*
+
+In the October 28 week run Kyle pressed Pick another day, and the agent read it as being told to
+pick: it moved his pickup to a Thursday he never chose.
+
+**Why it's true:** the second answer is now "I'll pick another day" (`THEY_PICK` in
+`crates/archie-runtime/src/gateway/turn.rs`), and a move made on that press is held whatever day it
+names, before the let-throughs above: the agent is told to ask which day, with a button for each of
+the next few days that are clear for that driver or truck, saying what is already on each, and to
+move it once one is pressed. Test: `a_stop_moved_onto_its_jobs_day_is_held_once`.
+
+- **The docs row moves with the release.** Once a release carries `2c60a2a3`, the Archie Docs row
+  "A stop moved onto a busy day" says I'll pick another day where it says Pick another day.
 
 ### ✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
@@ -16542,6 +16658,22 @@ instead. A question with none of those can still reach the researcher."
   name from the lists, stays with the agent even when all it wanted was a search. The agent can hand
   the search to the researcher itself, or answer without one.
 
+*Amended October 28, 2026 (Archie `d884e3e5`, in no release yet): a name of theirs includes who
+an entry is for.*
+
+In the October 28 week run Megan's "The Rivera appraisal is today. Anything I should watch for?" went
+to the researcher, which said it did not have the Rivera file. The Riveras are the clients on a deal
+titled by its address, and the names the check compares were the lists' titles.
+
+**Why it's true:** `their_names` in `crates/archie-runtime/src/gateway/routing.rs` now adds each
+entry's family and company names from the columns saying who it is for (`names_for_whom` in
+`crates/archie-runtime/src/records.rs`, the same reading an email is matched to an entry by), so
+"rivera" is one of the owner's names. Read only once the router has picked a searching handler, and
+it costs no call. Test: `a_question_naming_a_deal_s_client_stays_with_the_agent`.
+
+- ⚠️ **The boundary "a name from the lists" now reaches further.** A question naming a client's
+  family name stays with the agent even when all it wanted was a search.
+
 ### ⛔ The gate does not stop exfiltration — never imply it does
 
 **Narrowed in Archie 0.3.5, released October 5, 2026 (Archie for Business follows):** see the entry
@@ -17367,7 +17499,9 @@ later, ...").
   `crates/archie-runtime/src/texts/replies/nudge.rs`. New, on mail, is what `email/known.rs` found
   when the card was made: on none of the owner's lists, not one of the agent's people, and not
   written to by the owner in the last two weeks; it is checked again at the hour, so somebody written
-  to or added to a list since is left alone. On a text, new is not in the owner's contacts, in a
+  to or added to a list since is left alone. From Archie `5c87c399` (in no release yet), not named in
+  what the owner told the agent about their work either (the amendment of October 28 under "Mail from
+  people you write to is read first"). On a text, new is not in the owner's contacts, in a
   conversation of two. A card still open an hour after it was made is posted again once, with the
   reply it holds and its own buttons; the copy above becomes the line that says where it went. Once
   per message (`CardCatches` on the card), written down only once the post went, and held by quiet

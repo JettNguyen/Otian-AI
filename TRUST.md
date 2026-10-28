@@ -657,6 +657,30 @@ means nothing further is sent and anything waiting to be sent is deleted."
 - ⚠️ **One more thing goes out only when you press it:** from 0.3.10, the answer to "How did you hear about Archie?" on the Account page (the entry
   below). It is not telemetry and the crash-reports switch does not govern it.
 
+*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in no release yet, and switched off
+until Jett approves the words): one more thing goes out, and only after a trial or a plan ends.*
+
+**Proposed wording, Jett's to approve**, in place of "There is no analytics service in Archie:
+nothing records what you do in it, and nothing counts what you use.": "There is no analytics service
+in Archie, and nothing records what you do in it." And after the sentence about error reports: "After
+a free trial or a plan ends, Archie also sends four counts of what you made, once for each of up to
+three emails from Jett: how many lists you have with something in them, the entries in those lists,
+the reminders your agent set, and the drafts you sent. Never what is in any of them, and they are not
+kept."
+
+**Why it's true:** `request` in `src-tauri/src/access_end.rs` and `parseAsk` in
+`stripe-webhook/access-end.js`, in the entry above. The send route writes only when each email went
+(`askHandler`), and its log line names the account, which email and the kind of end, never the
+counts or the address.
+
+**The boundaries.**
+
+- ⛔ **Never "nothing counts what you use" once the switch is on.** Four counts go out, three times at
+  most, after an end.
+- ⚠️ **The crash-reports switch does not govern them.** Stop these emails does, and so does a plan or,
+  in Archie, an AI account of your own. A page that counts what goes out names this one too, as only
+  after a trial or a plan ends.
+
 ### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), its route deployed, SWITCHED ON 2026-10-17 (Archie `918676a1`), RELEASED in 0.3.10, 2026-10-17
 
 *Checked October 6, 2026, at the 0.3.6 release: the question ships switched off (`HEARD_FROM_LIVE` is
@@ -2455,6 +2479,15 @@ archie-mobile `817e099`):
   updates everywhere at once.
 - **Words.** The agent keeps **lists** and a document is in a **folder**. "Records" and "category"
   are gone from both apps' screens; any page describing the Knowledge tab says Documents and Lists.
+
+*Amended October 28, 2026 (Archie `0ec4b129` and `d161cabd`, Archie Mobile `549c9af`; in no release yet).* Under
+**Knowledge**, after "The phone groups documents by the same folders.", add: "Below its folders,
+Documents has Folders on this computer: folders the agent searches where they sit, which is a
+capability of its own (the entry 'Your agent finds things in the folders you pick on your computer,
+and names the file and the page'). The phone lists them under Documents and picks none." And one
+boundary: "⚠️ **A document's folder and a folder on this computer are two different things.** The
+first holds copies kept in Archie; the second is searched where it is. A page describing Documents
+keeps them apart."
 
 ### ✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
@@ -8634,6 +8667,27 @@ later, you buy a plan the same way as the first time, on the same account."
   with no plan granted: an older Archie, or a link opened by hand. Never say a plan can be moved to
   another Stripe customer, and never that any payment link grants a plan to any account.
 
+*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in no release yet, and switched off
+until Jett approves the words): after a paid plan ends, up to three emails from Jett.*
+
+**Proposed wording, Jett's to approve**, one sentence at the end of the October 27 amendment's
+proposed wording, after "Nothing on your computer is deleted in any of the three cases.": "Unless you
+get a plan again or, on Archie, set up an AI account of your own, Jett emails you about it three
+times at most, and each email has Stop these emails at the bottom."
+
+**Why it's true:** the entry "Three emails from Jett when your free trial or plan ends, and one press
+stops them", above. A plan's end is `plan_ended`, the same fact that decides what the agents do,
+dated by the end the account record named or the moment this computer first saw it over. The billing
+service refuses an account whose own record shows a plan with a live subscription.
+
+**The boundaries.**
+
+- ⚠️ **Only a paid plan.** A comped license past its date gets none, in either edition.
+- ⚠️ **Not in the first of the three cases.** An Archie owner with an AI account of their own lands
+  on the free tier and is not emailed.
+- The ⚠️ **"Never 'you are warned before your plan ends', for now"** stands, and the warnings ahead,
+  when they come, are the agent's: never emailed.
+
 ### ✅ It answers ordinary questions too, the way any AI chat does (entry written 2026-09-18)
 
 **Approved wording:** "Your agent answers ordinary questions the same way any AI chat you have
@@ -10938,6 +10992,88 @@ read them."
   it" is not said to an owner who said yes, since the count they said yes under explained it
   (`mail_note` in `gateway/morning_list.rs`).
 
+*Amended October 28, 2026 (Archie `841fad3c`, in no release yet): the first list of each week ends
+with what the agent did the week before, counted from what Archie recorded.*
+
+**Proposed wording, Jett's to approve:** "On the first morning list of each week, the last line says
+what your agent did the week before, Monday to Sunday: "Last week: 14 emails sorted, 3 drafts you
+sent, 2 invoices chased, $640 paid after a follow-up." Each number counts work Archie recorded doing,
+the same work the Jobs tab lists, and a dollar amount appears only for an invoice your agent followed
+up on that was then marked paid. It never guesses at time saved, and a week with nothing to count
+says nothing. It is counted on your computer without asking an AI anything."
+
+**Why it's true:**
+
+- **Counted in code from the record.** `crates/archie-runtime/src/last_week.rs` reads the agent's job
+  record (`journal/`, what the Jobs tab lists), the Waiting On list, and the follow-ups written
+  overnight (`tray.json`), and builds the line from counts alone. There is no model call and no
+  prompt text. The parts, in this order, each left out at zero:
+  - **emails sorted**: each email a filing moved out of the inbox or into a folder, once, by its id,
+    and not one put back since;
+  - **entries added to your lists**: each entry the agent added, and the entries on a card of
+    entries it drafted. A spreadsheet brought in whole is not counted, since its entries were the
+    owner's before they came in (`is_imported` in `crates/archie-runtime/src/journal.rs`, the one
+    title every way in for a spreadsheet writes);
+  - **drafts you sent**: each card the owner pressed Send on;
+  - **calls made**: each call the owner pressed Place the call for;
+  - **invoices chased** and **replies chased**: each Waiting On ask that a follow-up written
+    overnight was sent for, counted once however many went;
+  - **paid after a follow-up**: the dollars below.
+
+  A step taken back with Undo is not counted. Tests: `each_part_is_counted_from_the_record_in_its_order`,
+  `a_week_with_nothing_says_nothing`.
+- **Dollars only where the record ties them to the agent's own follow-up.** When a night writes a
+  follow-up for money on Waiting On, it writes down what that follow-up asked for: what was left
+  owed, "$900" for "$900 of $1,800" (`owed` on `Wrote` in
+  `crates/archie-runtime/src/gateway/tray/night.rs`). The line says that amount once the entry reads
+  paid (Status is Paid, or Paid so far reached the Amount), last changed after the owner sent the
+  follow-up and inside the week. So: never the invoice's whole amount when part was paid before,
+  never an invoice nobody chased, never one marked paid before the follow-up went, and never a
+  follow-up nobody sent. Tests: `a_dollar_figure_only_where_the_record_ties_it_to_the_agents_own_chase`,
+  `a_payment_after_an_earlier_follow_up_is_counted_once`, `a_night_writes_down_what_each_follow_up_asked_for`.
+- **Last week is Monday to Sunday on the owner's clock**, which is the clock of the computer running
+  Archie: midnight to midnight, whichever day of this week the list goes out on. Tests:
+  `the_week_runs_monday_to_sunday_on_the_owners_clock`, `a_week_with_a_clock_change_keeps_its_last_hour`.
+- **On the first list that reaches the owner that week, once.** The line is written down as said, by
+  a key for the week in what the list has named (`Named`), only once the list carrying it went
+  (`sent` and `note_told` in `crates/archie-runtime/src/gateway/morning_list.rs`), or was asked for in
+  words. It is never the reason a list goes out, so a Monday with nothing else on sends nothing, as
+  before. That Monday, and one held by quiet hours, a computer asleep, or a send that failed, leaves
+  the line for the next list that goes out that week; a week whose lists never went lets it go, and
+  the Monday after says its own week. Tests: `mondays_list_says_what_the_agent_did_last_week_once`,
+  `a_monday_with_no_list_carries_the_line_to_the_next_that_week_and_not_after`,
+  `a_monday_list_that_failed_to_send_leaves_last_weeks_line_for_the_next_that_week`,
+  `last_weeks_line_is_said_last_and_never_sends_a_list_by_itself`.
+- **Last on the list.** The list says what needs the owner first, and a week that is over needs
+  nothing, so the line comes after every part and after the line that names the empty lists
+  (`Pieces` in `crates/archie-runtime/src/morning.rs`).
+- **Both editions, the owner's work only.** A job a teammate or a guest asked for, and a send or a
+  call one of them pressed, are recorded under their name and never counted in the owner's line. A
+  routine's work is the agent's own, done for the owner. Test:
+  `on_a_shared_agent_a_teammates_work_is_not_counted`.
+- **Everywhere the list goes.** The window, Archie Mobile and the chat app the owner uses get the
+  same words in the same message, so an owner who never opens the Jobs tab still sees the week.
+
+**The boundaries.**
+
+- ⛔ **Only counts the record shows.** Never "everything your agent did". Reminders that went off are
+  not a part: nothing records a reminder once it has gone off, so the line cannot count them. Never
+  name one in an example.
+- ⛔ **A dollar figure only where an amount is tied to the agent's own follow-up**: an invoice on
+  Waiting On that a follow-up written overnight chased, that the owner sent, and that was then marked
+  paid. Never "money your agent collected", "earned you" or "saved you", and never an estimate.
+- ⛔ **Never time saved.** No minutes or hours, in the line or anywhere it is described.
+- ⛔ **Mondays only, and said once.** The first list of the week that reaches the owner carries it,
+  no other list does, and it never sends a list by itself. Never "a weekly report" or "a weekly
+  email".
+- ⚠️ **Invoices chased and the dollars after them need Write drafts overnight**, which needs the
+  owner's yes and an AI account of their own. Without it, the line has no chases and no dollars. A
+  follow-up written in the chat is a draft the owner sent, not a chase.
+- ⚠️ **Marked paid is what the list says.** The dollars count an entry marked paid on Waiting On
+  after the follow-up went, not money seen in a bank.
+- ⚠️ **It asks no AI to make it.** Say that much and stop: nothing about what its words cost on later
+  turns, or how Archie keeps that down.
+
 ### 🚧 The morning list and the agent say where Bookings and your calendar differ, decided without AI: BUILT 2026-10-18 (Archie `49965c01`, merged as `4ac7579f`), RELEASED in 0.3.11, 2026-10-19
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked October 27, 2026:
@@ -11586,6 +11722,68 @@ marketplaces are not Shopify stores, so for those it searches the web."
 - ❌ Never imply Shopify is a partner or endorses Archie. Naming Shopify in plain type to say where
   a price came from is fine; a Shopify logo is not (the no-logos rule).
 - ⚠️ A price is what the store showed at that moment. Say "right now", never "always current".
+
+*Amended October 28, 2026 (Archie `6b939f8d` to `3217d3cc`, in no release yet): a deal gets a card
+of its own, and the weekly check saves what it finds.*
+
+**Proposed wording, Jett's to approve**, after the approved wording: "When a check finds something at
+or under the price you set, it gets a card of its own with the price, the store, your price and when
+it was checked, like "Sony WH-1000XM5 is $239 at Best Buy, under your $250. Checked today at
+10:04am." The weekly check does this too, so a deal reaches you without your asking, and each one is
+said once. Not now leaves it on your list, and Stop watching marks it Dropped it."
+
+**Why it's true:**
+
+- **The hit is worked out in code, after every check.** `crates/archie-runtime/src/gateway/price_hits.rs`
+  reads the Price Watches list when a turn the owner asked for is answered (`after_a_turn`, from
+  `gateway/worker.rs`) and when a Weekly Price Check run ends (`after_a_routine`, from
+  `gateway/routines.rs`: under its message, or as the run ends when it is set to go with the next
+  scheduled message). A watch gets a card when it is Watching, its last price is at or under its
+  target, and that check changed it (`found` and `at_its_price`). What was said is kept by watch in
+  the agent's folder (`price-watch-cards.json`), so a deal is said once, and again only after its
+  price has gone back over the target. A card that could not be sent is not marked said, so the next
+  check says it.
+- **The card is its evidence, and none of it is the AI's.** Built from the watch alone
+  (`card_words`): the item, the price, the store (the shop of the page the check saved, or the
+  watch's own Where), the target ("under your $250", or "right at your $250"), and when it was
+  checked, from the watch's Last checked, through `clock::short_day_and_date` and `clock::clock_face`.
+  A target raised over a price found last week says last week's day (`Checked::of`).
+- **The weekly check saves what it finds.** Until Weekly Price Check 1.4.0 a scheduled check only
+  read, and the list moved only when the owner said "check my prices". Now it saves each price onto
+  its watch the way that check does (`data/marketplace/routines/price-check.json`), and Price Watch
+  1.4.0 keeps the page a deal was found on, in a new Link column
+  (`data/marketplace/skills/price-watch.json`). Code clears the page once a check finds the price
+  back over the target, so the next deal's card never names the last one's store.
+- **Not now and Stop watching are answered in code** (`answer`). Not now closes the card with "Left
+  it.", and Stop watching marks the watch Dropped it and says so. Only someone who may act as the
+  owner answers Not now, and only someone who can change the lists can stop a watch.
+- **Tests**, in `crates/archie-runtime/src/gateway/price_hits/tests.rs`:
+  `a_watch_at_its_price_is_one_card_with_its_evidence_said_once`,
+  `only_a_watch_the_check_changed_and_only_for_the_owner`,
+  `a_target_raised_over_an_old_price_says_when_the_price_was_found`,
+  `the_card_says_the_price_the_shop_the_target_and_when`, `the_shop_is_the_pages_and_the_where_names_it`,
+  `stop_watching_marks_it_dropped_it_and_a_purchase_marks_it_bought` and
+  `archie_for_teams_has_neither_the_card_nor_the_button`.
+
+**The boundaries.**
+
+- ⛔ **Never "live prices", "real-time alerts" or "the moment it drops".** Prices are checked on a
+  schedule (the weekly check) or when the owner asks, and a card is as fresh as that check, which is
+  why it says when the check was. "A price is what the store showed at that moment" stands, and so
+  does never "always current".
+- ⛔ **Never that a card finds the best price.** The boundary on the lowest price anywhere stands: a
+  card says what one check found at one store.
+- ⛔ **Never that a deal is bought for you.** A card has Buy only behind the buying switch, and Buy
+  goes no further than Place order without the owner's tap (the amendment under the Buying entry).
+- ⚠️ **One card a deal.** A further drop while the price is still under the target gets no new card;
+  the weekly message still lists it.
+- ⚠️ **For the owner only.** A check somebody else on the agent asked for puts up no card, because Buy
+  on it would spend the owner's money.
+- ⚠️ **Not in quiet hours.** A check whose message quiet hours hold puts up no card. The deal is not
+  marked said, so its card comes with the next check outside them, or the next one the owner asks
+  for. A weekly check switched to send nothing puts up none either.
+- ⚠️ **Personal edition only**, as Price Watch is. Archie for Teams has neither the card nor its
+  buttons.
 
 ### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPPED 2026-09-01, Archie 0.2.2)
 
@@ -14371,6 +14569,12 @@ their own email there."
 - What it replaced: there was no hand-over at all. Reset access was the only way, and it wipes the
   owner and every teammate.
 
+*Amended October 28, 2026 (Archie `e656d2b4`; in no release yet).* In the bullet **This computer's own
+things**, the list gains "the folders picked on it", which go to the person at this computer with
+the texts and the lights (`owners_alone` in `crates/archie-runtime/src/gateway/turn.rs`). And one
+boundary: "⛔ Never that a teammate can search the folders picked on the owner's computer, on any
+setting."
+
 ### ✅ On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
@@ -15395,6 +15599,94 @@ does not move, because a purchase is not a reply; do not widen it to cover buyin
 direction. And Flight Check-In's "It buys nothing" stays true, but it is now the add-on's own
 instructions holding it rather than the code alone: with buying on and an airline on the shop list,
 the code would release a Pay press there.
+
+*Amended October 28, 2026 (Archie `6b939f8d` to `3217d3cc`, in no release yet): Buy on a Price Watch
+card.*
+
+**Proposed wording, Jett's to approve**, a paragraph after the approved wording, written to stand on
+its own wherever Price Watch's Buy is described: "With Price Watch, the card for a deal has Buy on it
+if you have switched buying on, the shop is on your list, and the price is inside your limits. Press
+Buy and your agent opens the page the price was found on, goes as far as Place order, and waits for
+you to tap Press it for me, as with any purchase. If the items cost more there than the card said,
+before tax and shipping, it stops and leaves the order to you. The limit is checked against the price
+it reads on the page, and it never types a card you pay with."
+
+**Why it's true:**
+
+- **Buy is offered the way the press is decided.** `offer` in
+  `crates/archie-runtime/src/gateway/price_hits.rs` asks what `screen::tools::authorize_purchase`
+  asks at the press: Computer control on for websites, buying switched on, and `SpendPolicy::check`
+  passing for that shop and that price, with what was already spent in the window. A card with no
+  shop to buy from, or with a shop or a price the owner's own settings leave out, has no Buy and says
+  nothing about it. Test: `buy_is_offered_only_behind_the_switch_the_shop_list_and_the_limit`.
+- **Where the switch is, said once in the owner's life.** Under the first card that has no Buy
+  because buying is off, as Archie says it: "Sam can buy things like this for you: it gets as far as
+  Place order, and you make that last press with one tap. It buys only at shops you list, within
+  limits you set. To let it, go to this agent's Connections tab in Archie or Archie Mobile, and under
+  Computer control, switch on Let Sam press Buy in the Buying section." With Computer control off, it
+  says to switch that on first (`switch_line`). Written down once said, in
+  `price-watch-buying-told.json` in the workspace folder, so a second agent does not say it again.
+- **Buy runs the website job that already exists.** The press sends the owner's own sentence, built
+  in code with the item, the shop, the price and the page: "Buy Sony WH-1000XM5 for me at Best Buy,
+  at the $239 my Price Watch card showed. Start on the page it was found on, https://…, and stop at
+  Place order for me to press." (`buy_sentence`). Only the owner can press Buy. Before anything
+  starts, code checks that the watch is still at the card's price and that buying still allows it,
+  and otherwise says why and starts nothing (`still_buyable`; test
+  `a_buy_on_a_card_the_list_or_the_settings_overtook_starts_nothing`).
+- **Place order waits for Press it for me, as every purchase does.** The job is the one every
+  purchase runs (`screen::tools::op_click`): it reads the order total off the page, offers Press it
+  for me only inside the limits, and writes the receipt before the press. It also carries the card
+  (`CardErrand`, handed over by `price_hits::errand_for` in `gateway/tools_screen.rs`, only on the
+  owner's turn whose words are that sentence), and two things follow from that. The checkout's items, before tax and
+  shipping, are held to the card's price, read off the page in code from a line such as "Subtotal" or
+  "Items", never the total (`archie_domain::items_total_on_page`). Above it, the card that asks says
+  both figures, no tap can release the press, and it ends "This press is yours: finish it in the
+  window that is open." (`over_the_card`). And the press the owner approves marks the watch Bought
+  (`bought`), which the reply says.
+- **Tests:** `a_buy_from_a_card_waits_for_press_it_for_me_and_then_marks_the_watch` and
+  `a_checkout_above_the_cards_price_goes_back_to_the_owner` in `screen/tools.rs`,
+  `the_items_part_is_read_off_the_page_and_never_the_total` in `archie-domain`'s `screen.rs`, and
+  `buy_sends_the_owners_sentence_and_the_job_carries_the_card` and
+  `stop_watching_marks_it_dropped_it_and_a_purchase_marks_it_bought` in
+  `gateway/price_hits/tests.rs`.
+- **On the phone and in chat apps.** Archie Mobile draws the card and its buttons as it draws every
+  card (`InlineActions` in its `src/ui.tsx`), and a press reaches the computer through the `tap` op
+  (`src-tauri/src/phone.rs`), so nothing there changed. A chat app with no buttons ends the card
+  "Reply with one of these words: Buy at $239, Not now, or Stop watching.", and those whole words
+  answer the newest card in that chat (`try_consume_words`; test
+  `on_a_chat_app_with_no_buttons_the_typed_words_answer_the_card`). Typed, Buy at $239 starts the
+  job as the press does, and Place order still waits for Press it for me, or "press it" typed.
+
+**The boundaries.**
+
+- ⛔ **Two presses, both the owner's.** Buy starts the errand, and nothing is ordered until the owner
+  taps Press it for me at Place order. Never "one tap to buy", "buys it when it drops" or "automatic
+  buying", and never draw a Price Watch card that leads to an order without Press it for me in
+  between.
+- ⛔ **Never that the routine buys, or that a deal is bought while you are away.** The weekly check
+  can bring a card with Buy on it; both presses are still the owner's, and "Never that a routine buys
+  on its own" stands.
+- ⛔ **The weak link holds here too.** The limit and the card's price are both checked against what
+  the store's page showed, not what the card you pay with is charged. "Never 'you will never be
+  charged more than your limit'" stands, and so does never "never more than the card said": tax,
+  shipping and a charge added after the press are not the items' part, and a price drawn as a
+  picture is invisible to it.
+- ⛔ **Never "live", "instant" or "the moment it drops".** The price on the card is from the last
+  check, weekly or when asked, and a card works for a day. The checkout is read again at the press,
+  which is what holds a price that went up.
+- ⛔ **Never "tested", "proven" or "reliable at checkout"**, as above: no purchase has been made from
+  a card, and the items' part has never been read off a real checkout.
+- ⚠️ **Only behind the switch, the shop list and the limits**, and only with Computer control's
+  websites half on. With buying off, the card has no Buy, and where the switch is gets said once
+  ever, never on every card.
+- ⚠️ **The owner only.** Nobody else on the agent can press Buy.
+- ⚠️ **A checkout that costs more than the card said goes back to the owner.** On a page that does not
+  say what the items come to, the whole total is held to the card's price, so tax alone sends it
+  back.
+- ⚠️ **Bought is marked only when Press it for me placed the order.** An order the owner finishes in
+  the window themselves leaves the watch on Watching until they tell their agent they bought it.
+- ⚠️ **Personal edition only.** Price Watch is not on Archie for Teams, and nothing there puts up
+  this card or answers its Buy. Buying on Archie for Teams is unchanged.
 
 ### 🚧 Your agent phones a business for you, after you press Place the call, when you switch Call businesses on: BUILT 2026-10-18 (Archie `6e8e5549`, archie-mobile `7cf627e`), RELEASED in 0.3.11, 2026-10-19, off until the owner switches it on, the Archie Mobile half on iPhone in 1.4 (not on Android yet), and no real call has been placed
 
@@ -16655,6 +16947,153 @@ Archie's wording stays as it is.
   neither the trial's deadline nor the end of the AI-included plan's allowance stops an agent.
 - The ⚠️ **"Never to somebody who is paying"** is about the trial's warnings and stands. An owner
   whose plan is ending may hear about the plan's end, never the trial's.
+
+*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in no release yet, and switched off
+until Jett approves the words): after the end, up to three emails from Jett.*
+
+**Proposed wording, Jett's to approve**, one sentence at the end of each edition's wording: "After it
+ends, Jett emails you about it three times at most, and each email has Stop these emails at the
+bottom."
+
+**Why it's true:** the entry "Three emails from Jett when your free trial or plan ends, and one press
+stops them", above.
+
+**The boundaries.**
+
+- The ⛔ **"Never 'you are always warned three days ahead'"** stands, and its last clause is now
+  about the warnings alone. "Say 'your agent tells you', not 'we email you': nothing is emailed" is
+  still true before the end: the warnings are never emailed. After the end, once the switch is on, up
+  to three emails go, and they are Jett's, not the agent's.
+- ⚠️ **Never to an Archie owner with an AI account of their own**, whose end of the trial is the free
+  tier, and never once a plan is bought, as with the warnings.
+
+### 🚧 Three emails from Jett when your free trial or plan ends, and one press stops them: BUILT 2026-10-28, in no release yet, switched off until Jett approves the words
+
+*Built October 28, 2026 (Archie `353508a3`, `d70b7ee6` and `df71468c`; in no release yet, not on
+the billing service until it is deployed, and switched off there until Jett approves the words).*
+
+**Proposed wording, Jett's to approve:** "When your free trial ends with no plan, or your plan ends,
+Jett Nguyen, who runs Otian AI, emails you three times at most: the day it ends, with what you made
+in Archie and how to keep going, about two weeks later, and about a month after the end, to say it is
+the last one. Each one has Stop these emails at the bottom, and one press stops the rest. They stop
+on their own if you get a plan or set up an AI account of your own. For each one, your computer
+sends us four numbers: how many lists you have with something in them, the entries in those lists,
+the reminders your agent set, and the drafts you sent. Never what is in any of them."
+
+On Archie for Teams the fourth sentence is "They stop on their own if you get a plan."
+
+**What reaches Otian's server, all of it, once for each email:**
+
+- which email is due: the first, the second or the last;
+- the kind of end: a free trial's or a paid plan's;
+- the edition: Archie or Archie for Teams;
+- four counts: the lists with at least one entry, the entries in those lists, the reminders the
+  agent set, and the drafts the owner sent;
+- the sign-in token that says whose account it is, and the computer's internet address, which every
+  request carries.
+
+Never a list's name or what is in it, a reminder's words, a draft's text, or the date the end came.
+The counts fill in that one email and are not kept, and the request log never carries a body. What
+is kept, on `access_end_emails/{uid}`, is when each email went and when the owner pressed stop. Resend,
+which sends it, keeps the sent email under its own policy, as it does for the sign-in mail.
+
+**Why it's true:**
+
+- **When access ended is the agents' own answer.** `end_of_access` in `src-tauri/src/auth.rs`
+  (`decide_end_of_access`) reads the same `ThinksFrom` facts as `decide_thinks`, so the emails and the
+  agents cannot disagree: ended is a free trial over by its days or its credits, or a paid plan over,
+  with no plan now, no live trial, and in Archie no AI account of the owner's own. A comped license
+  that ran out is not an end, and a refused statement says nothing either way. Test
+  `access_has_ended_by_the_same_facts_the_agents_run_on`.
+- **The computer keeps the time.** `src-tauri/src/access_end.rs`, looked at once an hour from the
+  session keeper (`session.rs`) on a thread of its own: the first is asked for an hour after the end
+  and only within ten days of it, the second 14 days after the end, the last 30 days after, each at
+  least ten days after the one before, and nothing 60 days after the end. A plan, a live trial or, in
+  Archie, an AI account of the owner's own ends the run for good. What was asked is kept by account
+  in `access_end_emails.json` beside the bundles. Tests
+  `the_first_is_asked_for_the_day_access_ends_and_once`,
+  `the_second_and_the_last_come_at_their_times_and_none_after`,
+  `a_first_that_went_late_holds_the_rest_ten_days_apart`,
+  `a_plan_or_an_own_ai_account_or_a_stop_means_nothing_more`, `an_end_long_past_gets_no_email`,
+  `coming_back_and_leaving_again_is_a_new_end`, `each_account_keeps_a_run_of_its_own_across_a_restart`.
+- **The counts, and only the counts.** `crates/archie-runtime/src/made.rs` counts them from the
+  owner's agents' lists folders and journals: a teammate's or a guest's work is never counted, a step
+  taken back with Undo is not, and a lists folder two agents share is read once (tests
+  `each_count_is_read_from_the_owners_files`,
+  `a_teammates_work_and_a_step_taken_back_are_not_counted`,
+  `a_lists_folder_two_agents_share_is_counted_once`). `request` in `access_end.rs` builds the whole
+  body (test `the_request_carries_the_counts_and_nothing_else`), and the billing service refuses a
+  body with any other field or count (`parseAsk` in `stripe-webhook/access-end.js`; tests "a request
+  carries the counts and nothing else, or it is refused" and "a request that carries more than the
+  counts sends nothing and writes nothing").
+- **The billing service decides, and can only say no.** `askHandler` in `stripe-webhook/access-end.js`,
+  at `POST /account/access-end-email`, verifies the token with `verifyPersonToken`, the way
+  `/billing-portal` does, and takes the account and the address from it, never the body, so another
+  account's request sends nothing for this one (test "another uid's request sends nothing for that
+  uid: the account is the token's"). It refuses an account its own records show holding a live plan
+  or a live trial (`holdsAccessNow`; tests "an owner who got a plan gets nothing more" and "our own
+  records of a live plan or a live trial refuse the email") and one with no confirmed address. It
+  writes each email down as sent inside a transaction before sending it, so two computers cannot
+  both send one, and sends each at most once, in order, at least ten days apart, none once 90 days
+  have passed since the first, and none after a stop (`decide`; tests "the first email goes on the day
+  access ends, with the counts, and once", "the second and the last come at their times, and none
+  after the last", "the rules for each ask, worked out alone"). A send Resend refuses is put back; one
+  that got no answer is not, so the same email never goes twice.
+- **The stop.** Every email ends with Stop these emails, a link signed with its own secret
+  (`ACCESS_END_LINK_SECRET`) to `/access-end/stop`, and carries the same link in its
+  `List-Unsubscribe` header with `List-Unsubscribe-Post`, so a mail app's own Unsubscribe is one press
+  too (RFC 8058). `stopHandler` writes the stop once and the send route refuses everything after it,
+  whether or not the emails are switched on. A link that was not ours, or names another account,
+  changes nothing and says to reply instead (tests "a press on the stop link stops the rest at once,
+  and a mail app's own Unsubscribe does too" and "a stop link that was not ours, or for someone else,
+  changes nothing and says what to do"). `firestore.rules` closes `access_end_emails` to every client,
+  so a computer cannot reset what went or clear a stop, and `/account/delete` deletes it.
+- **Off until Jett approves the words.** `whyOff` sends nothing, and reads nothing, until
+  `ACCESS_END_EMAILS_APPROVED` on Render equals the fingerprint of every email the words can make
+  (`FINGERPRINT`, printed at the top of `docs/ACCESS-END-EMAILS.md`), the stop link's secret is set,
+  and Resend is. A word changed after the approval changes the fingerprint and turns them off again.
+  `/health` says `access_end_emails`. Tests "the switch is on only for the approved words, a stop
+  link secret and Resend" and "nothing sends while the switch is off, and nothing is read".
+- **The words are written once and filled in by code.** Each email is 80 to 200 words in Jett's
+  voice, and a test reads all 1,080 the code can make (three emails, two editions, two kinds of end, 45
+  shapes of counts, a name or none) for no dash, none of 49 phrases that mark machine writing, no
+  "not X but Y", no list of three, no bold or header, a spread of sentence lengths, a last sentence
+  that asks for a reply, and no date at all (test "every email the words can make passes every
+  mechanical check"). The drafts file is the code's own output (test "the drafts file is exactly what
+  the code would send").
+- **The law.** Each one is from `Jett Nguyen <jett@otianai.com>`, with replies to `jett@otianai.com`,
+  never the outreach domain, and its footer says why it came, carries the stop, and the mailing
+  address "Otian AI, 5900 Balcones Drive STE 100, Austin, Texas 78731" (tests "the sender is Jett at
+  otianai.com, never the outreach domain" and the mechanical check above).
+- **Each edition its own.** Archie's emails offer an AI account of the owner's own, with the free
+  tier's 20 jobs a day, or a plan; Archie for Teams' offer a plan, and never name a free tier (test
+  "each edition gets its own name and its own ways back", and "the free jobs a day the emails quote
+  is the app's own number").
+
+**The boundaries.**
+
+- ⛔ **Three emails at most, and then none.** Never "we'll keep in touch", "from time to time", or
+  anything that sounds like a list. An owner who comes back and leaves again within 90 days of the
+  first email gets only what is left of the three, and after that none, ever.
+- ⛔ **One press stops them.** Stop these emails at the bottom of any of them, or the mail app's own
+  Unsubscribe. Never "manage your email settings": there is no setting, and none is needed.
+- ⛔ **Only the counts reach us.** Four numbers, for each email, and never what is in a list, a
+  reminder or a draft. Never "Otian knows what you made" or "we track your usage". The counts are not
+  kept.
+- ⛔ **Nothing sends until the switch is on**, which is Jett's approval of these exact words, set on
+  the billing service. Until it is, no page may say the emails exist.
+- ⛔ **Never "we email you before your trial or plan ends."** The warnings ahead are the agent's, in
+  the chat app, and are never emailed. These come only after the end.
+- ⚠️ **They come from the computer's clock.** The computer running Archie asks for each, so one that
+  is off or asleep sends it late, and one that never runs Archie again sends nothing more. Never "on
+  day 14" or "exactly two weeks later".
+- ⚠️ **An end long past gets none.** The first is asked for only within ten days of the end.
+- ⚠️ **Only a free trial's end or a paid plan's.** A comped license that runs out gets none.
+- ⚠️ **Not anonymous.** They go to the address on the account, and what went is kept on the account
+  until it is deleted.
+- ⚠️ **Not on Archie Mobile.** The phone stays closed after an end, and nothing on it mentions them.
+- ⚠️ **The trust page's list of what we hold says anything new appears there that day**, so its row
+  for this record goes up the day the switch goes on.
 
 ### 🚧 A voice note answered in writing is written for a phone to read out, on a chat app and in Archie Mobile's notification: BUILT 2026-10-27, in no release yet, not yet heard in a car
 
@@ -18022,6 +18461,298 @@ past it, the card says so."
 - ⚠️ **/stop does not stop a job once Go started it.**
 - ⚠️ **iMessage, Signal and Matrix draw no buttons**, so there the card ends "Reply with one of these
   words: Go or Not now.", and a typed go starts the job.
+
+### 🚧 Archie offers a free setup call with Jett or Jack at the step where you connect an AI account, until December 31, 2026 or 50 owners, whichever comes first, in Archie and Archie Mobile: BUILT 2026-10-28, in no release yet, and nobody has booked one from the card
+
+*Built October 28, 2026 (Archie `06b91344` and `262b8120`; Archie Mobile `dd25992`; in no release
+yet). Nobody has pressed the card in a running app or booked a call from it.*
+
+**Proposed wording, Jett's to approve:** "Until December 31, 2026, or until 50 people have had one,
+Archie offers a free call of about 30 minutes with Jett or Jack, the two people who make it, at the
+step where you connect an AI account. On the call they set up your AI account with you and get your
+agent's first job running. There is room for 10 calls a week. The card goes once you have an AI
+account of your own, and for good if you press No thanks."
+
+Short form, for a list of abilities: "A free setup call with Jett or Jack, until December 31, 2026."
+
+As Archie draws the card, on the Setup tab under AI account and in Archie Mobile under the AI account
+card on Response quality:
+
+> **Free setup call**
+> On a call of about 30 minutes, Jett or Jack sets up your AI account with you and gets your
+> agent's first job running. They are the two people who make Archie, so there is room for 10
+> calls a week, until December 31, 2026, or until 50 people have had one.
+>
+> [Pick a time] No thanks
+
+In Archie for Teams the second sentence says "the two people who make Archie for Teams".
+
+**Why it's true:**
+
+All paths are in the Archie repo unless they say otherwise.
+
+- **Where it shows, on the computer.** `SetupCallCard` (`src/app/setup-call-card.tsx`) is drawn once,
+  in the Setup tab's AI account pane in `src/app/agent-detail.tsx`, under the AI account card
+  (`LlmConnect`). Every door to connecting an AI account lands there: the Setup tab itself, the
+  money card's Set up an AI account (`jumpTo("ai")`), and the trial strip's Set up an AI account
+  outside a first run (`section-connect`). It is not in the first run, and no tagline or first
+  screen carries it.
+- **Where it shows, on the phone.** Archie Mobile's `SetupCallCard` (`src/screens/SetupCall.tsx`) is
+  drawn once, under the AI account card at the top of Response quality (`src/screens/AiAccount.tsx`),
+  which is where the phone's money card sends somebody to set up an AI account.
+- **When it shows.** The computer decides whether it is offered and tells both apps the same thing:
+  `offered` in `crates/archie-runtime/src/setup_call.rs` (on or before `LAST_DAY` where the owner
+  is, not closed by the lever, and no AI account of the owner's own saved on this computer, which
+  `own_ai_key` in `src-tauri/src/auth.rs` reads from the credential list without opening a key).
+  The window asks with `setup_call_offer` (`src-tauri/src/commands/setup_call.rs`); the phone gets
+  the same answer inside its `ai_account` reply (`ai_data` in `src-tauri/src/phone/setup.rs`). Each
+  app then hides the card when its own booking link is empty, when the agent on screen has an AI
+  account of the owner's own in use, or after No thanks (`setupCallShown` in `src/app/setup-call.ts`
+  and in Archie Mobile's `src/setup-call.ts`).
+- **The end by date.** `LAST_DAY` is December 31, 2026, compared with this computer's own date
+  (`owner_today`), so the whole of December 31 is in, where the owner is, and January 1 is out. The
+  card says the day from `clock::month_day_and_year`. The booking picker stops offering setup calls
+  after the same day (`lastDay` for `setup` in `stripe-webhook/booking.js`).
+- **The end at 50, by a lever.** No copy of Archie can count calls other people booked, so Jett
+  closes the offer from the remote flags: `setup_call_closed` on `RemoteFlags`
+  (`crates/archie-domain/src/remote_flags.rs`), read by `crates/archie-core/src/flags.rs`. It closes
+  the card only when a fetched doc says `true`. Flags fail open, so a copy that never fetched the
+  doc, or fetched one without the field, leaves the date in charge.
+- **One link in each app.** `SETUP_CALL_LINK` is `https://otianai.com/setup-call/`, in
+  `src/app/setup-call.ts` on the computer and Archie Mobile's `src/setup-call.ts` on the phone, the
+  only copy in each. It is the website's own booking picker (website `05a0059fd`), which books 30
+  minutes on Jett's calendar through the billing service (`CALLS.setup` in `stripe-webhook/booking.js`,
+  at most two a day), so the booking can move, or the page can say the offer has ended, without a
+  release. An empty link hides the card.
+- **Nothing is sent.** Pick a time opens that page in the browser (`openExternal`; on the phone
+  `Linking.openURL`, the phone's own browser). No thanks is kept on the device: per account on the
+  computer (`archie.setup_call.declined.<uid>` in local storage) and per phone in Archie Mobile
+  (`setupCallDeclined` in `src/seen.ts`). No AI call and no prompt text.
+- **Both editions.** The card names the edition it is in: "Archie", or "Archie for Teams"
+  (`APP_NAME` on the computer, `useProductName` on the phone).
+- **Tests:** `src/app/setup-call.test.mjs` (the words in both editions, when it shows, that it is
+  drawn once and only under the AI account card, that No thanks keeps it gone for that account,
+  that the link is the site's, and that the card's last day and the booking page's agree) and
+  Archie Mobile's `src/setup-call.test.ts` (the same sentences, word for word, and the computer's
+  answer as it is sent); in Rust, `the_card_is_offered_through_december_31_and_not_after`,
+  `a_fetched_lever_closes_it_before_the_date`, `an_unfetched_lever_leaves_the_card_to_the_date`,
+  `an_owner_with_an_ai_account_of_their_own_is_not_offered_it`,
+  `the_last_day_is_december_31_2026_said_month_first`,
+  `the_setup_call_closes_only_when_a_doc_says_true`,
+  `the_answer_says_whether_it_is_offered_and_the_day_it_ends` and
+  `the_ai_account_answer_carries_the_setup_call_card`.
+- **Cost:** none. No AI call and no prompt text.
+
+**The boundaries.**
+
+- ⛔ **Never "free calls" on its own, and never "a free call" without saying what it is.** The calls
+  entry forbids "free calls" for the agent's phone calls, which Bland bills the owner for. Say "a
+  free setup call with Jett or Jack".
+- ⛔ **Never call it guided setup, a free session, or a first step to anything paid, and never put it
+  beside the paid setup's price.** Guided setup is the paid service at $250 an hour on
+  consulting.otianai.com, whose own free call talks through how a business runs and ends with a
+  written plan. This call gets the first job in Archie running.
+- ⛔ **Never a capacity or an end other than these:** 10 calls a week, until December 31, 2026, or
+  until 50 owners have had one, whichever comes first (the FACTS.md rows below). Never "anytime",
+  "as many as you need", "always free" or a date past December 31, 2026.
+- ⛔ **Never say it is offered anywhere but the step where you connect an AI account, or to somebody
+  who already has an AI account of their own.** It is an offer, not the headline: never in a hero or
+  a tagline, in the app or on the site.
+- ⛔ **Never name a meeting app for it.** The invite says how to join, and the place can change
+  without a release.
+- ⚠️ **The 50 is counted by Jett, not by code.** Until he closes the lever, the card shows on every
+  copy until December 31, 2026. A released copy reads only the signed levers (`flags.rs`), so
+  closing it means signing the lever set with `setup_call_closed: true` in it, and the page stops
+  offering times in the same pass.
+- ⚠️ **No thanks is kept where it was pressed.** Per account on a computer and per phone in Archie
+  Mobile, so pressing it on one leaves the card on the other.
+- ⚠️ **On the plan with the AI included it still shows at the step**, since no AI account of the
+  owner's own is connected there.
+- ⚠️ **A phone paired with a computer on a release from before the card shows none**, because only
+  the computer can say whether the offer is still open.
+
+### 🚧 Talk to Archie opens Archie Mobile ready to talk to your agent, from the Action Button or Siri: BUILT 2026-10-28, on iPhone only, in no release yet, not yet pressed on a real phone
+
+*Built October 28, 2026 (Archie Mobile `5125a83` and `251c9b5`; in no release yet).*
+
+**Proposed wording, Jett's to approve:** "On an iPhone, say "Hey Siri, talk to Archie", or put Talk
+to Archie on the Action Button, and Archie Mobile opens on the agent you last talked to, with its
+talk screen open. Nothing is heard or sent until that screen says it is listening. If your agent
+cannot hear yet, Archie Mobile opens the screen that says why and what to press instead."
+
+**Why it's true**, all paths in Archie Mobile:
+
+- **The intent:** `plugins/talk-intent/TalkToArchie.swift` holds one App Intent, `TalkToArchie`,
+  titled "Talk to Archie" and described as "Opens Archie Mobile ready to talk to your agent.". It
+  opens the app (`openAppWhenRun`) and does nothing else: it leaves the app a note that it was
+  pressed and opens the app's own link, `archie://talk`. `ArchieShortcuts`, in the same file, offers
+  it with nothing set up first, so it is in the Shortcuts app, in Spotlight and in the Action
+  Button's list, and Siri hears it as "Talk to Archie" (the phrase is "Talk to" and the home screen
+  name). `plugins/withTalkIntent.js` puts the file in the app's own target, the only place iOS looks
+  for an intent. The app compiled for a generic iPhone on October 28, 2026, and the built app's
+  `Metadata.appintents` lists the intent, its description, its phrase and `openAppWhenRun`.
+- **Where it lands:** `src/useTalkDoor.ts` hears the press (the note, and the link) and takes it
+  once; `talkWay` in `src/talk-door.ts` decides where it goes; `App.tsx` opens the agent whose
+  conversation holds the owner's newest message (`lastTalkedTo`) on its Chat tab, and
+  `src/screens/Chat.tsx` opens the talk screen the way its Talk out loud button does. The talk
+  screen (`src/screens/Talk.tsx`) is what asks for the microphone and listens, as it always was, so
+  nothing is heard or sent before it is open and says it is listening.
+- **When it cannot talk:** with no computer paired, the pairing screen; when the computer has not
+  downloaded the tools for hearing, the agent's conversation under the talk screen's own sentence
+  about that download (`needsDownloadLine` in `src/talk.ts`) and the button that gets it; when the
+  microphone was turned off for Archie in the phone's Settings, the conversation under the words its
+  microphone button already says (`MIC_REFUSED` in `src/words.ts`); a stopped agent's conversation,
+  which says so beside Switch on; and the agent list in the sample. Never a talk screen that cannot
+  hear.
+- **Both editions:** on Archie for Teams a teammate's phone opens their own agent and nothing more.
+  The computer does not let a teammate talk out loud yet, so it is their conversation, under a line
+  that says so.
+- **Tests:** `src/talk-door.test.ts`: `the way in from the intent opens the talk screen with the
+  last agent`, `each reason it cannot talk opens the screen that says why`, `a link that is not the
+  intent's is left to the app as before`, `one press that arrives as both the note and the link is
+  taken once`, and a check that the Swift file says the words and the link the app listens for.
+
+**The boundaries.**
+
+- ⛔ **Never "hands-free", "from anywhere" or "always listening".** Siri listens for its phrase, and
+  Archie Mobile listens only while the talk screen is open. On a locked phone Siri asks for Face ID
+  first, because the app has to open.
+- ⛔ **Nothing here may be said on a page until somebody has pressed it on a real iPhone**, from
+  Siri, the Action Button and the Shortcuts app, with what happened written down (the checklist is
+  in Archie Mobile's `docs/RELEASING.md`), and a build carries it.
+- ⚠️ **It opens the app ready to talk and does nothing more until the talk screen is listening.**
+- ⚠️ **It needs a paired computer that can hear**: on, running Archie, with the tools for hearing
+  downloaded. Without them it opens the conversation saying so, beside the button that gets them.
+- ⚠️ **iPhone first.** Android does not have it. Its counterpart, a shortcut on the app's icon, waits
+  on a check that stops Android reopening the talk screen later by itself (Archie's
+  `docs/OPEN-THREADS.md`). Never "on Android" until an entry says so.
+- ⚠️ **The Lock Screen and Control Center reach it through the Shortcut control** a person adds
+  there. Archie has no control of its own, so never "Archie's own button in Control Center".
+- ⚠️ **On the computer, no key press opens talking yet.** Control, Shift and Space on a Mac (Ctrl,
+  Alt and Space on Windows) open Archie, not its talk screen. Never "a key to start talking".
+- ⚠️ **A teammate's phone on Archie for Teams opens their conversation, not a talk screen**, since
+  a teammate cannot talk out loud yet.
+- ⚠️ **English only**, as talking out loud is: the Siri phrase is English.
+
+### 🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, in no release yet, never run on a real Mac's own folders
+
+*Built October 28, 2026 (Archie `21e069c8` to `d161cabd`; Archie Mobile `549c9af`; in no release
+yet).*
+
+**Proposed wording, Jett's to approve:** "Pick folders on your computer, like Warranties or Taxes, and
+your agent can find what is in them, where they are. Ask it to find the water heater warranty and it
+names the file and the page, with a button that sends you the file. The files stay on your
+computer. When you ask about something in them, only the lines that answer you go to your AI
+company, with the file's name and folder."
+
+**Why it's true:**
+
+- **Picking, one folder at a time.** On the agent's Knowledge tab, under Documents, Folders on this
+  computer has Pick a folder, which opens the computer's own folder picker, under the line "The files
+  stay on this computer. When you ask about something in them, only the lines that answer you go to
+  your AI company, with the file's name and folder." (`PickedFolders` in `src/app/knowledge.tsx`,
+  `folders_pick` in `src-tauri/src/commands/folders.rs`). Each folder's row says how many files it
+  holds and how many are searched by name only, and has Stop searching; Try again shows when the
+  computer would not let Archie open the folder, beside what to do about it (`problem_said` in
+  `crates/archie-runtime/src/folders.rs`). A whole disk, a home folder, Archie's own folders, an
+  app's data and hidden folders are refused at the pick (`refusal`; test
+  `a_folder_that_is_not_the_owners_to_pick_is_refused`). Twenty folders an agent at most.
+- **Read where the files sit.** Nothing is copied in, and no file in a picked folder is ever
+  changed. A look reads each file's words with the reader that documents added to Archie go
+  through (`crates/archie-domain/src/documents.rs`) and keeps them beside the agent, with each
+  file's size and saved time, so a later look opens only what changed (`look` in
+  `crates/archie-runtime/src/folders.rs`). It looks the moment a folder is picked, every five minutes
+  while the agent runs, and for up to two seconds before a search. No AI reads the files or matches
+  the question. Tests: `a_word_on_the_third_page_of_a_pdf_is_found_with_the_file_and_the_page`,
+  `a_changed_file_is_found_by_its_new_words_and_a_stopped_folder_is_not_searched` and
+  `a_look_that_runs_out_of_time_leaves_the_rest_for_the_next`.
+- **Only what is inside the picked folders.** The walk starts at each picked folder and never
+  follows a link out of it. Hidden files and folders, password managers' vaults and exports,
+  keychains, key and certificate files, app packages and photo libraries, and a home folder's
+  Library and AppData are never listed; a file named like passwords or codes is listed by its name
+  and never opened (`never_open_folder`, `never_list_file` and `reading_for` in
+  `crates/archie-domain/src/folders.rs`). Tests:
+  `nothing_outside_the_picked_folder_is_read_and_the_skipped_kinds_are_skipped` and
+  `hidden_private_and_app_folders_are_never_opened`.
+- **A question matched to a page.** The question's words are compared with each file's words and
+  its name, a PDF page by page and a deck slide by slide, a rare word counting for more than a common
+  one. At most five places come back, two from any one file, each with a short passage around the
+  words (`Matcher` and `best` in `crates/archie-domain/src/folders.rs`; tests
+  `a_pdf_is_cut_into_its_pages_and_keeps_their_numbers` and
+  `the_most_words_win_and_one_file_cannot_take_every_place`).
+- **The answer, and Send me.** The agent's tool `search_folders` hands it each place's file, page,
+  folder and passage, the passage marked as the file's own words, data and never instructions
+  (`crates/archie-runtime/src/gateway/tools_folders.rs`; test
+  `the_answer_names_the_file_and_the_page_and_fences_the_words`). A reply that names a file the search
+  found gets a Send me button for it, at most two to a reply, and the press sends the file the way
+  every file the agent sends goes, into the conversation it was asked in (`send_from_folder` in
+  `crates/archie-runtime/src/export.rs`; tests
+  `a_reply_that_names_a_file_gets_its_button_and_one_that_does_not_gets_none` and
+  `the_send_me_button_hands_the_file_over`).
+- **The owner's alone, on every setting.** The tool is on the owner's own turns only, and only while
+  the owner is the person at this computer, beside the texts and the lights (`owners_alone` and
+  `owners_turn` in `crates/archie-runtime/src/gateway/turn.rs`). A teammate's turn has no tool to
+  search with, and the agent is told those files are the owner's, so asked, it says so plainly; a
+  teammate's Send me press is refused (`shared_agent_note` in
+  `crates/archie-runtime/src/gateway/prompt.rs`; tests
+  `the_folder_search_is_on_the_owners_turns_and_on_no_one_elses` and
+  `a_teammate_asking_is_told_the_files_are_the_owners`). Routines, specialists and the first
+  interview never carry it.
+- **Sealed when encryption at rest is on.** What is kept is whole files in the agent's `folders/`,
+  written and read through the vault by their path, the words of each file under a random name. With
+  a key installed, no word of a file and no file's name can be read on disk
+  (`what_a_picked_folder_holds_is_kept_sealed_and_still_found` in
+  `crates/archie-runtime/tests/sealed_state.rs`). Encryption at rest is off in every build today: it
+  runs only with `ARCHIE_SEAL=1` set (`src-tauri/src/lib.rs`).
+- **On the phone.** Archie Mobile lists the folders under Documents, read only, with the computer's
+  counts in the same words, and says that folders are picked on the computer (`PickedFolders` in
+  archie-mobile `src/screens/Manage.tsx`, `folderCounts` in its `src/words.ts`). The computer sends
+  each folder's name, where it is in words, its counts and what to do when it could not be opened,
+  never its path, a file's name or a word from a file (`folders_of` in `src-tauri/src/phone.rs`). Send
+  me under an answer works in the phone's conversation like any button.
+- **On our AI** too, the way a document added to Archie is (`credit_policy` in
+  `crates/archie-runtime/src/tool_policy.rs`).
+- **Cost.** Reading the folders and matching a question are done on this computer, with no AI.
+
+**The boundaries.**
+
+- ⛔ **Never "it searches your computer", "your whole drive" or "all your files".** Only folders the
+  owner picked, one at a time, and inside them nothing on the never-listed kinds above.
+- ⛔ **Never that it watches your screen, records anything, or reads a file as you open it.** It
+  reads the files in the picked folders, where they sit, and nothing else on the computer.
+- ⛔ **Never that the agent reads the folders on its own.** Archie's own code looks for changed files
+  every five minutes, with no AI; the agent sees a folder's words only when it searches, in a
+  conversation with the owner.
+- ⛔ **Never that what Archie keeps of the folders is encrypted on your computer.** It keeps a copy of
+  each file's words, up to 1 MB of words a file, in the agent's folder, sealed only when encryption
+  at rest is on, which no build turns on yet. A backup of the agent carries it. Stop searching
+  deletes it.
+- ⛔ **Never "nothing leaves your computer".** Exactly this leaves, and only when the owner asks
+  something a search answers: at most five short passages, each with its file's name, folder, page
+  and saved date, to the AI company the agent uses, through our server only on our AI, as every
+  prompt does. A file leaves when the owner presses Send me or asks for it: it goes into the
+  conversation it was asked in, crossing a chat app's servers like any file there, and a copy is put
+  in the Archie folder in Downloads, where every file the agent sends is kept.
+- ⚠️ **Found by name only:** scans and other PDFs made of pictures, photos and pictures, Pages, Numbers
+  and Keynote files, older .doc and .ppt files, files with macros, zipped folders, audio and video,
+  files over 25 MB, cloud files not downloaded yet, and files named like passwords or codes. A file's
+  words past 1 MB and a folder's past 100 MB are not searched, a folder's files past 5,000 are left
+  out (its row says so), and a Word file carries no page numbers, so a match there names the file and
+  no page.
+- ⚠️ **Word comparison, not understanding.** A file worded differently from the question can be
+  missed, and the agent is told to say that only those folders were searched.
+- ⚠️ **A change is found within five minutes**, and a search looks first for up to two seconds, which
+  a big folder may not finish.
+- ⚠️ **Owner only on Archie for Teams, whatever a teammate's Can setting says,** and only while the
+  owner is the person at this computer. A teammate asking is told the files are the owner's.
+- ⚠️ **Picking is on the computer only.** Archie Mobile lists the folders and picks none.
+- ⚠️ **It is not the small files check** ("When you ask about something, Archie checks your small
+  files for lines that mention it, with no extra AI call"), which reads Documents' own small files on
+  every message. This one searches the picked folders when the agent calls for it.
+- ⚠️ **Never run on a real Mac's own folders, or on Windows.** The tests used temporary folders, so
+  the Mac's question about Documents, Desktop, Downloads and iCloud Drive has not been seen at a
+  pick. Until somebody has picked one on a real Mac and restarted Archie, say nothing about when the
+  Mac asks.
 
 ## Known Weaknesses — disclose, don't hide
 

@@ -801,6 +801,37 @@
       "guide": ""
     },
     {
+      "id": "talk-to-archie",
+      "name": "Talk to Archie from the Action Button or Siri",
+      "area": "voice",
+      "summary": "On an iPhone, say \"Hey Siri, talk to Archie\" or press the Action Button, and Archie Mobile opens on the agent you last talked to, with its talk screen open.",
+      "where": "On an iPhone: Siri, the Shortcuts app, the Action Button in Settings, and the Shortcut control on the Lock Screen or in Control Center.",
+      "how": [
+        "Say \"Hey Siri, talk to Archie\".",
+        "Or put it on the Action Button: in Settings, press Action Button, swipe to Shortcut, press Choose a Shortcut, and pick Talk to Archie.",
+        "When the talk screen says it is listening, talk."
+      ],
+      "limits": [
+        "It opens Archie Mobile and does nothing more until the talk screen is open and listening.",
+        "It needs the computer paired with the phone to be on and running Archie, with the tools for hearing downloaded. If something is missing, it opens the screen that says what, and what to press.",
+        "On a locked phone, Siri asks for Face ID first.",
+        "On Archie for Teams, a teammate's phone opens their conversation with the agent, since a teammate cannot talk out loud yet.",
+        "English only.",
+        "Nobody has used it on a real iPhone yet."
+      ],
+      "phone": "iPhone only, from the Archie Mobile build that carries it. Android does not have it yet.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no build of Archie Mobile yet (Archie Mobile 5125a83 and 251c9b5). The proposed wording is Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Talk to Archie opens Archie Mobile ready to talk to your agent, from the Action Button or Siri: BUILT 2026-10-28, on iPhone only, in no release yet, not yet pressed on a real phone"
+      ],
+      "wording": "On an iPhone, say \"Hey Siri, talk to Archie\", or put Talk to Archie on the Action Button, and Archie Mobile opens on the agent you last talked to, with its talk screen open. Nothing is heard or sent until that screen says it is listening. If your agent cannot hear yet, Archie Mobile opens the screen that says why and what to press instead.",
+      "guide": ""
+    },
+    {
       "id": "voice-notes-on-chat-apps-and-spoken-replies-in-a-voice-you-p",
       "name": "Voice notes on chat apps, and spoken replies in a voice you pick",
       "area": "voice",
@@ -3259,6 +3290,31 @@
       "guide": ""
     },
     {
+      "id": "morning-list-last-week",
+      "name": "Last week, on the first morning list of the week",
+      "area": "routines",
+      "summary": "The first morning list of each week ends with what your agent did the week before, in counts and dollars: emails sorted, drafts you sent, invoices chased, and what was paid after a follow-up.",
+      "where": "The last line of the first morning list of the week, in your chat with your agent.",
+      "how": [],
+      "limits": [
+        "It counts only work Archie recorded doing, Monday to Sunday on this computer's clock. Reminders that went off are not counted.",
+        "Dollars appear only for an invoice on Waiting On that a follow-up written overnight chased, that you sent, and that was then marked paid.",
+        "It comes once a week, on the first morning list that goes out. A week with nothing to count says nothing, and the line never sends a list on its own.",
+        "On Archie for Teams it counts what your agent did for you, never a teammate's work."
+      ],
+      "phone": "Archie Mobile shows the same line, in the same list.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 841fad3c). The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "On the first morning list of each week, the last line says what your agent did the week before, Monday to Sunday: \"Last week: 14 emails sorted, 3 drafts you sent, 2 invoices chased, $640 paid after a follow-up.\" Each number counts work Archie recorded doing, the same work the Jobs tab lists, and a dollar amount appears only for an invoice your agent followed up on that was then marked paid. It never guesses at time saved, and a week with nothing to count says nothing. It is counted on your computer without asking an AI anything.",
+      "guide": ""
+    },
+    {
       "id": "morning-list-lines-from-your-email",
       "name": "Lines from your email on the morning list, on Archie's own AI",
       "area": "routines",
@@ -3531,6 +3587,43 @@
       ],
       "wording": "",
       "guide": "knowledge"
+    },
+    {
+      "id": "find-in-folders",
+      "name": "Find things in folders on your computer",
+      "area": "files",
+      "summary": "Pick folders on your computer, like Warranties or Taxes, and your agent finds what is in them where they are, naming the file and the page, with a button that sends you the file.",
+      "where": "On your agent's Knowledge tab, under Documents: Folders on this computer.",
+      "how": [
+        "Open your agent's Knowledge tab, then Documents.",
+        "Under Folders on this computer, press Pick a folder and choose one.",
+        "On a Mac, if it asks whether Archie may open the folder, press Allow.",
+        "Ask your agent for something in it, like \"find the water heater warranty\".",
+        "Press Send me under the answer to get the file."
+      ],
+      "limits": [
+        "Only the folders you pick, one at a time, up to 20 for an agent. Never a whole disk, your whole home folder, or an app's own files.",
+        "The files stay on your computer. When you ask about something in them, the lines that answer you go to your AI company, with the file's name and folder.",
+        "Archie keeps a copy of each file's words in your agent's folder, to search them. Stop searching deletes it.",
+        "Scans, pictures, Pages, Numbers and Keynote files, files over 25 MB, and files named like passwords are found by their names only.",
+        "Hidden files, password managers' files and apps' own files are never looked at.",
+        "A folder's files past 5,000 are left out, and its row says so.",
+        "A file you change is found by its new words within five minutes.",
+        "A Word file has no page numbers, so a match there names the file only.",
+        "On Archie for Teams, only the owner can search them, whatever a teammate can do.",
+        "If you pressed Don't Allow on a Mac, open System Settings, then Privacy & Security, then Files and Folders, turn on that folder under Archie, and press Try again beside the folder."
+      ],
+      "phone": "Archie Mobile lists the folders under Documents with their counts, and picks none: pick them in Archie on your computer. Send me under an answer works on the phone.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 21e069c8 to d161cabd). The proposed wording is Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, in no release yet, never run on a real Mac's own folders"
+      ],
+      "wording": "Pick folders on your computer, like Warranties or Taxes, and your agent can find what is in them, where they are. Ask it to find the water heater warranty and it names the file and the page, with a button that sends you the file. The files stay on your computer. When you ask about something in them, only the lines that answer you go to your AI company, with the file's name and folder.",
+      "guide": ""
     },
     {
       "id": "first-questions",
@@ -4388,6 +4481,43 @@
       "guide": ""
     },
     {
+      "id": "price-watch-deal-card",
+      "name": "A card when Price Watch finds your price",
+      "area": "web",
+      "summary": "When a Price Watch check finds something at or under the price you set, it gets a card of its own with the price, the store and when it was checked. If you switched buying on, the card has Buy too, and the order still waits for you to tap Press it for me.",
+      "where": "A card in your chat with your agent, after a price check.",
+      "how": [
+        "Add Price Watch from the Marketplace, and tell your agent what you want and the price you would pay.",
+        "Ask it to check your prices, or let the Weekly Price Check run.",
+        "On a card, press Buy at $239, Not now, or Stop watching.",
+        "After Buy, your agent goes as far as Place order and sends you the page. Tap Press it for me to place the order."
+      ],
+      "limits": [
+        "Buy is on the card only if buying is switched on, the shop is on your list, and the price is inside your limits.",
+        "Buy only starts the errand. Nothing is ordered until you tap Press it for me.",
+        "If the items cost more at checkout than the card said, before tax and shipping, it stops and leaves the order to you.",
+        "The limit and the card's price are checked against what the store's page shows, not what your card is charged.",
+        "Prices are checked once a week, or when you ask, so a card is only as fresh as that check, and it says when that was.",
+        "Each deal gets one card. A bigger drop while it is still under your price does not get another.",
+        "A card works for a day.",
+        "Only you can press Buy. A check someone else asked for puts up no card.",
+        "If you finish an order yourself in the window, tell your agent you bought it, so the watch says Bought.",
+        "No purchase has been made from a card yet."
+      ],
+      "phone": "Archie Mobile shows the same card and buttons, and Press it for me after Buy. On a chat app with no buttons, reply Buy at $239, Not now or Stop watching, and type press it at Place order.",
+      "editions": "individual",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 6b939f8d to 3217d3cc). The proposed wordings are Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "✅ Prices at Shopify stores, for Price Watch: BUILT 2026-09-24 (Archie `b67a6576`), SHIPPED in Archie 0.3.1 on September 29, 2026",
+        "✅ Buying, as a switch the owner turns on: SHIPPED 2026-09-22 (0.3.0), APPROVED FOR COPY 2026-09-24"
+      ],
+      "wording": "When a Price Watch check finds something at or under the price you set, it gets a card of its own with the price, the store, your price and when it was checked, like \"Sony WH-1000XM5 is $239 at Best Buy, under your $250. Checked today at 10:04am.\" The weekly check does this too, and each deal is said once. If you have switched buying on, the shop is on your list and the price is inside your limits, the card has Buy too: your agent opens the page the price was found on, goes as far as Place order, and waits for you to tap Press it for me, as with any purchase. If the items cost more there than the card said, before tax and shipping, it stops and leaves the order to you. The limit is checked against the price it reads on the page, and it never types a card you pay with.",
+      "guide": ""
+    },
+    {
       "id": "pick-the-jobs-it-takes-on",
       "name": "Your agent takes on the jobs you pick",
       "area": "addons",
@@ -5101,6 +5231,34 @@
       ],
       "wording": "Archie runs on an AI account you connect: Anthropic, OpenAI, Google, Groq, xAI, DeepSeek, or Mistral, or any provider of your own that speaks the OpenAI format. You pick, and you can change it later. The free credits you start with run on Claude, because that is the account we pay for.",
       "guide": "picking-your-ai-account"
+    },
+    {
+      "id": "free-setup-call",
+      "name": "A free setup call",
+      "area": "ai",
+      "summary": "Until December 31, 2026, Archie offers a free call of about 30 minutes with Jett or Jack to set up your AI account with you and get your agent's first job running.",
+      "where": "On your agent's Setup tab, under AI account, below the AI account card.",
+      "how": [
+        "Press Pick a time, and choose a time on the booking page that opens in your browser.",
+        "Press No thanks to put the card away for good."
+      ],
+      "limits": [
+        "There is room for 10 calls a week, until December 31, 2026, or until 50 people have had one.",
+        "It shows only until you have an AI account of your own on this computer.",
+        "No thanks is kept on each computer and each phone, so pressing it on one leaves the card on the other.",
+        "Nobody has booked a call from the card yet."
+      ],
+      "phone": "Archie Mobile shows the same card under the AI account card, at the top of Response quality (open More, then Response quality), and opens the booking page in your phone's browser.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 06b91344 to 262b8120). The proposed wording is Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Archie offers a free setup call with Jett or Jack at the step where you connect an AI account, until December 31, 2026 or 50 owners, whichever comes first, in Archie and Archie Mobile: BUILT 2026-10-28, in no release yet, and nobody has booked one from the card"
+      ],
+      "wording": "Until December 31, 2026, or until 50 people have had one, Archie offers a free call of about 30 minutes with Jett or Jack, the two people who make it, at the step where you connect an AI account. On the call they set up your AI account with you and get your agent's first job running. There is room for 10 calls a week. The card goes once you have an AI account of your own, and for good if you press No thanks.",
+      "guide": ""
     },
     {
       "id": "switch-ai-by-asking",
@@ -6373,6 +6531,32 @@
       ],
       "wording": "Three days before your free trial ends, and again the day before, your agent tells you the day and the time, in the chat app you use with it. If the trial ends with no plan, Archie keeps running on your computer without the AI: the reminders you set still go off, the morning list still comes if you have it on, and your lists and calendar still work. Answers, routines, and writing wait for an AI account of your own or a plan, and come back on their own once you have one.",
       "guide": ""
+    },
+    {
+      "id": "emails-when-access-ends",
+      "name": "Emails from Jett when your trial or plan ends",
+      "area": "plans",
+      "summary": "When your free trial ends with no plan, or your plan ends, Jett emails you three times at most, and Stop these emails in any of them stops the rest.",
+      "where": "In your email, from jett@otianai.com.",
+      "how": [],
+      "limits": [
+        "Three at most: the day it ends, about two weeks later, and about a month after the end. Then none.",
+        "Press Stop these emails at the bottom of one, or your mail app's own Unsubscribe, and the rest never come.",
+        "They stop on their own if you get a plan or, in Archie, set up an AI account of your own.",
+        "Your computer asks for each one, so it has to be on and running Archie. An end more than ten days old gets none.",
+        "For each one your computer sends four numbers: lists, entries, reminders set and drafts sent. Never what is in them."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 353508a3 to df71468c). The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "🚧 Three emails from Jett when your free trial or plan ends, and one press stops them: BUILT 2026-10-28, in no release yet, switched off until Jett approves the words"
+      ],
+      "wording": "When your free trial ends with no plan, or your plan ends, Jett Nguyen, who runs Otian AI, emails you three times at most: the day it ends, with what you made in Archie and how to keep going, about two weeks later, and about a month after the end, to say it is the last one. Each one has Stop these emails at the bottom, and one press stops the rest. They stop on their own if you get a plan or set up an AI account of your own. For each one, your computer sends us four numbers: how many lists you have with something in them, the entries in those lists, the reminders your agent set, and the drafts you sent. Never what is in any of them.",
+      "guide": "where-your-information-goes"
     },
     {
       "id": "the-spend-note-in-chat",

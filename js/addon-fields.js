@@ -709,7 +709,7 @@ export const ADDON_SPEC = {
             },
             {
               "control": "toggle",
-              "help": "Lets it search the web for fresh information. It uses the AI account its owner already connected, at about 2 to 4 cents a search.",
+              "help": "Lets it search the web for fresh information, on the AI account its owner already connected. A look-up comes to about 10 cents with the usual five searches.",
               "key": "web_search",
               "label": "Web access",
               "max": 0,
@@ -761,7 +761,7 @@ export const ADDON_SPEC = {
               "max": 400,
               "max_items": 0,
               "options": [],
-              "placeholder": "e.g. Each search costs about 2 to 4 cents, and it runs up to five per task.",
+              "placeholder": "e.g. A look-up costs about 10 cents, and it makes up to five searches for one.",
               "required": false,
               "scaffold": ""
             },

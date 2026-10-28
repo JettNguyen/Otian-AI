@@ -13550,11 +13550,14 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
   its slot empty. Never say setup adds what you will need for your email or calendar.
 - ⛔ **The phone connects nothing.** It says where to connect on the computer.
 - ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
-- ⚠️ **A search is "about 2 to 4 cents", counting the pages it brings back** (FACTS.md; measured 1.6 to
-  4.3 cents). The app and the phone say so since
-  Archie 9f888e61 and archie-mobile 49f31d9, and the site's submit page since this sync; "about a cent"
-  was the search fee alone and is never quoted as a search's cost again. Deep Research: "about 50 cents
-  a run", up to 20 searches; never "a few cents".
+- ⚠️ **A look-up is "about 10 cents", counting its searches and the pages they bring back, and a Deep
+  Research run "about 40 cents"** (FACTS.md; measured at 6.6 to 17.4 cents a look-up across nine
+  runs). The app and the phone say so from Archie `f5623664` and Archie Mobile `0fd1090`, in no
+  release yet, and the site may say it now, since it is what a look-up costs on every release. "About
+  2 to 4 cents a search" (from September 28, 2026) priced one search and not the question it was part
+  of, and "about a cent" was the search fee alone; neither is quoted as a cost again. Deep Research:
+  "about 40 cents a run", up to 20 searches; never "a few cents", and never "about 50 cents", which
+  it said until October 27, 2026.
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
 *Amended October 26, 2026 (Archie `32a61822` and `cc03c915`, in no release yet):* Evening Reflection 1.1.5 is offered after setup (`"offered_after_setup": true` in
@@ -13565,6 +13568,11 @@ journal, on the computer or the phone. It is still a companion in the catalog, s
 brings it and lists it. Mind & Wellness still lists it by name and still installs it. The ⛔ "Never "nothing goes on without your
 yes."" stays: the starter pack, the Researcher and the Morning Task Checklist that comes with the
 to-do list still go on unasked.
+
+*Amended October 27, 2026 (Archie `f5623664` and `83852781`, Archie Mobile `0fd1090` and `c9e590e`,
+in no release yet): what a search costs is said by the look-up.* The bullet on it above said "about 2
+to 4 cents" a search from September 28, 2026, and now says about 10 cents a look-up and about 40
+cents a Deep Research run.
 
 ### ✅ Bring an agent over from OpenClaw, scheduled jobs included: SHIPPED in Archie 0.3.1 (2026-09-29; built 2026-09-28 as 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the free version)
 
@@ -17575,6 +17583,97 @@ overnight.").
 - ⚠️ **The list itself still asks no AI to make it.** Say that much and stop. The drafts on it were
   written by the email and text watches, or overnight once the owner said yes, with the owner's own
   AI account.
+
+### 🚧 Before a job likely to cost more than about 10 cents, Archie says what it would cost and waits for your Go: BUILT 2026-10-27, in no release yet, never run against a real AI account
+
+*Built October 27, 2026 (Archie `3dd55ec2`, `f5623664`, `4b3ea8a5`, `83852781` and `259c2495`;
+Archie Mobile `0fd1090` and `c9e590e`; in no release yet).*
+
+**Proposed wording, Jett's to approve:** "Before a job likely to cost more than about 10 cents, like a
+Deep Research question, Archie says about what it will cost and waits. Press Go and it starts. Press
+Not now and nothing is spent. On your own AI account it says the amount, like "about 40 cents on
+your Anthropic account". On the free credits, or the plan with the AI included, it says how much of
+what is left the job would use, counted in answers. If you set a monthly limit and the job would go
+past it, the card says so."
+
+**Why it's true:**
+
+- **The check:** `crates/archie-runtime/src/gateway/price_card.rs`. `before_a_search` and
+  `before_a_delegation` run in `crates/archie-runtime/src/gateway/turn.rs` before a skill that
+  searches the web starts, on a message that skill answers itself and on a job the agent hands to it, and
+  only for a message somebody sent in a chat (`ConfirmCtx::person_typed`). Nothing of the job is
+  started before Go: the turn answers with the card, and on a handed-over job the agent is told it is
+  waiting and says so in one sentence.
+- **The figure:** `price_card::job_micros`, worked out in code from what these jobs cost when they
+  were measured (the Archie repo's `docs/COST-MEASURED.md` section 55) and from how many searches
+  the job may make. No AI is asked for it. `about_money` says it the way a person would: "about 40
+  cents", never a figure to the cent.
+- **The words, by who pays:** `price_card::card_words`. On the owner's own AI account it names the
+  AI company the agent's settings name ("on your Anthropic account"). On the free credits and on a
+  plan it says the part of what is left and about how many answers that is, from the same count the
+  strip under the window uses (`answers_worth` and `left_micros` in
+  `crates/archie-runtime/src/gateway/credits_left.rs`), and never a dollar figure. With a monthly
+  limit on, it reads `crate::ai_limit::status` and says when the job would take the month past it;
+  the day things start again comes from `clock::month_and_day`. On Archie for Teams a teammate's
+  card names whose account pays (`Whose::of`).
+- **Go and Not now:** `crates/archie-runtime/src/gateway/worker.rs` puts the two buttons under the
+  reply and hands a press to `price_card::handle_action`. Go runs the job the way that skill runs
+  when it answers a message itself (`tools_specialist::answer_from_the_web`) and the answer comes
+  into the chat; Not now answers
+  "Left it. Nothing was looked up." Only the person who asked, or someone who may act as the owner,
+  may press it (`may_answer`). A chat app with no buttons is told "Reply with one of these words: Go
+  or Not now." (`typed_choices` in `crates/archie-net/src/channel.rs`), and the typed word is taken by
+  `price_card::try_consume_words`.
+- **On the phone:** Archie Mobile draws the card and its buttons as it draws every card
+  (`InlineActions` in `src/ui.tsx`), and a press reaches the computer through the `tap` op
+  (`src-tauri/src/phone.rs`, and `team_phone.rs` for a teammate's phone).
+- **A card the computer forgot:** a restart forgets a card, and the window and the phone take its
+  buttons off (`forgotten_by_a_restart` in `crates/archie-runtime/src/gateway/mod.rs`,
+  `drop_dead_buttons` in `src-tauri/src/inapp.rs`). A press on one says it is no longer current.
+- **Tests:** in `price_card.rs`, `deep_research_is_over_the_line_and_a_look_up_is_not`,
+  `the_line_is_where_the_card_would_say_more_than_ten_cents`,
+  `the_card_says_the_price_in_the_terms_of_whoever_pays`,
+  `on_the_free_credits_it_speaks_in_what_is_left_and_never_in_dollars`,
+  `a_job_over_the_monthly_limit_says_so`, `the_owner_hears_it_is_theirs_and_everybody_else_hears_whose_it_is`
+  and `only_a_message_somebody_sent_waits_for_go`; in `crates/archie-runtime/tests/pipeline.rs`,
+  `deep_research_says_its_price_first_and_searches_only_on_go`,
+  `not_now_leaves_a_costly_job_unstarted`, `an_ordinary_turn_and_a_look_up_ask_nothing`,
+  `go_typed_on_a_chat_app_with_no_buttons_starts_the_job` and
+  `a_routine_the_owner_set_up_runs_deep_research_without_asking`.
+- **Cost:** nothing on an ordinary turn, and no AI call to make the estimate.
+
+**The boundaries.**
+
+- ⛔ **Never call the price a quote, or say you will never pay more than the card says.** It is an
+  estimate from what these jobs cost when they were measured, and the card says "about". What the AI
+  company bills can differ, and a long written answer costs more than a short one.
+- ⛔ **Never "Archie asks before it spends anything", or "every costly job asks first".** An ordinary
+  answer never asks. The card is for a job that searches the web and is likely to cost more than
+  about 10 cents: today that is Deep Research, on every quality setting of every AI company that can
+  search, and on Best with Anthropic or OpenAI, a look-up by the Researcher or the Prospector. So the
+  least a card on your own AI account says is "about 15 cents". A website or Mac app job, reading a
+  scanned PDF, and bringing a spreadsheet into a list show no price, because each measured under the
+  line. A video already asks first, with Watch it or Skip, and says no price.
+- ⛔ **Never say a routine asks.** A routine you set up, its Run now, and the email and text watches
+  run without a card: you said yes when you set them up, and nobody is there to press Go. The monthly
+  limit is what holds those.
+- ⛔ **Say what the card does, never how the figure is worked out.** Not which model a job runs on,
+  and nothing about what Archie does to keep a bill down.
+- ⚠️ **On the free credits and on the plan with the AI included it says a part of what is left,
+  counted in answers, never dollars.** The answers are the same estimate the strip under the window
+  shows. When a job needs more than is left, the card says it would stop before it finished, and
+  where to set up an AI account of your own.
+- ⚠️ **A monthly limit never stops a job you asked for.** When the job would take the month past the
+  limit, the card says so, and Go still runs it; after that, routines and reading new mail and texts
+  pause until the first, as the limit's own entry says.
+- ⚠️ **On Archie for Teams** a teammate's card says whose account pays ("on Sam's Anthropic account,
+  which pays for this agent"), and only the person who asked, or someone who may act as the owner,
+  can press Go.
+- ⚠️ **A card lasts a day, and a restart of the computer running Archie forgets it.** A press after
+  that says it is no longer current, and the job is asked for again.
+- ⚠️ **/stop does not stop a job once Go started it.**
+- ⚠️ **iMessage, Signal and Matrix draw no buttons**, so there the card ends "Reply with one of these
+  words: Go or Not now.", and a typed go starts the job.
 
 ## Known Weaknesses — disclose, don't hide
 

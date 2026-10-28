@@ -524,6 +524,17 @@ refused before anything is sent, and the strip, the card and one message in chat
 ended.", as the amendment under "What happens when a plan ends" says. The month's allowance running
 out while the plan is live is unchanged.
 
+*Amended October 27, 2026 (Archie `d1e8a3e2` to `155f933b`, held until the Google filing is
+checked).* "So on this plan the agent thinks through the proxy and reads neither mail nor texts."
+stays true of the agent: no AI reads mail on this plan, and `runs_through_otian` and its condition
+are unchanged. From the release that switches on the lines under "A morning list for each line of
+work, with no AI in it", code on the owner's computer reads each Gmail message's sender, subject and
+date for the morning list once the owner says yes, and none of it goes to the AI or through the
+proxy.
+
+- ⛔ Never "the plan reads your email" or "email works on the plan".
+- ⚠️ Texts are unchanged: nothing reads them on this plan, in code or by an AI.
+
 ### ✅ On the two lanes that run on our AI account, each person's calls carry a tag, and we can turn that AI off for one person
 
 **Added 2026-10-04. Built in the Archie repo and not yet deployed; nothing on the site says it yet.**
@@ -3228,6 +3239,39 @@ policy. On our AI, your agent reads none of your mail."
   own is connected, from that agent's next start it reads what the connect-email lines say. Never
   "Archie never reads your mail".
 
+*Amended October 27, 2026 (Archie `b504ac87` and `155f933b`, held until the Google filing is
+checked).* The proposed wording's "On our AI, your agent reads none of your mail." stays true of the
+agent. With the lane on and the owner's yes, the two answers in code say what is read for the list
+(`READ_FOR_THE_LIST` and `OUR_AI_READS_FOR_THE_LIST` in
+`crates/archie-runtime/src/gateway/privacy.rs`, test
+`with_the_lines_from_their_email_on_the_answers_say_what_is_read_for_the_list`): the answer to where
+information goes adds "For your morning list, Archie reads who each email is from, its subject, and
+its date, on this computer. No AI sees any of it, and we cannot read it.", and the answer to what
+connecting email means opens "Right now this agent runs on our AI (the free credits, or a plan with
+the AI included), so no AI reads your mail: not when you ask, and not on its own." and leaves out the
+guide's line that says it reads none of the mail.
+
+Both guides, the chooser's copy of the first (`MAIL_PLAINLY` in `src/app/vocab.ts`) and this site's
+page change in the release that switches it on. Proposed lines, Jett's to approve:
+
+- Connect your email, its Where it goes line: "from this computer straight to the AI company on your
+  own AI account, the way everything it thinks about does. On our AI (free credits, or a plan with
+  the AI included) no AI reads your mail, and we cannot read it either. With Gmail, if you switch on
+  Email on the list (under Morning list on your agent's Routines tab), Archie reads each email's
+  sender, subject, and date for that list, on this computer." The guide would be 762 words of its
+  800.
+- Where your information goes, the paragraph about our AI, in place of "Your agent reads no email or
+  texts on our AI.": "On our AI, your agent does not read your email or texts. With Gmail, if you
+  switch on Email on the list (under Morning list on your agent's Routines tab), Archie reads each
+  email's sender, subject, and date for that list, on this computer, and no AI sees them." That
+  guide is 793 words by `scripts/guide-lengths.py` and would be 832, so 32 have to come out
+  elsewhere to keep it under its 800.
+
+- ⛔ With the lane on, never "Archie reads none of your mail on our AI". "No AI reads your mail on
+  our AI" stays true.
+- ⛔ Never "none of your mail reaches our server" once the list carries these lines: on Archie Mobile
+  the list crosses the phone relay sealed, which Otian holds and cannot read.
+
 ### Account choices stay visible, and Google Drive has its own waiting state: BUILT October 20, 2026 (Archie `686e073d` to `c9d42ff4`, archie-mobile `ca0b3a2` to `174176e`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)
 
 **Claim:** "Choose what your agent may use before you sign in. Once your account is connected,
@@ -3596,6 +3640,13 @@ service is deployed with `c97eecbb`): what the plan chooser's button opens.*
 - ⚠️ **The price is the Payment Link's.** The billing service sells only what one of the account's own
   active plan links sells, at that link's price, and refuses any other address. A page may say the
   price is the same as buying the first time; never that it is set or changed anywhere else.
+
+*Amended October 27, 2026 (held until the Google filing is checked).* The AI account panel's lines
+stay true as written: they name email and text replies, which still need an AI account of the
+owner's own. The Why it's true bullet's "email features refuse on the credits and on the plan" does
+not, from the release that switches on the lines under "A morning list for each line of work, with
+no AI in it": it becomes "every email feature that needs an AI refuses on the credits and on the
+plan".
 
 ### ✅ When the AI your agent thinks with runs out, it says so once, with the ways to keep going, and keeps what you send until the AI is back: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -5778,6 +5829,15 @@ Watch my inbox switch on the agent's Skills tab, under Email Manager, starts it 
 - **What the earlier version got wrong.** In 0.3.9 and 0.3.10, adding a skill that reads mail
   started the watch at once, and the notice arrived on the watch's own clock, which could put it in
   the middle of an answer the agent was writing.
+
+*Amended October 27, 2026 (held until the Google filing is checked).* Both bullets that say "Not on
+the free credits or the plan with the AI included, where mail is not read at all" become, from the
+release that switches on the lines under "A morning list for each line of work, with no AI in it",
+"Not on the free credits or the plan with the AI included, where no AI reads mail and the watch
+never starts." Those lines are not the watch: they are read once a morning for the list, after a
+yes of their own, and their offer under the first evening's count is the only notice they give.
+
+- ⛔ With the lane on, never "Archie never reads your mail on the free credits".
 
 ### 🚧 What your agent sends on its own waits until it has finished answering you: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19
 
@@ -10767,6 +10827,111 @@ overnight". Tests: `a_watch_draft_waits_on_the_tray_and_only_send_sends_it`,
   owner said yes, with the owner's own AI account. Never say the drafts were made without AI.
 - ⚠️ **On the free credits or the plan with the AI included** the part holds Waiting On and tomorrow's
   appointments only, since the mail and the texts are not read there.
+
+*Amended October 27, 2026 (Archie `d1e8a3e2` to `155f933b`, archie-mobile `b21657a`, in no release
+and switched off in every build until the Google filing is checked): on Archie's own AI, once the
+owner says yes, the list carries lines from their email that code works out on their computer.*
+
+**Proposed wording, Jett's to approve:** "On Archie's own AI, your morning list can also carry a few
+things from your email once you say yes: bills and renewals coming due, people you know who are
+waiting on a reply, and any email asking to change where a payment goes. Archie works them out on
+your computer from who sent each email, its subject, and its date. No AI reads them, and we cannot
+read them."
+
+**Why it's true:**
+
+- **Three fields, read on the computer, from Gmail.** `headers_matching` in
+  `crates/archie-net/src/mail/google.rs` lists the last two weeks of the owner's inbox and Sent mail
+  and asks Gmail for each message's sender, subject and date and nothing else (`HEADERS_ONLY` in
+  `crates/archie-net/src/google.rs`: Gmail's metadata format, two headers, and a field list that
+  leaves out the preview Gmail would otherwise send). Test:
+  `the_header_read_asks_for_two_headers_and_never_the_snippet`. The call goes from the computer to
+  Google, like every other mail read; no server of ours is in it.
+- **The rules are the catches' own, not a second copy.** A payment change is `catches::payment`'s
+  rule read on the subject, with its warning; a reply owed is `catches::owed`'s rule and words,
+  found from the conversation's senders and dates: somebody the owner knows, or wrote to first in
+  that conversation, wrote last, two or more days ago, and nothing in Sent answers it since; a bill or
+  a renewal is a subject that says so, with the date the subject names (`bill_kind`, and
+  `schedule::dates_written` for the date). A receipt, a renewal that already went through, a
+  cancellation and a conversation about an invoice are not bills, and mail from a no-reply address
+  is never a reply owed. Test: `the_facts_come_from_who_wrote_the_subject_and_the_date`. No email's
+  text is read for any of it: `on_otians_ai_bills_and_renewals_come_from_the_subject_and_the_date_and_no_body_is_read`.
+- **In the list's own parts and words, each said once.** "Asked to change where a payment goes",
+  "Waiting on a reply from you", and "Bills and renewals in your email", the first two the headings
+  the catches already use (`catches` in `crates/archie-runtime/src/morning.rs`), each line said once
+  by the catches' own keys, and the line under the list says it read the sender, subject and date
+  of each email. Test: `on_otians_ai_the_lines_from_their_email_go_out_and_never_into_the_history`.
+- **Shown to the owner, and never kept where an AI reads.** The lines go to the window, to Archie
+  Mobile (sealed, as everything there is) and to the chat app the owner uses. What the agent keeps
+  of the conversation has the list without them, and says in their place that there were some and
+  what to say when asked (`Listed::history` in `morning.rs`, `KEPT_OUT` in `mail_facts.rs`). A test
+  sends the list, then runs the owner's next message as a whole turn, and finds no sender, subject or
+  line in anything handed to the AI:
+  `on_otians_ai_the_turn_after_a_list_with_lines_from_their_email_is_handed_none_of_them`. A list
+  asked for in words is kept the same way
+  (`asked_for_in_words_the_history_keeps_the_list_without_the_lines_from_their_email`), and the
+  agent's search of the conversation cuts them
+  (`on_otians_ai_a_search_never_hands_back_the_lines_from_their_email`).
+- **Asking about a line meets the wall, answered without the AI.** A question that names a line's
+  sender or subject and asks about the email ("What did Sam Hart want in that email?") is answered
+  in code: "That line on your list came from your email: Archie worked it out on this computer from
+  who sent it, its subject, and its date, so I have not seen the email itself.", then the mail wall's
+  own sentence, which says where an AI account of their own goes (`answer_about_a_line`). Test:
+  `asking_about_a_mail_line_meets_the_wall_with_the_way_through_named`.
+- **Offered once, under the first evening's count**, with Yes and No thanks (`make_the_offer` in
+  `mail_facts.rs`, called by `mail_census` in `src-tauri/src/commands/integrations.rs`): "I can also
+  put a few things from your email on your morning list: bills and renewals coming due, people you
+  know who are waiting on a reply, and any email asking to change where a payment goes. I would work
+  them out on this computer from who sent each email, its subject, and its date. No AI would see any
+  of it, and Otian could not read it. Want that?" Yes reads the mail once and changes the count in
+  place to show what it found, with where the switch is; No thanks says where the switch is.
+  Nothing is read before Yes, and a guest's press changes nothing. Tests:
+  `the_offer_is_made_once_under_the_count_and_yes_shows_the_facts_in_place`,
+  `no_thanks_reads_nothing_and_says_where_the_switch_is`. After that it is a switch named Email on
+  the list under the Morning list row on the Routines tab, in Archie (`src/app/routines.tsx`) and
+  Archie Mobile (`src/screens/Routines.tsx`), with the same words, through `morning_mail_set` and
+  the phone op `morning_mail_on`.
+- **Off in every build until the filing is checked.** With `MAIL_FACTS_ON_OTIANS_AI` false, nothing
+  is offered, read or shown, and the Routines row has no such switch. Test:
+  `nothing_is_read_before_the_yes_and_with_the_switch_off_nothing_is_offered_or_read`. A test fails
+  the build that turns it on while any of three guides still says no email is read without an AI
+  account of the owner's own (`the_guides_are_rewritten_before_the_lane_goes_on`).
+- **Nothing changes on an AI account of the owner's own**, where Email Manager's catches say these
+  things: no offer, no read, no switch. Tests: `on_an_ai_account_of_their_own_nothing_changes`,
+  `on_an_ai_account_of_their_own_the_list_is_as_it_was`.
+- **On Archie for Teams, the owner's own mail only.** A mailbox given to a teammate is never opened
+  for this, so the owner's list holds the owner's own mail. Test:
+  `on_a_shared_agent_a_teammates_mailbox_is_never_read_for_the_owners_list`.
+
+**The boundaries.**
+
+- ⛔ **Held until the Google filing is checked.** Nothing of this goes on a page, in release notes
+  or in a store listing until Jett has checked `docs/GOOGLE-SUBMISSION.md` and a release carries the
+  switch on.
+- ⛔ **Only the sender, the subject and the date are read for this, and only on the owner's
+  computer.** Never "it reads your email", "it scans your inbox" or "it reads your bills".
+- ⛔ **Nothing about the mail goes to any AI, and Otian cannot read any of it.** The lines reach the
+  owner's window, Archie Mobile and their chat app, which carries them the way it carries every
+  message. On Archie Mobile they cross the phone relay sealed with a key only the computer and the
+  phone hold, so Otian holds them and cannot read them. Never "nothing about your mail reaches our
+  server", and never "your agent knows about your bills".
+- ⛔ **Asking about a line needs an AI account of the owner's own.** Without one, the agent says
+  where the line came from and where to connect one, and can say nothing more about the email. Never
+  "ask your agent about it".
+- ⛔ **Off until the owner says yes**, under the first evening's count or with the switch.
+- ⛔ **Gmail only, and the owner's own Gmail.** An Outlook or IMAP mailbox gets no lines.
+- ⚠️ **It knows what three fields say.** A bill whose subject does not say it is one, a payment
+  change asked for only in the email's text, or a reply the owner sent from another mailbox is not
+  seen. Those catches need the email's text and stay on an AI account of the owner's own. Never "it
+  catches every bill" or "it knows who you owe a reply".
+- ⚠️ **A read that does not answer in time** sends that morning's list without its mail lines,
+  which wait for the next.
+- ⛔ **The October 26 boundary "On the free credits and the plan with the AI included it has no email
+  part at all, because the inbox is never read there." becomes untrue** from the release that
+  switches this on: there, with the owner's yes, the list has these lines, and still no email cards.
+  And the October 17 amendment's "On Archie's own AI, the first list says once that email is not on
+  it" is not said to an owner who said yes, since the count they said yes under explained it
+  (`mail_note` in `gateway/morning_list.rs`).
 
 ### 🚧 The morning list and the agent say where Bookings and your calendar differ, decided without AI: BUILT 2026-10-18 (Archie `49965c01`, merged as `4ac7579f`), RELEASED in 0.3.11, 2026-10-19
 
@@ -16600,6 +16765,20 @@ later, ...").
   reads only the owner's own mailboxes. Texts are the owner's alone.
 - ⚠️ **It asks no AI to make any of it.** Say that much and stop.
 
+*Amended October 27, 2026 (held until the Google filing is checked).* The boundary "Only on an AI
+account of the owner's own. On the free credits or the plan with the AI included, mail and texts are
+not read at all, so none of this exists there, and nothing may suggest it does." stays true of the
+watches. From the release that switches on the lines under "A morning list for each line of work,
+with no AI in it", an owner on the free credits or the plan who says yes gets two of the three on
+the morning list, worked out from Gmail's senders, subjects and dates by the same rules and in the
+same words: a reply owed, and an email asking to change where a payment goes. Nobody new is nudged
+there, and nothing reads a text.
+
+- ⛔ Never present those lines as Email Manager's or Text Replies' catches, and never say the
+  watches run on the free credits.
+- ⚠️ A payment change asked for only in the email's text is found only by the watch, on an AI
+  account of the owner's own.
+
 ### 🚧 Working something out with Python: your agent works the numbers out in a short program on a Mac, and shows you how: BUILT 2026-10-20 (Archie `34a29c09`, archie-mobile `8bb7e1b`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)
 
 *Built October 20, 2026 on `parity-p13` in both repos, for working through a file, widened on
@@ -17584,6 +17763,12 @@ overnight.").
   written by the email and text watches, or overnight once the owner said yes, with the owner's own
   AI account.
 
+*Amended October 27, 2026 (held until the Google filing is checked).* "Where the AI runs through
+Otian, the mail and the texts are not read, so the part holds no drafts" becomes, from the release
+that switches on the lines under "A morning list for each line of work, with no AI in it", "Where
+the AI runs through Otian, no AI reads the mail or the texts, so the part holds no drafts." Those
+lines write no drafts and never put anything in this part.
+
 ### 🚧 Before a job likely to cost more than about 10 cents, Archie says what it would cost and waits for your Go: BUILT 2026-10-27, in no release yet, never run against a real AI account
 
 *Built October 27, 2026 (Archie `3dd55ec2`, `f5623664`, `4b3ea8a5`, `83852781` and `259c2495`;
@@ -17952,6 +18137,23 @@ Connections tab, under Email, calendar, files). The rule itself is unchanged (`r
 
 - ⚠️ **Only once a list goes out**, which needs a yes and a morning with something on it. The
   in-chat notice that Email Manager sends once is unchanged.
+
+*Amended October 27, 2026 (held until the Google filing is checked).* The approved wording ("While
+your agent is thinking on our credits it cannot read your email...") stays true of the agent. Three
+sentences in this file do not, from the release that switches on the lines under "A morning list for
+each line of work, with no AI in it":
+
+- The boundary "It is the whole app except email." becomes "It is the whole app except your agent
+  reading and answering your email."
+- The two approved forms in the August 21 reconciliation at the top of this file, item 10 ("Every
+  email feature refuses to run on the free starter credits; connect an AI account of your own and it
+  starts." and "Email features need an AI account of your own. The free starter credits will not run
+  them."). Proposed in their place, Jett's to approve: "Reading and answering your email needs an AI
+  account of your own. The free starter credits will not do it." The "will not" that carries the
+  claim stays.
+- The October 26 amendment's notice under the first list ("Your email is not on this list yet...")
+  is not given to an owner who said yes to the lines, whose list has their email on it in that form
+  (`mail_note` in `crates/archie-runtime/src/gateway/morning_list.rs`).
 
 ### Add-on permissions: one setting, not three levels
 

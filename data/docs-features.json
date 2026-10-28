@@ -1366,7 +1366,7 @@
       "limits": [
         "It says so once per agent. Switching the watch off and on again does not repeat it.",
         "Only the owner can stop it from the button.",
-        "Not on the free credits or a plan with the AI included, where your mail is not read."
+        "Not on the free credits or a plan with the AI included, where no AI reads your mail."
       ],
       "phone": "It arrives in your conversation like any message, so it also shows on Archie Mobile or your chat app.",
       "editions": "both",
@@ -1746,7 +1746,7 @@
         "An agent that was reading your mail before this goes on reading, and is not asked.",
         "Adding Email Manager or Package Tracker is not a yes on its own.",
         "It asks once. After Not now, the switch is the way back.",
-        "Not on the free credits or a plan with the AI included, where your mail is not read."
+        "Not on the free credits or a plan with the AI included, where no AI reads your mail."
       ],
       "phone": "The question arrives like any message, so you can answer it in Archie Mobile.",
       "editions": "both",
@@ -3256,6 +3256,34 @@
         "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
       ],
       "wording": "Your morning list also tells you what your own lists and calendar show, on the first morning it is true: a bill due in the next three days, or one whose day went by; an invoice past its due date; two things at once on your calendar today or tomorrow; a lead with no contact for a week, or a past client for three months; and a Paperwork deadline inside two weeks. Each line says the date, the amount or the person it came from, like \"Electric, $84, due Thu Oct 29\" or \"Sam Hart: $1,120, invoice 4471, billed September 30, due October 15 (12 days late)\", so you can check it against your list at a glance. Each one is said once, not every morning, and nothing is said about a list you don't keep. It is worked out on your computer from your own lists, without asking an AI anything.",
+      "guide": ""
+    },
+    {
+      "id": "morning-list-lines-from-your-email",
+      "name": "Lines from your email on the morning list, on Archie's own AI",
+      "area": "routines",
+      "summary": "On Archie's own AI, once you say yes, your morning list can name bills and renewals coming due, replies you owe, and payment changes, worked out on this computer from each email's sender, subject, and date.",
+      "where": "In the morning list. The switch is Email on the list, under the Morning list row on the Routines tab.",
+      "how": [
+        "Press Yes under the offer at the end of your first evening's count of your inbox.",
+        "Or switch on Email on the list on the Routines tab."
+      ],
+      "limits": [
+        "Only the sender, the subject, and the date are read, and only on this computer. No AI sees any of it, and we cannot read it.",
+        "Ask about a line and your agent says where it came from; reading the email needs an AI account of your own.",
+        "Gmail only, and only your own mailbox on Archie for Teams.",
+        "A bill whose subject does not say so, or a payment change asked for only in the email's text, is not seen."
+      ],
+      "phone": "Archie Mobile shows the same lines, and the same switch under its Morning list row.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie d1e8a3e2 to 155f933b), and off in every build until Jett checks the Google filing. The proposed wording is Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "On Archie's own AI, your morning list can also carry a few things from your email once you say yes: bills and renewals coming due, people you know who are waiting on a reply, and any email asking to change where a payment goes. Archie works them out on your computer from who sent each email, its subject, and its date. No AI reads them, and we cannot read them.",
       "guide": ""
     },
     {

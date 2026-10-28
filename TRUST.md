@@ -11707,7 +11707,12 @@ marketplaces are not Shopify stores, so for those it searches the web."
 - **No account and no key.** Shopify's catalog answers anonymous searches. What it does require is
   a page saying which assistant is asking, and this repo serves it at `ucp/agent.json` (it is on
   the allowlist in `scripts/stage-site.py`). If that page is not live, every search fails, and the
-  tool tells the agent to say so and use a web search instead.
+  tool tells the agent to say so and use a web search instead. Shopify also refuses the page when
+  its headers are wrong: UCP requires its Cache-Control to say `public` with a `max-age` of 60 or
+  more. GitHub Pages cannot send that, so a Cloudflare Worker in front of the page sets `public,
+  max-age=600` and drops the Expires and Age headers GitHub's cache adds (`cloudflare/ucp-profile/`
+  in this repo, deployed as `otianai-ucp-profile` on the route `otianai.com/ucp/agent.json`). Twenty
+  live searches in a row came back with products on October 28, 2026 once it was in.
 - **It only reads.** Paying through Shopify's own system is invite-only, so nothing here places an
   order. The cart link lands on the store's own checkout page, where buying works exactly as the
   Buying entry says: off until switched on, the shop on the owner's list, and a tap before the
@@ -11784,6 +11789,46 @@ said once. Not now leaves it on your list, and Stop watching marks it Dropped it
   for. A weekly check switched to send nothing puts up none either.
 - ⚠️ **Personal edition only**, as Price Watch is. Archie for Teams has neither the card nor its
   buttons.
+
+*Amended October 28, 2026 (website `114a8cf4e`, live for every release; Archie `bb4b4c5c`, in no
+release yet): the page Shopify reads is served the way Shopify requires, and a refusal of it is read
+as one.*
+
+**Why it's true:**
+
+- **The page's headers**, under **No account and no key** above: the Worker in front of the page is
+  live for every release, since it is on the site and not in the app.
+- **A refusal read as one.** Shopify sends its refusal of the page as an HTTP 422 (a page it will not
+  take) or 424 (one it could not fetch), and until Archie `bb4b4c5c` the app treated any such answer
+  as Shopify not answering, so the agent said the check was unavailable and never searched the web
+  instead. It now reads the reason under the 422 or 424, and every refusal of the page, whatever its
+  code, tells the agent to use a web search (`judge` and `parse` in
+  `crates/archie-net/src/shopify.rs`; test `a_profile_shopify_would_not_take_is_named_as_that_too`).
+
+**The boundaries.**
+
+- ⚠️ **Price checks at Shopify stores failed for every owner from some time after September 24 until
+  October 28, 2026.** Shopify refused every search with "Invalid cache control", and releases up to
+  0.3.12 told the agent only that the check was unavailable. Nobody's agent on Otian's computers ran
+  a Shopify search in that time, so when it started is not known. Never say Price Watch has checked
+  Shopify prices without a break since 0.3.1.
+- ⚠️ **Nothing watches the page.** A second refusal would be as quiet as the first: owners would see
+  "the price check is unavailable" and nobody here would hear of it.
+
+*Amended again October 28, 2026 (Archie `5d5586ec` and `d993fb95`, in no release yet).*
+
+**Why it's true, two more lines:**
+
+- **A card follows a check, never a price you typed.** When the owner's own message names the price
+  (they told the agent "it's $239 at Best Buy now" and the agent saved it), no card says it back to
+  them (`named_in` in `gateway/price_hits.rs`; test
+  `a_price_the_owner_typed_is_not_carded_back_to_them`).
+- **The weekly check searches the stores the watches name**, not only Shopify ones, since the search
+  in the amendment under "An address your agent wrote itself waits for your yes". Before it, a
+  scheduled check looked at Shopify stores alone.
+
+**Boundaries:** add to ⛔ **Never "live prices"**: from October 5, 2026 until a release carries
+`d993fb95`, a weekly check that ran on its own looked at Shopify stores only.
 
 ### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPPED 2026-09-01, Archie 0.2.2)
 
@@ -16373,6 +16418,49 @@ one."
 - A connected service's own requests (`http_request`) were already bound to that service's host and
   are not part of this entry.
 
+*Amended October 28, 2026 (Archie `d993fb95`, in no release yet): two routines no longer need the
+agent to hand on a search.*
+
+A simulated owner's Weekly Price Check, run on its schedule in the October 28, 2026 test round, never
+searched the web. It read the Price Watches list, and reading a list counts as reading text somebody
+else may have written, so its hand-off to the Researcher waited for a yes that a scheduled run has
+nobody to give. Market Morning has the same shape. Jett chose that morning that code writes the one
+search these routines ask for.
+
+**No wording changes.** "After your agent has read an email, a page or a file in a job, it asks you
+before handing a search to one" stays true: the agent's own hand-off still waits.
+
+**Why it's true:**
+
+- **The search is written by code, from named columns.** Before a Weekly Price Check or Market
+  Morning run starts, `gateway/searched_first.rs` builds the Researcher's task from the list alone:
+  each watch's item, store and target from Price Watches (only those still Watching, at most 12), or
+  the symbols from the Tickers list (at most 25). Each cell is cut to plain letters, digits and the
+  punctuation a product or store name uses, on one line and to a length (`plain`, `symbol`). None of
+  the agent's words are in it, and an instruction hidden in a row reaches the Researcher only as
+  words on its own line, with no agent behind it to carry it out (test
+  `the_price_search_is_written_from_the_watches_and_nothing_else`).
+- **The run then starts as outside text**, because what the search found is somebody else's
+  writing: the agent reads it fenced, and anything it hands on itself in that run still waits
+  (`STARTS_WITH_OUTSIDE_TEXT` in `gateway/routines.rs`). With nobody to say yes, that means refused.
+- **Only with a Researcher that searches the web**, and never when the owner has turned web access
+  off (`run`; test `no_researcher_no_search`). It runs once per run, never again on a retry.
+- **What it costs.** It is the one search the routine always asked the agent to hand on, and in
+  0.3.5 through 0.3.12 a scheduled run skipped it, so a run that searches costs more than those did.
+  The live run below cost $0.19, most of it the web search.
+- **Seen on a live model, October 28, 2026.** One Weekly Price Check run on a simulated owner with
+  two watches: the search was written by code and ran, and the agent saved the Vitamix E310 at
+  $379.95 from Vitamix's own site, with no Shopify search in the run.
+
+**Boundaries:**
+
+- ⚠️ **From October 5, 2026 until a release carries `d993fb95`, Weekly Price Check and Market
+  Morning did not search the web when they ran on their schedule.** The price check checked Shopify
+  stores only, and Market Morning had nothing to report from the web. "Check my prices", typed, was
+  never affected. Never say these routines searched the web on their own in 0.3.5 through 0.3.12.
+- ⛔ **Never "a routine can search for anything on its own".** Only these two, and only for what is
+  on their list.
+
 ### ✅ Fewer of your own questions handed to the web researcher, which reads only the one message it gets: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -18656,15 +18744,15 @@ yet).*
 **Proposed wording, Jett's to approve:** "Pick folders on your computer, like Warranties or Taxes, and
 your agent can find what is in them, where they are. Ask it to find the water heater warranty and it
 names the file and the page, with a button that sends you the file. The files stay on your
-computer. When you ask about something in them, only the lines that answer you go to your AI
-company, with the file's name and folder."
+computer. When you ask about something in them, only the parts that answer you, or a short file
+whole, go to your AI company, with the file's name and folder."
 
 **Why it's true:**
 
 - **Picking, one folder at a time.** On the agent's Knowledge tab, under Documents, Folders on this
   computer has Pick a folder, which opens the computer's own folder picker, under the line "The files
-  stay on this computer. When you ask about something in them, only the lines that answer you go to
-  your AI company, with the file's name and folder." (`PickedFolders` in `src/app/knowledge.tsx`,
+  stay on this computer. When you ask about something in them, only the parts that answer you, or a
+  short file whole, go to your AI company, with the file's name and folder." (`PickedFolders` in `src/app/knowledge.tsx`,
   `folders_pick` in `src-tauri/src/commands/folders.rs`). Each folder's row says how many files it
   holds and how many are searched by name only, and has Stop searching; Try again shows when the
   computer would not let Archie open the folder, beside what to do about it (`problem_said` in
@@ -18742,14 +18830,16 @@ company, with the file's name and folder."
   at rest is on, which no build turns on yet. A backup of the agent carries it. Stop searching
   deletes it.
 - ⛔ **Never "nothing leaves your computer".** Exactly this leaves, and only when the owner asks
-  something a search answers: at most five short passages, each with its file's name, folder, page
+  something a search answers: at most five short passages, or a short page whole (1,000 characters
+  or fewer), each with its file's name, folder, page
   and saved date, to the AI company the agent uses, through our server only on our AI, as every
   prompt does. A file leaves when the owner presses Send me or asks for it: it goes into the
   conversation it was asked in, crossing a chat app's servers like any file there, and a copy is put
   in the Archie folder in Downloads, where every file the agent sends is kept.
 - ⚠️ **Found by name only:** scans and other PDFs made of pictures, photos and pictures, Pages, Numbers
   and Keynote files, older .doc and .ppt files, files with macros, zipped folders, audio and video,
-  files over 25 MB, cloud files not downloaded yet, and files named like passwords or codes. A file's
+  files over 25 MB, cloud files not downloaded yet, and files named like passwords or codes. A file
+  named like passwords or codes is also never sent: the agent says which folder it is in. A file's
   words past 1 MB and a folder's past 100 MB are not searched, a folder's files past 5,000 are left
   out (its row says so), and a Word file carries no page numbers, so a match there names the file and
   no page.
@@ -18767,6 +18857,43 @@ company, with the file's name and folder."
   the Mac's question about Documents, Desktop, Downloads and iCloud Drive has not been seen at a
   pick. Until somebody has picked one on a real Mac and restarted Archie, say nothing about when the
   Mac asks.
+
+*Amended October 28, 2026 (Archie `5b79d63c`, `083736b8` and `1bc0875c`; Archie Mobile `21e63f8`; in
+no release yet): what that day's test round changed.*
+
+Two simulated owners tried it that day (a homeowner with Warranties and Taxes 2025 picked, and an
+Archie for Teams owner with a Leases folder and a teammate), on the models Archie ships with and on
+a cheaper one. Jett made both calls below that morning.
+
+**The proposed wording changes in one place:** "only the lines that answer you go to your AI
+company" became "only the parts that answer you, or a short file whole, go to your AI company", in
+the proposed wording above, on the Knowledge tab (`src/app/knowledge.tsx`), on Archie Mobile's
+Documents page (archie-mobile `src/screens/Manage.tsx`), and in the held Archie Docs row.
+
+**Why it's true:**
+
+- **A short page goes whole.** A page of 1,000 characters or fewer is handed to the agent whole
+  rather than as a 280-character passage (`WHOLE_PAGE_CHARS` and `Matcher::passage` in
+  `crates/archie-domain/src/folders.rs`; test `a_short_page_comes_back_whole`). In the round, an
+  agent given 280 characters of a 555-character warranty card said on every answer that the passage
+  cut off, searched the same file again, and offered to send it. At most five places still come
+  back, two from any one file.
+- **A file named like passwords or codes is never sent**, Jett's call: not by Send me, which is never
+  put under it, and not by the agent's own `save_file`, which is refused with "Open it in <folder> on
+  the computer running Archie" (`is_private` in `crates/archie-domain/src/folders.rs`, `file_to_send`
+  in `crates/archie-runtime/src/folders.rs`, `buttons` in
+  `crates/archie-runtime/src/gateway/tools_folders.rs`). In the round the agent rightly never opened
+  `passwords.txt`, then offered it and sent it into the owner's chat app on a press.
+- **One Send me, not two.** A reply saying the agent sent a file with `save_file` no longer carries a
+  Send me button for the same file (`note_if_sent` in `gateway/tools_folders.rs`; test
+  `a_file_save_file_sent_gets_no_send_me_under_the_reply_that_says_so`).
+- **Seen on a live model.** On the models Archie ships with, every answer named the file and the
+  folder and the dates in it were right, a missing car title was answered with which folders were
+  searched, and the teammate was told the lease was in the owner's own folders, with no search and no
+  file. Never yet on a real Mac's own folders; the simulator picks temporary ones.
+
+**The boundaries** "Never 'nothing leaves your computer'" and "Found by name only" above carry the
+short page and the never-sent file as of this amendment.
 
 ## Known Weaknesses — disclose, don't hide
 

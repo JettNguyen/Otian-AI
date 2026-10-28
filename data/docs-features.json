@@ -3604,9 +3604,9 @@
       ],
       "limits": [
         "Only the folders you pick, one at a time, up to 20 for an agent. Never a whole disk, your whole home folder, or an app's own files.",
-        "The files stay on your computer. When you ask about something in them, the lines that answer you go to your AI company, with the file's name and folder.",
+        "The files stay on your computer. When you ask about something in them, the parts that answer you, or a short file whole, go to your AI company, with the file's name and folder.",
         "Archie keeps a copy of each file's words in your agent's folder, to search them. Stop searching deletes it.",
-        "Scans, pictures, Pages, Numbers and Keynote files, files over 25 MB, and files named like passwords are found by their names only.",
+        "Scans, pictures, Pages, Numbers and Keynote files, files over 25 MB, and files named like passwords are found by their names only. A file named like passwords is never sent: your agent says which folder it is in, so you can open it on the computer.",
         "Hidden files, password managers' files and apps' own files are never looked at.",
         "A folder's files past 5,000 are left out, and its row says so.",
         "A file you change is found by its new words within five minutes.",
@@ -3618,12 +3618,12 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie 21e069c8 to d161cabd). The proposed wording is Jett's to approve.",
+      "hold": "In no release yet (Archie 21e069c8 to 1bc0875c). The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
         "🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, in no release yet, never run on a real Mac's own folders"
       ],
-      "wording": "Pick folders on your computer, like Warranties or Taxes, and your agent can find what is in them, where they are. Ask it to find the water heater warranty and it names the file and the page, with a button that sends you the file. The files stay on your computer. When you ask about something in them, only the lines that answer you go to your AI company, with the file's name and folder.",
+      "wording": "Pick folders on your computer, like Warranties or Taxes, and your agent can find what is in them, where they are. Ask it to find the water heater warranty and it names the file and the page, with a button that sends you the file. The files stay on your computer. When you ask about something in them, only the parts that answer you, or a short file whole, go to your AI company, with the file's name and folder.",
       "guide": ""
     },
     {

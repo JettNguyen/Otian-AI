@@ -6353,8 +6353,8 @@ before you send it.**, saying where it was looked for.
 **Proposed addition, Jett's to approve:** "If a draft your agent writes quotes a price that isn't in
 what you typed, your lists, your files, or the email it answers, Archie leaves the price in brackets
 for you to check, like [$140, check the price], and the draft won't send until you fill it in. A
-draft written by itself, that you didn't ask for, may only quote a price already in that email or
-text conversation."
+draft written by itself, that you didn't ask for, quotes a price only if you've written it down or it
+is already in that email or text conversation."
 
 **Why it's true:**
 
@@ -6367,22 +6367,23 @@ text conversation."
   what was read that turn, the email answered, the profile, memory, every entry on their lists and
   their small files (24KB or less, `crates/archie-runtime/src/kept_in_writing.rs`), and the draft
   already on the card when it revises one. A draft the mail watch or the text watch wrote by itself:
-  that email or text conversation only (`parse_triage` in `email/replies/triage.rs`, `priced_from`
-  in `texts/replies/triage.rs`), because a price on the owner's own sheet is still theirs to decide
-  to quote. That is the week run's "never quote a price to a customer unless i wrote it down".
+  that email or text conversation, and since Archie `e63105ab` the profile, memory, lists and small
+  files as well (`parse_triage` in `email/replies/triage.rs`, `priced_from` in
+  `texts/replies/triage.rs`). That is the week run's "never quote a price to a customer unless i
+  wrote it down", read as it was said: a price the owner wrote down is theirs to quote. A note the
+  agent saved from an email or another outside source is never read for it, on any draft.
 - **How it is marked.** `mark_prices` in the same file. A rewrite, another version, or a redraft
   with what was looked up keeps a held price held, unless the owner's words for the change or the
   lookup name it (`keep_marks`, in both lanes).
 - **What the card says.** On an email card the line leads with "$450: I found this price nowhere in
-  what you typed, your lists or your files". On one the watch drafted, it is "$140 is in your own
-  lists or files, but nobody has said to quote it in this email", or "$140: I found this price
-  nowhere in this email thread, your lists or your files" (`line_for_marks`, set in `deliver` in
+  what you typed, your lists or your files". On one the watch drafted, it is "$140: I found this
+  price nowhere in this email thread, your lists or your files" (`line_for_marks`, set in `deliver` in
   `email/replies/card.rs` and on the Draft press in `email/replies/actions.rs`). A text card has no
   such line; its Send names the blank, as before.
 - Tests: `a_price_nobody_gave_is_left_as_a_blank_that_holds_send`,
   `a_quote_worked_out_from_the_sheet_is_not_held_and_a_made_up_charge_is` and
   `marks_stay_on_the_price_they_mark` in `added.rs`;
-  `the_watch_leaves_a_price_nobody_said_to_quote_as_a_blank_and_send_waits` and
+  `the_watch_quotes_a_price_the_owner_wrote_down_and_blanks_one_from_nowhere` and
   `a_draft_names_what_nobody_gave_it` in `email/replies/tests.rs`;
   `a_price_nobody_gave_in_a_text_reply_is_a_blank_that_holds_send` in `texts/replies/tests.rs`.
 - **Cost.** None: it is code, run on a draft that has a dollar amount in it.
@@ -6403,6 +6404,20 @@ text conversation."
   held. Never "Archie checks your prices against your price list."
 - ⚠️ **A long document is not read for it.** Files over 24KB are checked only when the agent read
   them on that turn, so a price from a long price book the agent read yesterday is held.
+
+*Amended October 28, 2026 (Archie `e63105ab`, in no release yet): a draft nobody asked for may quote
+a price the owner wrote down.* Until then a mail or text watch draft held even a price from the
+owner's own price sheet, with the line "$140 is in your own lists or files, but nobody has said to
+quote it in this email". In the October 28 week run three owners (Emily, Mike and Sarah) read those
+brackets on their own prices as a fault, and Jett chose that day to let a price the owner wrote down
+through on every draft. The proposed addition above says so. Tests:
+`the_watch_quotes_a_price_the_owner_wrote_down_and_blanks_one_from_nowhere` and
+`a_price_nobody_gave_in_a_text_reply_is_a_blank_that_holds_send`.
+
+- ⛔ **Never "a draft nobody asked for never quotes a price".** It quotes one the owner wrote down,
+  and the owner still presses Send.
+- ⚠️ **Any match still counts.** A price on the owner's sheet for one thing can be quoted for
+  another; the brackets go only on a number written nowhere.
 
 ### ✅ When the AI company fails, Archie asks it once more, says whether anything was saved or sent, and puts Try again under the reply: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 

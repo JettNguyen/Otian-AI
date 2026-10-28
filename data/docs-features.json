@@ -1592,18 +1592,18 @@
         "Dollar amounts only. \"140 dollars\" in words is not read as a price.",
         "A made-up price that happens to match a number you gave is not held.",
         "Files over 24KB are checked only when your agent read them on that turn.",
-        "A draft written on its own, that you did not ask for, may only quote a price already in that conversation."
+        "A draft written on its own, that you did not ask for, quotes a price only if you wrote it down or it is in that conversation."
       ],
       "phone": "",
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie 82b01683).",
+      "hold": "In no release yet (Archie 82b01683, and e63105ab).",
       "unwatched": false,
       "trust": [
         "✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11"
       ],
-      "wording": "If a draft your agent writes quotes a price that isn't in what you typed, your lists, your files, or the email it answers, Archie leaves the price in brackets for you to check, like [$140, check the price], and the draft won't send until you fill it in. A draft written by itself, that you didn't ask for, may only quote a price already in that email or text conversation.",
+      "wording": "If a draft your agent writes quotes a price that isn't in what you typed, your lists, your files, or the email it answers, Archie leaves the price in brackets for you to check, like [$140, check the price], and the draft won't send until you fill it in. A draft written by itself, that you didn't ask for, quotes a price only if you've written it down or it is already in that email or text conversation.",
       "guide": ""
     },
     {

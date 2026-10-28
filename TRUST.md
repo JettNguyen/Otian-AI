@@ -16763,6 +16763,26 @@ entries, it asks which one before marking anything paid."
 - ⚠️ **A routine's or the mail watch's changes are not this.** The check reads the words a person
   typed in the chat. A button they pressed is their choice and goes through as pressed.
 
+*Amended October 28, 2026 (Archie `1f681ece`, in no release yet): a question writes nothing to an
+entry it does not name.*
+
+In the October 28 week run Sarah asked "Jim is going out to the Marsh ranch for T-4 this morning. Is
+that the only pickup today?", and the agent rewrote the note on Laura Henderson's deposit from an
+email, with the wrong day in it.
+
+**Why it's true:** on a message a person typed that ends in a question mark, carries none of the
+words that ask for a change ("can", "could", "please", "mark", "update", "move" and the like), and
+follows no yes, a change to an entry the message does not name is refused, and the model is told to
+answer the question and offer the change with "Update <the entry>" and "Leave it"
+(`asked_nothing_of` in `crates/archie-runtime/src/gateway/unasked.rs`). An entry is named by its
+title, a word of four letters or more from it, or the family or company name of who it is for. Test:
+`a_question_writes_nothing_to_an_entry_it_does_not_name`.
+
+- ⚠️ **The boundary "Pick-one columns only" is now true of the move beside a named one only.** On a
+  question like that, any column of an entry it does not name is held.
+- ⚠️ **Words, not meaning.** A question worded with "can" or "will" is let through, as before, and a
+  question that names the entry is the agent's to act on.
+
 ### 🚧 When your agent looks something up, it is handed the newest note and any day ahead in the notes: BUILT 2026-10-26, in no release yet
 
 *Built October 26, 2026 (Archie `45ebb748`, in no release yet).*

@@ -15685,6 +15685,164 @@ list and that file differ, the file is what counsel was asked.
 6. **Do not call.** The national registry covers solicitations to residential lines, which these
    are not. A business that asks not to be called again goes on that agent's own list for good.
 
+*Amended October 27, 2026 (Archie `89e0d229` to `a627d9c9`, in no release yet): a call may give
+the details the owner ticks on its card, as the entry headed "A call gives the details you tick on
+its card, and never a card or bank number, a Social Security number, a password or a date of birth"
+says.*
+
+- **The claim's "never gives card or account details" stands.** Once a release carries the details,
+  the proposed claim adds after it, Jett's to approve: "It gives only the details you tick on the
+  call's card, like the name on the account or a number to call you back."
+- **"What a call may do" above** now holds with nothing ticked, word for word. With details ticked,
+  the voice's instructions list those, with their values, and the sentence that keeps everything
+  else back names the never list; for anything not ticked the voice still says the owner will
+  confirm and ends the call. The after-call card's first line can now be a check of what the voice
+  gave (`after::slips`), above the commitment check's.
+- **"What Bland is sent" above** gains the ticked details and their values, in `task`, and a ticked
+  callback number in the voicemail message.
+- **The ⛔ "Never say it waits on hold, works phone menus well, or calls back"** stands, but its
+  reason no longer holds whole: a voicemail names a number to call back when the card's callback
+  number was ticked, and then it is that number, never one of Bland's. It still never calls back.
+
+### 🚧 A call gives the details you tick on its card, and never a card or bank number, a Social Security number, a password or a date of birth: BUILT 2026-10-27, in no release yet, and no real call has given one
+
+*Built October 27, 2026 (Archie `89e0d229` to `a627d9c9`, archie-mobile `303e62b`; in no release
+yet). No real call has given a detail, and no lawyer has read the rules on calls made for somebody.*
+
+**Proposed wording, Jett's to approve:** "When a call is about an order or an appointment, its card
+lists what a receptionist may ask for: the name on the account, the order or confirmation number,
+the appointment, and a number to call you back. Each one shows exactly what it would say, beside a
+box, and every box starts empty. The call gives only the ones you tick, and only if they ask or to
+say which order or appointment it is calling about. It never gives a card or bank number, a Social
+Security number, a password or a date of birth, whatever is ticked. And if the call said something
+it should not have, the card that comes back afterward says so at the top."
+
+Short form, for a list of abilities: "Gives only the details you tick on the call's card."
+
+As Archie draws the card, in the window and in Archie Mobile, for "call Miller Hardware and ask if
+my order is ready" with Sam's details in the conversation:
+
+> **Call Miller Hardware?**
+> (617) 555-0188, from millerhardware.com.
+>
+> It opens with: "Hi, this is an AI assistant calling for Sam at Miller Bakery. This call is
+> transcribed. Do you have a moment for a quick question?"
+>
+> It will ask:
+> - Is Sam's order ready to pick up?
+>
+> It may give these if they ask, but only the ones you tick:
+> ☐ Name on the account: Sam Miller
+> ☐ Order or confirmation number: A-4417
+> ☐ Callback number: (617) 555-0199
+>
+> If nobody answers, it leaves a message with the same questions and says Sam will follow up. It
+> never agrees to buy, book, or pay, and never gives a card or bank number, a Social Security
+> number, a password or a date of birth, whatever is ticked. If they ask for anything you have not
+> ticked, it says Sam will confirm and ends the call.
+>
+> Call 1 of 3 today, up to 10 minutes, billed to your Bland account.
+
+Under it, a button for each box ("☐ Name on the account"), each on its own row, then **✅ Place the
+call** and **Not now**. Pressing a box draws the card again with it ticked ("☑ Name on the
+account: Sam Miller"), and pressing it again takes the tick off. With the callback number ticked,
+the voicemail line ends "says Sam will follow up, and gives (617) 555-0199 to call back."
+
+**Why it's true:**
+
+All paths are in the Archie repo.
+
+- **Four details, each with its value, and every box empty.** `crates/archie-runtime/src/calls/details.rs`:
+  the four kinds in the card's order (`Kind`), the values the agent suggests from the conversation
+  in `details` on `call_business` (`read`), and the lines with their boxes (`card_lines`). Nothing
+  the agent writes ticks a box (`every_suggested_detail_starts_unticked_in_the_cards_order`,
+  `a_card_shows_each_suggested_detail_unticked_with_its_value_and_never_dials`).
+- **A box is a press, and the press is the only consent.** `tick` in `calls/mod.rs` handles it in
+  code with no model turn, like Place the call: the card is drawn again in place, and the ticked
+  box's button is a new one (`untick-`), so the same button pressed twice changes nothing. A box
+  cannot change once the call was placed, so Call again gives what the first call could, and
+  presses on an agent's cards are taken one at a time, so a box pressed beside Place the call on
+  another screen is either on the call or refused as too late (`CallsLane::cards`;
+  `a_tick_draws_the_card_again_and_never_dials`, `a_box_cannot_change_once_the_call_was_placed`,
+  `a_box_and_place_pressed_at_once_leave_the_card_agreeing_with_the_call`).
+  `press` is still the one function that dials (`only_the_press_can_dial`), and it checks every
+  ticked detail again before it does.
+- **Only ticked details reach the voice.** `bland::given` and `bland::task` in `calls/bland.rs`
+  list exactly the ticked details with their values, say that giving one never agrees to anything,
+  and keep the rest back, naming the never list; for anything not ticked the voice still says the
+  owner will confirm and ends the call. With nothing ticked, what Bland is told is what it was told
+  before details existed, word for word (`a_call_with_nothing_ticked_says_what_every_call_said_before`,
+  `only_ticked_details_reach_the_voice_with_their_values`,
+  `only_the_ticked_details_reach_the_call_with_their_values`, `a_card_nobody_ticked_gives_nothing`).
+- **The never list is code, not a sentence.** `calls/never.rs` reads a card number by the Luhn sum
+  and the way each card network's numbers start, a routing number by the sum every bank's nine
+  digits pass, a Social Security number by its three, two and four, and a password, a PIN, an
+  account number or a date of birth by the words that name one, a date of birth also by a date long
+  gone. It is asked on the card (a value on it is left off, and the card says why in plain words), in
+  the instructions (a value that got past a tick is still left out, `bland::given`), and after the
+  call. Each kind has a test: `a_card_number_is_refused`, `a_bank_routing_or_account_number_is_refused`,
+  `a_social_security_number_is_refused`, `a_password_or_a_code_that_opens_something_is_refused`,
+  `a_date_of_birth_is_refused`, and end to end
+  `each_never_list_kind_is_left_off_the_card_and_out_of_the_call` and
+  `a_never_list_value_is_kept_out_of_the_instructions_even_when_ticked`.
+- **Checked afterward.** `after::slips` in `calls/after.rs` reads every line the voice said for
+  anything on the never list and any detail nobody ticked, and puts a line at the top of the
+  after-call card, above the commitment check's ("Check this: on the call it said "It's A-4417.",
+  which gives the order or confirmation number, and you had not ticked it. Read what was said below,
+  and call Miller Hardware yourself if it matters.";
+  `the_voice_saying_anything_on_the_never_list_is_flagged_at_the_top`,
+  `an_unticked_detail_the_voice_said_is_flagged_and_a_ticked_one_is_not`,
+  `the_after_call_card_flags_an_unticked_detail_the_voice_said`).
+- **A teammate's call, on Archie for Teams.** A card is for the person who asked for it
+  (`calls::person_of`). On a teammate's card the owner's own details (the name, phone and email on
+  the owner's card, and the first name the voice calls for) are never offered, a question holding one
+  is sent back, only that teammate may tick a box, and once one is ticked only they may place the
+  call (`details::Owners`, `a_teammates_call_never_carries_the_owners_details`,
+  `the_owners_own_details_are_left_off_a_teammates_card`).
+- **The same in Archie Mobile and on a chat app.** The boxes are buttons that keep the card
+  (`keeps_card` in `src-tauri/src/inapp.rs`, `a_box_on_a_call_card_keeps_the_card`), drawn by both
+  apps the way a checklist's ticks are (archie-mobile `src/text/buttons.test.ts`). On a chat app
+  with no buttons, the card names them as buttons to press in Archie or Archie Mobile, as it already
+  does Place the call, because a typed word never ticks a box (`typed_choices` in
+  `crates/archie-net/src/channel.rs`).
+- **What Bland is sent.** The ticked details and their values, in the call's instructions, and a
+  ticked callback number in the voicemail message. Nothing unticked is anywhere in the request.
+- **A question is said as written.** The card shows each question word for word, as it always did,
+  so a detail a question already says is not offered again as a box
+  (`a_detail_a_question_already_says_is_not_a_box`). A question that would give something on the
+  never list is sent back (`a_question_that_would_give_a_never_list_item_goes_back`).
+
+**The boundaries:**
+
+- ⛔ **Never say a call gives your details without saying they are ticked on that call's card.**
+  Every box starts empty, and a tick is for that one call: the next card starts empty again.
+- ⛔ **Never say a tick can let a call give a card or bank number, a Social Security number, a
+  password or PIN, or a date of birth.** No tick can. Code leaves them off the card and out of what
+  the voice is told, whatever is ticked or written in a file.
+- ⛔ **Never "nothing about you is said unless you tick it".** The opening always says your first
+  name and your business, and a question on the card is said as written, so a detail a question
+  already says has no box. Say "the details you tick on the card", and that the card shows every
+  word the call opens with and asks.
+- ⛔ **Never say the details stay on your computer.** A ticked detail goes to Bland, the calling
+  service, in that call's instructions, and a ticked callback number in the message it leaves, and
+  Bland keeps them under its terms.
+- ⛔ **Never claim anything about consent rules**: not that a business, or anybody, agreed to
+  anything, and not that giving details on a call meets the TCPA or any other law. Counsel has not
+  answered the questions in the calls entry, and no lawyer has read the rules for this.
+- ⛔ **Never "it books for you" or "it confirms it for you".** Giving a detail never agrees to
+  anything. It asks, and you book.
+- ⛔ **Never "your teammates can use your details".** On Archie for Teams a teammate's call never
+  offers the owner's own details, and only that teammate can tick theirs.
+- ⚠️ **Say "it checks what was said", never "it catches every slip".** The check afterward reads the
+  transcript Bland returns, and a detail said in a way it does not recognize (a name spelled out
+  letter by letter, say) can pass it.
+- ⚠️ **An account number of any kind is never given.** A utility's or a phone company's account
+  number is on the never list with a bank's, because code cannot tell them apart by their digits.
+  Say "an order or confirmation number", never "your account number".
+- ⚠️ **No address.** A card never offers one, so never list an address among what a call can give.
+- ⚠️ **Never seen on a real call.** The first one with a box ticked should be Jett's, read against
+  its after-call card.
+
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
 Planned: group-chat messaging, and a UI for adding user IDs to a permitted-to-message list.

@@ -4303,6 +4303,37 @@
       "wording_pending": true
     },
     {
+      "id": "call-details",
+      "name": "The details a call may give",
+      "area": "web",
+      "summary": "A call's card lists what a receptionist may ask for, like the name on the account or a number to call you back, each beside a box. The call gives only the ones you tick.",
+      "where": "On a call's card in the chat, above Place the call.",
+      "how": [
+        "Ask your agent to call a business about an order or an appointment. It puts what it found in your conversation, your email or your lists on the card.",
+        "Read each detail, and press the box beside any the call may give. Press it again to take the tick off.",
+        "Press Place the call."
+      ],
+      "limits": [
+        "Every box starts empty, and a tick is for that call only.",
+        "It never gives a card or bank number, a Social Security number, a password or a date of birth, whatever is ticked. It never gives an account number of any kind, or an address.",
+        "A ticked detail goes to Bland, the calling service, for that call.",
+        "A question on the card is said as written, so a detail a question already says has no box.",
+        "On Archie for Teams, a teammate's call never offers your details, and only that teammate can tick theirs.",
+        "No real call has given a detail yet."
+      ],
+      "phone": "The boxes are on the call's card in Archie Mobile too. On a chat app with no buttons, press them in Archie or Archie Mobile.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 89e0d229 to a627d9c9). The proposed wording is Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 A call gives the details you tick on its card, and never a card or bank number, a Social Security number, a password or a date of birth: BUILT 2026-10-27, in no release yet, and no real call has given one"
+      ],
+      "wording": "When a call is about an order or an appointment, its card lists what a receptionist may ask for: the name on the account, the order or confirmation number, the appointment, and a number to call you back. Each one shows exactly what it would say, beside a box, and every box starts empty. The call gives only the ones you tick, and only if they ask or to say which order or appointment it is calling about. It never gives a card or bank number, a Social Security number, a password or a date of birth, whatever is ticked. And if the call said something it should not have, the card that comes back afterward says so at the top.",
+      "guide": ""
+    },
+    {
       "id": "places-on-the-map",
       "name": "Finding places on the map",
       "area": "web",

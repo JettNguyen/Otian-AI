@@ -2492,7 +2492,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-09-28",
+      "updated_at": "2026-10-27",
       "section": "set_up_what_agent_does",
       "setup_key": "",
       "video": "",
@@ -2518,7 +2518,7 @@
         },
         {
           "type": "text",
-          "text": "About 2 to 4 cents a search, billed to your AI account, with no separate subscription. At most five searches a job unless a skill's page says otherwise; Deep Research asks for twenty, so it is slower and costs more than the Researcher."
+          "text": "About 10 cents a look-up, the searches and the pages they bring back included, billed to your AI account, with no separate subscription. At most five searches a job unless a skill's page says otherwise; Deep Research asks for twenty, so it is slower and comes to about 40 cents a run."
         },
         {
           "type": "note",
@@ -2769,7 +2769,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-09-28",
+      "updated_at": "2026-10-27",
       "section": "good_to_know",
       "setup_key": "",
       "video": "",
@@ -2791,7 +2791,8 @@
           "type": "list",
           "items": [
             "An ordinary reply: a fraction of a cent.",
-            "A web search with the Researcher skill: about 2 to 4 cents, at most five per task on Anthropic, OpenAI, and xAI. Groq charges per search but sets its own number, so it has no cap. Gemini, DeepSeek, and Mistral have no live search.",
+            "A look-up with the Researcher skill: about 10 cents, the searches and the pages they bring back included, with at most five searches per task on Anthropic, OpenAI, and xAI. Groq charges per search but sets its own number, so it has no cap. Gemini, DeepSeek, and Mistral have no live search.",
+            "A Deep Research run: about 40 cents, with up to twenty searches.",
             "A routine: the same as asking yourself.",
             "A long document costs more, because it goes in with the question."
           ]

@@ -813,6 +813,7 @@
       ],
       "limits": [
         "It opens Archie Mobile and does nothing more until the talk screen is open and listening.",
+        "If another app opens the talk screen, the microphone stays off until you press Start talking.",
         "It needs the computer paired with the phone to be on and running Archie, with the tools for hearing downloaded. If something is missing, it opens the screen that says what, and what to press.",
         "On a locked phone, Siri asks for Face ID first.",
         "On Archie for Teams, a teammate's phone opens their conversation with the agent, since a teammate cannot talk out loud yet.",
@@ -823,7 +824,7 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no build of Archie Mobile yet (Archie Mobile 5125a83 and 251c9b5). The proposed wording is Jett's to approve.",
+      "hold": "In no build of Archie Mobile yet (Archie Mobile 5125a83, 251c9b5 and c0ae986). The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
         "🚧 Talk to Archie opens Archie Mobile ready to talk to your agent, from the Action Button or Siri: BUILT 2026-10-28, on iPhone only, in no release yet, not yet pressed on a real phone"

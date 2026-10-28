@@ -18634,6 +18634,20 @@ cannot hear yet, Archie Mobile opens the screen that says why and what to press 
   a teammate cannot talk out loud yet.
 - ⚠️ **English only**, as talking out loud is: the Siri phrase is English.
 
+*Amended October 28, 2026 (Archie Mobile `c0ae986`, in no build yet).* **A link alone opens the
+talk screen with the microphone off.** Any app on the phone can open `archie://talk`, and iOS does
+not ask first, so only Talk to Archie's own press listens by itself: the note it leaves in Archie's
+cache folder, which nothing outside Archie can write, is what opens the microphone (`waits` in
+`src/talk-door.ts`). Any other way in, a link another app opens or a shortcut of the owner's own
+that opens the link, opens the talk screen saying "Something other than Talk to Archie opened this
+screen, so the microphone stays off until you press Start talking." with a Start talking button
+under it (`waitsForTap` in `src/screens/Talk.tsx`). Jett's call that morning. Tested in
+`src/talk-door.test.ts` (`only the note opens the microphone by itself, and a link alone waits for
+a tap`); not yet tried on a real phone.
+
+- ⛔ **Never say no other app can open the talk screen.** One can; the microphone then waits for a
+  press of Start talking.
+
 ### 🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, in no release yet, never run on a real Mac's own folders
 
 *Built October 28, 2026 (Archie `21e069c8` to `d161cabd`; Archie Mobile `549c9af`; in no release

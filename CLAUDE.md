@@ -540,6 +540,13 @@ sizes are on the page at rest, and the pick only lights one.
     yet, or it is privacy or safety wording he has not approved. Held rows stay in the file with
     their reason, so `node scripts/gen-docs.mjs --report` is the whole feature list, published
     and not. **When a feature ships, its row goes in with its TRUST.md entry, in the same pass.**
+    **And any change the docs describe updates them in the same pass** (Jett, October 27, 2026):
+    a renamed tab or button, a new limit, a phone half, a feature removed. The Archie repo's
+    CLAUDE.md, "Docs rule", says what touches what. The run fails when a TRUST.md entry has no
+    row, unless the file lists it under `not_features` (with why) or `owed` (a row not written
+    yet, which `--report` prints); the Known Weaknesses, Settled Decisions and Competitor claims
+    sections are skipped. A held row's `hold` names its Archie commits ("In no release yet
+    (Archie 82b01683)."), so the release check there can tell when it has shipped.
 
 - **The homepage is one stage, and its two objects are the app's own mockups (2026-09-16).**
   `index.html` is a sticky `.day-story` the scroll moves through: seven acts across one day, captions in one column, and one Ember inside the stage that

@@ -1,5 +1,88 @@
 {
-  "about": "Every Archie feature for Archie Docs: published when claimable, held with the reason otherwise. Read by scripts/gen-docs.mjs; node scripts/gen-docs.mjs --report lists it all.",
+  "about": "Every Archie feature for Archie Docs: published when claimable, held with the reason otherwise. Read by scripts/gen-docs.mjs; node scripts/gen-docs.mjs --report lists it all. Every TRUST.md entry outside its Known Weaknesses, Settled Decisions and Competitor claims sections has a row here, or is listed under not_features (with why) or owed (a row not written yet), and gen-docs stops otherwise.",
+  "not_features": [
+    {
+      "trust": "✅ We are paid by the people who use Archie, and by nobody else",
+      "why": "A claim about how Otian AI is paid, not something in Archie."
+    },
+    {
+      "trust": "✅ On the two lanes that run on our AI account, each person's calls carry a tag, and we can turn that AI off for one person",
+      "why": "How Otian AI runs its own AI account, not something an owner uses."
+    },
+    {
+      "trust": "✅ We work to keep the AI bill down, and we do not say how",
+      "why": "Says what Archie costs is kept down and that how is not said, so there is nothing to show."
+    },
+    {
+      "trust": "✅ What other agents charge per unit, and the like-for-like caveat",
+      "why": "Prices of other products, for the comparison pages."
+    },
+    {
+      "trust": "✅ What \"own\" means in \"Don't rent your agent. Own it.\" (entry written 2026-09-28)",
+      "why": "What a line on the site means, not something in Archie."
+    },
+    {
+      "trust": "Main pages use shorter copy and visual groups: BUILT October 20, 2026 (Archie `31c20187`, `ce1c0654` and `4788ef79`, archie-mobile `74506b3`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)",
+      "why": "A redesign of how pages look; each feature on them has its own row."
+    },
+    {
+      "trust": "✅ The video library: YouTube behind a press, and Jack's voice (decided 2026-09-28, LIVE 2026-09-30)",
+      "why": "A page on this site, not something in Archie."
+    },
+    {
+      "trust": "⛔ RETIRED 2026-10-16: Google's \"unverified app\" screen before its permission page (added 2026-09-30)",
+      "why": "Retired: Google no longer shows that screen."
+    },
+    {
+      "trust": "✅ Archie passed the security assessment Google requires (CASA): LETTER ISSUED 2026-10-13, CLEARED FOR EVERY PAGE 2026-10-16",
+      "why": "A fact about a review Archie passed, not something an owner uses."
+    },
+    {
+      "trust": "✅ This website, and what it asks your browser for (added 2026-09-16)",
+      "why": "About this site, not Archie."
+    },
+    {
+      "trust": "✅ The claims a reader can run in a browser: `trust/proof/` (added 2026-09-16)",
+      "why": "A page on this site, not something in Archie."
+    },
+    {
+      "trust": "Archie Docs: the guides inside Archie and every released feature, on one site: BUILT October 27, 2026, in no push yet",
+      "why": "The docs themselves."
+    },
+    {
+      "trust": "✅ One agent, many add-ons: what a scope or breadth claim may say",
+      "why": "Rules for wording a claim, not a feature."
+    },
+    {
+      "trust": "🚧 Group-chat messaging + a \"who it may message\" UI \u2014 ROADMAP, NOT SHIPPED",
+      "why": "Not built."
+    },
+    {
+      "trust": "🚧 The weekly letter: LIST RUNNING, COPY CORRECTED, ONE DECISION STILL OPEN",
+      "why": "Otian AI's newsletter, not something in Archie."
+    },
+    {
+      "trust": "✅ Email send with click-to-approve \u2014 SHIPPED 2026-07-20 (superseded)",
+      "why": "Replaced by later entries, which have their own rows."
+    },
+    {
+      "trust": "⛔ The gate does not stop exfiltration \u2014 never imply it does",
+      "why": "A claim that must never be made, not a feature."
+    }
+  ],
+  "owed": [
+    "✅ Archie for Business's Marketplace holds only what a business can use",
+    "✅ What the technical log holds, and how far back a restart reads mail (entry written 2026-09-27)",
+    "🚧 Acuity Scheduling: your agent reads it, and cancels or moves an appointment when you say yes: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a for reading, 769eed7d..5417c884 for cancel and move), IN THE CATALOG for Archie 0.3.1 and later, never run against a real account",
+    "✅ One agent answers one person \u2014 ENFORCED IN CODE 2026-08-20",
+    "✅ On Archie for Business, a mailbox marked as one person's answers only that person (entry written 2026-09-27)",
+    "✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16",
+    "🚧 A change you did not ask for is offered, not made: BUILT 2026-10-26, in no release yet",
+    "🚧 When your agent looks something up, it is handed the newest note and any day ahead in the notes: BUILT 2026-10-26, in no release yet",
+    "🚧 \"undo it\" is answered with what was actually changed, each with its Undo: BUILT 2026-10-26, in no release yet",
+    "🚧 On Archie for Teams, your agent can make a GoHighLevel change you asked for and tell you after, with Undo: BUILT 2026-10-26, in no release yet",
+    "🚧 On Archie for Teams, the owner can let named kinds of GoHighLevel change happen at once, said under the reply with Undo: BUILT 2026-10-26, in no release yet, never run against a real GoHighLevel account"
+  ],
   "features": [
     {
       "id": "stop-a-reply",

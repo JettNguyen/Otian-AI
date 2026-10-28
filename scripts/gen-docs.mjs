@@ -11,7 +11,9 @@
  *     and this refuses to write anything while a heading is missing, because a claim that is not in
  *     TRUST.md may not be made on this site. Only `claimable` features are published. The rest are
  *     held, with the reason, and `--report` lists them, so the file is the whole inventory and the
- *     pages are the part of it we may say.
+ *     pages are the part of it we may say. It goes the other way too: every TRUST.md entry has a
+ *     row, or is listed in the file as not a feature or as a row still owed, so an entry written
+ *     without its row stops the deploy (the shipping rule in the Archie repo's CLAUDE.md).
  *   - What's new is archie/releases.json, every release's notes, newest first. Those before
  *     OPEN_FROM are folded shut under Older releases, because they use names and prices the site
  *     no longer prints; they read as they shipped, and the page says so.
@@ -235,10 +237,23 @@ function block(b, ctx, ids) {
 
 /* ---------- features ---------- */
 
+/* Sections of TRUST.md that hold no features, so their entries need no row. */
+const NO_FEATURES = /^(Known Weaknesses|Settled Decisions|Competitor claims)/;
+
 function readFeatures(guides) {
   if (!fs.existsSync(FEATURES)) return [];
-  const all = JSON.parse(fs.readFileSync(FEATURES, "utf8")).features;
-  const trust = new Set(fs.readFileSync(TRUST, "utf8").split("\n").filter((l) => l.startsWith("### ")).map((l) => l.slice(4).trim()));
+  const data = JSON.parse(fs.readFileSync(FEATURES, "utf8"));
+  const all = data.features;
+  const trust = new Set();
+  const owing = [];
+  let section = "";
+  for (const l of fs.readFileSync(TRUST, "utf8").split("\n")) {
+    if (l.startsWith("## ")) section = l.slice(3).trim();
+    else if (l.startsWith("### ")) {
+      trust.add(l.slice(4).trim());
+      if (!NO_FEATURES.test(section)) owing.push(l.slice(4).trim());
+    }
+  }
   const ids = new Set();
   const bad = [];
   for (const f of all) {
@@ -257,7 +272,21 @@ function readFeatures(guides) {
     const { trust: t, wording: w, ...shown } = f;
     if (/[\u2014\u2013]/.test(JSON.stringify(shown))) bad.push(`${where}: has a dash the site does not print`);
   }
+  // Every entry has its row, or says why not. A heading is copied whole, so dating an entry means
+  // copying its new heading here too, the same as into a row's `trust`.
+  const named = new Set(all.flatMap((f) => (f.trust || []).map((h) => h.trim())));
+  const skip = new Map((data.not_features || []).map((n) => [n.trust.trim(), "not_features"]));
+  for (const h of data.owed || []) skip.set(h.trim(), "owed");
+  for (const [h, list] of skip) {
+    if (!trust.has(h)) bad.push(`${list}: TRUST.md has no heading "${h.slice(0, 80)}". Copy its new heading if it was dated or renamed.`);
+    if (named.has(h)) bad.push(`${list}: "${h.slice(0, 80)}" has a row now, so take it off ${list}.`);
+  }
+  for (const n of data.not_features || []) if (!n.why) bad.push(`not_features: "${n.trust.slice(0, 80)}" has no why`);
+  for (const h of owing) if (!named.has(h) && !skip.has(h)) {
+    bad.push(`TRUST.md has an entry with no docs row: "${h.slice(0, 90)}". Add its row (held, with the reason, if it is in no release), or list it under not_features with why, if it describes no feature.`);
+  }
   if (bad.length) throw new Error("data/docs-features.json:\n  " + bad.join("\n  "));
+  all.owed = (data.owed || []).map((h) => h.trim());
   return all;
 }
 
@@ -871,6 +900,10 @@ function report(all) {
   }
   const held = all.filter((f) => !f.claimable).length;
   out.push(`\n${all.length} features: ${all.length - held} published, ${held} held (H).`);
+  if (all.owed?.length) {
+    out.push(`\n${all.owed.length} TRUST.md entries still owe a row (\`owed\` in data/docs-features.json):`);
+    for (const h of all.owed) out.push(`  ${h.slice(0, 110)}`);
+  }
   console.log(out.join("\n"));
 }
 

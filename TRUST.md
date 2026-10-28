@@ -96,10 +96,13 @@ copy the change made false and all of them fixed in the same pass as the code:
    removed** from `trust/`, `trust/details/`, `faq/`, `index.html` and the Terms. The honest
    replacement, live now: a plan ends at the close of the period already paid for, nothing on the
    person's computer is deleted, and restarting a plan restores access. *[Caveat added
-   2026-08-21: the account stays bound to its original Stripe customer, and a re-subscription
-   Stripe books under a new customer is refused with no tier granted until support rebinds it.
-   Say "restarting a plan restores access" only with "if anything looks stuck, write to us"
-   nearby; never promise it as instant and unconditional.]*
+   2026-08-21, amended October 28, 2026: the account stays bound to its original Stripe customer.
+   Buying again on otianai.com/account is booked on that same customer and restores access, and so
+   will buying again in Archie once a release carries it (Archie `de7f59d9`, in no release yet). A
+   Payment Link opened any other way, the plan buttons in Archie 0.3.12 and earlier included, still
+   books a new customer, which is refused with no tier granted until support rebinds it. Say
+   "restarting a plan restores access" only with "if anything looks stuck, write to us" nearby;
+   never promise it as instant and unconditional.]*
 3. **"If we disappear, it still keeps working" stays, in its 60-day form below.** The Terms
    commitment (a final version **requiring no license check**, published within 30 days of
    ceasing operations; those are the Terms' own words, and this file used to paraphrase them as
@@ -3610,8 +3613,8 @@ Teams' trial, and after a plan ends in Archie.*
   then what the trial's end says").
 - ⛔ **The Teams line never says what still works.** After day 14 with no plan, nothing does.
 
-*Amended October 27, 2026 (Archie `de7f59d9`, in no release yet, and not working until the billing
-service is deployed with `c97eecbb`): what the plan chooser's button opens.*
+*Amended October 27, 2026 (Archie `de7f59d9`, in no release yet; the billing service it needs has
+run `c97eecbb` since October 28, 2026): what the plan chooser's button opens.*
 
 - **A first-time buyer's door is the one it was.** An account with no Stripe customer opens the
   plan's Payment Link from the chooser behind Get a plan and See plans, with nothing asked first
@@ -8566,9 +8569,9 @@ of the three cases."
   message at the end now point at Get a plan in Archie. Archie `docs/OPEN-THREADS.md` has what a
   returning owner's checkout still needs, under the same heading as above.
 
-*Amended October 27, 2026 (Archie `c97eecbb` and `de7f59d9`, in no release yet, and not on the
-billing service until it is deployed with them): a plan set to end is warned ahead, and buying again
-after one ended takes.*
+*Amended October 27, 2026 (Archie `c97eecbb` and `de7f59d9`; the billing service has run `c97eecbb`
+since October 28, 2026, and `de7f59d9` is in no release yet): a plan set to end is warned ahead, and
+buying again after one ended takes.*
 
 **Proposed wording, Jett's to approve**, one sentence in the Archie case with no AI account of your
 own, after "Your agent tells you once, in the chat app you use with it, that the plan has ended and
@@ -8608,14 +8611,16 @@ later, you buy a plan the same way as the first time, on the same account."
 
 **The boundaries.**
 
-- ⚠️ **Not before the billing service is deployed with this.** Until then the ⚠️ "Never 'you are
-  warned before your plan ends', for now" above stands, and so does the caveat that a returning
-  owner's checkout may not take.
-- ⚠️ **Once it is deployed, the ⚠️ "Never 'you are warned before your plan ends'" above becomes:**
-  warned ahead only when Stripe says the plan is set to end, which is a cancellation in the billing
-  portal. A payment that fails is still told once, when the plan ends, since Stripe sets no end ahead
-  for it. The warnings come from the computer, so a computer off or asleep through both marks sends
-  neither.
+- ⚠️ **The billing service's half is deployed (October 28, 2026), and Archie's is in no release
+  yet.** The end date is written now, but the warnings come from the computer, in a release that
+  carries them, so until one does the ⚠️ "Never 'you are warned before your plan ends', for now"
+  above stands. Buying again takes on otianai.com/account now, and in Archie once a release carries
+  `de7f59d9`, as the caveat near the top of this file says.
+- ⚠️ **Once a release carries the warnings, the ⚠️ "Never 'you are warned before your plan ends'"
+  above becomes:** warned ahead only when Stripe says the plan is set to end, which is a
+  cancellation in the billing portal. A payment that fails is still told once, when the plan ends,
+  since Stripe sets no end ahead for it. The warnings come from the computer, so a computer off or
+  asleep through both marks sends neither.
 - ⚠️ **Only where the amendment above sends them**: in Archie, to an owner with no AI account of their
   own. An owner with one lands on the free tier and is not warned, and Archie for Teams says nothing
   new ahead of a plan's end.

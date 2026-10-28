@@ -167,7 +167,7 @@ one is deliberately manual: a `feedback` collection either of us can add to in t
 visible. This is the highest-value panel and the one that needs the least infrastructure. There
 is no machine-collected feedback to draw on and we should not invent one.
 
-**6. Follow-ups.** Riggs, Jeff, Pat, Todd all came up on the call as people to get back to, and
+**6. Follow-ups.** Riggs, Pat, Todd all came up on the call as people to get back to, and
 they currently live in Jack's head and in Hudson. Same manual pattern as feedback: name, what
 is next, when. Hudson pushing into the same collection is the version-two upgrade, not the
 starting point.

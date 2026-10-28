@@ -54,8 +54,8 @@ One scale each, and a component is either on the scale or it is a documented exc
     ticks (`.two-col-card-list`, `.plan-list`), small uppercase component headers
     (`.calm-list-label`, `.price-card-label`, `.faq-group-title`), supporting icons
     (`.feature-icon`, `.value-icon`, `.use-case-item svg`), diagram wayfinding (step
-    badges, wire captions, time dots), the nav's current-section underline, the advisor
-    ring, and the status pill. One deliberate exception: the six custody glyphs on the
+    badges, wire captions, time dots), the nav's current-section underline
+    and the status pill. One deliberate exception: the six custody glyphs on the
     homepage stay ember, because there they are the argument, not support.
   - **Kind colors** appear on kind chips and anywhere the three kinds are compared:
     skills ember, personalities plum, routines teal (matching the app).

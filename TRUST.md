@@ -18356,7 +18356,9 @@ And once a message gets through again: "Messages on Telegram reach me again."
   a short outage passes without a word), `watch_trouble::chat_app_failing` says it, with the words
   from `chat_app_down` in `crates/archie-runtime/src/gateway/mod.rs`. A run of failures is kept on
   disk, so a restart neither starts the half hour again nor says it twice, and quiet hours hold it
-  until they lift.
+  until they lift. The half hour is time the computer was awake: the time asleep inside a run of
+  failures is measured from the two clocks (`crates/archie-runtime/src/asleep.rs`) and does not
+  count (since October 29, 2026, Archie `0cc336b1`, in no release yet).
 - **In Archie, never on the chat app.** It goes to Archie's own conversation and nowhere else
   (`Channel::say_in_archie_only` in `crates/archie-net/src/channel.rs`, which the mirror between a
   chat app and the window answers by posting to the window, in `crates/archie-net/src/mirror.rs`),
@@ -18371,8 +18373,9 @@ And once a message gets through again: "Messages on Telegram reach me again."
 - **What it replaced.** Until October 23, 2026 the owner got only a badge on the agent in Archie's
   window: the chat app was the only way anything reached them, so an agent whose bot token was
   revoked went silent on every chat while its owner, away from the computer, kept writing to it.
-- **Tests:** `a_chat_app_that_is_down_is_said_in_archie_and_not_on_it` and
-  `the_words_for_a_chat_app_that_is_down_say_where_to_go` in `watch_trouble.rs`.
+- **Tests:** `a_chat_app_that_is_down_is_said_in_archie_and_not_on_it`,
+  `the_words_for_a_chat_app_that_is_down_say_where_to_go` and
+  `a_night_asleep_does_not_count_toward_telling` in `watch_trouble.rs`.
 - **What reaches us is unchanged.** The same half hour queues an error report with the chat app's
   name and its error line, as it did before this change. It is one of the error reports in the entry
   headed "No analytics, and two small things that are not analytics", and the same switch turns it
@@ -18395,6 +18398,12 @@ And once a message gets through again: "Messages on Telegram reach me again."
 - ⚠️ **The fix is at the computer.** Connecting a chat app again happens on the agent's Setup tab,
   in Archie on the computer.
 - ⚠️ **Nobody has seen it on a real phone yet.** Its tests read the words and where they went.
+- ⚠️ **Up to 0.3.12, a closed lid could still set it off.** A Mac with its lid shut wakes for a few
+  seconds at a time through the night, and Archie runs in those seconds, so a run of failures on a
+  network that was barely there reached half an hour on the wall clock by morning. On October 29,
+  2026 that is how an owner was told at 9:21 that mail had not been read for half an hour, about a
+  computer asleep since 1:23. The release after 0.3.12 counts only awake time. A stretch asleep
+  before Archie was last started still counts, so after a restart it can speak sooner, never later.
 
 ### 🚧 On iMessage, a spoken reply arrives as an audio message in the thread: BUILT 2026-10-23 (Archie `dddea95a`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, and not yet played on a real iPhone
 

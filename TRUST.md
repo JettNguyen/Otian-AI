@@ -98,7 +98,7 @@ copy the change made false and all of them fixed in the same pass as the code:
    person's computer is deleted, and restarting a plan restores access. *[Caveat added
    2026-08-21, amended October 28, 2026: the account stays bound to its original Stripe customer.
    Buying again on otianai.com/account is booked on that same customer and restores access, and so
-   will buying again in Archie once a release carries it (Archie `de7f59d9`, in no release yet). A
+   will buying again in Archie once a release carries it (Archie `de7f59d9`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12). A
    Payment Link opened any other way, the plan buttons in Archie 0.3.12 and earlier included, still
    books a new customer, which is refused with no tier granted until support rebinds it. Say
    "restarting a plan restores access" only with "if anything looks stuck, write to us" nearby;
@@ -513,14 +513,14 @@ is never a promise about everybody's words.)*
 - ✅ The `ai_included` flag on the user document exists for support and is not a holding that
   changes the What We Hold list: it is part of "whether you have a current plan".
 
-*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* The October 12 amendment says a
+*Amended October 27, 2026 (Archie `07351d82`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* The October 12 amendment says a
 plan coming through starts again "every agent the trial's end had stopped". The trial's end stops
 none now, so a plan brings the AI back to agents that are still running: the session keeper restarts
 each one with the AI within a minute of seeing the plan (`restart_what_started_otherwise` in
 `src-tauri/src/session.rs`), and `reopen_after_plan` still starts any agent an older Archie stopped
 at the trial's end. Agents the owner switched off stay off.
 
-*Amended October 27, 2026 (Archie `8fea0270`, in no release yet): the plan's own end.* When this plan
+*Amended October 27, 2026 (Archie `8fea0270`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the plan's own end.* When this plan
 ends, canceled or left unpaid, Archie no longer stops every agent and puts the paywall up: the
 reminders, the morning list, and the lists and calendar keep going on the computer, the AI is
 refused before anything is sent, and the strip, the card and one message in chat say "Your plan has
@@ -657,7 +657,7 @@ means nothing further is sent and anything waiting to be sent is deleted."
 - ⚠️ **One more thing goes out only when you press it:** from 0.3.10, the answer to "How did you hear about Archie?" on the Account page (the entry
   below). It is not telemetry and the crash-reports switch does not govern it.
 
-*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in no release yet, and switched off
+*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, and switched off
 until Jett approves the words): one more thing goes out, and only after a trial or a plan ends.*
 
 **Proposed wording, Jett's to approve**, in place of "There is no analytics service in Archie:
@@ -1850,7 +1850,7 @@ on both platforms**, change the policy's sentence to "we also keep its model, su
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
-*Amended October 30, 2026 (Archie `239ef019`, in no release yet): Archie Mobile is enough on its own.*
+*Amended October 30, 2026 (Archie `239ef019`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): Archie Mobile is enough on its own.*
 
 **The claim:** Archie Mobile can be the only way you reach your agent from your phone. You do not
 need a chat app as well, and setting up a new agent finishes on Archie Mobile alone.
@@ -1912,7 +1912,7 @@ read, and the privacy policy says so with a row in its retention table. Previews
   agent goes quiet**, so never "instantly".
 - ❌ Never "end-to-end encrypted" without the boundaries on "Archie on your phone" above.
 
-*Amended October 27, 2026 (Archie `2276639d`, in no release yet).* A reply to a voice note sent from the phone notifies in the reply's plain sentences instead of its words; see the entry headed "A voice note answered in writing is written for a phone to read out".
+*Amended October 27, 2026 (Archie `2276639d`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* A reply to a voice note sent from the phone notifies in the reply's plain sentences instead of its words; see the entry headed "A voice note answered in writing is written for a phone to read out".
 
 ### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release and on iPhone in 1.1
 
@@ -2167,7 +2167,7 @@ when that is the clearer shape."
   alone (the Share fix runs on iOS only); picked photos going at once is on Android too, until an
   APK after `50c192d`.
 
-*Amended October 27, 2026 (Archie `2276639d`, in no release yet).* On a chat app, a reply to a voice note says a table as sentences, one a row, instead of labeled bullets; see the entry headed "A voice note answered in writing is written for a phone to read out".
+*Amended October 27, 2026 (Archie `2276639d`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* On a chat app, a reply to a voice note says a table as sentences, one a row, instead of labeled bullets; see the entry headed "A voice note answered in writing is written for a phone to read out".
 
 ### ✅ A microphone and Talk out loud beside Archie's message box, and where what you say goes: the window only, SHIPPED in Archie 0.3.2 on 2026-09-30
 
@@ -2505,7 +2505,7 @@ archie-mobile `817e099`):
 - **Words.** The agent keeps **lists** and a document is in a **folder**. "Records" and "category"
   are gone from both apps' screens; any page describing the Knowledge tab says Documents and Lists.
 
-*Amended October 28, 2026 (Archie `0ec4b129` and `d161cabd`, Archie Mobile `549c9af`; in no release yet).* Under
+*Amended October 28, 2026 (Archie `0ec4b129` and `d161cabd`, Archie Mobile `549c9af`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).* Under
 **Knowledge**, after "The phone groups documents by the same folders.", add: "Below its folders,
 Documents has Folders on this computer: folders the agent searches where they sit, which is a
 capability of its own (the entry 'Your agent finds things in the folders you pick on your computer,
@@ -3029,7 +3029,7 @@ appraisal and loan approval dates."
 - ⚠️ **Follow Up Boss deals bring no such dates.** A deal brought in from Follow Up Boss fills the
   columns its read has words for, and these three are not among them.
 
-*Amended October 26, 2026 (Archie `32a61822`, in no release yet).* Two bullets of this entry change.
+*Amended October 26, 2026 (Archie `32a61822`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* Two bullets of this entry change.
 
 - **Three buttons under the goodbye.** The morning list's offer now takes their place under the
   goodbye, and the three starters come under the answer to it instead, once (`starters_after_the_goodbye`
@@ -3631,7 +3631,7 @@ know: on the strip under every page during the trial, and on the Account page un
   - ⚠️ **"For your whole team" is the plan, not the AI.** Archie for Teams still thinks on an AI
     account of the owner's own, billed by that company; say both halves together.
 
-*Amended October 27, 2026 (Archie `3ba19e57` and `afaf0a8d`, in no release yet): the strip after
+*Amended October 27, 2026 (Archie `3ba19e57` and `afaf0a8d`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the strip after
 the trial.* Once a free trial is over with no plan, the window stays open and the strip is the line
 that says so. As Archie says it: "Your free trial ended Friday, October 30. The reminders you set
 still go off, the morning list still comes if you have it on, and your lists and calendar still
@@ -3649,7 +3649,7 @@ from `pricing.ts` as before.
 - ⛔ **The strip still never calls the time after the trial free.** "Itself costs nothing" belongs to
   the AI account clause, as everywhere since round four.
 
-*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, in no release yet): the strip after
+*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the strip after
 Teams' trial, and after a plan ends in Archie.*
 
 - **Archie for Teams' line says the agents stop.** It replaces the Teams quote in the amendment above
@@ -3671,7 +3671,7 @@ Teams' trial, and after a plan ends in Archie.*
   then what the trial's end says").
 - ⛔ **The Teams line never says what still works.** After day 14 with no plan, nothing does.
 
-*Amended October 27, 2026 (Archie `de7f59d9`, in no release yet; the billing service it needs has
+*Amended October 27, 2026 (Archie `de7f59d9`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12; the billing service it needs has
 run `c97eecbb` since October 28, 2026): what the plan chooser's button opens.*
 
 - **A first-time buyer's door is the one it was.** An account with no Stripe customer opens the
@@ -3961,7 +3961,7 @@ calendar work the whole time."
     left as they are on October 17, because each names the AI account beside it.
 
 *Amended October 27, 2026 (Archie `b5c6e57b`, `30821825`, `3ba19e57` and `afaf0a8d`, archie-mobile
-`9370d36`, in no release yet).*
+`9370d36`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).*
 
 - **The line under the ways now names the reminders and the morning list.** "Without the AI, the
   reminders you set still go off, the morning list still comes if you have it on, and your lists and
@@ -3984,7 +3984,7 @@ calendar work the whole time."
   Set up an AI account (`no_ai_refusal` in `src-tauri/src/auth.rs`).
 
 *Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, archie-mobile `fb3f42f` and
-`8c3804a`, in no release yet).*
+`8c3804a`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
 - **On Archie for Teams the line under the ways is not shown after the trial's end or a plan's.**
   After `trial_exhausted`, `trial_expired`, `no_trial` or `plan_lapsed` the card says nothing about
@@ -4503,13 +4503,13 @@ stopped Ember yesterday at 11:34 PM", on your computer and on your phone."
   stopped the company map's restart from starting agents the owner had stopped: it took any answer
   from Stop as "it was running".
 
-*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* The free trial running out no
+*Amended October 27, 2026 (Archie `07351d82`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* The free trial running out no
 longer stops an agent, so "Ember stopped when the free trial ended" is now written only if the
 switch above is turned off, and read only on agents an older Archie stopped. Those are started
 again once a launch to run what needs no AI (`reopen_after_plan` in `src-tauri/src/session.rs`). The
 ⚠️ "Never quote the trial line as an example" stands, now for that reason as well.
 
-*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, in no release yet).* "Ember stopped when
+*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* "Ember stopped when
 the free trial ended" is written again on Archie for Teams, where the switch is off, since the
 trial's end stops every agent there at day 14. In Archie it is not written at all now: the end of the
 plan with the AI included, which used to stop the agents under that same line, keeps them running
@@ -4751,7 +4751,7 @@ it is answering."
     Sam asked the agent something mid-interview on all three passes, was answered with its next
     question, and had to press Stop the questions to get an answer.
 
-*Amended October 26, 2026 (Archie `32a61822` and `7ebc5374`, in no release yet): the first evening
+*Amended October 26, 2026 (Archie `32a61822` and `7ebc5374`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the first evening
 ends on the morning list's offer.* Whichever way the interview ends, with its goodbye or by letting go
 on a question of the owner's own, Stop the questions, a job or the turn cap, that last reply carries
 the offer of the morning list with its time (the first entry above), except a goodbye that already
@@ -5648,7 +5648,7 @@ Jobs tab and the Today list now offer for it. Tests: `a_note_saved_to_memory_is_
 - ⚠️ **Not on a chat app**, as the rest of the line: Telegram, Slack, Discord, Matrix and iMessage
   draw none of it.
 
-*Amended October 26, 2026 (Archie `792109e8`, archie-mobile `a60f01e`, in no release yet): what it
+*Amended October 26, 2026 (Archie `792109e8`, archie-mobile `a60f01e`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): what it
 read is folded.* The "Read:" line is now a fold, "What I looked at", that names what was read
 ("Bookings and your file rates.pdf"); opened, it says "I looked at" and each read as before, with
 the same presses to open each list or file (`src/app/read-words.ts`, drawn in `KeptLine` in
@@ -6046,7 +6046,7 @@ AI reads a customer's email as that customer's. Only matched mail carries that s
   email the tab rule lets through is one more read on the owner's AI account, where it used to cost
   nothing.
 
-*Amended October 28, 2026 (Archie `5c87c399`, in no release yet): the watch also knows the people
+*Amended October 28, 2026 (Archie `5c87c399`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the watch also knows the people
 the owner has told their agent about.*
 
 In the October 28 week run, mail from Kyle's wife was called "new to you", though the agent's notes
@@ -6112,7 +6112,7 @@ reads, after every add-on that reads mail.
 - ⚠️ **The AI can misread the email.** That is why the card shows both values and the email's words,
   and why nothing is written without the press.
 
-*Amended October 28, 2026 (Archie `5c87c399` and `d884e3e5`, in no release yet): an entry is also
+*Amended October 28, 2026 (Archie `5c87c399` and `d884e3e5`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): an entry is also
 named by who it is for.*
 
 In the October 28 week run a deal is titled by its address, so "Garcia repair addendum signed" and
@@ -6359,7 +6359,7 @@ write on a card yourself go out as you wrote them, signed once."
 - ⛔ **Never "Take out removes everything Archie made up".** It reads the agent's own label on each item, so an item the agent wrongly says came from your price sheet stays. Five items at most, code's finds first, and facts with a source fall off first.
 - **What that got wrong before.** On the finished replay the press sent the whole line back and cut a real pickup day.
 
-*Amended October 26, 2026 (Archie `b7bdeb53`, archie-mobile `a60f01e`, in no release yet): the
+*Amended October 26, 2026 (Archie `b7bdeb53`, archie-mobile `a60f01e`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): the
 "Check before sending" line has new words.* An email card now ends "**Check these before you send
 it.** I put them in myself:" with one short bullet for each thing (`render_card` in
 `crates/archie-runtime/src/email/replies/card.rs`), where it said "_Check before sending: $450 and
@@ -6369,7 +6369,7 @@ old. Archie Mobile keeps the bullets in view under a long draft's cut (`cardNote
 phone with no change there" is no longer the whole story. What it names and its boundaries are
 unchanged.
 
-*Amended October 26, 2026 (Archie `82b01683`, in no release yet): a price nobody gave is now a
+*Amended October 26, 2026 (Archie `82b01683`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a price nobody gave is now a
 blank, so Send waits on it.* Where the line under an email draft only named an amount nothing given
 held, code now leaves it in the draft as a blank, "[$140, check the price]", which holds Send like
 any other, on email and text cards alike. On an email card it is also first under **Check these
@@ -6430,7 +6430,7 @@ is already in that email or text conversation."
 - ⚠️ **A long document is not read for it.** Files over 24KB are checked only when the agent read
   them on that turn, so a price from a long price book the agent read yesterday is held.
 
-*Amended October 28, 2026 (Archie `e63105ab`, in no release yet): a draft nobody asked for may quote
+*Amended October 28, 2026 (Archie `e63105ab`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a draft nobody asked for may quote
 a price the owner wrote down.* Until then a mail or text watch draft held even a price from the
 owner's own price sheet, with the line "$140 is in your own lists or files, but nobody has said to
 quote it in this email". In the October 28 week run three owners (Emily, Mike and Sarah) read those
@@ -7380,7 +7380,7 @@ there and asks before moving it."
 - ⚠️ **On a message a person typed.** A routine moving an entry is not held this way.
 - ⛔ Never "it checks your whole schedule" or "it never double-books a truck".
 
-*Amended October 28, 2026 (Archie `2c60a2a3`, in no release yet): the second answer says who
+*Amended October 28, 2026 (Archie `2c60a2a3`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the second answer says who
 picks the day.*
 
 In the October 28 week run Kyle pressed Pick another day, and the agent read it as being told to
@@ -7679,7 +7679,7 @@ make a new list that keeps every column, and still offers the closest list."
   sentence names the place.
 
 *Amended October 27, 2026 (Archie `e76af7e1`, `ab17ec44`, `40b4548f` and `e60180d5`; archie-mobile
-`b875a84`; in no release yet): Import on a list in Archie Mobile, and the first rows shown before
+`b875a84`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): Import on a list in Archie Mobile, and the first rows shown before
 Add on both screens.*
 
 **Proposed addition, Jett's to approve:** "On your phone, open the list in Archie Mobile and press
@@ -7841,8 +7841,7 @@ never takes an entry off the list without asking, and your agent knows the list 
 - ⚠️ **Not tried on a real Windows file system,** where Excel can hold a file open, nor on a file in
   OneDrive or iCloud Drive not downloaded to this computer. Never seen with a real Google account.
 
-*Amended October 27, 2026 (Archie `e76af7e1` and `e60180d5`, archie-mobile `b875a84`, in no release
-yet).*
+*Amended October 27, 2026 (Archie `e76af7e1` and `e60180d5`, archie-mobile `b875a84`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
 - **The owner's phone can turn matching on for a Google Sheet shared with the agent**, from Import:
   the box "Keep Units matched to Units 2026." starts checked, "Archie tells the rows apart by" with
@@ -8533,7 +8532,7 @@ setting Archie up does not cost a day.
   version. The draft and its reasoning are in the Archie repo,
   `docs/drafts/FREE-TIER-TERMS.draft.md`.
 
-*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* `require_access` asks one
+*Amended October 27, 2026 (Archie `07351d82`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* `require_access` asks one
 question now, `crate::auth::thinks`, whose answers cover the three doors this entry names and a
 fourth: after a free trial with no plan, the agents start with the AI refused.
 
@@ -8541,7 +8540,7 @@ fourth: after a free trial with no plan, the agents start with the AI refused.
   tier are two offers, not two phases of one" stands, and what follows a trial with neither is not
   a third offer to write beside them.
 
-*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, in no release yet).* The fourth door in
+*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* The fourth door in
 the amendment above is Archie's alone now, and it opens after a paid plan's end as well as after the
 free trial: in Archie, an account whose trial is over or whose plan ended, with no plan and no AI
 account of its own, starts its agents with the AI refused. Archie for Teams has no fourth door after
@@ -8659,7 +8658,7 @@ Backups section.
   billing portal, and the portal is the right door for a lapsed subscriber because a fresh checkout
   bills them twice.
 
-*Amended October 27, 2026 (Archie `3ba19e57`, in no release yet).* Nothing changes for a plan. The
+*Amended October 27, 2026 (Archie `3ba19e57`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* Nothing changes for a plan. The
 `App.tsx` condition quoted under Why it's true gains `&& !auth.no_ai_parts`, which is true only after
 a free trial with no plan, never after a plan ended (`Thinks::Closed` for a lapsed plan in
 `src-tauri/src/auth.rs`).
@@ -8667,7 +8666,7 @@ a free trial with no plan, never after a plan ended (`Thinks::Closed` for a laps
 - ⛔ **Never carry the trial's ending over to a plan's.** A plan that ends still meets the paywall,
   in the three cases this entry names.
 
-*Amended October 27, 2026 (Archie `8fea0270`, archie-mobile `8c3804a`, in no release yet): in
+*Amended October 27, 2026 (Archie `8fea0270`, archie-mobile `8c3804a`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): in
 Archie a plan's end keeps the parts with no AI, the trial's way.* This replaces the October 27
 amendment above, which said nothing changes for a plan, and withdraws its ⛔ "Never carry the trial's
 ending over to a plan's" for Archie. It stands for Archie for Teams.
@@ -8759,7 +8758,7 @@ of the three cases."
   returning owner's checkout still needs, under the same heading as above.
 
 *Amended October 27, 2026 (Archie `c97eecbb` and `de7f59d9`; the billing service has run `c97eecbb`
-since October 28, 2026, and `de7f59d9` is in no release yet): a plan set to end is warned ahead, and
+since October 28, 2026, and `de7f59d9` is in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a plan set to end is warned ahead, and
 buying again after one ended takes.*
 
 **Proposed wording, Jett's to approve**, one sentence in the Archie case with no AI account of your
@@ -8823,7 +8822,7 @@ later, you buy a plan the same way as the first time, on the same account."
   with no plan granted: an older Archie, or a link opened by hand. Never say a plan can be moved to
   another Stripe customer, and never that any payment link grants a plan to any account.
 
-*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in no release yet, and switched off
+*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, and switched off
 until Jett approves the words): after a paid plan ends, up to three emails from Jett.*
 
 **Proposed wording, Jett's to approve**, one sentence at the end of the October 27 amendment's
@@ -9637,7 +9636,7 @@ now as tall as what they hold; on the simulator a three-row table had been drawn
 screen of empty border under it (`flexGrow: 0` in archie-mobile's `src/markdown.tsx`). Neither
 changes what may be claimed.
 
-*Amended October 27, 2026 (Archie `2276639d`, in no release yet).* A reply to a voice note says a chart's numbers as sentences instead of a list, on the chat app and in Archie Mobile's notification; see the entry headed "A voice note answered in writing is written for a phone to read out".
+*Amended October 27, 2026 (Archie `2276639d`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* A reply to a voice note says a chart's numbers as sentences instead of a list, on the chat app and in Archie Mobile's notification; see the entry headed "A voice note answered in writing is written for a phone to read out".
 
 ### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, RELEASED in 0.3.10, 2026-10-17
 
@@ -10605,7 +10604,7 @@ saying so, or on the Routines tab."
 - ⚠️ **The boundary above that the owner can stop it but not move it is out of date since October 17, 2026:** Another time and "send me the morning list at 7am" move it.
 - On an event trailer agent it also compares Bookings with the owner's calendar: see the entry "The morning list and the agent say where Bookings and your calendar differ".
 
-*Amended October 26, 2026 (Archie `32a61822`, `7ebc5374` and `c67d4aed`, in no release yet): every
+*Amended October 26, 2026 (Archie `32a61822`, `7ebc5374` and `c67d4aed`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): every
 agent has one, and every owner is offered it on the first evening.*
 
 **Proposed wording, Jett's to approve:** "At the end of your first evening, your agent offers to send
@@ -10707,7 +10706,7 @@ on disk. Still no model call anywhere in it.
   goodbye to put the offer under; that owner is offered it under a later reply, once something is on
   the list.
 
-*Amended October 26, 2026 (Archie `3e814e76`, in no release yet): a list slept through until after
+*Amended October 26, 2026 (Archie `3e814e76`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a list slept through until after
 noon is named in that message, with Send the morning list now.*
 
 The list is still never sent late by itself. What changes is that it is no longer silent: on a wake
@@ -10758,7 +10757,7 @@ own, so a morning with only that on it still sends a list. Tests:
   reply; the list says the watch cannot tell whether the owner needs to know. Never describe it as
   the AI flagging uncertainty.
 
-*Amended October 27, 2026 (Archie `823a77cc` and `cd478474`, in no release yet): the list says what
+*Amended October 27, 2026 (Archie `823a77cc` and `cd478474`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the list says what
 the owner's own lists and calendar show coming due, gone by, late, at the same time, or gone quiet,
 each once.*
 
@@ -10872,7 +10871,7 @@ there and has something new to say. There is no model call anywhere in it, and n
 - ⚠️ **It asks no AI to make it.** Say that much and stop: nothing about what its words cost on later
   turns, or how Archie keeps that down.
 
-*Amended October 27, 2026 (Archie `dd17497b`, in no release yet): when the list has something on it
+*Amended October 27, 2026 (Archie `dd17497b`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): when the list has something on it
 already, the first evening's offer shows the list it would send instead of describing it.*
 
 **Proposed wording, Jett's to approve:** "At the end of your first evening, if your lists and
@@ -10968,7 +10967,7 @@ with Yes, at 7:00am, Another time and No thanks under it, as before.
 - ⚠️ **It asks no AI to make it.** Say that much and stop: nothing about what its words cost on later
   turns, or how Archie keeps that down.
 
-*Amended October 27, 2026 (Archie `6f44f9a4`, in no release yet): two parts from the mail and text
+*Amended October 27, 2026 (Archie `6f44f9a4`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): two parts from the mail and text
 watches, once the owner says yes to them.*
 
 **Proposed wording, Jett's to approve:** "Once you say yes to them in Email Manager or Text Replies,
@@ -10988,7 +10987,7 @@ line is said once (`Named`), written down only once the list went out. Tests:
   lines is in the entry headed "Email Manager and Text Replies can watch for someone new waiting an
   hour, replies you owe, and an email asking to change where a payment goes, once you say yes".
 
-*Amended October 27, 2026 (Archie `3ac4c6e3`, archie-mobile `3be52eb`, in no release yet): the list
+*Amended October 27, 2026 (Archie `3ac4c6e3`, archie-mobile `3be52eb`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): the list
 everyone has names the bills, money owed and deadlines where it is offered.*
 
 **Proposed wording, Jett's to approve**, in place of the October 26 amendment's: "At the end of your
@@ -11018,8 +11017,7 @@ the list instead, as the `dd17497b` amendment says. Tests:
 - ⚠️ **The clause names what the list can say, not what every morning says.** Each part comes only
   from a list the owner keeps, and only when it has something new, as the `823a77cc` amendment says.
 
-*Amended October 27, 2026 (Archie `086f372b` and `5ba8131a`, Archie Mobile `f13adad`, in no release
-yet): the list starts with what is ready for one press.*
+*Amended October 27, 2026 (Archie `086f372b` and `5ba8131a`, Archie Mobile `f13adad`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): the list starts with what is ready for one press.*
 
 **Proposed wording, Jett's to approve:** "Your morning list starts with what is ready for one press:
 replies your agent already drafted for your email and texts, each with Send, Fix and Skip, what is
@@ -11043,7 +11041,7 @@ overnight". Tests: `a_watch_draft_waits_on_the_tray_and_only_send_sends_it`,
 - ⚠️ **On the free credits or the plan with the AI included** the part holds Waiting On and tomorrow's
   appointments only, since the mail and the texts are not read there.
 
-*Amended October 27, 2026 (Archie `d1e8a3e2` to `155f933b`, archie-mobile `b21657a`, in no release
+*Amended October 27, 2026 (Archie `d1e8a3e2` to `155f933b`, archie-mobile `b21657a`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here,
 and switched off in every build until the Google filing is checked): on Archie's own AI, once the
 owner says yes, the list carries lines from their email that code works out on their computer.*
 
@@ -11148,7 +11146,7 @@ read them."
   it" is not said to an owner who said yes, since the count they said yes under explained it
   (`mail_note` in `gateway/morning_list.rs`).
 
-*Amended October 28, 2026 (Archie `841fad3c`, in no release yet): the first list of each week ends
+*Amended October 28, 2026 (Archie `841fad3c`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the first list of each week ends
 with what the agent did the week before, counted from what Archie recorded.*
 
 **Proposed wording, Jett's to approve:** "On the first morning list of each week, the last line says
@@ -11535,7 +11533,7 @@ blamed for this morning.
 - ⛔ Never "it never misses a routine". Past its window a slot is recorded as missed, not run.
 - ⚠️ Not yet watched across a real sleep, the same caution as the rest of this entry.
 
-*Amended October 26, 2026 (Archie `3e814e76`, `c806f7b3` and `97f959ad`, in no release yet): a routine whose
+*Amended October 26, 2026 (Archie `3e814e76`, `c806f7b3` and `97f959ad`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a routine whose
 time passed while the computer was asleep or off, too long ago to run late, is now said in the chat
 once the computer is back, with a button that runs it.*
 
@@ -11756,7 +11754,7 @@ Archie tells you it did."
   this computer" below).
 - ⚠️ **Any number in the message passes the when-check,** so never "it never guesses a time".
 
-*Amended October 26, 2026 (Archie `3e814e76`, in no release yet): a reminder dropped for being a
+*Amended October 26, 2026 (Archie `3e814e76`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a reminder dropped for being a
 week late is given in its own words in that message.*
 
 "Past a week it is dropped rather than delivered, and the drop is logged" is still true, and now it
@@ -11884,7 +11882,7 @@ marketplaces are not Shopify stores, so for those it searches the web."
   a price came from is fine; a Shopify logo is not (the no-logos rule).
 - ⚠️ A price is what the store showed at that moment. Say "right now", never "always current".
 
-*Amended October 28, 2026 (Archie `6b939f8d` to `3217d3cc`, in no release yet): a deal gets a card
+*Amended October 28, 2026 (Archie `6b939f8d` to `3217d3cc`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a deal gets a card
 of its own, and the weekly check saves what it finds.*
 
 **Proposed wording, Jett's to approve**, after the approved wording: "When a check finds something at
@@ -11946,8 +11944,7 @@ said once. Not now leaves it on your list, and Stop watching marks it Dropped it
 - ⚠️ **Personal edition only**, as Price Watch is. Archie for Teams has neither the card nor its
   buttons.
 
-*Amended October 28, 2026 (website `114a8cf4e`, live for every release; Archie `bb4b4c5c`, in no
-release yet): the page Shopify reads is served the way Shopify requires, and a refusal of it is read
+*Amended October 28, 2026 (website `114a8cf4e`, live for every release; Archie `bb4b4c5c`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): the page Shopify reads is served the way Shopify requires, and a refusal of it is read
 as one.*
 
 **Why it's true:**
@@ -11973,7 +11970,7 @@ as one.*
   stops on a refusal. A refusal between two releases would be as quiet as the first: owners would see
   "the price check is unavailable" and nobody here would hear of it until the next release.
 
-*Amended again October 28, 2026 (Archie `5d5586ec` and `d993fb95`, in no release yet).*
+*Amended again October 28, 2026 (Archie `5d5586ec` and `d993fb95`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).*
 
 **Why it's true, two more lines:**
 
@@ -13074,7 +13071,7 @@ against a real Google, Outlook or iCloud account.*
 - ⚠️ **"The Today line" is the line over the message box**, which is what the 0.3.11 notes call it
   ("with Undo over the message box").
 
-*Amended October 26, 2026 (Archie `fb93a20a`, in no release yet):* `AllowKind` still has one kind
+*Amended October 26, 2026 (Archie `fb93a20a`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12):* `AllowKind` still has one kind
 and the CRM lane still says why not. The GoHighLevel switch is a separate thing with its own file,
 its own screen and its own rule for who turns it on (the owner only, where the calendar's is the
 owner or an admin). ⚠️ Never describe the two as one setting, and never say the calendar entry's
@@ -13154,7 +13151,7 @@ agent saves it. Both are in the entry "Ask what's on, what's due, or what's free
   version also handed the drafter every title, guest and description for two weeks. Do not
   describe the calendar check as a setting, or as something you ask for.
 
-*Amended October 26, 2026 (Archie `b7bdeb53`, in no release yet).* The card under the draft says
+*Amended October 26, 2026 (Archie `b7bdeb53`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* The card under the draft says
 "I looked at your calendar before writing this." where it said "Checked first: your calendar", on
 email and text cards alike (`render_card` in both lanes' `card.rs`). Quote the new words.
 
@@ -13456,7 +13453,7 @@ email or a time on your calendar, and it looks before it rewrites."
     card, so a draft posted again after a change grays only the words beside the card that was
     pressed.
   - ⚠️ **The phone's half has never been seen on a phone.**
-  - **Amended October 26, 2026 (Archie `792109e8`, archie-mobile `a60f01e`, in no release yet): counted by
+  - **Amended October 26, 2026 (Archie `792109e8`, archie-mobile `a60f01e`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): counted by
     draft everywhere.** "2 waiting to send" over the message box, the Now tab in Archie, Now and its
     Needs you in Archie Mobile, and the Chat badge in the sidebar count one per draft, whatever version
     of it is showing (`draftOf` in `src/app/waiting.ts` and archie-mobile `src/waiting.ts`;
@@ -13486,7 +13483,7 @@ email or a time on your calendar, and it looks before it rewrites."
   - ⚠️ **The phone's half has never been seen on a phone.**
 
 *Amended October 26, 2026 (Archie `b7bdeb53`, `792109e8`, `85282adb` and `37b512e0`, archie-mobile
-`a60f01e`, in no release yet): one draft, one card.*
+`a60f01e`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): one draft, one card.*
 
 **Proposed wording, Jett's to approve:** "However a draft changes (you edit it, your agent rewrites
 it because you asked, or they write again on the same email), you see one card with Send on it: the
@@ -14123,15 +14120,14 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
 - ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
 - ⚠️ **A look-up is "about 10 cents", counting its searches and the pages they bring back, and a Deep
   Research run "about 40 cents"** (FACTS.md; measured at 6.6 to 17.4 cents a look-up across nine
-  runs). The app and the phone say so from Archie `f5623664` and Archie Mobile `0fd1090`, in no
-  release yet, and the site may say it now, since it is what a look-up costs on every release. "About
+  runs). The app and the phone say so from Archie `f5623664` and Archie Mobile `0fd1090`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here, and the site may say it now, since it is what a look-up costs on every release. "About
   2 to 4 cents a search" (from September 28, 2026) priced one search and not the question it was part
   of, and "about a cent" was the search fee alone; neither is quoted as a cost again. Deep Research:
   "about 40 cents a run", up to 20 searches; never "a few cents", and never "about 50 cents", which
   it said until October 27, 2026.
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
-*Amended October 26, 2026 (Archie `32a61822` and `cc03c915`, in no release yet):* Evening Reflection 1.1.5 is offered after setup (`"offered_after_setup": true` in
+*Amended October 26, 2026 (Archie `32a61822` and `cc03c915`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12):* Evening Reflection 1.1.5 is offered after setup (`"offered_after_setup": true` in
 `data/marketplace/routines/evening-reflection.json`, read through `arrives_with_its_skill` in
 `crates/archie-domain/src/routine.rs`), so on an Archie with these commits adding the Journal skill,
 in the store or through a pack, no longer brings it, and the install step no longer lists it under the
@@ -14141,7 +14137,7 @@ yes."" stays: the starter pack, the Researcher and the Morning Task Checklist th
 to-do list still go on unasked.
 
 *Amended October 27, 2026 (Archie `f5623664` and `83852781`, Archie Mobile `0fd1090` and `c9e590e`,
-in no release yet): what a search costs is said by the look-up.* The bullet on it above said "about 2
+in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): what a search costs is said by the look-up.* The bullet on it above said "about 2
 to 4 cents" a search from September 28, 2026, and now says about 10 cents a look-up and about 40
 cents a Deep Research run.
 
@@ -14374,7 +14370,7 @@ add: "A reply with a blank still in it won't send until you fill it in."
 | ~~"Replies, calendar moves and your agent's edits to your lists wait for your yes."~~ | ⛔ **Never shipped: reversed before the release.** Found 2026-09-30: this row said it was approved "for the first release that carries Archie `5b51b70b`", and 0.3.2 carries it, but it also carries `139029ac` from the same day, which put edits back to happening at once. Published on the strength of this row, the sentence would have been false on the day it went up. What the row went on to say still explains the two words: In that build an edit to a row on one of the agent's lists, checking one off, or removing one waits for the owner's yes, and a routine that tries is refused and reports what it would have changed (`gateway/tools_records.rs`, `RECORDS_GATE`). Two limits, both ruled by Jett on 2026-09-29, and two words carry them. **"edits"** leaves out adding a row, which still happens at once (a row they did not want is one tap to remove), so never widen it to "changes to your lists" or "anything on your lists". **"your agent's"** leaves out Package Tracker, whose status updates from shipping emails are made by the app below the agent's tools (`email/packages.rs`, `on_email`) and stay automatic, because a yes on every "out for delivery" is noise; Package Tracker's own copy must say its rows update on their own. When the release ships, the homepage figure gets its third lane back (a to-do checked off, never an add) (⚠️ 2026-10-08: not a to-do checked off either, since that now happens at once with an undo; a deleted to-do is the one that still waits) and the four blog posts may take the same wording. |
 | ~~"Replies, calendar moves and changes to your lists wait for your yes."~~ | ⛔ **FALSE in 0.3.1, and retired 2026-09-29.** The homepage heading from 2026-09-27 (Jett's voice pass, replacing "Your agent does the work. You say the word.", a two-sentence aphorism) and in four blog posts until the narrowing. Found by the Learning Library claim check: at the 0.3.1 release (`09c5cb5e`) `records_update` and `records_delete` run at once with an undo and a routine may update a row unattended (`gateway/tools_records.rs`, `dispatch_records_tool`), and Task Manager, which every new agent starts with, keeps its tasks in such a list; only edits to existing Todoist or Google Tasks items were staged. Jett chose to change the app, and `5b51b70b` does, but the sentence stays false as written even then, because adding a row does not wait. Use the row above at that release. |
 
-*Amended October 26, 2026 (Archie `fb93a20a` and `3994c5d8`, in no release yet, Archie for Teams
+*Amended October 26, 2026 (Archie `fb93a20a` and `3994c5d8`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, Archie for Teams
 only):* there is now a second switch, separate from Yes, and stop asking, that skips the asking for
 two kinds of GoHighLevel change. A message through a connected CRM still waits in both editions, so
 "What waits" stays true as written. Two of its sentences do not, from the release that carries
@@ -14688,8 +14684,8 @@ to Google or Microsoft still happens on the computer."
 - ⚠️ The computer runs every one of these and must be awake, connected to the internet, and running
   Archie.
 
-*Amended October 27, 2026 (Archie `ce10fbf5`, Archie Mobile `7184cdc`, in no release and no phone
-build): the switches under Also watch for.*
+*Amended October 27, 2026 (Archie `ce10fbf5`, Archie Mobile `7184cdc`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, and the Archie
+Mobile half in no phone build): the switches under Also watch for.*
 
 **Proposed wording, once both apps carry it:** "From Archie Mobile you can also turn on or off what
 Email Manager and Text Replies watch for under Also watch for."
@@ -14772,7 +14768,7 @@ their own email there."
 - What it replaced: there was no hand-over at all. Reset access was the only way, and it wipes the
   owner and every teammate.
 
-*Amended October 28, 2026 (Archie `e656d2b4`; in no release yet).* In the bullet **This computer's own
+*Amended October 28, 2026 (Archie `e656d2b4`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* In the bullet **This computer's own
 things**, the list gains "the folders picked on it", which go to the person at this computer with
 the texts and the lights (`owners_alone` in `crates/archie-runtime/src/gateway/turn.rs`). And one
 boundary: "⛔ Never that a teammate can search the folders picked on the owner's computer, on any
@@ -15803,7 +15799,7 @@ direction. And Flight Check-In's "It buys nothing" stays true, but it is now the
 instructions holding it rather than the code alone: with buying on and an airline on the shop list,
 the code would release a Pay press there.
 
-*Amended October 28, 2026 (Archie `6b939f8d` to `3217d3cc`, in no release yet): Buy on a Price Watch
+*Amended October 28, 2026 (Archie `6b939f8d` to `3217d3cc`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): Buy on a Price Watch
 card.*
 
 **Proposed wording, Jett's to approve**, a paragraph after the approved wording, written to stand on
@@ -16185,7 +16181,7 @@ list and that file differ, the file is what counsel was asked.
 6. **Do not call.** The national registry covers solicitations to residential lines, which these
    are not. A business that asks not to be called again goes on that agent's own list for good.
 
-*Amended October 27, 2026 (Archie `89e0d229` to `a627d9c9`, in no release yet): a call may give
+*Amended October 27, 2026 (Archie `89e0d229` to `a627d9c9`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a call may give
 the details the owner ticks on its card, as the entry headed "A call gives the details you tick on
 its card, and never a card or bank number, a Social Security number, a password or a date of birth"
 says.*
@@ -16204,10 +16200,9 @@ says.*
   reason no longer holds whole: a voicemail names a number to call back when the card's callback
   number was ticked, and then it is that number, never one of Bland's. It still never calls back.
 
-### 🚧 A call gives the details you tick on its card, and never a card or bank number, a Social Security number, a password or a date of birth: BUILT 2026-10-27, in no release yet, and no real call has given one
+### 🚧 A call gives the details you tick on its card, and never a card or bank number, a Social Security number, a password or a date of birth: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, and no real call has given one
 
-*Built October 27, 2026 (Archie `89e0d229` to `a627d9c9`, archie-mobile `303e62b`; in no release
-yet). No real call has given a detail, and no lawyer has read the rules on calls made for somebody.*
+*Built October 27, 2026 (Archie `89e0d229` to `a627d9c9`, archie-mobile `303e62b`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here). No real call has given a detail, and no lawyer has read the rules on calls made for somebody.*
 
 **Proposed wording, Jett's to approve:** "When a call is about an order or an appointment, its card
 lists what a receptionist may ask for: the name on the account, the order or confirmation number,
@@ -16576,7 +16571,7 @@ one."
 - A connected service's own requests (`http_request`) were already bound to that service's host and
   are not part of this entry.
 
-*Amended October 28, 2026 (Archie `d993fb95`, in no release yet): two routines no longer need the
+*Amended October 28, 2026 (Archie `d993fb95`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): two routines no longer need the
 agent to hand on a search.*
 
 A simulated owner's Weekly Price Check, run on its schedule in the October 28, 2026 test round, never
@@ -16700,7 +16695,7 @@ instead. A question with none of those can still reach the researcher."
   name from the lists, stays with the agent even when all it wanted was a search. The agent can hand
   the search to the researcher itself, or answer without one.
 
-*Amended October 28, 2026 (Archie `d884e3e5`, in no release yet): a name of theirs includes who
+*Amended October 28, 2026 (Archie `d884e3e5`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a name of theirs includes who
 an entry is for.*
 
 In the October 28 week run Megan's "The Rivera appraisal is today. Anything I should watch for?" went
@@ -16762,9 +16757,9 @@ for a new feature, and the paragraph nobody is defending is the one that quietly
 
 ---
 
-### 🚧 A change you did not ask for is offered, not made: BUILT 2026-10-26, in no release yet
+### 🚧 A change you did not ask for is offered, not made: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12
 
-*Built October 26, 2026 (Archie `04825592` and `adeb3ce4`, in no release yet).*
+*Built October 26, 2026 (Archie `04825592` and `adeb3ce4`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).*
 
 **Proposed wording, Jett's to approve:** "When you tell your agent to change one thing, it changes
 that. If it also wants to move something you didn't mention, like a client to Past client, it asks
@@ -16805,7 +16800,7 @@ entries, it asks which one before marking anything paid."
 - ⚠️ **A routine's or the mail watch's changes are not this.** The check reads the words a person
   typed in the chat. A button they pressed is their choice and goes through as pressed.
 
-*Amended October 28, 2026 (Archie `1f681ece`, in no release yet): a question writes nothing to an
+*Amended October 28, 2026 (Archie `1f681ece`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12): a question writes nothing to an
 entry it does not name.*
 
 In the October 28 week run Sarah asked "Jim is going out to the Marsh ranch for T-4 this morning. Is
@@ -16825,9 +16820,9 @@ title, a word of four letters or more from it, or the family or company name of 
 - ⚠️ **Words, not meaning.** A question worded with "can" or "will" is let through, as before, and a
   question that names the entry is the agent's to act on.
 
-### 🚧 When your agent looks something up, it is handed the newest note and any day ahead in the notes: BUILT 2026-10-26, in no release yet
+### 🚧 When your agent looks something up, it is handed the newest note and any day ahead in the notes: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12
 
-*Built October 26, 2026 (Archie `45ebb748`, in no release yet).*
+*Built October 26, 2026 (Archie `45ebb748`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).*
 
 **Proposed wording, Jett's to approve:** "Each time your agent looks up a customer, a deal or
 anything else on your lists, it is handed the newest line of that entry's notes and any date still
@@ -16854,9 +16849,9 @@ on, with that day spelled out (`dates_written` in `crates/archie-runtime/src/sch
 - ⚠️ **A list of more than 3 entries carries neither**, so a question about every deal reads each
   deal's notes as before.
 
-### 🚧 "undo it" is answered with what was actually changed, each with its Undo: BUILT 2026-10-26, in no release yet
+### 🚧 "undo it" is answered with what was actually changed, each with its Undo: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12
 
-*Built October 26, 2026 (Archie `0b0ce599`, in no release yet).*
+*Built October 26, 2026 (Archie `0b0ce599`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).*
 
 **Proposed wording, Jett's to approve:** "Type 'undo that' and your agent tells you exactly what it
 changed the last time you asked it for something, with an Undo button beside each change. Nothing
@@ -16886,9 +16881,9 @@ the turn makes no AI call.
 - ⚠️ **Not on a chat app's line.** Telegram, Slack, Discord, Matrix and iMessage draw no line, so
   there the answer points to the Jobs tab.
 
-### 🚧 On Archie for Teams, your agent can make a GoHighLevel change you asked for and tell you after, with Undo: BUILT 2026-10-26, in no release yet
+### 🚧 On Archie for Teams, your agent can make a GoHighLevel change you asked for and tell you after, with Undo: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12
 
-### 🚧 On Archie for Teams, the owner can let named kinds of GoHighLevel change happen at once, said under the reply with Undo: BUILT 2026-10-26, in no release yet, never run against a real GoHighLevel account
+### 🚧 On Archie for Teams, the owner can let named kinds of GoHighLevel change happen at once, said under the reply with Undo: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run against a real GoHighLevel account
 
 **Proposed wording, Jett's to approve:**
 
@@ -16984,10 +16979,10 @@ the turn makes no AI call.
 - ⚠️ **Notes and tags are not offered.** GoHighLevel notes cannot be read back to be put back, and a
   tag is the usual way a GoHighLevel workflow is started.
 
-### 🚧 A screen reader hears what your agent is doing and then its answer, in Archie and Archie Mobile: BUILT 2026-10-27, in no release yet, not yet heard by a person who uses one
+### 🚧 A screen reader hears what your agent is doing and then its answer, in Archie and Archie Mobile: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, not yet heard by a person who uses one
 
 *Built October 27, 2026 (Archie `0e2ef244`, `655d96ae`, `ffe729b6` and `94b6eb1f`; Archie Mobile
-`578475e` and `58417e0`; in no release yet).*
+`578475e` and `58417e0`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).*
 
 **Proposed wording, Jett's to approve:** "If you use VoiceOver, TalkBack or another screen reader,
 Archie says when your agent starts working and what it is doing first, then reads the answer as soon
@@ -17040,10 +17035,10 @@ without seeing the screen."
 - ⚠️ **The chat apps draw their own screens.** How Telegram, Slack, Discord, Matrix or iMessage read
   Archie's messages aloud is theirs.
 
-### 🚧 When the free trial ends with no plan, Archie says so ahead of time and keeps doing what needs no AI: BUILT 2026-10-27, in no release yet
+### 🚧 When the free trial ends with no plan, Archie says so ahead of time and keeps doing what needs no AI: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12
 
 *Built October 27, 2026 (Archie `b5c6e57b`, `30821825`, `07351d82`, `3ba19e57`, `afaf0a8d` and
-`226ceb55`; archie-mobile `9370d36`; in no release yet).*
+`226ceb55`; archie-mobile `9370d36`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
 **Proposed wording, Jett's to approve:** "Three days before your free trial ends, and again the day
 before, your agent tells you the day and the time, in the chat app you use with it. If the trial
@@ -17159,8 +17154,7 @@ back on their own once you have one."
   off and for the plan with the AI included). An owner on a phone heard nothing until a message their
   agent could not answer.
 
-*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, archie-mobile `fb3f42f`, in no release
-yet): Archie for Teams stops at day 14 again, with the warnings; and in Archie a paid plan's end
+*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, archie-mobile `fb3f42f`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): Archie for Teams stops at day 14 again, with the warnings; and in Archie a paid plan's end
 keeps the parts with no AI too, as the amendment under "What happens when a plan ends" says.*
 
 **Proposed wording for Archie for Teams, Jett's to approve**, in place of the Teams sentence above,
@@ -17230,7 +17224,7 @@ Archie's wording stays as it is.
 - The ⚠️ **"Never to somebody who is paying"** is about the trial's warnings and stands. An owner
   whose plan is ending may hear about the plan's end, never the trial's.
 
-*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in no release yet, and switched off
+*Amended October 28, 2026 (Archie `353508a3` to `df71468c`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, and switched off
 until Jett approves the words): after the end, up to three emails from Jett.*
 
 **Proposed wording, Jett's to approve**, one sentence at the end of each edition's wording: "After it
@@ -17249,9 +17243,9 @@ stops them", above.
 - ⚠️ **Never to an Archie owner with an AI account of their own**, whose end of the trial is the free
   tier, and never once a plan is bought, as with the warnings.
 
-### 🚧 Three emails from Jett when your free trial or plan ends, and one press stops them: BUILT 2026-10-28, in no release yet, switched off until Jett approves the words
+### 🚧 Three emails from Jett when your free trial or plan ends, and one press stops them: BUILT 2026-10-28, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, switched off until Jett approves the words
 
-*Built October 28, 2026 (Archie `353508a3`, `d70b7ee6` and `df71468c`; in no release yet, not on
+*Built October 28, 2026 (Archie `353508a3`, `d70b7ee6` and `df71468c`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, not on
 the billing service until it is deployed, and switched off there until Jett approves the words).*
 
 **Proposed wording, Jett's to approve:** "When your free trial ends with no plan, or your plan ends,
@@ -17377,9 +17371,9 @@ which sends it, keeps the sent email under its own policy, as it does for the si
 - ⚠️ **The trust page's list of what we hold says anything new appears there that day**, so its row
   for this record goes up the day the switch goes on.
 
-### 🚧 A voice note answered in writing is written for a phone to read out, on a chat app and in Archie Mobile's notification: BUILT 2026-10-27, in no release yet, not yet heard in a car
+### 🚧 A voice note answered in writing is written for a phone to read out, on a chat app and in Archie Mobile's notification: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, not yet heard in a car
 
-*Built October 27, 2026 (Archie `2276639d`; in no release yet).*
+*Built October 27, 2026 (Archie `2276639d`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).*
 
 **Proposed wording, Jett's to approve:** "Send your agent a voice note on a chat app like Telegram,
 and the answer it writes back is made for your phone to read out to you: a table comes as one
@@ -17480,10 +17474,9 @@ Monday in bold and "pending" set as code, and "[Open the invoices](...) to send 
   agent wrote.** The two copies are kept only while Archie runs (the Archie repo's
   `docs/OPEN-THREADS.md`).
 
-### 🚧 Email Manager and Text Replies can watch for someone new waiting an hour, replies you owe, and an email asking to change where a payment goes, once you say yes: BUILT 2026-10-27, in no release yet, never run on a real inbox or a real Mac's Messages
+### 🚧 Email Manager and Text Replies can watch for someone new waiting an hour, replies you owe, and an email asking to change where a payment goes, once you say yes: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run on a real inbox or a real Mac's Messages
 
-*Built October 27, 2026 (Archie `6f44f9a4` and `ce10fbf5`; Archie Mobile `7184cdc`; in no release
-yet).*
+*Built October 27, 2026 (Archie `6f44f9a4` and `ce10fbf5`; Archie Mobile `7184cdc`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
 **Proposed wording, Jett's to approve:** "On an AI account of your own, Email Manager and Text
 Replies can watch for three more things, once you say yes. If someone new to you is still waiting an
@@ -17561,7 +17554,7 @@ later, ...").
   `crates/archie-runtime/src/texts/replies/nudge.rs`. New, on mail, is what `email/known.rs` found
   when the card was made: on none of the owner's lists, not one of the agent's people, and not
   written to by the owner in the last two weeks; it is checked again at the hour, so somebody written
-  to or added to a list since is left alone. From Archie `5c87c399` (in no release yet), not named in
+  to or added to a list since is left alone. From Archie `5c87c399` (in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12), not named in
   what the owner told the agent about their work either (the amendment of October 28 under "Mail from
   people you write to is read first"). On a text, new is not in the owner's contacts, in a
   conversation of two. A card still open an hour after it was made is posted again once, with the
@@ -18383,7 +18376,7 @@ And once a message gets through again: "Messages on Telegram reach me again."
   disk, so a restart neither starts the half hour again nor says it twice, and quiet hours hold it
   until they lift. The half hour is time the computer was awake: the time asleep inside a run of
   failures is measured from the two clocks (`crates/archie-runtime/src/asleep.rs`) and does not
-  count (since October 29, 2026, Archie `0cc336b1`, in no release yet).
+  count (since October 29, 2026, Archie `0cc336b1`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).
 - **In Archie, never on the chat app.** It goes to Archie's own conversation and nowhere else
   (`Channel::say_in_archie_only` in `crates/archie-net/src/channel.rs`, which the mirror between a
   chat app and the window answers by posting to the window, in `crates/archie-net/src/mirror.rs`),
@@ -18474,10 +18467,9 @@ are downloaded."
 - ⚠️ **Once the voices are downloaded.** Until then, and for a long answer, the answer comes in
   writing.
 
-### 🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, in no release yet, never run on a real inbox, a real Mac's Messages or a real night
+### 🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run on a real inbox, a real Mac's Messages or a real night
 
-*Built October 27, 2026 (Archie `086f372b` and `5ba8131a`; Archie Mobile `f13adad`; in no release
-yet).*
+*Built October 27, 2026 (Archie `086f372b` and `5ba8131a`; Archie Mobile `f13adad`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
 **Proposed wording, Jett's to approve:** "Your morning list starts with what is ready for one press.
 Replies your agent already drafted for your email and texts come first, each with Send, Fix and
@@ -18664,10 +18656,10 @@ that switches on the lines under "A morning list for each line of work, with no 
 the AI runs through Otian, no AI reads the mail or the texts, so the part holds no drafts." Those
 lines write no drafts and never put anything in this part.
 
-### 🚧 Before a job likely to cost more than about 10 cents, Archie says what it would cost and waits for your Go: BUILT 2026-10-27, in no release yet, never run against a real AI account
+### 🚧 Before a job likely to cost more than about 10 cents, Archie says what it would cost and waits for your Go: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run against a real AI account
 
 *Built October 27, 2026 (Archie `3dd55ec2`, `f5623664`, `4b3ea8a5`, `83852781` and `259c2495`;
-Archie Mobile `0fd1090` and `c9e590e`; in no release yet).*
+Archie Mobile `0fd1090` and `c9e590e`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
 **Proposed wording, Jett's to approve:** "Before a job likely to cost more than about 10 cents, like a
 Deep Research question, Archie says about what it will cost and waits. Press Go and it starts. Press
@@ -18755,10 +18747,9 @@ past it, the card says so."
 - ⚠️ **iMessage, Signal and Matrix draw no buttons**, so there the card ends "Reply with one of these
   words: Go or Not now.", and a typed go starts the job.
 
-### 🚧 Archie offers a free setup call with Jett or Jack at the step where you connect an AI account, until December 31, 2026 or 50 owners, whichever comes first, in Archie and Archie Mobile: BUILT 2026-10-28, in no release yet, and nobody has booked one from the card
+### 🚧 Archie offers a free setup call with Jett or Jack at the step where you connect an AI account, until December 31, 2026 or 50 owners, whichever comes first, in Archie and Archie Mobile: BUILT 2026-10-28, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, and nobody has booked one from the card
 
-*Built October 28, 2026 (Archie `06b91344` and `262b8120`; Archie Mobile `dd25992`; in no release
-yet). Nobody has pressed the card in a running app or booked a call from it.*
+*Built October 28, 2026 (Archie `06b91344` and `262b8120`; Archie Mobile `dd25992`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here). Nobody has pressed the card in a running app or booked a call from it.*
 
 **Proposed wording, Jett's to approve:** "Until December 31, 2026, or until 50 people have had one,
 Archie offers a free call of about 30 minutes with Jett or Jack, the two people who make it, at the
@@ -18941,10 +18932,9 @@ a tap`); not yet tried on a real phone.
 - ⛔ **Never say no other app can open the talk screen.** One can; the microphone then waits for a
   press of Start talking.
 
-### 🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, in no release yet, never run on a real Mac's own folders
+### 🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run on a real Mac's own folders
 
-*Built October 28, 2026 (Archie `21e069c8` to `d161cabd`; Archie Mobile `549c9af`; in no release
-yet).*
+*Built October 28, 2026 (Archie `21e069c8` to `d161cabd`; Archie Mobile `549c9af`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
 **Proposed wording, Jett's to approve:** "Pick folders on your computer, like Warranties or Taxes, and
 your agent can find what is in them, where they are. Ask it to find the water heater warranty and it
@@ -19063,8 +19053,7 @@ whole, go to your AI company, with the file's name and folder."
   pick. Until somebody has picked one on a real Mac and restarted Archie, say nothing about when the
   Mac asks.
 
-*Amended October 28, 2026 (Archie `5b79d63c`, `083736b8` and `1bc0875c`; Archie Mobile `21e63f8`; in
-no release yet): what that day's test round changed.*
+*Amended October 28, 2026 (Archie `5b79d63c`, `083736b8` and `1bc0875c`; Archie Mobile `21e63f8`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): what that day's test round changed.*
 
 Two simulated owners tried it that day (a homeowner with Warranties and Taxes 2025 picked, and an
 Archie for Teams owner with a Leases folder and a teammate), on the models Archie ships with and on
@@ -19330,7 +19319,7 @@ The old version of this sentence ended "you can still have the fourteen days by 
 account of your own", which was true and is no longer the whole answer: connecting one now opens the
 app whether or not the fourteen days are available.
 
-*Amended October 27, 2026 (Archie `07351d82`, in no release yet).* The standing true sentence gains
+*Amended October 27, 2026 (Archie `07351d82`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* The standing true sentence gains
 one: "Fourteen days free, with nothing counted. After that Archie is free on an AI account of your
 own, with a limit of 20 jobs a day. A plan is $299 a year or $30 a month, takes the limit off, and
 runs up to ten agents. With neither, Archie keeps your reminders, your morning list, and your lists
@@ -19365,7 +19354,7 @@ reading the page.
 - Do not frame connecting a key as an upsell. It costs us nothing and it is the step that turns
   email on.
 
-*Amended October 26, 2026 (Archie `32a61822`, in no release yet):* the owner is now also told by the
+*Amended October 26, 2026 (Archie `32a61822`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12):* the owner is now also told by the
 first morning list on the credits or on the plan with the AI included, once, under the list: "Your
 email is not on this list yet. While I run on Archie's own AI I don't read mail, because it would
 pass through Otian's servers, and the people who write to you never agreed to that. To change that,

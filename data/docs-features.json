@@ -77,11 +77,11 @@
     "✅ One agent answers one person \u2014 ENFORCED IN CODE 2026-08-20",
     "✅ On Archie for Business, a mailbox marked as one person's answers only that person (entry written 2026-09-27)",
     "✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16",
-    "🚧 A change you did not ask for is offered, not made: BUILT 2026-10-26, in no release yet",
-    "🚧 When your agent looks something up, it is handed the newest note and any day ahead in the notes: BUILT 2026-10-26, in no release yet",
-    "🚧 \"undo it\" is answered with what was actually changed, each with its Undo: BUILT 2026-10-26, in no release yet",
-    "🚧 On Archie for Teams, your agent can make a GoHighLevel change you asked for and tell you after, with Undo: BUILT 2026-10-26, in no release yet",
-    "🚧 On Archie for Teams, the owner can let named kinds of GoHighLevel change happen at once, said under the reply with Undo: BUILT 2026-10-26, in no release yet, never run against a real GoHighLevel account"
+    "🚧 A change you did not ask for is offered, not made: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12",
+    "🚧 When your agent looks something up, it is handed the newest note and any day ahead in the notes: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12",
+    "🚧 \"undo it\" is answered with what was actually changed, each with its Undo: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12",
+    "🚧 On Archie for Teams, your agent can make a GoHighLevel change you asked for and tell you after, with Undo: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12",
+    "🚧 On Archie for Teams, the owner can let named kinds of GoHighLevel change happen at once, said under the reply with Undo: BUILT 2026-10-26, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run against a real GoHighLevel account"
   ],
   "features": [
     {
@@ -871,12 +871,12 @@
       ],
       "phone": "Archie Mobile's notification says the same sentences, and the conversation keeps the answer as your agent wrote it.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 2276639d to 22eca104). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 A voice note answered in writing is written for a phone to read out, on a chat app and in Archie Mobile's notification: BUILT 2026-10-27, in no release yet, not yet heard in a car"
+        "🚧 A voice note answered in writing is written for a phone to read out, on a chat app and in Archie Mobile's notification: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, not yet heard in a car"
       ],
       "wording": "Send your agent a voice note on a chat app like Telegram, and the answer it writes back is made for your phone to read out to you: a table comes as one sentence a row, a list as sentences, with every name, amount and date kept, and a link's address goes after the answer instead of being read out in the middle of it. Send one from Archie Mobile and the notification says the same sentences, while the conversation keeps the answer as your agent wrote it.",
       "guide": ""
@@ -921,7 +921,8 @@
         "Install Archie Mobile from the App Store on iPhone, or from the Android download.",
         "In Archie, open an agent's Setup tab and choose Chat app.",
         "On the Archie Mobile row, press Show the code.",
-        "In Archie Mobile, press Scan and point the camera at the code."
+        "In Archie Mobile, press Scan and point the camera at the code.",
+        "Setting up a new agent, press Continue with Archie Mobile once the code is on screen. You don't need a chat app as well."
       ],
       "limits": [
         "Your agent runs on your computer, so it has to be on, awake and running Archie for the phone to reach it.",
@@ -1542,9 +1543,9 @@
       ],
       "phone": "",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie 08f8ef95 to 11782cd1, and 5c87c399).",
+      "released": "0.3.13",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
       "trust": [
         "🚧 Mail from people you write to is read first, and other mail can take a few minutes: BUILT 2026-10-13 (Archie `9a99e47e`), RELEASED in 0.3.9, 2026-10-14, never run on a real inbox"
@@ -1596,9 +1597,9 @@
       ],
       "phone": "",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie 82b01683, and e63105ab).",
+      "released": "0.3.13",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
       "trust": [
         "✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11"
@@ -1758,12 +1759,12 @@
       ],
       "phone": "",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 6f44f9a4 to e9a8e9c4). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 Email Manager and Text Replies can watch for someone new waiting an hour, replies you owe, and an email asking to change where a payment goes, once you say yes: BUILT 2026-10-27, in no release yet, never run on a real inbox or a real Mac's Messages"
+        "🚧 Email Manager and Text Replies can watch for someone new waiting an hour, replies you owe, and an email asking to change where a payment goes, once you say yes: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run on a real inbox or a real Mac's Messages"
       ],
       "wording": "On an AI account of your own, Email Manager and Text Replies can watch for three more things, once you say yes. If someone new to you is still waiting an hour after their card, Archie posts the card again at the bottom of your chat, with the reply it wrote. Your morning list names someone you know who wrote two or more days ago and has not heard back, with who, when and what it was about. And when an email asks to change where a payment goes, its card and your next morning list say so, and say to call them at a number you already have, not one from the email. Nothing is ever sent for you: a reply still goes only when you press Send. Archie offers these once, under the first card they would have changed, and each one has its own switch.",
       "guide": ""
@@ -3256,9 +3257,9 @@
       ],
       "phone": "",
       "editions": "individual",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie 32a61822 and 7ebc5374).",
+      "released": "0.3.13",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
       "trust": [
         "✅ Your agent's first questions start with the first thing you say, and Archie for Teams starts with a pack of its own: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11"
@@ -3284,9 +3285,9 @@
       ],
       "phone": "Archie Mobile's Routines screen has the same Morning list row and switch.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 32a61822, 823a77cc, and dd17497b to c05db428). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
         "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
@@ -3309,9 +3310,9 @@
       ],
       "phone": "",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 823a77cc to 4e6da007). The proposed wordings are Jett's to approve.",
+      "hold": "The proposed wordings are Jett's to approve.",
       "unwatched": false,
       "trust": [
         "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
@@ -3334,9 +3335,9 @@
       ],
       "phone": "Archie Mobile shows the same line, in the same list.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 841fad3c). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
         "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
@@ -3362,9 +3363,9 @@
       ],
       "phone": "Archie Mobile shows the same lines, and the same switch under its Morning list row.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie d1e8a3e2 to 155f933b), and off in every build until Jett checks the Google filing. The proposed wording is Jett's to approve.",
+      "hold": "Off in every build until Jett checks the Google filing. The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
         "✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to be offered and never sent empty, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
@@ -3389,12 +3390,12 @@
       ],
       "phone": "Archie Mobile shows the same list with the same buttons, and Fix opens the same edit sheet.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 086f372b to 313be7d8). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, in no release yet, never run on a real inbox, a real Mac's Messages or a real night"
+        "🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run on a real inbox, a real Mac's Messages or a real night"
       ],
       "wording": "Your morning list starts with what is ready for one press. Replies your agent already drafted for your email and texts come first, each with Send, Fix and Skip. Under them: what is due on your Waiting On list, and tomorrow's appointments with your last note on that person and anything they owe you. Nothing is sent until you press Send.",
       "guide": ""
@@ -3417,12 +3418,12 @@
       ],
       "phone": "Archie Mobile's Routines screen has the same switch.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 086f372b to 313be7d8). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, in no release yet, never run on a real inbox, a real Mac's Messages or a real night"
+        "🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run on a real inbox, a real Mac's Messages or a real night"
       ],
       "wording": "If you say yes, your agent writes up to five drafts a night for the top of your morning list, using your own AI account: a follow-up for what is due on your Waiting On list, and a reply to a text from someone new. Each one waits there with Send, Fix and Skip, and nothing is sent until you press Send. Your agent offers it once, under your morning list, and the switch is on the Routines tab under Morning list.",
       "guide": ""
@@ -3444,9 +3445,9 @@
       ],
       "phone": "",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 3e814e76, c806f7b3 and 97f959ad). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
         "✅ Waking the computer for a routine \u2014 SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)",
@@ -3645,12 +3646,12 @@
       ],
       "phone": "Archie Mobile lists the folders under Documents with their counts, and picks none: pick them in Archie on your computer. Send me under an answer works on the phone.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 21e069c8 to 1bc0875c). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
-        "🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, in no release yet, never run on a real Mac's own folders"
+        "🚧 Your agent finds things in the folders you pick on your computer, and names the file and the page: BUILT 2026-10-28, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run on a real Mac's own folders"
       ],
       "wording": "Pick folders on your computer, like Warranties or Taxes, and your agent can find what is in them, where they are. Ask it to find the water heater warranty and it names the file and the page, with a button that sends you the file. The files stay on your computer. When you ask about something in them, only the parts that answer you, or a short file whole, go to your AI company, with the file's name and folder.",
       "guide": ""
@@ -3672,7 +3673,7 @@
         "It stops after 12 messages, a second job, a question of yours, or Stop the questions, and keeps what was said by then.",
         "On the free tier its own turns are not counted, but a job asked for in your first message is one of the day's 20."
       ],
-      "phone": "The first run happens on the computer. On a chat app, the questions start when you claim your agent.",
+      "phone": "The first run happens on the computer. On a chat app, the questions start when you claim your agent. With Archie Mobile alone, they go on in Archie, and Archie Mobile shows the same conversation, so you can answer there.",
       "editions": "both",
       "released": "0.3.8",
       "claimable": true,
@@ -4446,12 +4447,12 @@
       ],
       "phone": "The boxes are on the call's card in Archie Mobile too. On a chat app with no buttons, press them in Archie or Archie Mobile.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 89e0d229 to a627d9c9). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
-        "🚧 A call gives the details you tick on its card, and never a card or bank number, a Social Security number, a password or a date of birth: BUILT 2026-10-27, in no release yet, and no real call has given one"
+        "🚧 A call gives the details you tick on its card, and never a card or bank number, a Social Security number, a password or a date of birth: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, and no real call has given one"
       ],
       "wording": "When a call is about an order or an appointment, its card lists what a receptionist may ask for: the name on the account, the order or confirmation number, the appointment, and a number to call you back. Each one shows exactly what it would say, beside a box, and every box starts empty. The call gives only the ones you tick, and only if they ask or to say which order or appointment it is calling about. It never gives a card or bank number, a Social Security number, a password or a date of birth, whatever is ticked. And if the call said something it should not have, the card that comes back afterward says so at the top.",
       "guide": ""
@@ -4536,9 +4537,9 @@
       ],
       "phone": "Archie Mobile shows the same card and buttons, and Press it for me after Buy. On a chat app with no buttons, reply Buy at $239, Not now or Stop watching, and type press it at Place order.",
       "editions": "individual",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 6b939f8d to 3217d3cc). The proposed wordings are Jett's to approve.",
+      "hold": "The proposed wordings are Jett's to approve.",
       "unwatched": true,
       "trust": [
         "✅ Prices at Shopify stores, for Price Watch: BUILT 2026-09-24 (Archie `b67a6576`), SHIPPED in Archie 0.3.1 on September 29, 2026",
@@ -5280,12 +5281,12 @@
       ],
       "phone": "Archie Mobile shows the same card under the AI account card, at the top of Response quality (open More, then Response quality), and opens the booking page in your phone's browser.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 06b91344 to 262b8120). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
-        "🚧 Archie offers a free setup call with Jett or Jack at the step where you connect an AI account, until December 31, 2026 or 50 owners, whichever comes first, in Archie and Archie Mobile: BUILT 2026-10-28, in no release yet, and nobody has booked one from the card"
+        "🚧 Archie offers a free setup call with Jett or Jack at the step where you connect an AI account, until December 31, 2026 or 50 owners, whichever comes first, in Archie and Archie Mobile: BUILT 2026-10-28, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, and nobody has booked one from the card"
       ],
       "wording": "Until December 31, 2026, or until 50 people have had one, Archie offers a free call of about 30 minutes with Jett or Jack, the two people who make it, at the step where you connect an AI account. On the call they set up your AI account with you and get your agent's first job running. There is room for 10 calls a week. The card goes once you have an AI account of your own, and for good if you press No thanks.",
       "guide": ""
@@ -5421,12 +5422,12 @@
       ],
       "phone": "Archie Mobile shows the same card with Go and Not now.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 3dd55ec2 to 51abaf15). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 Before a job likely to cost more than about 10 cents, Archie says what it would cost and waits for your Go: BUILT 2026-10-27, in no release yet, never run against a real AI account"
+        "🚧 Before a job likely to cost more than about 10 cents, Archie says what it would cost and waits for your Go: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, never run against a real AI account"
       ],
       "wording": "Before a job likely to cost more than about 10 cents, like a Deep Research question, Archie says about what it will cost and waits. Press Go and it starts. Press Not now and nothing is spent. On your own AI account it says the amount, like \"about 40 cents on your Anthropic account\". On the free credits, or the plan with the AI included, it says how much of what is left the job would use, counted in answers. If you set a monthly limit and the job would go past it, the card says so.",
       "guide": ""
@@ -6552,12 +6553,12 @@
       ],
       "phone": "",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie b5c6e57b to 226ceb55, and 3ac4c6e3 to 74b39803). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 When the free trial ends with no plan, Archie says so ahead of time and keeps doing what needs no AI: BUILT 2026-10-27, in no release yet"
+        "🚧 When the free trial ends with no plan, Archie says so ahead of time and keeps doing what needs no AI: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12"
       ],
       "wording": "Three days before your free trial ends, and again the day before, your agent tells you the day and the time, in the chat app you use with it. If the trial ends with no plan, Archie keeps running on your computer without the AI: the reminders you set still go off, the morning list still comes if you have it on, and your lists and calendar still work. Answers, routines, and writing wait for an AI account of your own or a plan, and come back on their own once you have one.",
       "guide": ""
@@ -6578,12 +6579,12 @@
       ],
       "phone": "",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 353508a3 to df71468c). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 Three emails from Jett when your free trial or plan ends, and one press stops them: BUILT 2026-10-28, in no release yet, switched off until Jett approves the words"
+        "🚧 Three emails from Jett when your free trial or plan ends, and one press stops them: BUILT 2026-10-28, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, switched off until Jett approves the words"
       ],
       "wording": "When your free trial ends with no plan, or your plan ends, Jett Nguyen, who runs Otian AI, emails you three times at most: the day it ends, with what you made in Archie and how to keep going, about two weeks later, and about a month after the end, to say it is the last one. Each one has Stop these emails at the bottom, and one press stops the rest. They stop on their own if you get a plan or set up an AI account of your own. For each one, your computer sends us four numbers: how many lists you have with something in them, the entries in those lists, the reminders your agent set, and the drafts you sent. Never what is in any of them.",
       "guide": "where-your-information-goes"
@@ -7394,12 +7395,12 @@
       ],
       "phone": "In Archie Mobile on iPhone and Android, with VoiceOver or TalkBack on.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.13",
       "claimable": false,
-      "hold": "In no release yet (Archie 075fd599). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "🚧 A screen reader hears what your agent is doing and then its answer, in Archie and Archie Mobile: BUILT 2026-10-27, in no release yet, not yet heard by a person who uses one"
+        "🚧 A screen reader hears what your agent is doing and then its answer, in Archie and Archie Mobile: BUILT 2026-10-27, RELEASED in 0.3.13 on a Mac, October 30, 2026, with Windows still on 0.3.12, not yet heard by a person who uses one"
       ],
       "wording": "If you use VoiceOver, TalkBack or another screen reader, Archie says when your agent starts working and what it is doing first, then reads the answer as soon as it is done. Every button has a name, and buttons like Send and Undo can be reached and pressed without seeing the screen.",
       "guide": ""

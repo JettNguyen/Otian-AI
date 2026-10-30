@@ -1841,14 +1841,39 @@ on both platforms**, change the policy's sentence to "we also keep its model, su
 - ❌ Never "Telegram reads your messages" or "Discord reads your messages". The true and sourced
   claim is about what those companies **can** do and what their own documents say, and the stronger
   version is an accusation we cannot support.
-- ❌ Never imply the app removes the chat app, or that a chat app becomes unsafe to use. Most people
-  will keep using one, the agent still works there, and the app is a second door rather than a
-  replacement for the first.
+- ❌ Never imply the app removes the chat app, or that a chat app becomes unsafe to use. A chat app
+  that is connected keeps working beside it. And never say the app needs a chat app as well: it works
+  alone or beside one (amended October 30, 2026, below).
 - ❌ Never "end-to-end encrypted, so nobody can ever see your agent", for the reason the shipped
   claim gives: the desktop is one end, the phone is the other, and somebody at that unlocked
   computer has everything.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
+
+*Amended October 30, 2026 (Archie `239ef019`, in no release yet): Archie Mobile is enough on its own.*
+
+**The claim:** Archie Mobile can be the only way you reach your agent from your phone. You do not
+need a chat app as well, and setting up a new agent finishes on Archie Mobile alone.
+
+**Why it's true:** The app shows the agent's own conversation on the computer, and a message typed in
+it goes through the same command as the Archie window's message box (the `say` op in
+`src-tauri/src/phone.rs` calls `inapp_send`), so an agent with no chat app answers it. Until this
+amendment the first run would not let it be the only one: on its Let me message you on your phone
+panel, the one press that moved setup on was a chat app's Connect, and the Archie Mobile row said
+"Works as well as a chat app, not instead", which read as "you still need one". Now, once the code is
+on screen, the panel has Continue with Archie Mobile, and the agent's first questions go on in the
+window, which the phone shows (`continueOnPhone` in `src/app/setup-flow.tsx`, `onPhoneDone` in
+`src/app/connect.tsx`). The agent page's "Text it from your phone" offer and the first evening's card
+stop asking for a chat app while Archie Mobile is on (`phoneOn` in `src/app/agent-detail.tsx`,
+`phoneReady` in `src/app/first-evening.tsx`).
+
+**Boundaries:**
+
+- ⚠️ **Phone access is this computer's, not one agent's.** Turning it on for one agent's setup puts
+  every agent on this computer on the phone.
+- ⚠️ **The computer still runs the agent**, as everywhere in this entry: Archie Mobile alone reaches it
+  only while the computer is on, awake and running Archie.
+- ⚠️ **Type-checked, not yet walked through** on a real first run with a phone in hand.
 
 ### ✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (build 32, not on Android yet)
 

@@ -19277,10 +19277,14 @@ name the stores you care about or the ones to skip."
 *Built October 31, 2026 (Archie `a1ada6b7`, `9ad34152` and `e0cac126`, archie-mobile `250ae49`; in
 no release yet). Jett's call, October 30: "more apps to connect=more people served".*
 
+*(Amended October 31, 2026, when the Marketplace moved to one tile for each job: TickTick is picked
+under Where it lives on To-Do List, Monarch Money on Budget Keeper, Cal.com on Booking Watch and
+PayPal on Revenue Watch. Underneath, the last two are still the skill's own setting.)*
+
 **Proposed wording, Jett's to approve:** "Your agent works with Cal.com, Granola, Otter, TickTick,
 Monarch Money, and PayPal. Booking Watch reads Cal.com or Calendly, whichever you pick, and Revenue
 Watch reads PayPal or Stripe. Meeting Notes asks Granola and Otter alongside Fireflies and Zoom.
-TickTick and Monarch Money each have a skill of their own. You sign in to each one in your browser
+Your to-do list can be kept in TickTick, and your budget in Monarch Money. You sign in to each one in your browser
 (TickTick takes a token from its settings), and anything that would change something waits for your
 yes."
 
@@ -19306,8 +19310,9 @@ yes."
 - **Monarch is signed in to for reading only** (`scope` in `SERVER_TERMS`, applied in
   `connector_mcp_sign_in` in `src-tauri/src/commands/integrations.rs`), so Monarch itself refuses
   any change.
-- **One source at a time** for Booking Watch and Revenue Watch, picked on the skill's settings
-  (`source_setting`), the way Package Tracker picks. The skill's text keeps only the part for the
+- **One source at a time** for Booking Watch and Revenue Watch, picked under Where it lives on the
+  job's tile or row, which saves the skill's own setting (`source_setting`), the way Package Tracker
+  picks. The skill's text keeps only the part for the
   app picked (`keep_sections` in `crates/archie-domain/src/marketplace.rs`), and the setup steps on
   both apps ask to connect the one picked (`integrations_to_connect`).
 - **The skills**: `data/marketplace/skills/booking-watch.json`, `revenue-watch.json`,
@@ -19335,6 +19340,73 @@ yes."
 - ⚠️ **The trust rows' connected-accounts line** ("any service you connected with a key of your own:
   directly", under What you can connect) does not cover an app somebody signed in to. Proposed, for
   Jett: "any service you connected with a key or a sign-in of your own: directly."
+
+### 🚧 One tile for each job in the Marketplace, and one row for it on your agent: BUILT 2026-10-31, in no release yet, not yet used by an owner
+
+*Built October 31, 2026 (Archie `28ce7c78`, `d5387abd`, `a7c19010`, `2df79967`, `200933d5` and
+`5542bc78`; the phone's part in `d3a60b9d` and `5641dfc1`, and archie-mobile `aec7d9b` and `54cf22d`; in no release yet). Jett's call, October 31: "less options=easier decision".*
+
+**Proposed wording, Jett's to approve:** "The Marketplace shows one tile for each job. Where a job
+can be kept in more than one app, its tile asks where it lives: your to-do list can be kept in
+Archie, Todoist, TickTick or Google Tasks, and your agent uses one at a time. Where a job has
+extras, they are switches on its tile: Calendar Manager can also find times with other people, brief
+you before meetings, and tell you whether next week fits. A routine is a switch on the job it does.
+On your agent's page, each job is one row with the same switches, and moving to another app pauses
+the old one and keeps what it saved. If you ask for something a switch that is off would do, the
+reply says so, with a button that turns it on."
+
+**Why it's true**, paths in the Archie repo unless named:
+
+- **The tiles** are one list, `data/parts.json`, read by the computer (`src/app/parts.ts`) and held
+  by the tests in `crates/archie-domain/src/parts.rs`: an add-on is part of one tile at most, a tile
+  has at most three switches, a choice is a skill or one answer of a skill's setting (Booking
+  Watch's Calendly or Cal.com), and a switch is listed only in an edition its tile is.
+- **The Marketplace** draws the tiles and keeps their parts and routines off its shelves
+  (`offTheShelf` and `choiceTiles` in `src/app/parts.ts`; `src/app/marketplace.tsx` and
+  `src/app/store-sheet.tsx`). A part filed under another area keeps a card there that opens its
+  tile (`filedElsewhere`), so Follow your stocks is still under Money. Searching for a part finds its
+  tile, and picks an app only when the words name it (`searchTiles` in `src/app/store-helpers.ts`).
+- **One app at a time.** Picking another one, in the Marketplace or on the agent's page, pauses the
+  one in use and its routines, and never removes it (`switchParts` in `src/app/tile-rows.ts`, called
+  from `installSet` in `src/app/install-step.ts` and from `src/app/skill-config.tsx`).
+- **One row for each job** on the agent's Skills tab, with Where it lives, It can also and On its own
+  (`planTileRows` in `src/app/tile-rows.ts`); the Routines tab says which job each routine is part
+  of. The words are `PART_WORDS` in `src/app/vocab.ts`, and the rules are in
+  `docs/SKILL-ROUTINE-CONTROLS.md`.
+- **Nothing an agent has moves.** Each part is still an add-on of its own underneath, with its own
+  settings, lists and updates (`docs/ADDON-PARTS.md`), so an agent works as it did the day before.
+- **The card in the chat** is made in code, with no AI call (`crates/archie-runtime/src/gateway/part_offer.rs`):
+  "Find times with other people is off for this agent.", with one button, Turn it on. It comes only
+  for a switch on a job the agent has, only for the owner's or an admin's own words, never while the
+  agent's Add and remove add-ons switch is off, and at most once a day in a chat for each switch.
+  The button installs the part or switches it back on (`part_switch` in `src-tauri/src/addons.rs`).
+  Archie Mobile and the chat apps with buttons draw it as a message with a button; iMessage, Signal
+  and Matrix say where to press instead.
+- **On the phone**, Archie Mobile draws the same tiles and rows from its own copy of the list
+  (archie-mobile `src/parts.json`, `src/parts.ts`, `src/tile-rows.ts`, `src/screens/SkillParts.tsx`)
+  and makes the same changes through the computer, which takes a specialist's switch too
+  (`specialist_enabled` in `src-tauri/src/phone.rs`).
+
+**The boundaries.**
+
+- ⛔ **Never "add-ons were merged" or "fewer add-ons."** Every add-on is still there and still its
+  own. What changed is that the Marketplace draws one tile for each job, and the agent's page one row.
+- ⛔ **Never describe what a switch adds to a reply.** The rule in "Why there is a store" governs.
+- ⚠️ **Three routines keep tiles of their own**: Morning Brief, Health Month in Review and Team
+  Standup, because each brings several jobs into one message (`routines_of_their_own` in
+  `data/parts.json`).
+- ⚠️ **Only switches get the card.** Which app a job is kept in is never changed from the chat.
+- ⚠️ **A card can come when it was not wanted.** A few switches answer to broad words ("next meeting"
+  for briefing you before meetings, "course" for learning from lecture videos), so a card may follow
+  a question about something else, at most once a day in a chat for each switch.
+- ⚠️ **Archie for Teams draws only the parts its own store lists**, so it has no Budget Keeper, and its
+  Personal News Briefing has no Follow your teams switch.
+- ⚠️ **An agent set up before the tiles** can have two apps on for one job. Both keep working until
+  its owner presses Keep beside one, on the job's row.
+- ⚠️ **A phone paired with a computer on an older Archie** shows Deep Research as a row of its own, as
+  that computer does, with no Dig deeper switch on the Researcher.
+- ⚠️ **Not yet used by an owner.** Built and tested on October 31, 2026; nobody has added a job from
+  a tile, moved one to another app, or pressed Turn it on, with a real agent.
 
 ## Known Weaknesses — disclose, don't hide
 

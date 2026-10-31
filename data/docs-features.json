@@ -5124,17 +5124,47 @@
       "guide": ""
     },
     {
+      "id": "one-tile-for-each-job",
+      "name": "One tile for each job",
+      "area": "addons",
+      "summary": "The Marketplace shows one tile for each job, with the app it is kept in, what else it can do, and its routines as choices and switches on the tile. Your agent's page shows one row for it with the same switches.",
+      "where": "In the Marketplace, on a job's tile. On the agent's page, in the job's row on the Skills tab.",
+      "how": [
+        "Open the Marketplace and press a job's tile, such as To-Do List or Calendar Manager.",
+        "Under Where it lives, pick the app the job is kept in.",
+        "Under It can also, switch on the extras you want, and under On its own, the routines.",
+        "Press Add. To change it later, open the job's row on your agent's Skills tab."
+      ],
+      "limits": [
+        "Your agent uses one app for a job at a time. Picking another pauses the old one and keeps what it saved.",
+        "Morning Brief, Health Month in Review and Team Standup keep tiles of their own, since each brings several jobs into one message.",
+        "If you ask for something a switch that is off would do, a card under the reply offers to turn it on, at most once a day in a chat for each switch.",
+        "An agent set up before this can have two apps on for one job until you press Keep beside one.",
+        "Archie for Teams shows only the parts its own Marketplace lists."
+      ],
+      "phone": "Archie Mobile shows the same tiles in its Marketplace and the same one row per job on an agent's Skills tab, with Where it lives, It can also and On its own. Its Routines tab says which job each routine is part of.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 28ce7c78, d5387abd, a7c19010, 2df79967, 200933d5, 5542bc78, d3a60b9d, 5641dfc1, archie-mobile aec7d9b, 54cf22d).",
+      "unwatched": true,
+      "trust": [
+        "🚧 One tile for each job in the Marketplace, and one row for it on your agent: BUILT 2026-10-31, in no release yet, not yet used by an owner"
+      ],
+      "wording": "",
+      "guide": "skills-specialists-routines"
+    },
+    {
       "id": "six-more-apps",
       "name": "Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal",
       "area": "connections",
       "summary": "Six apps your agent can sign in to, each read by the skill it belongs to: bookings, meeting notes, to-dos, a budget, and payments.",
       "where": "On the agent's Connections tab, under Apps.",
       "how": [
+        "In the Marketplace, add the job that reads the app, with the app picked under Where it lives: Booking Watch for Cal.com, To-Do List for TickTick, Budget Keeper for Monarch Money, or Revenue Watch for PayPal. For Granola or Otter, add Meeting Notes.",
+        "On an agent that already has the job, open its row on the Skills tab and pick the app under Where it lives.",
         "Open the Connections tab, then Apps, and press Connect beside the app. Sign in on the app's page in your browser and approve Archie.",
-        "For TickTick, paste the token from TickTick's Settings, under Account & Security, then API Token.",
-        "Once it is connected, Archie offers the skill that reads it: Booking Watch for Cal.com, Meeting Notes for Granola or Otter, To-Do List (TickTick), Monarch Money Keeper, or Revenue Watch for PayPal. Press Install.",
-        "If Booking Watch is already reading Calendly, or Revenue Watch is reading Stripe, press Use Cal.com in Booking Watch or Use PayPal in Revenue Watch beside the app.",
-        "When a skill's setup asks for one of these apps, Take me there opens that app's own form on the Connections tab."
+        "For TickTick, paste the token from TickTick's Settings, under Account & Security, then API Token."
       ],
       "limits": [
         "Anything that would change something waits for your yes, adding a TickTick task included.",
@@ -5142,7 +5172,7 @@
         "Monarch Money is read only. Accounts Monarch links through Finicity do not show, and Monarch limits how much an assistant asks each week.",
         "PayPal needs a Business account, and your agent cannot pay, buy, accept a dispute, or send a new invoice.",
         "Granola's free plan shows the last 30 days.",
-        "Monarch Money Keeper is in Archie, not Archie for Teams."
+        "Monarch Money is in Archie, not Archie for Teams, whose Marketplace has no Budget Keeper."
       ],
       "phone": "Ask about any of them from Archie Mobile once they are connected on the computer. Connecting happens on the computer.",
       "editions": "both",

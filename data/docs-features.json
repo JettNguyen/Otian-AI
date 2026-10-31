@@ -5115,7 +5115,7 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie 0acdd2e9, archie-mobile ca31ff9).",
+      "hold": "In no release yet (Archie 0acdd2e9, 611cc748, e54ce813, archie-mobile ca31ff9).",
       "unwatched": true,
       "trust": [
         "🚧 Package Tracker's settings: where it finds packages, what it tells you, and when: BUILT 2026-10-31, in no release yet, not yet run on a real inbox"
@@ -5147,7 +5147,7 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie a1ada6b7, 9ad34152, e0cac126, archie-mobile 250ae49).",
+      "hold": "In no release yet (Archie a1ada6b7, 9ad34152, e0cac126, 5a50e9f2, archie-mobile 250ae49).",
       "unwatched": true,
       "trust": [
         "🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, in no release yet, never signed in to by a person"

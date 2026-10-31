@@ -19261,6 +19261,60 @@ name the stores you care about or the ones to skip."
 - ⚠️ **Not run on a real inbox yet**: the tests prove each rule, and nobody has picked a roundup and
   received one.
 
+### 🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, in no release yet, never signed in to by a person
+
+*Built October 31, 2026 (Archie `a1ada6b7`, `9ad34152` and `e0cac126`, archie-mobile `250ae49`; in
+no release yet). Jett's call, October 30: "more apps to connect=more people served".*
+
+**Proposed wording, Jett's to approve:** "Your agent works with Cal.com, Granola, Otter, TickTick,
+Monarch Money, and PayPal. Booking Watch reads Cal.com or Calendly, whichever you pick, and Revenue
+Watch reads PayPal or Stripe. Meeting Notes asks Granola and Otter alongside Fireflies and Zoom.
+TickTick and Monarch Money each have a skill of their own. You sign in to each one in your browser
+(TickTick takes a token from its settings), and anything that would change something waits for your
+yes."
+
+**Why it's true**, paths in the Archie repo unless named:
+
+- **The apps** are rows in `KNOWN_SERVICES` (`crates/archie-domain/src/connectors.rs`). Each is
+  offered on the Apps list only on an agent with a skill that reads it, and each is used only inside
+  that skill.
+- **Each is kept to what its own docs make safe** (`SERVER_TERMS`, same file). Cal.com keeps the
+  twelve booking tools of its 72, TickTick its thirteen task tools, and PayPal its reads plus a
+  refund, canceling a subscription and an invoice reminder. The tools a vendor documents as reading
+  run without a tap (`tool_reads`); every other tool waits for a yes, as with every app.
+- **Monarch is signed in to for reading only** (`scope` in `SERVER_TERMS`, applied in
+  `connector_mcp_sign_in` in `src-tauri/src/commands/integrations.rs`), so Monarch itself refuses
+  any change.
+- **One source at a time** for Booking Watch and Revenue Watch, picked on the skill's settings
+  (`source_setting`), the way Package Tracker picks. The skill's text keeps only the part for the
+  app picked (`keep_sections` in `crates/archie-domain/src/marketplace.rs`), and the setup steps on
+  both apps ask to connect the one picked (`integrations_to_connect`).
+- **The skills**: `data/marketplace/skills/booking-watch.json`, `revenue-watch.json`,
+  `fireflies.json` (Meeting Notes), `ticktick.json` and `monarch-money-keeper.json`.
+
+**The boundaries.**
+
+- ⚠️ **Never signed in to by a person.** These use the browser sign-in in `archie_net::mcp_auth`,
+  which has never finished with a real server. Each app registered Archie and showed its sign-in page
+  in the live check of October 31 (`candidate_apps_say_how_to_sign_in_and_whether_they_register_archie`).
+  Shop works through its own code sign-in, which is a different route.
+- ⛔ **Never "your agent checks Granola or Monarch on its own."** Both are read only when their owner
+  asks in a message (`asked_for_only`), because both vendors' terms bar "processes that run or are
+  activated while you are not logged into the Services". The other four can be read by a routine the
+  owner set up, like any connected app; nothing reads any of them on a schedule by itself.
+- ⛔ **Never "it can change your Monarch budget."** It reads and nothing else. Accounts Monarch links
+  through Finicity (often Fidelity) do not show, and Monarch caps assistant use each week.
+- ⚠️ **TickTick asks before every change**, adding a task included, unlike Todoist and Google Tasks,
+  which add at once.
+- ⚠️ **PayPal needs a Business account.** It cannot pay, buy, accept a dispute, or send a new invoice.
+- ⚠️ **The tool details are partly unconfirmed.** Monarch publishes no tool names, Otter's exact names
+  are unconfirmed, and Cal.com's arguments come from code it published on September 1. Each skill
+  tells the agent to look a tool up and retry when an argument is refused.
+- ⚠️ **Granola's free plan** shows the last 30 days and no transcripts.
+- ⚠️ **The trust rows' connected-accounts line** ("any service you connected with a key of your own:
+  directly", under What you can connect) does not cover an app somebody signed in to. Proposed, for
+  Jett: "any service you connected with a key or a sign-in of your own: directly."
+
 ## Known Weaknesses — disclose, don't hide
 
 These are true and unflattering. They go on the Trust page anyway.

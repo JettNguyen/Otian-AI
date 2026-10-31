@@ -5124,6 +5124,38 @@
       "guide": ""
     },
     {
+      "id": "six-more-apps",
+      "name": "Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal",
+      "area": "connections",
+      "summary": "Six apps your agent can sign in to, each read by the skill it belongs to: bookings, meeting notes, to-dos, a budget, and payments.",
+      "where": "On the agent's Connections tab, under Apps, once the agent has a skill that reads the app.",
+      "how": [
+        "Add the skill first: Booking Watch for Cal.com, Meeting Notes for Granola or Otter, To-Do List (TickTick), Monarch Money Keeper, or Revenue Watch for PayPal.",
+        "For Booking Watch or Revenue Watch, open the skill's settings on the Skills tab and pick Cal.com or PayPal.",
+        "Open the Connections tab, then Apps, and press Connect beside the app. Sign in on the app's page in your browser and approve Archie.",
+        "For TickTick, paste the token from TickTick's Settings, under Account & Security, then API Token."
+      ],
+      "limits": [
+        "Anything that would change something waits for your yes, adding a TickTick task included.",
+        "Granola and Monarch Money are read only when you ask in a message.",
+        "Monarch Money is read only. Accounts Monarch links through Finicity do not show, and Monarch limits how much an assistant asks each week.",
+        "PayPal needs a Business account, and your agent cannot pay, buy, accept a dispute, or send a new invoice.",
+        "Granola's free plan shows the last 30 days.",
+        "Monarch Money Keeper is in Archie, not Archie for Teams."
+      ],
+      "phone": "Ask about any of them from Archie Mobile once they are connected on the computer. Connecting happens on the computer.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie a1ada6b7, 9ad34152, e0cac126, archie-mobile 250ae49).",
+      "unwatched": true,
+      "trust": [
+        "🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, in no release yet, never signed in to by a person"
+      ],
+      "wording": "",
+      "guide": ""
+    },
+    {
       "id": "connect-an-ai-assistant-address",
       "name": "Connect an app's address for AI assistants",
       "area": "connections",

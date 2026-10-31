@@ -5065,11 +5065,11 @@
       "name": "Your Shop orders in Package Tracker",
       "area": "connections",
       "summary": "Connect Shop and Package Tracker can read the orders the Shop app keeps, from every store whose receipts reach it, when you ask what's coming.",
-      "where": "On an agent with Package Tracker, on the Connections tab, under Apps: Shop.",
+      "where": "On the agent's Connections tab, under Apps: Shop.",
       "how": [
-        "Open Package Tracker's settings on the agent's Skills tab, and under Where it finds your packages, pick Shop.",
         "Open the agent's Connections tab, then Apps, and pick Shop.",
         "Press Connect Shop. Archie shows a short code and opens Shop in your browser. Check that Shop shows the same code, then approve it there. Archie notices on its own.",
+        "Once Shop is connected, Archie offers Package Tracker, set to find packages in Shop. Press Install. If Package Tracker is already on the agent, press Use Shop in Package Tracker beside Shop instead.",
         "Ask your agent what's coming. It answers from your email and from Shop, and says which is which."
       ],
       "limits": [
@@ -5083,7 +5083,7 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie a2a36187, de76a243, 0acdd2e9).",
+      "hold": "In no release yet (Archie a2a36187, de76a243, 0acdd2e9, 4957d811).",
       "unwatched": true,
       "trust": [
         "🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, first signed in by Jett on October 30, 2026"
@@ -5128,12 +5128,13 @@
       "name": "Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal",
       "area": "connections",
       "summary": "Six apps your agent can sign in to, each read by the skill it belongs to: bookings, meeting notes, to-dos, a budget, and payments.",
-      "where": "On the agent's Connections tab, under Apps, once the agent has a skill that reads the app.",
+      "where": "On the agent's Connections tab, under Apps.",
       "how": [
-        "Add the skill first: Booking Watch for Cal.com, Meeting Notes for Granola or Otter, To-Do List (TickTick), Monarch Money Keeper, or Revenue Watch for PayPal.",
-        "For Booking Watch or Revenue Watch, open the skill's settings on the Skills tab and pick Cal.com or PayPal.",
         "Open the Connections tab, then Apps, and press Connect beside the app. Sign in on the app's page in your browser and approve Archie.",
-        "For TickTick, paste the token from TickTick's Settings, under Account & Security, then API Token."
+        "For TickTick, paste the token from TickTick's Settings, under Account & Security, then API Token.",
+        "Once it is connected, Archie offers the skill that reads it: Booking Watch for Cal.com, Meeting Notes for Granola or Otter, To-Do List (TickTick), Monarch Money Keeper, or Revenue Watch for PayPal. Press Install.",
+        "If Booking Watch is already reading Calendly, or Revenue Watch is reading Stripe, press Use Cal.com in Booking Watch or Use PayPal in Revenue Watch beside the app.",
+        "When a skill's setup asks for one of these apps, Take me there opens that app's own form on the Connections tab."
       ],
       "limits": [
         "Anything that would change something waits for your yes, adding a TickTick task included.",
@@ -5147,7 +5148,7 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie a1ada6b7, 9ad34152, e0cac126, 5a50e9f2, archie-mobile 250ae49).",
+      "hold": "In no release yet (Archie a1ada6b7, 9ad34152, e0cac126, 5a50e9f2, 4957d811, archie-mobile 250ae49).",
       "unwatched": true,
       "trust": [
         "🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, in no release yet, never signed in to by a person"

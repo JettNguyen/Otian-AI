@@ -10104,7 +10104,10 @@ and the request never leaves your network."
   twenty-four rows on 2026-09-18: twenty-three named services and one for any other MCP server
   (on screen since 2026-09-24, that one is the Something else door, and the four vendor MCP rows
   appear only when a skill asks for one, so the Apps list shows nineteen of these plus Todoist,
-  Fireflies, Zoom and GoHighLevel).
+  Fireflies, Zoom and GoHighLevel). The apps added since that are reached through their own AI tools
+  (Shop, and the six of October 31) are listed wherever an add-on in the store reads them (`read_by`
+  in `connector_known_services`, `src-tauri/src/commands/integrations.rs`); no add-on reads the four
+  vendor rows, so they still wait for a skill that asks.
   Count the file before printing a number; this one has been stale before. A key is bound to one host (`ConnectorEntry`) and the runtime attaches it,
   never the model (`archie_net::http::send` drops runtime-owned headers).
 - Lights on the user's own wifi: `crates/archie-domain/src/local_devices.rs` refuses any roster
@@ -19191,9 +19194,15 @@ Shop only when you ask, it never buys anything, and your email still sends the a
   Shop stops taking it (`connector_device_sign_in_finish`).
 - **Never a setup step, and only when picked.** Package Tracker lists Shop as optional
   (`optional_integrations` in `data/marketplace/skills/package-tracker.json`), so its setup never
-  asks for it, and Shop reaches the agent and the Apps list only when it is the source picked on
-  Package Tracker's settings (`source_setting`, `integrations_for` in
-  `crates/archie-domain/src/marketplace.rs`). A build from before this ignores it.
+  asks for it, and Shop reaches the agent only when it is the source picked on Package Tracker's
+  settings (`source_setting`, `integrations_for` in `crates/archie-domain/src/marketplace.rs`). A
+  build from before this ignores it.
+- **Offered first, then the add-on.** Shop is on the Apps list of any agent, because Package Tracker
+  reads it (`read_by` in `connector_known_services`). Once it is connected, Archie offers to install
+  Package Tracker set to read Shop, or, where Package Tracker is already there reading email, a
+  Use Shop in Package Tracker press that changes that one setting (`offerReader` and `usePick` in
+  `src/app/connect.tsx`; `source_pick` in `connector_status`,
+  `src-tauri/src/commands/integrations.rs`). Nothing is installed or changed until it is pressed.
 
 **The boundaries.**
 
@@ -19234,8 +19243,10 @@ name the stores you care about or the ones to skip."
   and in Archie Mobile, where Tell me when a package draws as boxes to tick (`src/app/checks.ts`;
   archie-mobile `src/screens/Skills.tsx`).
 - **One source at a time** is held where the agent's tools are decided: only the service picked
-  reaches the skill, and the Apps list offers only that one (`source_setting` and `integrations_for`
-  in `crates/archie-domain/src/marketplace.rs`). With AfterShip picked, shipping email is not read
+  reaches the skill, and the setup steps ask only for that one (`source_setting` and
+  `integrations_for` in `crates/archie-domain/src/marketplace.rs`). The Apps list still shows the
+  others, and connecting one offers a press that switches the source to it (`source_pick` in
+  `connector_status`, `src-tauri/src/commands/integrations.rs`). With AfterShip picked, shipping email is not read
   for packages (`on_email` in `crates/archie-runtime/src/email/packages.rs`).
 - **What and when**: a message goes out only for a moment picked, about an order over the price set
   and from a store wanted (`Settings` in `email/packages.rs`). A package past its expected date and
@@ -19276,8 +19287,18 @@ yes."
 **Why it's true**, paths in the Archie repo unless named:
 
 - **The apps** are rows in `KNOWN_SERVICES` (`crates/archie-domain/src/connectors.rs`). Each is
-  offered on the Apps list only on an agent with a skill that reads it, and each is used only inside
-  that skill.
+  offered on the Apps list wherever an add-on in the store reads it (`read_by` in
+  `connector_known_services`, `src-tauri/src/commands/integrations.rs`), so Monarch Money is not
+  offered in Archie for Teams, whose store has no Monarch Money Keeper. Each is used only inside the
+  skill that reads it.
+- **Connect first, then the skill.** Once an app is connected, Archie offers to install the skill
+  that reads it, set to read that app; where that skill is already there reading the other app, the
+  row offers Use Cal.com in Booking Watch (or Use PayPal in Revenue Watch), which changes that one
+  setting (`offerReader` and `usePick` in `src/app/connect.tsx`, `source_pick` in
+  `connector_status`). Nothing is installed or changed until it is pressed.
+- **Take me there opens the app's own form.** A setup step that asks for one of these apps carries
+  the app's name to the Connections tab, which opens its form rather than scrolling to the list
+  (`openDoor` in `src/app/agent-detail.tsx`, `CONNECT_APP_SECTION` in `src/app/agent-reach.ts`).
 - **Each is kept to what its own docs make safe** (`SERVER_TERMS`, same file). Cal.com keeps the
   twelve booking tools of its 72, TickTick its thirteen task tools, and PayPal its reads plus a
   refund, canceling a subscription and an invoice reminder. The tools a vendor documents as reading

@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../../css/styles.css?v=20261028-1" />
+  <link rel="stylesheet" href="../../../css/styles.css?v=20261030-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -182,8 +182,21 @@
       <div class="container">
         <a class="sv-back" href="../"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>Marketplace</a>
         <h1 id="voices-heading" class="sv-title">Personalities</h1>
+        <div class="sv-search sv-search--page">
+          <svg class="sv-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m20 20-3.9-3.9"/></svg>
+          <input type="search" class="sv-search-input" data-page-search placeholder="Search 36 personalities" aria-label="Search Personalities" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" writingsuggestions="false" />
+        </div>
+        <div class="sv-results" data-results hidden>
+          <p class="sr-only" role="status" aria-live="polite" data-count></p>
+          <div class="sv-icons" data-grid></div>
+          <div class="sv-none" data-none hidden>
+            <p class="sv-none-q">&ldquo;<span data-none-q></span>&rdquo;</p>
+            <p>Nothing in Personalities matches that. It may be in another part of the Marketplace.</p>
+            <div class="btn-row"><a class="btn btn-primary" data-search-all href="../">Search the whole Marketplace</a></div>
+          </div>
+        </div>
         <!-- GENERATED-CATALOG-START -->
-        <div class="sv-icons sv-icons--faces">
+        <div class="sv-icons sv-icons--faces" data-browse>
           <a class="sv-app" href="#addon-personality-friendly" aria-haspopup="dialog"><span class="sv-face sv-hue-terracotta" aria-hidden="true"><svg viewBox="0 0 182 182" aria-hidden="true" focusable="false"><use href="#face-friendly" width="182" height="182"/></svg></span><span class="sv-an">Friendly</span></a>
           <a class="sv-app" href="#addon-personality-concise" aria-haspopup="dialog"><span class="sv-face sv-hue-blue" aria-hidden="true"><svg viewBox="0 0 182 182" aria-hidden="true" focusable="false"><use href="#face-concise" width="182" height="182"/></svg></span><span class="sv-an">Concise</span></a>
           <a class="sv-app" href="#addon-personality-calm-anchor" aria-haspopup="dialog"><span class="sv-face sv-hue-green" aria-hidden="true"><svg viewBox="0 0 182 182" aria-hidden="true" focusable="false"><use href="#face-calm-anchor" width="182" height="182"/></svg></span><span class="sv-an">Calm Anchor</span></a>
@@ -1003,8 +1016,8 @@ I do not know whether the 2:40 has seats or whether they will waive the change f
     </div>
   </footer>
 
-  <script src="../../../js/nav.js?v=20261028-1"></script>
-  <script type="module" src="../../../js/account-nav.js?v=20261028-1"></script>
-  <script type="module" src="../../../js/store.js?v=20261028-1"></script>
+  <script src="../../../js/nav.js?v=20261030-1"></script>
+  <script type="module" src="../../../js/account-nav.js?v=20261030-1"></script>
+  <script type="module" src="../../../js/store.js?v=20261030-1"></script>
 </body>
 </html>

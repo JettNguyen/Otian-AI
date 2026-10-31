@@ -260,6 +260,43 @@ function back() {
   return `<a class="sv-back" href="../">${R.CHEVRON_LEFT}Marketplace</a>`;
 }
 
+const SEARCH_ICON = `<svg class="sv-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m20 20-3.9-3.9"/></svg>`;
+
+/* A search is matched as typed, and a Mac's spelling correction and gray word-finishing both
+   rewrite a word as the field loses focus, which is the press on a result. Archie's own search
+   field turns the same four off. */
+const AS_TYPED = `autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" writingsuggestions="false"`;
+
+/* An inner page's own search, as the app has on each Marketplace page: a field under the page's
+   name, and the place its results go. js/store.js looks through the sheets this page carries,
+   which are exactly the ones it lists. With `where`, a search that finds nothing here says so and
+   offers the whole Marketplace with the words carried over; without it (the All page, which is
+   the whole Marketplace already) it gives the front's own answer. */
+function pageSearch(label, placeholder, where) {
+  const nothing = where
+    ? `<p>Nothing in ${esc(where)} matches that. It may be in another part of the Marketplace.</p>
+            <div class="btn-row"><a class="btn btn-primary" data-search-all href="../">Search the whole Marketplace</a></div>`
+    : `<p>Nothing here does this yet. Your agent can write a skill for it from what you tell it. For a service Archie cannot reach, ask us; we quote the cost before any work starts.</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="../../../archie/install/">Download Archie</a>
+              <a class="btn btn-secondary" href="https://consulting.otianai.com/#services">Have an add-on built for you</a>
+            </div>`;
+  return {
+    field: `<div class="sv-search sv-search--page">
+          ${SEARCH_ICON}
+          <input type="search" class="sv-search-input" data-page-search placeholder="${esc(placeholder)}" aria-label="${esc(label)}" ${AS_TYPED} />
+        </div>`,
+    results: `<div class="sv-results" data-results hidden>
+          <p class="sr-only" role="status" aria-live="polite" data-count></p>
+          <div class="sv-icons" data-grid></div>
+          <div class="sv-none" data-none hidden>
+            <p class="sv-none-q">&ldquo;<span data-none-q></span>&rdquo;</p>
+            ${nothing}
+          </div>
+        </div>`,
+  };
+}
+
 function areaPage(D, C, area) {
   const ctx = context(D, 3);
   const key = (i) => `${i.kind}:${i.id}`;
@@ -280,6 +317,7 @@ function areaPage(D, C, area) {
   }
 
   const s = area.sample;
+  const find = pageSearch(`Search ${area.name}`, `Search ${sheets.length} in ${area.name}`, area.name);
   const body = `    <section class="section section--top sv-page" aria-labelledby="area-heading">
       <div class="container">
         ${back()}
@@ -290,6 +328,9 @@ function areaPage(D, C, area) {
           <a class="sv-band-btn" href="${ctx.up}archie/install/">${R.DOWNLOAD}Download Archie</a>
           ${R.chat(s.ask, s.reply, ctx.faces.use("agent"), "sv-chat--band")}
         </section>
+        ${find.field}
+        ${find.results}
+        <div data-browse>
 
         <section class="sv-sec" aria-labelledby="start-heading">
           <h2 id="start-heading">Start here</h2>
@@ -312,6 +353,7 @@ ${rest.length ? `
           </div>
         </section>
 ` : ""}
+        </div>
         ${sources(sheets, ctx)}
         ${ctx.faces.sprite()}
         ${END}
@@ -330,12 +372,15 @@ ${endBand(ctx.up)}`;
 function voicesPage(D, C) {
   const ctx = context(D, 3);
   const voices = D.items.filter((i) => i.kind === "personality").sort(D.order);
+  const find = pageSearch("Search Personalities", `Search ${voices.length} personalities`, "Personalities");
   const body = `    <section class="section section--top sv-page" aria-labelledby="voices-heading">
       <div class="container">
         ${back()}
         <h1 id="voices-heading" class="sv-title">Personalities</h1>
+        ${find.field}
+        ${find.results}
         ${START}
-        <div class="sv-icons sv-icons--faces">
+        <div class="sv-icons sv-icons--faces" data-browse>
           ${voices.map((i) => R.app(i, ctx)).join("\n          ")}
         </div>
         ${sources(voices.map((i) => R.sheet(i, ctx)), ctx)}
@@ -362,11 +407,15 @@ function packsPage(D, C) {
           </div>
         </section>
 ` : "";
+  const find = pageSearch("Search Packs", `Search ${D.data.packs.length} packs`, "Packs");
   const body = `    <section class="section section--top sv-page" aria-labelledby="packs-heading">
       <div class="container">
         ${back()}
         <h1 id="packs-heading" class="sv-title">Packs</h1>
-        ${START}${group("For one job", "one-job-heading", D.data.packs.filter((p) => !bringsVoice(p)))}${group("For a new agent", "new-agent-heading", D.data.packs.filter(bringsVoice))}
+        ${find.field}
+        ${find.results}
+        ${START}<div data-browse>${group("For one job", "one-job-heading", D.data.packs.filter((p) => !bringsVoice(p)))}${group("For a new agent", "new-agent-heading", D.data.packs.filter(bringsVoice))}
+        </div>
         ${sources(D.data.packs.map((p) => R.packSheet(p, ctx)), ctx)}
         ${ctx.faces.sprite()}
         ${END}
@@ -395,17 +444,21 @@ function allPage(D, C) {
   }).join("");
   const voices = D.items.filter((i) => i.kind === "personality").sort(D.order);
   const ordered = [...D.data.areas.flatMap((a) => D.items.filter((i) => D.data.areaOf[`${i.kind}:${i.id}`] === a.id).sort(D.order)), ...voices];
+  const find = pageSearch("Search the Marketplace", `Search ${D.items.length} add-ons`, null);
   const body = `    <section class="section section--top sv-page" aria-labelledby="all-heading">
       <div class="container">
         ${back()}
         <h1 id="all-heading" class="sv-title">All ${D.items.length}</h1>
-        ${START}${sections}
+        ${find.field}
+        ${find.results}
+        ${START}<div data-browse>${sections}
         <section class="sv-sec" aria-labelledby="all-personalities">
           <h2 id="all-personalities"><a href="../${VOICES}/">Personalities</a></h2>
           <div class="sv-icons sv-icons--faces">
             ${voices.map((i) => R.app(i, ctx)).join("\n            ")}
           </div>
         </section>
+        </div>
         ${sources(ordered.map((i) => R.sheet(i, ctx)), ctx)}
         ${ctx.faces.sprite()}
         ${END}
@@ -429,8 +482,8 @@ const REGIONS = [
       const n = D.items.length;
       return `
         <div class="sv-search">
-          <svg class="sv-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m20 20-3.9-3.9"/></svg>
-          <input type="search" id="svSearch" class="sv-search-input" placeholder="Search ${n} add-ons" aria-label="Search ${n} add-ons" autocomplete="off" />
+          ${SEARCH_ICON}
+          <input type="search" id="svSearch" class="sv-search-input" placeholder="Search ${n} add-ons" aria-label="Search ${n} add-ons" ${AS_TYPED} />
         </div>
         <div class="sv-browse" id="svBrowse">
           ${START}

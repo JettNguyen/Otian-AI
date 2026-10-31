@@ -90,15 +90,7 @@
     if (open(id, link)) e.preventDefault();
   });
 
-  /* ── Search, on the front ──────────────────────────────────────────────────────────────────── */
-
-  var input = document.getElementById("svSearch");
-  var browse = document.getElementById("svBrowse");
-  var results = document.getElementById("svResults");
-  var grid = document.getElementById("svResultsGrid");
-  var count = document.getElementById("svResultsCount");
-  var none = document.getElementById("svNone");
-  var noneQ = document.getElementById("svNoneQ");
+  /* ── Search ───────────────────────────────────────────────────────────────────────────────── */
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -106,45 +98,101 @@
     });
   }
 
-  function search(q) {
-    var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
-    var searching = terms.length > 0;
-    browse.hidden = searching;
-    results.hidden = !searching;
-    if (!searching) { grid.innerHTML = ""; count.textContent = ""; return; }
+  /* One search box and the places it draws. The front's looks through every sheet, and an inner
+     page's through that page's own, which is the same code because each page carries only the
+     sheets it lists. */
+  function wire(box) {
+    function search(q) {
+      var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+      var searching = terms.length > 0;
+      box.browse.hidden = searching;
+      box.results.hidden = !searching;
+      if (!searching) { box.grid.innerHTML = ""; box.count.textContent = ""; return; }
 
-    var all = Array.prototype.slice.call(document.querySelectorAll(".sv-src"));
-    var hits = all.filter(function (el) {
-      var hay = el.getAttribute("data-search") || "";
-      return terms.every(function (t) { return hay.indexOf(t) !== -1; });
-    });
-    var packs = hits.filter(function (el) { return el.hasAttribute("data-pack"); });
-    var addons = hits.filter(function (el) { return !el.hasAttribute("data-pack"); });
-    addons.sort(function (a, b) {
-      return (Number(b.getAttribute("data-installs")) - Number(a.getAttribute("data-installs"))) ||
-        a.getAttribute("data-name").localeCompare(b.getAttribute("data-name"));
-    });
+      var all = Array.prototype.slice.call(document.querySelectorAll(".sv-src"));
+      var hits = all.filter(function (el) {
+        var hay = el.getAttribute("data-search") || "";
+        return terms.every(function (t) { return hay.indexOf(t) !== -1; });
+      });
+      var packs = hits.filter(function (el) { return el.hasAttribute("data-pack"); });
+      var addons = hits.filter(function (el) { return !el.hasAttribute("data-pack"); });
+      addons.sort(function (a, b) {
+        return (Number(b.getAttribute("data-installs")) - Number(a.getAttribute("data-installs"))) ||
+          a.getAttribute("data-name").localeCompare(b.getAttribute("data-name"));
+      });
 
-    grid.innerHTML = packs.concat(addons).map(function (el) {
-      var pic = el.querySelector(".sv-pic");
-      return '<a class="sv-app" href="#' + el.id + '" aria-haspopup="dialog">' +
-        (pic ? ownIds(pic.innerHTML) : "") +
-        '<span class="sv-an">' + esc(el.getAttribute("data-name")) + "</span></a>";
-    }).join("");
-    none.hidden = hits.length > 0;
-    grid.hidden = hits.length === 0;
-    noneQ.textContent = q.trim();
-    count.textContent = hits.length === 0 ? "" :
-      hits.length === 1 ? "1 match" : hits.length + " matches";
+      box.grid.innerHTML = packs.concat(addons).map(function (el) {
+        var pic = el.querySelector(".sv-pic");
+        return '<a class="sv-app" href="#' + el.id + '" aria-haspopup="dialog">' +
+          (pic ? ownIds(pic.innerHTML) : "") +
+          '<span class="sv-an">' + esc(el.getAttribute("data-name")) + "</span></a>";
+      }).join("");
+      box.none.hidden = hits.length > 0;
+      box.grid.hidden = hits.length === 0;
+      box.noneQ.textContent = q.trim();
+      if (box.all) box.all.setAttribute("href", "../?q=" + encodeURIComponent(q.trim()));
+      box.count.textContent = hits.length === 0 ? "" :
+        hits.length === 1 ? "1 match" : hits.length + " matches";
+    }
+
+    /* The results a press starts on are the ones it ends on. A field can change as it loses focus
+       (a Mac's spelling correction commits then), which is the press on a result, and a redraw
+       between the button going down and coming up sent the press to nothing and the next one to
+       whatever had moved under it. Words that arrive during a press wait for its click. */
+    var pressing = false;
+    var waiting = null;
+    box.input.addEventListener("input", function () {
+      if (pressing) waiting = box.input.value;
+      else search(box.input.value);
+    });
+    box.results.addEventListener("pointerdown", function () {
+      pressing = true;
+      function release() {
+        window.removeEventListener("pointerup", release, true);
+        window.removeEventListener("pointercancel", release, true);
+        setTimeout(function () {
+          pressing = false;
+          if (waiting !== null) { var q = waiting; waiting = null; search(q); }
+        }, 0);
+      }
+      window.addEventListener("pointerup", release, true);
+      window.addEventListener("pointercancel", release, true);
+    }, true);
+    return search;
   }
 
-  if (input && browse && results && grid) {
-    input.addEventListener("input", function () { search(input.value); });
+  var front = {
+    input: document.getElementById("svSearch"),
+    browse: document.getElementById("svBrowse"),
+    results: document.getElementById("svResults"),
+    grid: document.getElementById("svResultsGrid"),
+    count: document.getElementById("svResultsCount"),
+    none: document.getElementById("svNone"),
+    noneQ: document.getElementById("svNoneQ"),
+  };
+  if (front.input && front.browse && front.results && front.grid) {
+    var searchFront = wire(front);
     /* ?q= from elsewhere on the site lands the reader where typing it would have. */
     try {
       var q = new URLSearchParams(location.search).get("q");
-      if (q) { input.value = q; search(q); }
+      if (q) { front.input.value = q; searchFront(q); }
     } catch (e) { /* no deep link */ }
+  }
+
+  var pageInput = document.querySelector("[data-page-search]");
+  var pageResults = document.querySelector("[data-results]");
+  var pageBrowse = document.querySelector("[data-browse]");
+  if (pageInput && pageResults && pageBrowse) {
+    wire({
+      input: pageInput,
+      browse: pageBrowse,
+      results: pageResults,
+      grid: pageResults.querySelector("[data-grid]"),
+      count: pageResults.querySelector("[data-count]"),
+      none: pageResults.querySelector("[data-none]"),
+      noneQ: pageResults.querySelector("[data-none-q]"),
+      all: pageResults.querySelector("[data-search-all]"),
+    });
   }
 
   /* ── Arriving with an address ──────────────────────────────────────────────────────────────── */

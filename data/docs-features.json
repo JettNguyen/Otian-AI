@@ -5068,7 +5068,7 @@
       "where": "On an agent with Package Tracker, on the Connections tab, under Apps: Shop.",
       "how": [
         "Open the agent's Connections tab, then Apps, and pick Shop.",
-        "Press Connect Shop and sign in to Shop in your browser, then come back to Archie.",
+        "Press Connect Shop. Archie shows a short code and opens Shop in your browser. Check that Shop shows the same code, then approve it there. Archie notices on its own.",
         "Ask your agent what's coming. It answers from your email and from Shop, and says which is which."
       ],
       "limits": [
@@ -5082,7 +5082,7 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie a2a36187).",
+      "hold": "In no release yet (Archie a2a36187, de76a243).",
       "unwatched": true,
       "trust": [
         "🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, never signed in to Shop by a person"

@@ -19152,25 +19152,27 @@ short page and the never-sent file as of this amendment.
 
 ### 🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, never signed in to Shop by a person
 
-*Built October 30, 2026 (Archie `a2a36187`; in no release yet).*
+*Built October 30, 2026 (Archie `a2a36187`, signing in by code since `de76a243`; in no release yet).*
 
 **Proposed wording, Jett's to approve:** "If you use the Shop app, connect Shop on your agent's
-Connections tab and sign in to Shop in your browser. When you ask Package Tracker what's coming, it
+Connections tab: Archie shows a short code and opens Shop, and you approve it there. When you ask Package Tracker what's coming, it
 can also read the orders Shop keeps, from every store whose receipts reach Shop, whichever email
 address they went to. It reads Shop only when you ask, and it never buys anything."
 
 **Why it's true**, paths in the Archie repo unless named:
 
-- **Signing in.** Shop's sign-in server (`accounts.shop.app`) has no way for an app to register and
-  knows an app only by a small file the app publishes. Archie's is
-  `https://otianai.com/archie/oauth-client.json` (this repo's `archie/oauth-client.json`, written from
-  `client_document` in `crates/archie-net/src/mcp_auth.rs`), and `connector_mcp_sign_in` in
-  `src-tauri/src/commands/integrations.rs` signs in as it whenever a server says it reads such files.
-  The sign-in comes back to one of the addresses on this computer that the file lists
-  (`authorize_loopback_at` in `crates/archie-core/src/oauth.rs`), and an answer that does not name
-  Shop's sign-in server is refused before its code is used (`check_issuer`, as the MCP spec
-  requires). Found against Shop's live server on October 30, 2026
-  (`shop_says_how_to_sign_in_and_reads_our_document` in `crates/archie-runtime/tests/mcp_live.rs`).
+- **Signing in.** Archie signs in the way Shop's page for AI agents says to
+  (`shop.com/references/sign-in.md`): under Shop's own public client id for agents, Archie asks Shop
+  for a short code, shows it, and opens Shop's page in the browser, where the person checks that the
+  codes match and approves. Archie names itself to Shop as "Archie: " and the agent's name. Shop's
+  addresses and client id are `DEVICE_SIGN_INS` in `crates/archie-domain/src/connectors.rs`; the
+  asking and waiting are `device_authorize` and `device_poll` in `crates/archie-net/src/oauth2.rs`,
+  run by `connector_device_sign_in_start` and `connector_device_sign_in_finish` in
+  `src-tauri/src/commands/integrations.rs`. Nothing has to come back to an address on this computer.
+  The first version signed in as a small file Archie publishes
+  (`https://otianai.com/archie/oauth-client.json`), which Shop's sign-in server says it reads. Shop
+  refused it on October 30, 2026 with "invalid_client", as it refuses every web address tried that
+  way, and the code sign-in replaced it the same day.
 - **Only orders.** Shop offers nineteen tools, most of them for shopping and paying. Archie keeps
   one, `search_orders`, which Shop marks as only reading (`SERVER_TERMS` in
   `crates/archie-domain/src/connectors.rs`), so nothing that buys is ever offered to the agent.
@@ -19180,9 +19182,11 @@ address they went to. It reads Shop only when you ask, and it never buys anythin
   `crates/archie-runtime/src/gateway/turn.rs`), and a call is refused unless that person sent the
   message being answered, so a watcher's check-in never reads it (`dispatch_mcp` in
   `crates/archie-runtime/src/connectors.rs`; test `shop_is_not_called_on_a_turn_nobody_asked`).
-- **Staying signed in.** A refresh token Shop hands back in place of the old one is saved in the
-  Keychain under the same name (`signed_in_access_token` and `keep_replacements` in
-  `crates/archie-runtime/src/connectors.rs`).
+- **Staying signed in.** If Shop gives a refresh token, it is kept in the Keychain and Archie
+  refreshes the sign-in on its own, saving any replacement Shop hands back under the same name
+  (`signed_in_access_token` and `keep_replacements` in `crates/archie-runtime/src/connectors.rs`).
+  If Shop gives none, the access token is kept in the Keychain like a pasted key and works until
+  Shop stops taking it (`connector_device_sign_in_finish`).
 - **Never a setup step.** Package Tracker lists Shop as optional (`optional_integrations` in
   `data/marketplace/skills/package-tracker.json`), so its setup never asks for it, and a build from
   before this ignores it.
@@ -19199,10 +19203,13 @@ address they went to. It reads Shop only when you ask, and it never buys anythin
   person connected inside Shop. Not every order everywhere.
 - ⚠️ **Taking it away** is in Shop, under Account, then Connections, or by removing Shop on the
   Connections tab. Shop's own help says disconnecting does not delete what was already shared.
-- ⚠️ **Never signed in to Shop by a person yet**, so whether Shop accepts the file's addresses is
-  unproven until someone does.
-- ⚠️ **The same sign-in reaches any app that reads such a file**, through Connections, then
-  Something else. Only Shop has been checked.
+- ⚠️ **Never signed in to Shop by a person yet**, so it is unproven until someone approves the code
+  and asks Package Tracker what is coming. Shop's page does not say whether its sign-in lasts. If it
+  gives no refresh token, the person signs in again once Shop stops taking the old one, and the
+  message they see then is not yet worded for it.
+- ⛔ **Never say Archie signs in to Shop as its own published app.** That was the first version, and
+  Shop refused it. The file is still on the site, and Connections, then Something else, still offers
+  that sign-in to any server that reads such files, but none has accepted it yet.
 
 ## Known Weaknesses — disclose, don't hide
 

@@ -1905,6 +1905,37 @@ forgets who was let in on that app for this agent.
 - ⚠️ **Only on the computer.** Archie Mobile has no chat app list.
 - ⚠️ **Type-checked and unit-tested, not yet walked through** in the window.
 
+*Amended October 30, 2026 (Archie `72977b7f` and `4c03bbbc`, with archie-mobile `a1db95b`, in no release yet): one computer at a time has the phone.*
+
+**The claim:** With Archie on two computers signed in to the same account, Archie Mobile reads the
+one whose code it scanned last. The other stops sending to the phone and says so on its Archie
+Mobile panel, and showing the code there moves the phone to it. Once phone access is on, the
+Archie Mobile steps on the Setup tab fold to one line, with Connect a phone to open them and Done to
+close them.
+
+**Why it's true:** Both computers wrote the phone's one mailbox, each locked with its own key, so the
+phone could read only whichever wrote last, and said it "could not read what your computer sent".
+Now each computer writes over the stamp of the last write it saw (`publish_state_over` in
+`crates/archie-core/src/phone.rs`, which sends a Firestore precondition). When the mailbox has moved
+on, it reads what is there, and if its own key cannot open it, the other computer has the phone: this
+one stops writing, stops answering the phone's commands, and stops sending notifications
+(`publish_owned` in `src-tauri/src/phone.rs`, and `phone_elsewhere` in `src-tauri/src/phone_push.rs`).
+Showing a code takes the phone back (`phone_pair_app`). The panel's words and the fold are in
+`src/app/connect.tsx`, and the phone's error names the two-computers case (`open` in archie-mobile's
+`src/relay/envelope.ts`).
+
+**Boundaries:**
+
+- ⚠️ **This is not support for one account on two computers.** Both still read the same email
+  accounts and chat apps. It only stops the two from fighting over the phone. Never say Archie runs
+  on two computers at once.
+- ⚠️ **Both computers need it.** A computer on an older Archie still overwrites the phone's mailbox.
+- ⚠️ **A teammate's phone is not covered** on Archie for Teams: each computer still writes to it for
+  the agents it runs.
+- ⚠️ **An agent set to Archie Mobile on the computer without the phone goes back to its chat app**,
+  if it has one, the next time it starts, so it is not left answering where nobody reads.
+- ⚠️ **Unit-tested, not yet tried** with two computers and a phone.
+
 ### ✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (build 32, not on Android yet)
 
 **The claim:** "Turn on notifications in Archie Mobile and your phone shows a reminder, a report, new

@@ -920,7 +920,7 @@
       "how": [
         "Install Archie Mobile from the App Store on iPhone, or from the Android download.",
         "In Archie, open an agent's Setup tab and choose Chat app.",
-        "On the Archie Mobile row, press Show the code.",
+        "On the Archie Mobile row, press Show the code (press Connect a phone first if that is what you see).",
         "In Archie Mobile, press Scan and point the camera at the code.",
         "Setting up a new agent, press Continue with Archie Mobile once the code is on screen. You don't need a chat app as well."
       ],
@@ -967,6 +967,35 @@
       "claimable": true,
       "hold": "",
       "unwatched": false,
+      "trust": [
+        "✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID AND IPHONE"
+      ],
+      "wording": "",
+      "guide": ""
+    },
+    {
+      "id": "one-computer-has-the-phone",
+      "name": "One computer at a time has your phone",
+      "area": "phone",
+      "summary": "With Archie on two computers signed in to the same account, Archie Mobile reads the one whose code it scanned last, and the other one says so.",
+      "where": "On an agent's Setup tab, under Chat app, on the Archie Mobile panel of the computer that does not have the phone.",
+      "how": [
+        "On the computer you want your phone to use, open an agent's Setup tab and choose Chat app.",
+        "Pick Archie Mobile, press Connect a phone, then press Show the code.",
+        "Scan the code with Archie Mobile. The other computer stops sending to your phone and says so on its Archie Mobile panel."
+      ],
+      "limits": [
+        "Both computers need a version of Archie with this in it. An older one still overwrites what your phone reads.",
+        "On Archie for Teams, a teammate's phone is not covered yet.",
+        "Both computers still read the same email accounts and chat apps.",
+        "Not tried yet with two computers and a phone."
+      ],
+      "phone": "When Archie Mobile cannot read what a computer sent, its message says which computer to scan the code from, and where the code is.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 72977b7f).",
+      "unwatched": true,
       "trust": [
         "✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID AND IPHONE"
       ],

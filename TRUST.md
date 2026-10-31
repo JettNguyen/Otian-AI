@@ -1875,6 +1875,36 @@ stop asking for a chat app while Archie Mobile is on (`phoneOn` in `src/app/agen
   only while the computer is on, awake and running Archie.
 - ⚠️ **Type-checked, not yet walked through** on a real first run with a phone in hand.
 
+*Amended October 30, 2026 (Archie `9529e755`, in no release yet): Archie Mobile is a choice in the
+Chat app list, and a chat app can be taken off one agent.*
+
+**The claim:** On an agent's Setup tab, under Chat app, Archie Mobile is the first choice in the list
+with the chat apps. Picking it, once a phone is connected, moves the agent off the chat app it was
+using: it answers in Archie and on Archie Mobile, and picking the chat app again moves it back.
+Picking a chat app that is already connected starts using it, with no second press. Disconnect, on a
+connected chat app, takes it off that one agent.
+
+**Why it's true:** The list is `PickList` in `src/app/connect.tsx`, with Archie Mobile as its first
+row (`pickPhone`), and the move is `movingToPhone` there, which sets the agent's channel to the
+window (`agent_channel_set` with `inapp`) and restarts it. An agent set to the window used to answer
+on any chat app still holding a claim regardless, so the pick did nothing; the start rule now
+respects the window while a phone is paired (`Some("inapp")` in
+`src-tauri/src/commands/gateway_lifecycle.rs`), and falls back to the chat app as before when none
+is, so nobody is left reachable only at the desk. Disconnect is `agent_channel_disconnect` in
+`src-tauri/src/commands/access.rs`: it unbinds that chat app's token from this agent only, and
+forgets who was let in on that app for this agent.
+
+**Boundaries:**
+
+- ⚠️ **Disconnect is not forgetting the token.** The token stays saved on this computer, under
+  Settings, Saved keys, where removing it takes it off every agent. Never say Disconnect deletes it.
+- ⚠️ **Connecting the same app again means claiming the agent again** with a new code, and letting
+  people in again. Archie Mobile and everyone on other chat apps are kept.
+- ⚠️ **Picking Archie Mobile before any phone is connected moves nothing** until the first code is
+  shown; the chat app keeps answering until then.
+- ⚠️ **Only on the computer.** Archie Mobile has no chat app list.
+- ⚠️ **Type-checked and unit-tested, not yet walked through** in the window.
+
 ### ✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (build 32, not on Android yet)
 
 **The claim:** "Turn on notifications in Archie Mobile and your phone shows a reminder, a report, new

@@ -944,6 +944,36 @@
       "guide": ""
     },
     {
+      "id": "use-or-disconnect-a-chat-app",
+      "name": "Pick where your agent answers, and disconnect a chat app",
+      "area": "phone",
+      "summary": "On an agent's Setup tab, picking Archie Mobile or a connected chat app is what moves your agent there, and Disconnect takes a chat app off that one agent.",
+      "where": "On an agent's Setup tab, under Chat app: the list, with Archie Mobile first, and Disconnect on a chat app that is connected.",
+      "how": [
+        "Open the agent's Setup tab and choose Chat app.",
+        "To answer only in Archie and on Archie Mobile, pick Archie Mobile. With a phone connected, the agent stops answering on its chat app.",
+        "To use a chat app you connected before, pick it. Nothing else to press.",
+        "To take a chat app off this agent, pick it and press the Disconnect button under it (it says Disconnect Telegram, for Telegram), then press Disconnect again to confirm."
+      ],
+      "limits": [
+        "Disconnect leaves the app's token saved under Settings, Saved keys. Removing it there takes it off every agent.",
+        "To use that chat app again, you connect it and claim the agent with a new code, and let people in again.",
+        "Picking Archie Mobile moves nothing until a phone is connected.",
+        "Not walked through in the window yet."
+      ],
+      "phone": "Only on the computer. Archie Mobile has no chat app list.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 9529e755).",
+      "unwatched": false,
+      "trust": [
+        "✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID AND IPHONE"
+      ],
+      "wording": "",
+      "guide": ""
+    },
+    {
       "id": "imessage-own-apple-id",
       "name": "Your agent on iMessage, with its own Apple ID",
       "area": "phone",

@@ -19150,14 +19150,16 @@ Documents page (archie-mobile `src/screens/Manage.tsx`), and in the held Archie 
 **The boundaries** "Never 'nothing leaves your computer'" and "Found by name only" above carry the
 short page and the never-sent file as of this amendment.
 
-### 🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, never signed in to Shop by a person
+### 🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, first signed in by Jett on October 30, 2026
 
-*Built October 30, 2026 (Archie `a2a36187`, signing in by code since `de76a243`; in no release yet).*
+*Built October 30, 2026 (Archie `a2a36187`, signing in by code since `de76a243`, a source to pick
+since `0acdd2e9`; in no release yet).*
 
-**Proposed wording, Jett's to approve:** "If you use the Shop app, connect Shop on your agent's
-Connections tab: Archie shows a short code and opens Shop, and you approve it there. When you ask Package Tracker what's coming, it
-can also read the orders Shop keeps, from every store whose receipts reach Shop, whichever email
-address they went to. It reads Shop only when you ask, and it never buys anything."
+**Proposed wording, Jett's to approve:** "If you use the Shop app, pick Shop on Package Tracker's
+settings, then connect Shop on your agent's Connections tab: Archie shows a short code and opens
+Shop, and you approve it there. When you ask Package Tracker what's coming, it reads the orders Shop
+keeps, from every store whose receipts reach Shop, whichever email address they went to. It reads
+Shop only when you ask, it never buys anything, and your email still sends the alerts."
 
 **Why it's true**, paths in the Archie repo unless named:
 
@@ -19187,9 +19189,11 @@ address they went to. It reads Shop only when you ask, and it never buys anythin
   (`signed_in_access_token` and `keep_replacements` in `crates/archie-runtime/src/connectors.rs`).
   If Shop gives none, the access token is kept in the Keychain like a pasted key and works until
   Shop stops taking it (`connector_device_sign_in_finish`).
-- **Never a setup step.** Package Tracker lists Shop as optional (`optional_integrations` in
-  `data/marketplace/skills/package-tracker.json`), so its setup never asks for it, and a build from
-  before this ignores it.
+- **Never a setup step, and only when picked.** Package Tracker lists Shop as optional
+  (`optional_integrations` in `data/marketplace/skills/package-tracker.json`), so its setup never
+  asks for it, and Shop reaches the agent and the Apps list only when it is the source picked on
+  Package Tracker's settings (`source_setting`, `integrations_for` in
+  `crates/archie-domain/src/marketplace.rs`). A build from before this ignores it.
 
 **The boundaries.**
 
@@ -19203,13 +19207,59 @@ address they went to. It reads Shop only when you ask, and it never buys anythin
   person connected inside Shop. Not every order everywhere.
 - ⚠️ **Taking it away** is in Shop, under Account, then Connections, or by removing Shop on the
   Connections tab. Shop's own help says disconnecting does not delete what was already shared.
-- ⚠️ **Never signed in to Shop by a person yet**, so it is unproven until someone approves the code
-  and asks Package Tracker what is coming. Shop's page does not say whether its sign-in lasts. If it
-  gives no refresh token, the person signs in again once Shop stops taking the old one, and the
-  message they see then is not yet worded for it.
+- ⚠️ **Signed in once, by Jett, on October 30, 2026**: he approved the code on Shop's page, and his
+  agent read Shop's orders that night (none were in progress, so no order has been read yet).
+  Shop's page does not say whether its sign-in lasts. If it gives no refresh token, the person signs
+  in again once Shop stops taking the old one, and the message they see then is not yet worded for
+  it.
 - ⛔ **Never say Archie signs in to Shop as its own published app.** That was the first version, and
   Shop refused it. The file is still on the site, and Connections, then Something else, still offers
   that sign-in to any server that reads such files, but none has accepted it yet.
+
+### 🚧 Package Tracker's settings: where it finds packages, what it tells you, and when: BUILT 2026-10-31, in no release yet, not yet run on a real inbox
+
+*Built October 31, 2026 (Archie `0acdd2e9`, archie-mobile `ca31ff9`; in no release yet). Jett's
+call, October 31: "only then would it feel like a true agent".*
+
+**Proposed wording, Jett's to approve:** "Package Tracker's settings are yours. Pick where it finds
+packages: your email, AfterShip, or the Shop app. Pick what it tells you about: a package that
+ships, is out for delivery, is delivered, or is late or has a problem. Hear about each one right
+away, or in one roundup a day at a time you choose. Leave out small orders by setting a price, and
+name the stores you care about or the ones to skip."
+
+**Why it's true**, paths in the Archie repo unless named:
+
+- **The settings** are Package Tracker's own (`required_variables` in
+  `data/marketplace/skills/package-tracker.json`), on its settings on the Skills tab on the computer
+  and in Archie Mobile, where Tell me when a package draws as boxes to tick (`src/app/checks.ts`;
+  archie-mobile `src/screens/Skills.tsx`).
+- **One source at a time** is held where the agent's tools are decided: only the service picked
+  reaches the skill, and the Apps list offers only that one (`source_setting` and `integrations_for`
+  in `crates/archie-domain/src/marketplace.rs`). With AfterShip picked, shipping email is not read
+  for packages (`on_email` in `crates/archie-runtime/src/email/packages.rs`).
+- **What and when**: a message goes out only for a moment picked, about an order over the price set
+  and from a store wanted (`Settings` in `email/packages.rs`). A package past its expected date and
+  not delivered is late, said once for each expected date. The roundup goes out once a day at its
+  time, and quiet hours hold it like everything unprompted (`tick`, called from the mail watcher in
+  `email/poller.rs`).
+- **AfterShip on its own**: with AfterShip picked, Archie asks AfterShip every half hour and folds
+  each tracking into the Packages list (`check_aftership`). The first look after picking it fills
+  the list without a message, so nobody gets one for every package already in AfterShip.
+
+**The boundaries.**
+
+- ⛔ **Never "alerts from Shop".** With Shop picked, Shop answers questions and the email sends the
+  alerts, because Shop's terms forbid reading it on its own.
+- ⚠️ **AfterShip knows only what is added to it**: a tracking number the agent adds when somebody
+  hands it one (that add waits for their yes), or one added in AfterShip itself.
+- ⚠️ **Late comes from the expected date** an email or the carrier gave. A package with no expected
+  date is never called late.
+- ⚠️ **The price is the order total an email showed.** An order whose emails show no price always
+  counts.
+- ⚠️ **It rides the mail watcher.** Package Tracker needs an email connection whichever source is
+  picked, and the alerts and the roundup come on the watcher's check, every few minutes.
+- ⚠️ **Not run on a real inbox yet**: the tests prove each rule, and nobody has picked a roundup and
+  received one.
 
 ## Known Weaknesses — disclose, don't hide
 

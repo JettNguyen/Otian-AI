@@ -5067,6 +5067,7 @@
       "summary": "Connect Shop and Package Tracker can read the orders the Shop app keeps, from every store whose receipts reach it, when you ask what's coming.",
       "where": "On an agent with Package Tracker, on the Connections tab, under Apps: Shop.",
       "how": [
+        "Open Package Tracker's settings on the agent's Skills tab, and under Where it finds your packages, pick Shop.",
         "Open the agent's Connections tab, then Apps, and pick Shop.",
         "Press Connect Shop. Archie shows a short code and opens Shop in your browser. Check that Shop shows the same code, then approve it there. Archie notices on its own.",
         "Ask your agent what's coming. It answers from your email and from Shop, and says which is which."
@@ -5076,16 +5077,48 @@
         "It reads your orders and nothing else. It cannot buy anything through Shop.",
         "Shop knows the orders whose receipts reached an email account you connected inside Shop.",
         "To take it away, open Shop, then Account, then Connections, or remove Shop on the Connections tab.",
-        "Nobody has signed in to Shop with it yet."
+        "With Shop picked, alerts still come from your email, because Shop does not let assistants check it on their own."
       ],
       "phone": "Connecting happens at the computer. Once it is connected, asking from Archie Mobile works the same.",
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie a2a36187, de76a243).",
+      "hold": "In no release yet (Archie a2a36187, de76a243, 0acdd2e9).",
       "unwatched": true,
       "trust": [
-        "🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, never signed in to Shop by a person"
+        "🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, first signed in by Jett on October 30, 2026"
+      ],
+      "wording": "",
+      "guide": ""
+    },
+    {
+      "id": "package-tracker-settings",
+      "name": "Package Tracker's settings",
+      "area": "addons",
+      "summary": "Pick where Package Tracker finds packages, which moments it tells you about, and whether it tells you right away or in one roundup a day.",
+      "where": "On an agent with Package Tracker, on the Skills tab: open Package Tracker.",
+      "how": [
+        "Open the agent's Skills tab and open Package Tracker.",
+        "Under Where it finds your packages, pick Your email, AfterShip, or Shop.",
+        "Under Tell me when a package, tick the moments you want: ships, is out for delivery, is delivered, or is late or has a problem.",
+        "Under When to tell you, pick Right away or In a daily roundup. For a roundup, set Daily roundup time.",
+        "To leave some out, fill in Only orders over, Only these stores, or Never these stores."
+      ],
+      "limits": [
+        "One source at a time. With Shop picked, alerts still come from your email.",
+        "With AfterShip picked, a package shows once its tracking number is in AfterShip: hand it to your agent, and say yes when it asks to add it.",
+        "A package is late once its expected date has passed without a delivery. One with no expected date is never called late.",
+        "An order whose emails show no price always counts, whatever the price you set.",
+        "Quiet hours hold the alerts and the roundup until they end."
+      ],
+      "phone": "The same settings are on Package Tracker in Archie Mobile, with the moments as buttons you press on and off.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 0acdd2e9, archie-mobile ca31ff9).",
+      "unwatched": true,
+      "trust": [
+        "🚧 Package Tracker's settings: where it finds packages, what it tells you, and when: BUILT 2026-10-31, in no release yet, not yet run on a real inbox"
       ],
       "wording": "",
       "guide": ""

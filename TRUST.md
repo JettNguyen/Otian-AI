@@ -1875,7 +1875,7 @@ stop asking for a chat app while Archie Mobile is on (`phoneOn` in `src/app/agen
   only while the computer is on, awake and running Archie.
 - ⚠️ **Type-checked, not yet walked through** on a real first run with a phone in hand.
 
-*Amended October 30, 2026 (Archie `9529e755`, in no release yet): Archie Mobile is a choice in the
+*Amended October 30, 2026 (Archie `9529e755`, in 0.3.14 on a Mac since October 30, 2026, with Windows still on 0.3.12): Archie Mobile is a choice in the
 Chat app list, and a chat app can be taken off one agent.*
 
 **The claim:** On an agent's Setup tab, under Chat app, Archie Mobile is the first choice in the list

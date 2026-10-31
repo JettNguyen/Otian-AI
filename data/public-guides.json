@@ -3183,7 +3183,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-10-10",
-      "updated_at": "2026-10-17",
+      "updated_at": "2026-10-28",
       "section": "getting_started",
       "read_minutes": 4,
       "body": [
@@ -3242,6 +3242,7 @@
             "On our AI, what each request cost, and a scrambled one-way stamp of the computer and internet address that claimed free credits.",
             "Second-factor sign-in records, invoices for any guided session, and any refused checkout (the account, the country, the amount).",
             "Your address on our weekly letter's list, and whether it is switched on.",
+            "After a trial or plan ends: which of our three emails went to you, and whether you stopped them.",
             "With phone access on, the messages between your computer and phone, sealed with a key we never receive. Unsealed: when each was left, which version of Archie left it, whether it was picked up, and your phone's name from pairing.",
             "How many times each add-on was added, but not by whom."
           ]
@@ -3274,12 +3275,13 @@
           "type": "list",
           "items": [
             "An account or app: on your agent's Connections tab, under Email, calendar, files, or under Apps, press the trash can beside it. Its sign-in or key stays in Settings, under Saved keys, until you remove it there.",
-            "A chat app: remove its token in Settings, under Saved keys. Your agent still answers in the Archie window.",
+            "A chat app: on your agent's Setup tab, under Chat app, pick it and press Disconnect. Its token stays in Settings, under Saved keys, until you remove it there. Your agent still answers in the Archie window.",
             "Your AI company: change it on your agent's Setup tab, under AI account.",
             "Crash and error reports and the version check-in: in Settings, under Privacy, turn off Send crash reports.",
             "Your phone, or a lost one: on your agent's Setup tab, under Chat app, press Archie Mobile, then Disconnect every phone. That empties the sealed mailbox too.",
             "This computer: on the Account page, under Resetting Archie, press Reset Archie, then type reset. Your agents and saved keys are erased and every phone disconnected; Open Archie at login and waking this computer for routines stay.",
-            "Your Otian AI account, or the weekly letter: sign in at https://otianai.com/account/"
+            "Your Otian AI account, or the weekly letter: sign in at https://otianai.com/account/",
+            "Our emails after a trial or plan ends: press Stop these emails at the bottom of one."
           ]
         },
         {
@@ -3391,7 +3393,7 @@
         {
           "type": "list",
           "items": [
-            "Each chat app keeps its own approved list. Only two things reset one: pasting a different connection code for that app, or removing its saved code on the Settings page, under Saved keys (which resets every agent using it).",
+            "Each chat app keeps its own approved list. Only three things reset one: pasting a different connection code for that app, pressing Disconnect on it on the Setup tab under Chat app (which resets this agent only), or removing its saved code on the Settings page, under Saved keys (which resets every agent using it).",
             "Someone got no reply: they are told once that they aren’t approved, then your agent stays quiet for about an hour. Approve them and ask them to write again.",
             "Reset access makes the agent forget its owner and every guest, and issues a new code. It answers nobody until it is claimed again."
           ]

@@ -963,9 +963,9 @@
       ],
       "phone": "Only on the computer. Archie Mobile has no chat app list.",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie 9529e755).",
+      "released": "0.3.14",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
       "trust": [
         "✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID AND IPHONE"

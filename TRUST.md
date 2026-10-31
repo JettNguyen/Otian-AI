@@ -19150,6 +19150,60 @@ Documents page (archie-mobile `src/screens/Manage.tsx`), and in the held Archie 
 **The boundaries** "Never 'nothing leaves your computer'" and "Found by name only" above carry the
 short page and the never-sent file as of this amendment.
 
+### 🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, never signed in to Shop by a person
+
+*Built October 30, 2026 (Archie `a2a36187`; in no release yet).*
+
+**Proposed wording, Jett's to approve:** "If you use the Shop app, connect Shop on your agent's
+Connections tab and sign in to Shop in your browser. When you ask Package Tracker what's coming, it
+can also read the orders Shop keeps, from every store whose receipts reach Shop, whichever email
+address they went to. It reads Shop only when you ask, and it never buys anything."
+
+**Why it's true**, paths in the Archie repo unless named:
+
+- **Signing in.** Shop's sign-in server (`accounts.shop.app`) has no way for an app to register and
+  knows an app only by a small file the app publishes. Archie's is
+  `https://otianai.com/archie/oauth-client.json` (this repo's `archie/oauth-client.json`, written from
+  `client_document` in `crates/archie-net/src/mcp_auth.rs`), and `connector_mcp_sign_in` in
+  `src-tauri/src/commands/integrations.rs` signs in as it whenever a server says it reads such files.
+  The sign-in comes back to one of the addresses on this computer that the file lists
+  (`authorize_loopback_at` in `crates/archie-core/src/oauth.rs`), and an answer that does not name
+  Shop's sign-in server is refused before its code is used (`check_issuer`, as the MCP spec
+  requires). Found against Shop's live server on October 30, 2026
+  (`shop_says_how_to_sign_in_and_reads_our_document` in `crates/archie-runtime/tests/mcp_live.rs`).
+- **Only orders.** Shop offers nineteen tools, most of them for shopping and paying. Archie keeps
+  one, `search_orders`, which Shop marks as only reading (`SERVER_TERMS` in
+  `crates/archie-domain/src/connectors.rs`), so nothing that buys is ever offered to the agent.
+- **Only when asked.** Shop's terms for assistants forbid reading an account in the background.
+  Shop is among the agent's tools only in the conversation of the person whose Shop it is, never in
+  a routine or anybody else's conversation (`holders_conversation` in
+  `crates/archie-runtime/src/gateway/turn.rs`), and a call is refused unless that person sent the
+  message being answered, so a watcher's check-in never reads it (`dispatch_mcp` in
+  `crates/archie-runtime/src/connectors.rs`; test `shop_is_not_called_on_a_turn_nobody_asked`).
+- **Staying signed in.** A refresh token Shop hands back in place of the old one is saved in the
+  Keychain under the same name (`signed_in_access_token` and `keep_replacements` in
+  `crates/archie-runtime/src/connectors.rs`).
+- **Never a setup step.** Package Tracker lists Shop as optional (`optional_integrations` in
+  `data/marketplace/skills/package-tracker.json`), so its setup never asks for it, and a build from
+  before this ignores it.
+
+**The boundaries.**
+
+- ⛔ **Never "tracks your Shop orders automatically", and no alert comes from Shop.** Shop forbids
+  reading it in the background, so the out-for-delivery, delivered and problem messages still come
+  from email alone.
+- ⛔ **Never say Archie can buy through Shop.** It keeps only the order tool.
+- ⚠️ **One person's Shop.** On Archie for Teams a Shop connection is its holder's, and only that
+  person's own messages reach it. An unassigned one is the owner's.
+- ⚠️ **What Shop knows is what reached Shop**: orders whose receipts went to an email account the
+  person connected inside Shop. Not every order everywhere.
+- ⚠️ **Taking it away** is in Shop, under Account, then Connections, or by removing Shop on the
+  Connections tab. Shop's own help says disconnecting does not delete what was already shared.
+- ⚠️ **Never signed in to Shop by a person yet**, so whether Shop accepts the file's addresses is
+  unproven until someone does.
+- ⚠️ **The same sign-in reaches any app that reads such a file**, through Connections, then
+  Something else. Only Shop has been checked.
+
 ## Known Weaknesses — disclose, don't hide
 
 These are true and unflattering. They go on the Trust page anyway.

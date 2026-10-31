@@ -1,0 +1,20 @@
+{
+  "client_id": "https://otianai.com/archie/oauth-client.json",
+  "client_name": "Archie",
+  "client_uri": "https://otianai.com",
+  "redirect_uris": [
+    "http://127.0.0.1:47613/callback",
+    "http://127.0.0.1:47614/callback",
+    "http://127.0.0.1:47615/callback",
+    "http://127.0.0.1/callback"
+  ],
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "token_endpoint_auth_method": "none",
+  "application_type": "native"
+}

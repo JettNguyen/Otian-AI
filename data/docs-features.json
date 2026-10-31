@@ -5061,6 +5061,36 @@
       "wording_pending": true
     },
     {
+      "id": "shop-orders-in-package-tracker",
+      "name": "Your Shop orders in Package Tracker",
+      "area": "connections",
+      "summary": "Connect Shop and Package Tracker can read the orders the Shop app keeps, from every store whose receipts reach it, when you ask what's coming.",
+      "where": "On an agent with Package Tracker, on the Connections tab, under Apps: Shop.",
+      "how": [
+        "Open the agent's Connections tab, then Apps, and pick Shop.",
+        "Press Connect Shop and sign in to Shop in your browser, then come back to Archie.",
+        "Ask your agent what's coming. It answers from your email and from Shop, and says which is which."
+      ],
+      "limits": [
+        "Your agent reads Shop only when you ask it in a message. Delivery alerts still come from your email.",
+        "It reads your orders and nothing else. It cannot buy anything through Shop.",
+        "Shop knows the orders whose receipts reached an email account you connected inside Shop.",
+        "To take it away, open Shop, then Account, then Connections, or remove Shop on the Connections tab.",
+        "Nobody has signed in to Shop with it yet."
+      ],
+      "phone": "Connecting happens at the computer. Once it is connected, asking from Archie Mobile works the same.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie a2a36187).",
+      "unwatched": true,
+      "trust": [
+        "🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, never signed in to Shop by a person"
+      ],
+      "wording": "",
+      "guide": ""
+    },
+    {
       "id": "connect-an-ai-assistant-address",
       "name": "Connect an app's address for AI assistants",
       "area": "connections",

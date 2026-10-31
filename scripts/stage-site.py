@@ -20,7 +20,11 @@ EXTRA = {'assets/articles.json', 'assets/ai-glossary-final.md', 'data/public-cat
          'phone/sw.js', 'phone/manifest.webmanifest', 'terms-of-service/versions/2026-09-14.json',
          # Who Archie is, as Shopify's catalog reads it: fetched by Shopify on every product search
          # the Archie app makes (archie_net::shopify::AGENT_PROFILE). Moving it breaks every search.
-         'ucp/agent.json'}
+         'ucp/agent.json',
+         # Who Archie is when it signs in to an app that reads client documents (Shop): the
+         # address is the app's client id (archie_net::mcp_auth::CLIENT_DOCUMENT), and a server
+         # fetches it on every sign-in. Moving or editing it breaks every one of those sign-ins.
+         'archie/oauth-client.json'}
 
 def public_file(rel):
     p = Path(rel)

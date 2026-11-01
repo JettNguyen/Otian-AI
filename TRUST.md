@@ -19385,7 +19385,12 @@ reply says so, with a button that turns it on."
 - **One row for each job** on the agent's Skills tab, with Where it lives, It can also and On its own
   (`planTileRows` in `src/app/tile-rows.ts`); the Routines tab says which job each routine is part
   of. The words are `PART_WORDS` in `src/app/vocab.ts`, and the rules are in
-  `docs/SKILL-ROUTINE-CONTROLS.md`.
+  `docs/SKILL-ROUTINE-CONTROLS.md`. **What an extra brings is under its own switch** (built
+  November 1, 2026, in no release yet, Archie `1891c72a` and archie-mobile `0a66064`): a list it
+  needs started, its answers and its routines sit right under "Remember birthdays and
+  anniversaries", not in the row's own checklist, answers and On its own (`partInside` in
+  `src/app/skill-config.tsx`). Do not say this of 0.3.15, which spreads an extra's pieces over the
+  row's own sections.
 - **Nothing an agent has moves.** Each part is still an add-on of its own underneath, with its own
   settings, lists and updates (`docs/ADDON-PARTS.md`), so an agent works as it did the day before.
 - **The card in the chat** is made in code, with no AI call (`crates/archie-runtime/src/gateway/part_offer.rs`):

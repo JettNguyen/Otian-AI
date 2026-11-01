@@ -19182,7 +19182,9 @@ Shop only when you ask, it never buys anything, and your email still sends the a
 - **Signing in.** Archie signs in the way Shop's page for AI agents says to
   (`shop.com/references/sign-in.md`): under Shop's own public client id for agents, Archie asks Shop
   for a short code, shows it, and opens Shop's page in the browser, where the person checks that the
-  codes match and approves. Archie names itself to Shop as "Archie: " and the agent's name. Shop's
+  codes match and approves. The same page shows as a QR code beside the code, to approve on a phone
+  instead (`qr_svg` on `DeviceSignInStart`; built November 1, 2026, in no release yet, Archie
+  `b18f3eb2`). Archie names itself to Shop as "Archie: " and the agent's name. Shop's
   addresses and client id are `DEVICE_SIGN_INS` in `crates/archie-domain/src/connectors.rs`; the
   asking and waiting are `device_authorize` and `device_poll` in `crates/archie-net/src/oauth2.rs`,
   run by `connector_device_sign_in_start` and `connector_device_sign_in_finish` in

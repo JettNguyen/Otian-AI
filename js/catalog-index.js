@@ -293,6 +293,10 @@ export const CATALOG_INDEX = [
     "name": "Mercury Watch"
   },
   {
+    "key": "skill:monarch-money-keeper",
+    "name": "Monarch Money Keeper"
+  },
+  {
     "key": "skill:money-in-out",
     "name": "Money In & Out"
   },
@@ -505,10 +509,6 @@ export const CATALOG_INDEX = [
     "name": "Sunday Stay-in-Touch Nudge"
   },
   {
-    "key": "skill:task-manager",
-    "name": "Task Manager"
-  },
-  {
     "key": "routine:team-standup",
     "name": "Team Standup"
   },
@@ -613,8 +613,16 @@ export const CATALOG_INDEX = [
     "name": "The Week in Classes"
   },
   {
+    "key": "skill:task-manager",
+    "name": "To-Do List"
+  },
+  {
     "key": "skill:google-tasks",
     "name": "To-Do List (Google Tasks)"
+  },
+  {
+    "key": "skill:ticktick",
+    "name": "To-Do List (TickTick)"
   },
   {
     "key": "skill:todoist",

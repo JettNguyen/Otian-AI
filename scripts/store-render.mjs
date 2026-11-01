@@ -214,7 +214,11 @@ function more(item, ctx) {
   const needs = item.required_screen.map((k) => SCREEN_NEEDS[k]).filter(Boolean);
   if (needs.length) parts.push(`<h3>What ${esc(item.name)} needs</h3>` + needs.map((n) => `<p>${esc(n)}</p>`).join(""));
   const built = item.required_integrations.map(formatIntegration);
-  if (item.required_skill) built.push(titleCase(item.required_skill.replace(/[-_]+/g, " ")) + " skill");
+  // The catalog's name for the skill, as the app's requiredSkillName gives it: task-manager is To-Do List.
+  if (item.required_skill) {
+    const skill = ctx.byKey.get(`skill:${item.required_skill}`);
+    built.push((skill ? skill.name : titleCase(item.required_skill.replace(/[-_]+/g, " "))) + " skill");
+  }
   if (built.length) {
     parts.push(`<h3>Works with</h3><ul class="sv-chips">${built.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`);
   }

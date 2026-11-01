@@ -990,11 +990,11 @@
         "Both computers still read the same email accounts and chat apps.",
         "Not tried yet with two computers and a phone."
       ],
-      "phone": "When Archie Mobile cannot read what a computer sent, its message says which computer to scan the code from, and where the code is.",
+      "phone": "If Archie Mobile says it could not read what your computer sent, show the code on the computer you want it to use and scan it again.",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie 72977b7f).",
+      "released": "0.3.15",
+      "claimable": true,
+      "hold": "",
       "unwatched": true,
       "trust": [
         "✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID AND IPHONE"
@@ -2225,7 +2225,7 @@
         "Tick a to-do to mark it done, or type one in Add a to-do."
       ],
       "limits": [
-        "Only on an agent with the Task Manager add-on. To-dos kept in Todoist or Google Tasks do not show here.",
+        "Only on an agent whose To-Do List is set to Here in Archie, under Where it lives. To-dos kept in another app, like Todoist, do not show here.",
         "Something waiting on you, like a draft to send, sits above it.",
         "A checklist your agent already posted in the chat updates only when your agent next touches the list.",
         "Change a date or a priority by telling your agent, or in the list on the Knowledge tab."
@@ -3037,7 +3037,7 @@
         "To drop it, press Delete under the reply that set it, on the Dashboard, on the Calendar, or on the card when it goes off."
       ],
       "limits": [
-        "Only on an agent with the Task Manager add-on.",
+        "Only on an agent whose To-Do List is set to Here in Archie, under Where it lives.",
         "Promises caught from texts show on the list only with Commitment Keeper as well.",
         "Nobody has watched it in the Archie window yet."
       ],
@@ -5081,12 +5081,12 @@
       ],
       "phone": "Connecting happens at the computer. Once it is connected, asking from Archie Mobile works the same.",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie a2a36187, de76a243, 0acdd2e9, 4957d811).",
+      "released": "0.3.15",
+      "claimable": true,
+      "hold": "",
       "unwatched": true,
       "trust": [
-        "🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, first signed in by Jett on October 30, 2026"
+        "🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, first signed in by Jett on October 30, 2026"
       ],
       "wording": "",
       "guide": ""
@@ -5111,14 +5111,14 @@
         "An order whose emails show no price always counts, whatever the price you set.",
         "Quiet hours hold the alerts and the roundup until they end."
       ],
-      "phone": "The same settings are on Package Tracker in Archie Mobile, with the moments as buttons you press on and off.",
+      "phone": "The same settings are on Package Tracker in Archie Mobile. There, Tell me when a package is a line of text, so pick its moments in Archie on your computer.",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie 0acdd2e9, 611cc748, e54ce813, archie-mobile ca31ff9).",
+      "released": "0.3.15",
+      "claimable": true,
+      "hold": "",
       "unwatched": true,
       "trust": [
-        "🚧 Package Tracker's settings: where it finds packages, what it tells you, and when: BUILT 2026-10-31, in no release yet, not yet run on a real inbox"
+        "🚧 Package Tracker's settings: where it finds packages, what it tells you, and when: BUILT 2026-10-31, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, not yet run on a real inbox"
       ],
       "wording": "",
       "guide": ""
@@ -5142,14 +5142,14 @@
         "An agent set up before this can have two apps on for one job until you press Keep beside one.",
         "Archie for Teams shows only the parts its own Marketplace lists."
       ],
-      "phone": "Archie Mobile shows the same tiles in its Marketplace and the same one row per job on an agent's Skills tab, with Where it lives, It can also and On its own. Its Routines tab says which job each routine is part of.",
+      "phone": "Archie Mobile lists each skill and routine on its own, without the tiles. Pick where a job lives, and turn its extras and routines on or off, in Archie on your computer.",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie 28ce7c78, d5387abd, a7c19010, 2df79967, 200933d5, 5542bc78, d3a60b9d, 5641dfc1, archie-mobile aec7d9b, 54cf22d).",
+      "released": "0.3.15",
+      "claimable": true,
+      "hold": "",
       "unwatched": true,
       "trust": [
-        "🚧 One tile for each job in the Marketplace, and one row for it on your agent: BUILT 2026-10-31, in no release yet, not yet used by an owner"
+        "🚧 One tile for each job in the Marketplace, and one row for it on your agent: BUILT 2026-10-31, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, not yet used by an owner"
       ],
       "wording": "",
       "guide": "skills-specialists-routines"
@@ -5176,12 +5176,12 @@
       ],
       "phone": "Ask about any of them from Archie Mobile once they are connected on the computer. Connecting happens on the computer.",
       "editions": "both",
-      "released": "",
-      "claimable": false,
-      "hold": "In no release yet (Archie a1ada6b7, 9ad34152, e0cac126, 5a50e9f2, 4957d811, archie-mobile 250ae49).",
+      "released": "0.3.15",
+      "claimable": true,
+      "hold": "",
       "unwatched": true,
       "trust": [
-        "🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, in no release yet, never signed in to by a person"
+        "🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, never signed in to by a person"
       ],
       "wording": "",
       "guide": ""
@@ -6862,7 +6862,7 @@
       "name": "Team Starter pack",
       "area": "teams",
       "summary": "A new Archie for Teams agent starts with Team Starter: a shared to-do list, a record of who took which job, web lookups, and a personality naming who it answers.",
-      "where": "In the Marketplace, Team Starter holds Task Manager, Who's Got This, Researcher, and The Team Assistant. On the first run, Who is on my team? puts \"On my team:\" in the message box.",
+      "where": "In the Marketplace, Team Starter holds To-Do List, Who's Got This, Researcher, and The Team Assistant. On the first run, Who is on my team? puts \"On my team:\" in the message box.",
       "how": [],
       "limits": [
         "It goes on a new agent without asking, the way Everyday Assistant does on Archie.",
@@ -6962,7 +6962,7 @@
         "A teammate's adds and changes to entries happen at once, with an undo, as yours do. Removing an entry waits for a yes in their own chat, from them.",
         "Making a new list or adding a column stays yours.",
         "On every setting, a teammate reads every list the agent can. On a list that says whose each entry is, their answers keep to their own work.",
-        "A task in Todoist or Google Tasks is a connected app, so the middle setting leaves it out. A task in Task Manager is an entry on a list, so it is in.",
+        "A task in Todoist or Google Tasks is a connected app, so the middle setting leaves it out. A task kept Here in Archie is an entry on a list, so it is in.",
         "Nobody has picked it on a real agent yet."
       ],
       "phone": "On an iPhone, Archie Mobile has the same three answers under More, then Teammates.",

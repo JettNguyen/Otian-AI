@@ -2435,7 +2435,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-10-14",
+      "updated_at": "2026-10-31",
       "section": "set_up_what_agent_does",
       "setup_key": "",
       "video": "",
@@ -2457,7 +2457,7 @@
         },
         {
           "type": "text",
-          "text": "Skills with a routine attached show a switch: “Messages you on a schedule” or “Not messaging you on a schedule”."
+          "text": "A skill’s routines are on its card, under On its own, each with its schedule and a switch. On the Routines tab, each one says what it is part of, like “Part of To-Do List”, and has the same switch."
         },
         {
           "type": "note",
@@ -2492,7 +2492,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-10-27",
+      "updated_at": "2026-10-31",
       "section": "set_up_what_agent_does",
       "setup_key": "",
       "video": "",
@@ -2518,7 +2518,7 @@
         },
         {
           "type": "text",
-          "text": "About 10 cents a look-up, the searches and the pages they bring back included, billed to your AI account, with no separate subscription. At most five searches a job unless a skill's page says otherwise; Deep Research asks for twenty, so it is slower and comes to about 40 cents a run."
+          "text": "About 10 cents a look-up, the searches and the pages they bring back included, billed to your AI account, with no separate subscription. At most five searches a job unless a skill's page says otherwise; a deeper run, from the Researcher's Dig deeper switch, asks for twenty, so it is slower and comes to about 40 cents a run."
         },
         {
           "type": "note",
@@ -2530,7 +2530,7 @@
         },
         {
           "type": "text",
-          "text": "Nothing installed could look it up. Add the Researcher for quick facts, or Deep Research for something you will act on."
+          "text": "Nothing installed could look it up. Add the Researcher for quick facts, and turn on its Dig deeper switch for something you will act on."
         }
       ]
     },
@@ -2923,7 +2923,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-07-27",
+      "updated_at": "2026-10-31",
       "section": "bring_agent_online",
       "setup_key": "",
       "video": "",
@@ -2939,7 +2939,7 @@
         },
         {
           "type": "text",
-          "text": "Skills that keep a list start empty: Sports Follow with no teams has nothing to report. Tell it once:"
+          "text": "Skills that keep a list start empty: Follow your teams, on Personal News Briefing, has nothing to report until you name a team. Tell it once:"
         },
         {
           "type": "list",

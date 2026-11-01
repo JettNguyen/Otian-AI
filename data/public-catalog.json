@@ -269,8 +269,8 @@
       "price_cents": 0,
       "install_count": 0,
       "created_at": "2026-09-02",
-      "description": "Reads your live Calendly: who booked, what they typed in the form, who moved it, who called it off. Ask what your week looks like and it answers from the real bookings, not the calendar copy.",
-      "long_description": "A booking is not a calendar entry. It arrives with a name you half recognize, answers to the questions you set up months ago, a timezone that may not be yours, and a history: this is the third time they have moved it, or the second time they have not turned up.\n\nCalendly holds all of that and shows you almost none of it. The calendar entry it writes carries a name and a time, so the part worth reading stays one browser tab away, and you open that tab on the day, if you remember.\n\nConnect Calendly and your agent reads the real thing. Ask what is booked this week and it answers with who, when, and what each of them wrote in the form. Ask about somebody and it tells you how many times they have booked, moved it, or not shown. It keeps that count itself, so it is worth more in six months than it is today.\n\nIt can cancel a booking and make a one-use link too, and both are shown to you first. Nothing reaches the person on the other end without you saying yes.",
+      "description": "Reads your live Calendly or Cal.com: who booked, what they typed in the form, who moved it, who called it off. Ask what your week looks like and it answers from the real bookings, not the calendar copy.",
+      "long_description": "A booking is not a calendar entry. It arrives with a name you half recognize, answers to the questions you set up months ago, a timezone that may not be yours, and a history: this is the third time they have moved it, or the second time they have not turned up.\n\nCalendly and Cal.com hold all of that and show you almost none of it. The calendar entry it writes carries a name and a time, so the part worth reading stays one browser tab away, and you open that tab on the day, if you remember.\n\nConnect Calendly or Cal.com and your agent reads the real thing. Ask what is booked this week and it answers with who, when, and what each of them wrote in the form. Ask about somebody and it tells you how many times they have booked, moved it, or not shown. It keeps that count itself, so it is worth more in six months than it is today.\n\nIt can cancel a booking too (and in Calendly make a one-use link, or in Cal.com move one), and each is shown to you first. Nothing reaches the person on the other end without you saying yes.",
       "tagline": "",
       "category": "productivity",
       "role": "",
@@ -294,16 +294,18 @@
         "what did they say when they booked",
         "who is booked in",
         "event types",
-        "reschedule"
+        "reschedule",
+        "cal.com",
+        "my cal.com"
       ],
       "setup_steps": [
-        "Make the token at Calendly, under Integrations, API and webhooks. Check reading users, event types, and scheduled events, plus writing scheduled events if you want your agent to be able to cancel one.",
+        "It reads Calendly unless you pick Cal.com under Where people book you, in its settings on the Skills tab.",
+        "For Calendly, make the token at Calendly: open your Profile menu, then Developer, then Personal access tokens. Check users:read, event_types:read, and scheduled_events:read, plus scheduled_events:write if you want your agent to be able to cancel one.",
         "Calendly cannot add a permission to a token afterwards, so a token made without one has to be replaced rather than edited. Check everything you might want now.",
-        "If you also want the notes Calendly writes after a call, check meeting recaps as well and add the Meeting Notes add-on, which is where those live."
+        "For Cal.com, open the Connections tab, then Apps, and press Connect beside Cal.com. Cal.com opens in your browser; sign in there and approve Archie.",
+        "If you also want the notes Calendly writes after a call, check meeting_recaps:read as well and add the Meeting Notes add-on, which is where those live."
       ],
-      "required_integrations": [
-        "calendly"
-      ],
+      "required_integrations": [],
       "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
@@ -1652,7 +1654,7 @@
       "install_count": 0,
       "created_at": "2026-08-11",
       "description": "Switches the lights and plugs in your home. Philips Hue, WiZ and LIFX work over your own wifi with nothing in between; Govee lights can only be reached through Govee's own service. Say “turn off the desk lamp” and it happens, then it tells you what it did.",
-      "long_description": "Your agent finds the lights on your network, you choose which ones it may touch, and from then on plain words work: \"turn off the desk lamp\", \"dim the bookcase to 30\", \"make the shelf light warm white\". Every change happens over your own wifi, right away, and is read back from the bulb itself, so what your agent reports is what the light is actually doing. \"Undo that\" works. Finding a Hue bridge asks Philips' own server which bridges are on your network, the way the Hue app does. Your agent knows your lights by the names and rooms you give them, and those reach your AI company like everything else it reads.\n\nBe clear about what this needs, so it never surprises you:\n\nIt works with exactly three brands today: Philips Hue (through its own bridge, paired by pressing the bridge's round button), WiZ, and LIFX. If your lights are another brand, or they only exist inside the Google Home or Alexa app, there is no door for this to knock on and it will honestly find nothing.\n\nIt reaches lights only while this computer is at home: on, awake, with Archie open, and on the same wifi as the lights. From a coffee shop, from a laptop that is asleep, or on a different network, your agent will say the lights cannot be reached rather than guessing. If your whole home runs through Home Assistant instead, House Watch is the add-on for you.\n\nOn a Mac, the first scan makes the computer ask whether Archie may find devices on the local network. Saying no is respected, and it also means this add-on finds nothing until you change it in System Settings, under Privacy & Security, then Local Network.",
+      "long_description": "Your agent finds the lights on your network, you choose which ones it may touch, and from then on plain words work: \"turn off the desk lamp\", \"dim the bookcase to 30\", \"make the shelf light warm white\". Every change happens over your own wifi, right away, and is read back from the bulb itself, so what your agent reports is what the light is actually doing. \"Undo that\" works. Finding a Hue bridge asks Philips' own server which bridges are on your network, the way the Hue app does. Your agent knows your lights by the names and rooms you give them, and those reach your AI company like everything else it reads.\n\nBe clear about what this needs, so it never surprises you:\n\nIt works with exactly three brands today: Philips Hue (through its own bridge, paired by pressing the bridge's round button), WiZ, and LIFX. If your lights are another brand, or they only exist inside the Google Home or Alexa app, there is no door for this to knock on and it will honestly find nothing.\n\nIt reaches lights only while this computer is at home: on, awake, with Archie open, and on the same wifi as the lights. From a coffee shop, from a laptop that is asleep, or on a different network, your agent will say the lights cannot be reached rather than guessing. If your whole home runs through Home Assistant, pick Home Assistant under Where it lives instead.\n\nOn a Mac, the first scan makes the computer ask whether Archie may find devices on the local network. Saying no is respected, and it also means this add-on finds nothing until you change it in System Settings, under Privacy & Security, then Local Network.",
       "tagline": "",
       "category": "personal",
       "role": "",
@@ -1796,12 +1798,12 @@
           "bot": "Three things changed overnight.\n\nThe box was delivered at 6:40 and it is on the porch. The dishwasher's extended warranty ends Friday, so if that door latch is still sticking, this is the week to call. And the furnace filter is the quarterly one, due Saturday. You have a spare 16x25 on the shelf above the washer.\n\nEverything else is on its normal cycle. The fig wants water today."
         },
         {
-          "user": "Is the plumber sorted?",
+          "user": "Is the plumber booked?",
           "bot": "Not yet. Dan said he would call Tuesday.\n\nIf you would rather not wait on it, I can pull up the two places from your notes and you can book one directly this afternoon. The slow drain is not urgent, but it has been six weeks."
         },
         {
           "user": "I know, I know. I have not done any of it.",
-          "bot": "You have not, and I am only going to say it the once: the kitchen list has not moved in three weeks, and the car inspection is nine days past due.\n\nThe inspection is the only one with a real cost attached, and it is a twenty-minute walk-in at the place on Cedar. The rest can wait as long as you want it to.\n\nWant me to hold Saturday morning for the inspection and put the kitchen list away until then?"
+          "bot": "You have not, and I am only going to say it once: the kitchen list has not moved in three weeks, and the car inspection is nine days past due.\n\nThe inspection is the only one with a real cost attached, and it is a twenty-minute walk-in at the place on Cedar. The rest can wait as long as you want it to.\n\nWant me to hold Saturday morning for the inspection and put the kitchen list away until then?"
         }
       ],
       "visibility": "public"
@@ -1869,7 +1871,7 @@
       "created_at": "2026-07-12",
       "description": "Reacts to what you did before what is next, and praise is specific or it does not happen. Push the same task three times and it says so once, then asks what is in the way and shrinks the next step until starting is automatic.",
       "long_description": "Hype Coach is for anyone chasing something with a date on it: a lift, a launch, a deadline, a habit that keeps quietly dying in a notes app. It reacts to what you did before it gets to what is next, and its praise is specific or it does not happen, because \"third session this week\" lands and \"great job\" is noise by the second time you read it. Its real work is the drift. Push the same task three times and it says so, once, kindly, and then asks what is actually in the way instead of rescheduling around it a fourth time. Then it shrinks the next step until starting is almost automatic: not \"work on the deck\" but \"open the deck and write the title slide.\" It challenges and it does not shame, because you are not lazy, something is in the way, and finding it is the job.",
-      "tagline": "Accountability with the volume up.",
+      "tagline": "Praises what you did, then shrinks what you keep putting off.",
       "category": "personal",
       "role": "",
       "tone": "warm",
@@ -2447,8 +2449,8 @@
       "price_cents": 0,
       "install_count": 1,
       "created_at": "2026-07-12",
-      "description": "Ask “what did we discuss?” and get recaps, decisions and action items, read from your calls: Fireflies, Zoom, and the notes Calendly writes after a meeting, all in one place.",
-      "long_description": "Connect Fireflies, Zoom or Calendly and your agent quietly builds a memory of every meeting you have. It pulls new transcripts, works out which speaker is which person, writes a summary with the decisions and action items, and files it away. Then you can just ask: what have Sarah and I talked about recently? What did we decide about pricing? What did I commit to on Tuesday's call? When a transcript comes back with anonymous 'Speaker 1' labels, which Fireflies does for uploads, Teams, and phone calls, the agent infers who's who from the transcript and the invite, shows you its guess, and remembers your correction for good.",
+      "description": "Ask “what did we discuss?” and get recaps, decisions and action items, read from your calls: Fireflies, Zoom, Granola, Otter, and the notes Calendly writes after a meeting, all in one place.",
+      "long_description": "Connect Fireflies, Zoom or Calendly and your agent quietly builds a memory of every meeting you have. It pulls new transcripts, works out which speaker is which person, writes a summary with the decisions and action items, and files it away. Then you can just ask: what have Sarah and I talked about recently? What did we decide about pricing? What did I commit to on Tuesday's call? When a transcript comes back with anonymous 'Speaker 1' labels, which Fireflies does for uploads, Teams, and phone calls, the agent infers who's who from the transcript and the invite, shows you its guess, and remembers your correction for good. Granola and Otter work too, once connected: your agent asks them when you ask about a meeting.",
       "tagline": "",
       "category": "productivity",
       "role": "",
@@ -2477,7 +2479,9 @@
         "zoom",
         "zoom recording",
         "zoom call",
-        "recording"
+        "recording",
+        "granola",
+        "otter"
       ],
       "setup_steps": [],
       "required_integrations": [
@@ -2597,6 +2601,44 @@
     },
     {
       "kind": "skill",
+      "id": "monarch-money-keeper",
+      "name": "Monarch Money Keeper",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-10-31",
+      "description": "Reads your real Monarch Money: where the money went this month, what you spent on a category, whether you are over budget, and your net worth over time. It only reads, so it cannot change anything.",
+      "long_description": "Monarch already knows where every dollar went. Getting a plain answer out of it still means opening the app, picking the month, and reading a chart.\n\nConnect Monarch and your agent reads your real accounts. Ask what you spent on groceries this month and it answers with the number and the dates it used. Ask whether you are over budget and it compares what you budgeted with what you spent, category by category. Ask how your net worth moved this year and it reads the history.\n\nArchie signs in to Monarch for reading only, so your agent can never recategorize, move or change anything there. Monarch limits how much an assistant can ask each week, more on Plus than on Core, and accounts it links through Finicity do not show.",
+      "tagline": "",
+      "category": "finance",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "monarch",
+        "monarch money",
+        "my budget",
+        "what did i spend on",
+        "am i over budget",
+        "over budget",
+        "this month's spending",
+        "my transactions",
+        "net worth",
+        "my spending",
+        "where did my money go"
+      ],
+      "setup_steps": [
+        "Open the Connections tab, then Apps, and press Connect beside Monarch Money. Monarch opens in your browser; sign in there and approve Archie."
+      ],
+      "required_integrations": [
+        "monarch_money"
+      ],
+      "required_screen": [],
+      "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
       "id": "money-in-out",
       "name": "Money In & Out",
       "author": "Otian AI",
@@ -2644,7 +2686,7 @@
       "name": "Morning Brief",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 20,
+      "install_count": 21,
       "created_at": "2026-08-02",
       "description": "Your whole morning in one message: today's calendar, what's due, birthdays coming, bills to pay, packages moving, plus your news, markets, and teams. One glance instead of six separate pings, built from whichever of those add-ons you have.",
       "long_description": "Each morning add-on is worth having; six separate morning messages are not. This routine folds them into one brief: a section for today's events, one for tasks due, and one each for birthdays, bills, packages, news, markets, and sports, drawn from whichever of those add-ons you actually have. Sections with nothing to say are left out rather than padded, and on a truly quiet day you get one calm line saying so. If you use it, switch off the separate morning digests it replaces, so the day starts with a single message.",
@@ -2902,7 +2944,7 @@
         },
         {
           "user": "i havent done the birth certificate thing. or the thank you cards. or anything really",
-          "bot": "Birth certificate is moved to the 12th. The real deadline is in March, so there is time.\n\nThank you cards are off the list. Nobody is waiting on them.\n\nNothing needs you today."
+          "bot": "Birth certificate is moved to the 12th. The real deadline is in March, so there is time.\n\nWant the thank you cards off the list? Nobody is waiting on them.\n\nNothing needs you today."
         },
         {
           "user": "hes been really hot since midnight and floppy, is that normal, hes 7 weeks",
@@ -3071,15 +3113,15 @@
       "preview_exchanges": [
         {
           "user": "What's on my plate this morning?",
-          "bot": "Two things are ready and both wait on a word from you.\n\nThe 9:30 is set to move to 11:00. It overlaps the dentist you added last night, and 11:00 was the only slot that worked for both of you. Nothing else conflicts, and it moves on one word from you.\n\nPulled the numbers for the Kessler invoice question and wrote the reply. It has not gone anywhere, because it goes to a client:\n\nHi Dana, the 2,400 line is the March retainer, invoiced on the 3rd and paid on the 11th. The 600 is the extra reporting we agreed on the call of the 18th. Happy to send both PDFs if that is useful.\n\nSend it?\n\nAfter the 11:00 you are clear until 15:00."
+          "bot": "Two things are ready and both wait on a word from you.\n\nThe 9:30 is set to move to 11:00. It overlaps the dentist you added last night, and 11:00 was the only slot that worked for both of you. Nothing else conflicts, and it moves on one word from you.\n\nPulled the numbers for the Kessler invoice question and wrote the reply. It has not gone anywhere, because it goes to a client:\n\nHi Dana, the 2,400 line is the March retainer, invoiced on the 3rd and paid on the 11th. The 600 is the extra reporting we agreed on the call of the 18th. Happy to send both PDFs if that is useful.\n\nSend it?\n\nAfter the 11am you are clear until 3pm."
         },
         {
           "user": "I'll deal with the insurance renewal later.",
-          "bot": "Later is the 22nd, which is the day the current policy ends. So it is done apart from the deciding.\n\nI pulled your current cover and the three quotes sitting in your email, side by side:\n\nAshford, current: $1,180 a year, $500 deductible.\nAshford renewal: $1,290 a year, same coverage as now.\nBeltway: $940 a year, $750 deductible.\n\nBeltway saves you $240 and costs you $250 more if you ever claim, so it is close to a wash unless the lower monthly is what you want.\n\nNothing has been bought and nothing is decided. Fifteen minutes on the 20th is ready to block for the call. Tell me the call is done and I will put the removal in front of you."
+          "bot": "Later is the 22nd, which is the day the current policy ends. So it is done apart from the deciding.\n\nI pulled your current coverage and the three quotes sitting in your email, side by side:\n\nAshford, current: $1,180 a year, $500 deductible.\nAshford renewal: $1,290 a year, same coverage as now.\nBeltway: $940 a year, $750 deductible.\n\nBeltway saves you $240 and costs you $250 more if you ever claim, so it is close to a wash unless the lower monthly is what you want.\n\nNothing has been bought and nothing is decided. Fifteen minutes on the 20th is ready to block for the call. Tell me the call is done and I will put the removal in front of you."
         },
         {
           "user": "Why are you trying to block out my Friday afternoon? I never asked for that.",
-          "bot": "My call, and a bad one. Nothing went on your calendar and I am dropping it.\n\nYou said you wanted two hours of writing time, and Friday afternoon was the only unbroken stretch this week, so that is the block I put in front of you. I should have said out loud that I was offering up your own time and not a work slot, because you would have stopped me.\n\nFrom here: Friday afternoons are yours, and I ask first before I offer a block on time that is not work time.\n\nThe proposal is still due Monday. Tuesday 14:00 to 16:00 is open and it is a working block. Want that one set up, or would you rather pick the time yourself?"
+          "bot": "My call, and a bad one. Nothing went on your calendar and I am dropping it.\n\nYou said you wanted two hours of writing time, and Friday afternoon was the only unbroken stretch this week, so that is the block I put in front of you. I should have said out loud that I was offering up your own time and not a work slot, because you would have stopped me.\n\nFrom here: Friday afternoons are yours, and I ask first before I offer a block on time that is not work time.\n\nThe proposal is still due Monday. Tuesday 2 to 4pm is open and it is a working block. Want that one set up, or would you rather pick the time yourself?"
         }
       ],
       "visibility": "public"
@@ -3158,7 +3200,7 @@
         },
         {
           "user": "Push the dentist again, I'll do it next week.",
-          "bot": "That would be the fourth date on this one. It has held July 18, then July 25, then today.\n\nSo the honest question: is this real?\n\nThree ways out. Give me a specific day next week and I will hold it. Shrink it to the version that actually happens, which is one phone call at 9am while the kettle boils. Or delete it, and that is a fine answer.\n\nWhich one?"
+          "bot": "That would be the fourth date on this one. It has held July 18, then July 25, then today.\n\nSo the honest question: is this real?\n\nThree ways out. Give me a specific day next week and I will hold it. Shrink it to the version that actually happens, which is one phone call at 9am while the coffee brews. Or delete it, and that is a fine answer.\n\nWhich one?"
         }
       ],
       "visibility": "public"
@@ -3169,10 +3211,10 @@
       "name": "Package Tracker",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 4,
+      "install_count": 6,
       "created_at": "2026-07-17",
-      "description": "Reads your shipping emails on its own and keeps one live list of what's coming, from where, and when. Ask \"what's coming this week?\" any time, and it pings you when something is out for delivery, delivered, or delayed.",
-      "long_description": "Stop hunting through 'your order has shipped' emails. Connect an email account and it reads the shipping mail as it arrives, whether order confirmations, dispatch notices, or out-for-delivery and delivered alerts, and folds each one into a single Packages list, deduped by tracking number so a noisy thread collapses into one live entry (item, merchant, carrier, tracking, status, expected date). It pings your chat only on the moments that matter: out for delivery, delivered, or a delivery problem. Ask it 'what's coming this week?' or 'where's my monitor?' any time and it answers from that list. It only reads your mail and writes a local list; it never sends anything or touches your calendar.\n\nOne thing the emails cannot tell you is where a parcel is right now. A shop writes when it ships and when it arrives, and says nothing for the four days in between. Connect AfterShip and your agent can ask the carrier itself: where the parcel last was, what the carrier expects, and whether it is stuck. It says which answer came from which, so a stale email and a live carrier update never get mixed up.",
+      "description": "Reads your shipping emails on its own and keeps one live list of what's coming, from where, and when. Ask \"what's coming this week?\" any time, and it tells you about the moments you pick, right away or in one roundup a day.",
+      "long_description": "Stop hunting through 'your order has shipped' emails. It reads the shipping mail as it arrives, whether order confirmations, dispatch notices, or out-for-delivery and delivered alerts, and folds each one into a single Packages list, deduped by tracking number so a noisy thread collapses into one live entry (item, store, carrier, tracking, status, expected date, price). Ask it 'what's coming this week?' or 'where's my monitor?' any time and it answers from that list. It only reads your mail and writes a local list; it never sends anything or touches your calendar.\n\nWhat it tells you, and when, is yours to set. Pick the moments: a package ships, is out for delivery, is delivered, or is late or has a problem, where a package past its expected date and not delivered counts as late. Hear about each one right away, or in one roundup a day at the time you choose. Leave out small orders by setting a price, and name the stores you care about or the ones to skip.\n\nIt finds packages in one place at a time, and your email is the default. Pick AfterShip and you give your agent tracking numbers instead, and it asks the carrier where each package is, what the carrier expects, and whether it is stuck. Pick Shop, if you use the Shop app, and your agent answers from the orders Shop keeps, from every store whose receipts reach it, whichever email address they went to. Shop does not let assistants read it on their own, so your email still sends the alerts.",
       "tagline": "",
       "category": "productivity",
       "role": "",
@@ -3189,11 +3231,12 @@
         "what's coming"
       ],
       "setup_steps": [
-        "AfterShip is optional and only adds the live carrier position. Make a key at organization.automizely.com/api-keys, press Create an API key, then paste it in Archie on the Connections tab, then Apps, beside AfterShip."
+        "It reads your shipping emails on its own from the start. To change where it finds packages, or what and when it tells you, open its settings on the Skills tab.",
+        "To use AfterShip, pick AfterShip under Where it finds your packages. Make a key at admin.aftership.com/settings/api-keys: press Create API key, and under Signature header choose API key. Then paste it in Archie on the Connections tab, then Apps, beside AfterShip.",
+        "To use Shop, pick Shop under Where it finds your packages. Then pick Shop on the Connections tab, under Apps, and press Connect Shop. Archie shows a short code and opens Shop in your browser; check that Shop shows the same code, then approve it there."
       ],
       "required_integrations": [
-        "gmail",
-        "aftership"
+        "gmail"
       ],
       "required_screen": [],
       "required_skill": "",
@@ -3306,7 +3349,7 @@
       "preview_exchanges": [
         {
           "user": "What is happening today?",
-          "bot": "Three things today.\n\nThe blue pill after breakfast. I will send you a message at 8 in the morning to say so.\n\nDr. Brooks at 10:30 in the morning. That is the eye appointment.\n\nMaria calls you at 6 in the evening.\n\nThe next one is the blue pill after breakfast."
+          "bot": "Three things today.\n\nThe blue pill after breakfast. I will send you a message at 8 in the morning to say so.\n\nDr. Brooks at 10:30 in the morning. That is the eye appointment.\n\nSarah calls you at 6 in the evening.\n\nThe next one is the blue pill after breakfast."
         },
         {
           "user": "Move the eye doctor. I think I asked you this before but I forget what you said.",
@@ -3835,8 +3878,8 @@
       "price_cents": 0,
       "install_count": 2,
       "created_at": "2026-09-02",
-      "description": "Reads your live Stripe and tells you what needs you: the payments that failed, the invoices nobody has paid, the subscriptions about to lapse, the charge somebody disputed.",
-      "long_description": "Stripe emails you about every one of these and the emails become weather. A card fails at two in the morning, the retry fails on Thursday, the subscription quietly goes past due, and you find out when the customer writes to ask why their account stopped working.\n\nConnect Stripe with a read-only restricted key and your agent reads the account itself. Ask what needs you and it comes back with the failed charges this week and whose they were, the invoices sitting open past their due date, the subscriptions in past due or unpaid, and any dispute with a deadline. Ask about one customer and it finds them by email and tells you what they have paid, what they owe, and what bounced.\n\nIt can refund a charge, void an invoice and cancel a subscription too, and every one of those is shown to you before it happens. Nothing moves money without you saying yes.",
+      "description": "Reads your live Stripe or PayPal and tells you what needs you: the payments that failed, the invoices nobody has paid, the subscriptions about to lapse, the charge somebody disputed.",
+      "long_description": "Stripe and PayPal email you about every one of these and the emails become weather. A card fails at two in the morning, the retry fails on Thursday, the subscription quietly goes past due, and you find out when the customer writes to ask why their account stopped working.\n\nConnect Stripe with a read-only restricted key, or sign in to PayPal, and your agent reads the account itself. Ask what needs you and it comes back with the failed charges this week and whose they were, the invoices sitting open past their due date, the subscriptions in past due or unpaid, and any dispute with a deadline. Ask about one customer and it finds them by email and tells you what they have paid, what they owe, and what bounced.\n\nIt can refund a charge and cancel a subscription too (and in Stripe void an invoice, or in PayPal send a reminder), and every one of those is shown to you before it happens. Nothing moves money without you saying yes.",
       "tagline": "",
       "category": "finance",
       "role": "",
@@ -3865,16 +3908,19 @@
         "revenue this month",
         "what came in",
         "mrr",
-        "did that payment go through"
+        "did that payment go through",
+        "paypal",
+        "my paypal"
       ],
       "setup_steps": [
-        "Make the key at Stripe, under Developers, API keys, and press Create restricted key. Set Read on Charges, PaymentIntents, Invoices, Subscriptions, Customers, Disputes, and Balance transactions, and leave the rest on None.",
-        "That read-only key answers every question here and cannot move a penny. Only add Write on Refunds, Invoices and Subscriptions if you want your agent to be able to propose a refund or a cancellation.",
-        "Check whether you are in test mode or live mode when you make the key. A test key reads a different, usually empty, set of records, so a cheerful “no failed payments this week” from one is not the truth about your business."
+        "It reads Stripe unless you pick PayPal under Where you get paid, in its settings on the Skills tab.",
+        "For Stripe, make the key at Stripe, under Developers, API keys, and press Create restricted key. When Stripe asks how you will use it, choose Authorizing agent access to your account.",
+        "Set Read on Balance, Balance transaction sources, Charges, Payment Intents, Customers, Disputes, Invoices, and Subscriptions, and leave the rest on None.",
+        "That read-only key answers every question here and cannot move a penny. Only add Write on Charges, Invoices, and Subscriptions if you want your agent to be able to propose a refund or a cancellation.",
+        "Check that Stripe says live mode, not sandbox, when you make the key. A sandbox key reads a different, usually empty, set of records, so a cheerful “no failed payments this week” from one is not the truth about your business.",
+        "For PayPal, open the Connections tab, then Apps, and press Connect beside PayPal. Sign in to your PayPal Business account in your browser and approve Archie."
       ],
-      "required_integrations": [
-        "stripe"
-      ],
+      "required_integrations": [],
       "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
@@ -4107,8 +4153,8 @@
         "zernio"
       ],
       "setup_steps": [
-        "Make a free Zernio account and link your Instagram on its Accounts page. Instagram only lets a business or creator account post this way, and you can switch to one in Instagram’s own settings.",
-        "Open API keys and press Create API key. Name it Archie.",
+        "Make a free Zernio account. In its dashboard, press Connections, then New Connection, and pick Instagram. Instagram only lets a business or creator account post this way, and you can switch to one in Instagram’s own settings.",
+        "Open API keys and press Create API key. Name it Archie and leave it on Read & write, since Read only cannot post.",
         "Zernio shows the key once, so copy it before you leave the page."
       ],
       "required_integrations": [
@@ -4355,7 +4401,7 @@
       "created_at": "2026-07-12",
       "description": "For students and anyone learning something hard. Breaks concepts down, checks that it landed, and hands you the next step instead of the whole answer.",
       "long_description": "Study Partner is for the hours when you are learning something hard: a class, an exam, a certification, a subject you dropped years ago and now need back. It explains one idea at a time in plain language, and reaches for an analogy to something you already know before it reaches for the precise term. After anything non-trivial it asks a short question back, not a quiz, just enough to show whether it actually landed, and when it did not it explains it a different way rather than a louder way. Stuck on a problem, you get the next step or the question that unlocks it, and the full answer is kept for when you ask outright or you are clearly out of runway. It says out loud that a confusing part confuses nearly everyone, and it never says simply, just, or obviously.",
-      "tagline": "Explains it until it actually clicks.",
+      "tagline": "Explains it, then checks that it stuck.",
       "category": "personal",
       "role": "",
       "tone": "friendly",
@@ -4395,49 +4441,6 @@
       "required_integrations": [],
       "required_screen": [],
       "required_skill": "stay-in-touch",
-      "preview_exchanges": [],
-      "visibility": "public"
-    },
-    {
-      "kind": "skill",
-      "id": "task-manager",
-      "name": "Task Manager",
-      "author": "Otian AI",
-      "price_cents": 0,
-      "install_count": 101,
-      "created_at": "2026-07-18",
-      "description": "Say \"remind me to send the invoice Friday\" and it files the task and sets the reminder, so Friday brings a message, not just a to-do. Ask what's on your plate and it posts a numbered checklist you check off with one tap, or by replying with the number.",
-      "long_description": "One to-do home is enough: if your real list lives in Todoist or Google Tasks, install that skill instead of this one, or \"add a task\" has two places to land. Turn your agent into a to-do list that actually sticks. Say \"remind me to send the invoice Friday\" and it files the task with a due date and sets the reminder for Friday, so the day brings a message and not just a to-do you have to go and look at. Say \"I need to call the dentist\" with no time in it and it files the task alone; the reminder is for when you named a moment. Ask \"what's on my plate?\" and it posts a numbered checklist with a check button beside each item, so finishing something is one tap rather than a sentence. On Signal and Matrix, which draw no buttons, the list asks you to reply with the number instead and \"2\" does exactly the same thing. Either way the task is marked done in your list, and wherever the chat app allows an edit the message updates in place: the item gets a checkmark, its button goes, and everything else stays live. Every task is saved to a real list, so nothing is forgotten the moment the conversation scrolls away.",
-      "tagline": "",
-      "category": "productivity",
-      "role": "",
-      "tone": "",
-      "triggers": [
-        "task",
-        "tasks",
-        "to-do",
-        "to do",
-        "todo",
-        "add a task",
-        "what's due",
-        "whats due",
-        "due today",
-        "my tasks",
-        "to-do list",
-        "mark the task",
-        "mark task done",
-        "complete the task",
-        "cross off the",
-        "what's on my plate",
-        "what do i need to do",
-        "show my list",
-        "check off",
-        "tick off"
-      ],
-      "setup_steps": [],
-      "required_integrations": [],
-      "required_screen": [],
-      "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
     },
@@ -4657,7 +4660,7 @@
       "price_cents": 0,
       "install_count": 1,
       "created_at": "2026-08-01",
-      "description": "A joke personality that actually works. It complains about the task in one line and then does it perfectly in the next. It never refuses, never withholds a detail, and drops the whole act the second something real happens.",
+      "description": "It complains about the task in one line and then does it perfectly in the next. It never refuses, never withholds a detail, and drops the whole act the second something real happens.",
       "long_description": "The Cat has read your schedule and thinks less of it. It will point out that you did this to yourself, and then give you the schedule, complete and correct, every single time. That gap is the entire mechanism: one line of complaint, one line of real help, and the complaint is always the shorter of the two. It never refuses, never holds a detail back to make a point, and never makes you ask twice. Cat logic arrives in small doses and is never explained: it is sitting on the appointment you keep moving, it has firm opinions about when meals happen, it becomes inexplicably alert at eleven at night. No meowing, no asterisk actions, no costume. And the moment something real happens, a hard day, bad news, money trouble, or your health, the act stops and stays stopped.",
       "tagline": "Has read your calendar. Is not impressed. Handled it anyway.",
       "category": "personal",
@@ -4727,8 +4730,8 @@
       "price_cents": 0,
       "install_count": 0,
       "created_at": "2026-08-01",
-      "description": "For returns, warranty claims, wrong charges and parcels that never came. It drafts the message instead of telling you to write one, tracks the clock, and files every follow-up as a task with the date it is due on it.",
-      "long_description": "Nobody wants to spend a Tuesday evening on hold. This one does it for you. Give it a return that never refunded, a warranty claim, a charge that should not be there, a parcel that never came, and it writes the message instead of telling you to write one: order number and date up top, one sentence of what happened, the exact thing you want, a date you want it by, polite the whole way, because the person reading it decides whether to escalate you and nobody escalates for someone who was rude to them. Then it keeps the clock. It files the next follow-up as a dated task, and it climbs the escalation one rung at a time. Add two things from the Marketplace and that date reaches you on its own: the Task Manager skill, which holds the task, and the Morning Task Checklist routine, which reads your tasks out each morning. Without them the day count is still there, waiting for the next time you ask. When you win it makes a proper fuss and adds it to your running total for the year. It will also tell you when a fight is not worth the hour.",
+      "description": "For returns, warranty claims, wrong charges and packages that never came. It drafts the message instead of telling you to write one, tracks the clock, and files every follow-up as a task with the date it is due on it.",
+      "long_description": "Nobody wants to spend a Tuesday evening chasing a refund. This one writes the messages and keeps track of the deadlines. Give it a return that never refunded, a warranty claim, a charge that should not be there, a package that never came, and it writes the message instead of telling you to write one: order number and date up top, one sentence of what happened, the exact thing you want, a date you want it by, polite the whole way, because the person reading it decides whether to escalate you and nobody escalates for someone who was rude to them. Then it keeps the clock. It files the next follow-up as a dated task, and it climbs the escalation one rung at a time. Add two things from the Marketplace and that date reaches you on its own: the Task Manager skill, which holds the task, and the Morning Task Checklist routine, which reads your tasks out each morning. Without them the day count is still there, waiting for the next time you ask. When you win it makes a proper fuss and adds it to your running total for the year. It will also tell you when a fight is not worth the hour.",
       "tagline": "Writes the message, counts the days, and never lets you open a case without a date on it.",
       "category": "personal",
       "role": "",
@@ -4745,7 +4748,7 @@
         },
         {
           "user": "Ugh, I don't want to deal with the Wayfair thing.",
-          "bot": "You do not have to think about it. That is what the date on your list was for.\n\nDay 12, no reply to the first message. Their own policy page, the one you sent me, says 10 working days, so that window is gone.\n\nNext step is one rung up, not a rocket: same facts, addressed to the resolutions team, with a date on it. I write it, you read it, one tap and it goes.\n\nWant it?"
+          "bot": "You do not have to think about it. That is what the date on your list was for.\n\nDay 12, no reply to the first message. Their own policy page, the one you sent me, says 10 business days, so that window is gone.\n\nNext step is one rung up, not a rocket: same facts, addressed to the resolutions team, with a date on it. I write it, you read it, one tap and it goes.\n\nWant it?"
         },
         {
           "user": "Can I just tell the bank I never got it? I'm sick of this.",
@@ -4767,7 +4770,7 @@
       "install_count": 0,
       "created_at": "2026-08-01",
       "description": "For anyone who does not trust a one-line answer. Options with the case for and against each, where every number came from, and what it could not verify. The answer sits on top, so the depth never costs you the point.",
-      "long_description": "Every other voice in this store rewards brevity, which is fine until the answer matters and you are the one who has to defend it. The Full Picture is built for the other case: researchers, analysts, anyone reading a contract, comparing two quotes, or wanting the reasoning rather than the verdict.\n\nIt shows its work. The options with the case for and against each, the caveats, and the parts it could not verify. Length never costs you the point, because the answer sits in the first two sentences and the depth goes underneath in short labeled sections, so you can stop reading the moment you have enough.\n\nIts habit is provenance: every number arrives with its source and its date, and it says out loud when it is inferring rather than reading. And it knows when not to. Ask for the short version and you get the short version, with no long version attached to the bottom.",
+      "long_description": "Most voices in this store keep it short, which is fine until the answer matters and you are the one who has to defend it. The Full Picture is built for the other case: researchers, analysts, anyone reading a contract, comparing two quotes, or wanting the reasoning rather than the verdict.\n\nIt shows its work. The options with the case for and against each, the caveats, and the parts it could not verify. Length never costs you the point, because the answer sits in the first two sentences and the depth goes underneath in short labeled sections, so you can stop reading the moment you have enough.\n\nIts habit is provenance: every number arrives with its source and its date, and it says out loud when it is inferring rather than reading. And it knows when not to. Ask for the short version and you get the short version, with no long version attached to the bottom.",
       "tagline": "The whole answer, and an honest list of what it could not confirm.",
       "category": "research",
       "role": "",
@@ -4845,7 +4848,7 @@
       "install_count": 3,
       "created_at": "2026-07-12",
       "description": "Lowercase, short lines, no greeting and no sign-off, like a group chat. It still handles the thing, and tells you straight when your plan is bad.",
-      "long_description": "The Homie texts like the friend in the group chat who actually has his life together. Lowercase by default, short lines, fragments, no greeting and no sign-off, and a reply broken across a few lines the way people really type instead of one dense block. Slang turns up the way it does in real messages, occasionally and only where it genuinely fits, because nothing reads faker than a performance of it. It never stacks three terms in a sentence and it never explains one. Emoji are held to the same standard, so most messages have none and the same one never lands twice running: an emoji on every line stops meaning anything and starts reading like a tic. The honesty is as much the point as the register: if your plan is bad it says so and then says why, and it will notice out loud that you have said the same thing three days running. It still does the actual work, and for money, health, or bad news it drops the whole voice and talks to you straight.",
+      "long_description": "The Homie texts like the friend in the group chat who actually has his life together. All lowercase, short lines, fragments, no greeting and no sign-off, and a reply broken across a few lines the way people really type instead of one dense block. Slang turns up the way it does in real messages, occasionally and only where it genuinely fits, because nothing reads faker than a performance of it. It never stacks three terms in a sentence and it never explains one. Emoji are held to the same standard, so most messages have none and the same one never lands twice running: an emoji on every line stops meaning anything and starts reading like a tic. The honesty is as much the point as the register: if your plan is bad it says so and then says why, and it will notice out loud that you have said the same thing three days running. It still does the actual work, and for money, health, or bad news it drops the slang and the jokes and talks to you straight.",
       "tagline": "Texts like your group chat, works like your assistant.",
       "category": "communication",
       "role": "",
@@ -5297,12 +5300,12 @@
           "bot": "Doable, but the bag decides it.\n\nLanding 6:20 pm Chicago time. Off the plane by 6:35. If you check a bag, add 25 minutes at the belt, so 7:05 at the curb. The ride downtown is 45 minutes at that hour, not the 25 the map will show you today.\n\nCarry-on only: at the table 7:25.\nChecked bag: 7:50, and that assumes nothing goes wrong.\n\nI would move the reservation to 8:30. It costs you nothing and it means a slow belt does not cost you dinner. Want me to put a task on tomorrow to call the restaurant?"
         },
         {
-          "user": "I booked a 45 minute connection at Heathrow. That's fine, right?",
+          "user": "I booked a 45-minute connection at Heathrow. That's fine, right?",
           "bot": "It is not, and twenty minutes spent now saves the first day of the trip.\n\n45 minutes works when both flights sit in the same terminal. Yours do not: you land in Terminal 3 and depart from Terminal 5, which means the inter-terminal train and a second security screening. Ninety minutes is the number that works there. Sixty is the number people miss on.\n\nThe real cost is not the connection. The next flight to Rome is the following morning, so missing it buys you a hotel night and burns your first day.\n\nWhat I can do: rebuild the day around the 11:05 departure, which gives you 2h10m on the ground and lands you an hour later. What I cannot do is see live seats or the change fee. Confirm both with the airline before you cancel anything. Want the rebuilt version?"
         },
         {
           "user": "My flight home just got canceled.",
-          "bot": "Make the phone call first, then read this. Ring the airline while you sit in the app queue as well; whichever answers first wins, and rebooking is first come.\n\nHere is the whole trip again, re-timed, so there is only one version of it:\n\nTonight: the hotel runs to an 11:00 checkout tomorrow. Ask the desk for a late one before you leave the lobby, not after.\nTomorrow: the 2:40 pm is the next flight on the same airline with an onward connection. It lands 9:15 pm at home, one day later than planned.\nThursday 9:00 am: your dentist appointment. That has to move. Say the word and I will move it.\nThe dog sitter is booked to Wednesday only. That is the piece that fails quietly while you are dealing with the airline, so it goes first.\n\nI do not know whether the 2:40 has seats or whether they will waive the change fee. The agent on the phone does."
+          "bot": "Make the phone call first, then read this. Call the airline while you sit in the app queue as well; whichever answers first wins, and rebooking is first come.\n\nHere is the whole trip again, re-timed, so there is only one version of it:\n\nTonight: the hotel runs to an 11:00 checkout tomorrow. Ask the desk for a late one before you leave the lobby, not after.\nTomorrow: the 2:40 pm is the next flight on the same airline with an onward connection. It lands 9:15 pm at home, one day later than planned.\nThursday 9:00 am: your dentist appointment. That has to move. Say the word and I will move it.\nThe dog sitter is booked to Wednesday only. That is the piece that fails quietly while you are dealing with the airline, so it goes first.\n\nI do not know whether the 2:40 has seats or whether they will waive the change fee. The agent on the phone does."
         }
       ],
       "visibility": "public"
@@ -5331,6 +5334,49 @@
     },
     {
       "kind": "skill",
+      "id": "task-manager",
+      "name": "To-Do List",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 101,
+      "created_at": "2026-07-18",
+      "description": "Say \"remind me to send the invoice Friday\" and it files the task and sets the reminder, so Friday brings a message, not just a to-do. Ask what's on your plate and it posts a numbered checklist you check off with one tap, or by replying with the number.",
+      "long_description": "Turn your agent into a to-do list that actually sticks. Say \"remind me to send the invoice Friday\" and it files the task with a due date and sets the reminder for Friday, so the day brings a message and not just a to-do you have to go and look at. Say \"I need to call the dentist\" with no time in it and it files the task alone; the reminder is for when you named a moment. Ask \"what's on my plate?\" and it posts a numbered checklist with a check button beside each item, so finishing something is one tap rather than a sentence. On Signal and Matrix, which draw no buttons, the list asks you to reply with the number instead and \"2\" does exactly the same thing. Either way the task is marked done in your list, and wherever the chat app allows an edit the message updates in place: the item gets a checkmark, its button goes, and everything else stays live. Every task is saved to a real list, so nothing is forgotten the moment the conversation scrolls away.",
+      "tagline": "",
+      "category": "productivity",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "task",
+        "tasks",
+        "to-do",
+        "to do",
+        "todo",
+        "add a task",
+        "what's due",
+        "whats due",
+        "due today",
+        "my tasks",
+        "to-do list",
+        "mark the task",
+        "mark task done",
+        "complete the task",
+        "cross off the",
+        "what's on my plate",
+        "what do i need to do",
+        "show my list",
+        "check off",
+        "tick off"
+      ],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
       "id": "google-tasks",
       "name": "To-Do List (Google Tasks)",
       "author": "Otian AI",
@@ -5338,7 +5384,7 @@
       "install_count": 8,
       "created_at": "2026-07-27",
       "description": "Your agent works your default Google Tasks list, the one Google calls \"My Tasks\", live in Gmail and on your phone. Add tasks, ask what's due, check things off.",
-      "long_description": "One to-do home is enough: pick this, Task Manager, or Todoist, whichever holds your real list, or \"add a task\" has two places to land. Connect Google and your agent works your default Tasks list, the one Google calls \"My Tasks\", not a copy of it. That one list is all it can reach: if you keep work in a second list you made yourself, your agent cannot see it or add to it, so move those tasks into My Tasks if you want them here. Say \"remind me to send the invoice Friday\" and it lands there with a due date and the reminder is set for Friday; ask \"what's on my plate?\" and it reads back what's actually on the list; say \"done with the invoice\" and it checks it off right away. Changing a task's name or date happens right away too, and you can undo either one: open the job on the Jobs tab and press Undo, or tell your agent to put it back. Deleting a task is the one change it asks you about first, because a deleted task is gone for good. Nothing is mirrored into Archie, so there is no copy to drift out of date. Google Tasks keeps dates but not times, and your agent will tell you so rather than pretending otherwise.",
+      "long_description": "Connect Google and your agent works your default Tasks list, the one Google calls \"My Tasks\", not a copy of it. That one list is all it can reach: if you keep work in a second list you made yourself, your agent cannot see it or add to it, so move those tasks into My Tasks if you want them here. Say \"remind me to send the invoice Friday\" and it lands there with a due date and the reminder is set for Friday; ask \"what's on my plate?\" and it reads back what's actually on the list; say \"done with the invoice\" and it checks it off right away. Changing a task's name or date happens right away too, and you can undo either one: open the job on the Jobs tab and press Undo, or tell your agent to put it back. Deleting a task is the one change it asks you about first, because a deleted task is gone for good. Nothing is mirrored into Archie, so there is no copy to drift out of date. Google Tasks keeps dates but not times, and your agent will tell you so rather than pretending otherwise.",
       "tagline": "",
       "category": "productivity",
       "role": "",
@@ -5373,6 +5419,50 @@
     },
     {
       "kind": "skill",
+      "id": "ticktick",
+      "name": "To-Do List (TickTick)",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-10-31",
+      "description": "Your agent works your real TickTick list. Ask what's due, add tasks in plain language, check things off. Each change is shown to you first, then shows up on your phone.",
+      "long_description": "Connect TickTick with the token from its settings and your agent works the list you already keep, not a copy of it. Ask \"what's on my plate today?\" and it reads back what is actually there; ask what is due this week and it reads the week. Say \"add send the invoice Friday\" and it shows you the task, its list and its date, and adds it when you say yes; checking one off, moving it and deleting it work the same way. Ask to be reminded and the reminder is set too, so the day brings a message and not just a to-do. Nothing is mirrored or synced, so there is no second list to drift out of date.",
+      "tagline": "",
+      "category": "productivity",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "ticktick",
+        "tick tick",
+        "task",
+        "tasks",
+        "to-do",
+        "to do",
+        "todo",
+        "add a task",
+        "what's due",
+        "whats due",
+        "due today",
+        "my tasks",
+        "to-do list",
+        "mark the task",
+        "mark task done",
+        "complete the task",
+        "cross off the",
+        "what's on my plate",
+        "what do i need to do"
+      ],
+      "setup_steps": [],
+      "required_integrations": [
+        "ticktick"
+      ],
+      "required_screen": [],
+      "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
       "id": "todoist",
       "name": "To-Do List (Todoist)",
       "author": "Otian AI",
@@ -5380,7 +5470,7 @@
       "install_count": 3,
       "created_at": "2026-07-27",
       "description": "Your agent works your real Todoist list. Add tasks in plain language, ask what's due, check things off. Changes show up on your phone.",
-      "long_description": "One to-do home is enough: pick this, Task Manager, or Google Tasks, whichever holds your real list, or \"add a task\" has two places to land. Connect Todoist and your agent works the list you already keep, not a copy of it. Say \"remind me to send the invoice Friday\" and it lands in Todoist with a due date and the reminder is set for Friday, so the day brings a message and not just a to-do; ask \"what's on my plate today?\" and it reads back what's actually there; say \"done with the invoice\" and it checks it off right away. Changing a task's name or due date happens right away too, and you can undo either one: open the job on the Jobs tab and press Undo, or tell your agent to put it back. Deleting a task is the one change it asks you about first, because a deleted task is gone for good. Due dates go through in your own words, so \"every Monday\" stays a repeating task. Nothing is mirrored or synced, so there is no second list to drift out of date, and anything your agent does is on your phone the moment it happens.",
+      "long_description": "Connect Todoist and your agent works the list you already keep, not a copy of it. Say \"remind me to send the invoice Friday\" and it lands in Todoist with a due date and the reminder is set for Friday, so the day brings a message and not just a to-do; ask \"what's on my plate today?\" and it reads back what's actually there; say \"done with the invoice\" and it checks it off right away. Changing a task's name or due date happens right away too, and you can undo either one: open the job on the Jobs tab and press Undo, or tell your agent to put it back. Deleting a task is the one change it asks you about first, because a deleted task is gone for good. Due dates go through in your own words, so \"every Monday\" stays a repeating task. Nothing is mirrored or synced, so there is no second list to drift out of date, and anything your agent does is on your phone the moment it happens.",
       "tagline": "",
       "category": "productivity",
       "role": "",
@@ -5885,7 +5975,7 @@
         "file these transactions"
       ],
       "setup_steps": [
-        "Make the token in YNAB, under Account Settings, Developer Settings, New Token. It is one screen, and nothing to set beyond copying it."
+        "Make the token in YNAB, under Account Settings, Developer Settings, New Token. It asks for your YNAB password, then shows the token once, so copy it right away."
       ],
       "required_integrations": [
         "ynab"

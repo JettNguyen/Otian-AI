@@ -68,6 +68,7 @@
         "skill:home-maintenance",
         "routine:home-checkup",
         "skill:meal-planner",
+        "skill:stay-in-touch",
         "skill:birthday-keeper",
         "routine:birthday-heads-up",
         "skill:my-documents"
@@ -197,6 +198,7 @@
         "routine:lead-sweep",
         "skill:campaign-watch",
         "routine:campaign-check",
+        "skill:email-manager",
         "skill:common-questions",
         "skill:booking-watch"
       ],
@@ -238,6 +240,7 @@
     "routine:weekly-review": "work",
     "skill:task-manager": "work",
     "skill:todoist": "work",
+    "skill:ticktick": "work",
     "skill:google-tasks": "work",
     "routine:daily-task-digest": "work",
     "skill:commitment-keeper": "work",
@@ -277,6 +280,7 @@
     "routine:market-morning": "money",
     "skill:ynab-keeper": "money",
     "skill:lunch-money-keeper": "money",
+    "skill:monarch-money-keeper": "money",
     "skill:splitwise-keeper": "money",
     "skill:mercury-watch": "money",
     "skill:square-keeper": "money",
@@ -966,6 +970,9 @@
     "skill:mercury-watch": [
       "What's my Mercury balance?"
     ],
+    "skill:monarch-money-keeper": [
+      "How did my Monarch budget do this month?"
+    ],
     "skill:money-in-out": [
       "$14 lunch",
       "Spent 60 at the hardware store"
@@ -1054,6 +1061,9 @@
     "skill:the-handover": [
       "I'm away the 14th to the 21st, write the handover",
       "Trash goes out Tuesday night"
+    ],
+    "skill:ticktick": [
+      "What's on my TickTick today?"
     ],
     "skill:trip-planner": [
       "Lisbon, May 10 to 17",

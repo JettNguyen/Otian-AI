@@ -1905,7 +1905,7 @@ forgets who was let in on that app for this agent.
 - ⚠️ **Only on the computer.** Archie Mobile has no chat app list.
 - ⚠️ **Type-checked and unit-tested, not yet walked through** in the window.
 
-*Amended October 30, 2026 (Archie `72977b7f` and `4c03bbbc`, with archie-mobile `a1db95b`, in no release yet): one computer at a time has the phone.*
+*Amended October 30, 2026 (Archie `72977b7f` and `4c03bbbc`, with archie-mobile `a1db95b`, in 0.3.15 on a Mac since November 1, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here): one computer at a time has the phone.*
 
 **The claim:** With Archie on two computers signed in to the same account, Archie Mobile reads the
 one whose code it scanned last. The other stops sending to the phone and says so on its Archie
@@ -14289,7 +14289,7 @@ files or 5 MB, or matches the shapes of the 2026 registry incidents.
 on its row, and the replies it drafts follow them, as Email Manager's do (`owner_text_instructions`
 in `crates/archie-runtime/src/texts/replies/triage.rs`, Archie `35d51ff4`). What was typed in the
 panel's When it writes as you box moves there when Archie starts (`migrate_text_rules`, Archie
-`51f5a19f`). In no release yet.)*
+`51f5a19f`). In 0.3.15 on a Mac since November 1, 2026.)*
 
 The one feature that reads messages **other people** wrote, so every sentence about it is held
 to the strictest form the code supports. Mac only, off until installed, and it refuses to run
@@ -19159,10 +19159,10 @@ Documents page (archie-mobile `src/screens/Manage.tsx`), and in the held Archie 
 **The boundaries** "Never 'nothing leaves your computer'" and "Found by name only" above carry the
 short page and the never-sent file as of this amendment.
 
-### 🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, in no release yet, first signed in by Jett on October 30, 2026
+### 🚧 Package Tracker reads your Shop orders when you ask: BUILT 2026-10-30, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, first signed in by Jett on October 30, 2026
 
 *Built October 30, 2026 (Archie `a2a36187`, signing in by code since `de76a243`, a source to pick
-since `0acdd2e9`; in no release yet).*
+since `0acdd2e9`; in 0.3.15 on a Mac since November 1, 2026, with Windows still on 0.3.12).*
 
 **Proposed wording, Jett's to approve:** "If you use the Shop app, pick Shop on Package Tracker's
 settings, then connect Shop on your agent's Connections tab: Archie shows a short code and opens
@@ -19231,9 +19231,9 @@ Shop only when you ask, it never buys anything, and your email still sends the a
   Shop refused it. The file is still on the site, and Connections, then Something else, still offers
   that sign-in to any server that reads such files, but none has accepted it yet.
 
-### 🚧 Package Tracker's settings: where it finds packages, what it tells you, and when: BUILT 2026-10-31, in no release yet, not yet run on a real inbox
+### 🚧 Package Tracker's settings: where it finds packages, what it tells you, and when: BUILT 2026-10-31, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, not yet run on a real inbox
 
-*Built October 31, 2026 (Archie `0acdd2e9`, archie-mobile `ca31ff9`; in no release yet). Jett's
+*Built October 31, 2026 (Archie `0acdd2e9`, archie-mobile `ca31ff9`; in 0.3.15 on a Mac since November 1, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here). Jett's
 call, October 31: "only then would it feel like a true agent".*
 
 **Proposed wording, Jett's to approve:** "Package Tracker's settings are yours. Pick where it finds
@@ -19278,10 +19278,10 @@ name the stores you care about or the ones to skip."
 - ⚠️ **Not run on a real inbox yet**: the tests prove each rule, and nobody has picked a roundup and
   received one.
 
-### 🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, in no release yet, never signed in to by a person
+### 🚧 Six more apps your agent can use: Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal: BUILT 2026-10-31, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, never signed in to by a person
 
-*Built October 31, 2026 (Archie `a1ada6b7`, `9ad34152` and `e0cac126`, archie-mobile `250ae49`; in
-no release yet). Jett's call, October 30: "more apps to connect=more people served".*
+*Built October 31, 2026 (Archie `a1ada6b7`, `9ad34152` and `e0cac126`, archie-mobile `250ae49`;
+in 0.3.15 on a Mac since November 1, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here). Jett's call, October 30: "more apps to connect=more people served".*
 
 *(Amended October 31, 2026, when the Marketplace moved to one tile for each job: TickTick is picked
 under Where it lives on To-Do List, Monarch Money on Budget Keeper, Cal.com on Booking Watch and
@@ -19347,10 +19347,10 @@ yes."
   directly", under What you can connect) does not cover an app somebody signed in to. Proposed, for
   Jett: "any service you connected with a key or a sign-in of your own: directly."
 
-### 🚧 One tile for each job in the Marketplace, and one row for it on your agent: BUILT 2026-10-31, in no release yet, not yet used by an owner
+### 🚧 One tile for each job in the Marketplace, and one row for it on your agent: BUILT 2026-10-31, RELEASED in 0.3.15 on a Mac, November 1, 2026, with Windows still on 0.3.12, not yet used by an owner
 
 *Built October 31, 2026 (Archie `28ce7c78`, `d5387abd`, `a7c19010`, `2df79967`, `200933d5` and
-`5542bc78`; the phone's part in `d3a60b9d` and `5641dfc1`, and archie-mobile `aec7d9b` and `54cf22d`; in no release yet). Jett's call, October 31: "less options=easier decision".*
+`5542bc78`; the phone's part in `d3a60b9d` and `5641dfc1`, and archie-mobile `aec7d9b` and `54cf22d`; in 0.3.15 on a Mac since November 1, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here). Jett's call, October 31: "less options=easier decision".*
 
 **Proposed wording, Jett's to approve:** "The Marketplace shows one tile for each job. Where a job
 can be kept in more than one app, its tile asks where it lives: your to-do list can be kept in

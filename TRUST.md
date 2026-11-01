@@ -14285,6 +14285,12 @@ files or 5 MB, or matches the shapes of the 2026 registry incidents.
 
 ### ✅ Text Replies: it reads your texts on your Mac, and only you can send one — SHIPPED 2026-08-21
 
+*(Amended November 1, 2026: the rules an owner types for Text Replies are in one box, Anything else
+on its row, and the replies it drafts follow them, as Email Manager's do (`owner_text_instructions`
+in `crates/archie-runtime/src/texts/replies/triage.rs`, Archie `35d51ff4`). What was typed in the
+panel's When it writes as you box moves there when Archie starts (`migrate_text_rules`, Archie
+`51f5a19f`). In no release yet.)*
+
 The one feature that reads messages **other people** wrote, so every sentence about it is held
 to the strictest form the code supports. Mac only, off until installed, and it refuses to run
 on the free starter credits at all (`crates/archie-runtime/src/texts/mod.rs`,

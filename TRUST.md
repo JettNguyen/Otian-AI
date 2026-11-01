@@ -1950,8 +1950,10 @@ billing service's `/phone/push`, which passes it to Apple or Google (Archie
 `src-tauri/src/phone_push.rs` and the drain in `inapp.rs`; `stripe-webhook/push.js`). The phone opens
 it with its own copy of the key (archie-mobile `src/push/`, with a notification service extension
 on an iPhone). The phone files where it can be reached at `/phone/push-address` with the id of the
-key it holds; a preview goes only to addresses with the same key id, and every other one is
-deleted. That address (the platform, the address Apple or Google issued, Apple's host, the key id,
+key it holds; a preview goes only to addresses with the same key id, and every other one is sent
+nothing and kept, because it may be the phone reading the owner's other computer (Archie
+`81ffd036`, October 31, 2026; until then it was deleted, which silenced a phone paired with one of
+two Macs until the app was reopened). That address (the platform, the address Apple or Google issued, Apple's host, the key id,
 and when it was written) is the one thing stored, under the account in a collection no client can
 read, and the privacy policy says so with a row in its retention table. Previews are never stored.
 `docs/MOBILE-APP.md` section 4.3 is the contract the three codebases share.
@@ -1974,6 +1976,11 @@ read, and the privacy policy says so with a row in its retention table. Previews
 - ❌ Never "end-to-end encrypted" without the boundaries on "Archie on your phone" above.
 
 *Amended October 27, 2026 (Archie `2276639d`, in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12).* A reply to a voice note sent from the phone notifies in the reply's plain sentences instead of its words; see the entry headed "A voice note answered in writing is written for a phone to read out".
+
+*Amended November 1, 2026 (Archie Mobile `9fba10f`, in no phone release yet; it goes out with Archie Mobile 1.6).* On an iPhone, each notification shows the agent's face where the app icon was, with Archie's icon small on its corner, the way Messages shows a contact's photo. The app draws each agent's face into a folder its notification extension can read, and the extension marks the notification as a message from that agent (archie-mobile `src/push/faces.ts`, `src/push/FaceKeeper.tsx`, `plugins/notification-service/NotificationService.swift`). The face is the one the app shows everywhere else: the agent's Ember, or its initial when its face is a photograph.
+- ⛔ **Never on Android.** Its notifications take one fixed icon, so they show Archie's.
+- ⚠️ **A face appears once Archie Mobile has been opened** since that agent was made or its face changed. Until then, and whenever the face cannot be read, the notification shows Archie's icon as before.
+- ⚠️ **Not yet seen on a real lock screen** as of November 1, 2026. The extension builds and the face pictures were checked by eye; copy may describe it and may not call it proven.
 
 ### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release and on iPhone in 1.1
 

@@ -9407,7 +9407,11 @@ are then deleted on purpose: an agent's browser sign-ins and its Signal link are
 in the bundle, and on a **different** computer both are worse than missing (the browser opens
 signed out of everything while looking fine, and one Signal link on two computers is a state
 Signal does not expect). `CopyManifest::machine_id` is what separates a rescue from a move, and
-`notes()` names every dropped item on screen.
+`notes()` names every dropped item on screen. (From the release after 0.3.15, Archie `d9bf3f71`: the
+text watch's place in Messages is dropped too on a different computer, however fresh the copy,
+because it is a row number in the old Mac's own Messages; on the new Mac the watch starts from the
+newest text. Before that, an agent moved within a day could wait on a number the new Mac had not
+reached and draft no text replies, with nothing on screen saying so.)
 
 **Nothing is deleted to make room.** A restore moves what was there into `replaced-<timestamp>/`
 beside it and keeps two (`REPLACED_KEEP`), so a restore somebody regrets is a folder they still
@@ -19551,6 +19555,13 @@ routine never changes it, and a switch on the Setup tab turns it off."
 - **The owner only.** A guest or teammate does not have the tool, and is told the owner can make
   the change (`withheld_from` and the dispatch in `crates/archie-runtime/src/gateway/turn.rs`).
   Routines never have it. A change restarts the agent, which takes a few seconds.
+- **Why Text Replies is quiet, checked rather than guessed** (Archie `d9bf3f71`). Asked with Text
+  Replies named and no change, the same tool reads this computer's own answers in code: whether
+  Archie can read Messages, whether the watch is on and when it last ran, which AI account pays,
+  how new this Mac's newest message is, and whether the watch's place is ahead of it
+  (`texts::health` in `crates/archie-runtime/src/texts/mod.rs`). A newest message over a day old
+  is said with what it usually means: texts are not reaching this Mac, so Messages here has to be
+  signed in, and Android texts need Text Message Forwarding on the iPhone.
 - **A switch** on the agent's Setup tab, under What it can do, in Changes it can make to itself:
   Change its own settings when you ask (`change_setup` in `crates/archie-domain/src/skill.rs`,
   `src/app/agent-detail.tsx`). It is on until turned off.

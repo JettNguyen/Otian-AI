@@ -775,7 +775,7 @@ quality: which company answers, and how much thinking a reply gets.
   the gateway, so a schedule that could switch AI could take the agent down mid errand with
   nobody watching. Never write "your agent picks the model", which implies it chooses on its
   own. It changes because **you asked**, in a conversation.
-- ⚠️ **It is one of the eight switches** in "What it can do" (see that entry above), on by
+- ⚠️ **It is one of the nine switches** in "What it can do" (see that entry above), on by
   default and able to be turned off, after which the agent names Response quality instead of
   pretending it never could. Copy claiming the capability must not imply it is unconditional.
 - ⛔ **Never say "switch and keep going".** The change restarts the agent. That is a few seconds,
@@ -1006,20 +1006,21 @@ they chose. A saving quoted without its trade is a claim we cannot defend.
 ### ✅ You choose what your agent can do, and what it stops carrying (SHIPPED 2026-09-18)
 
 **Approved wording:** "Your agent's Setup tab has a section called 'What it can do', with a switch
-for each of eight abilities. Every one is on until you turn it off. Turn one off and the agent
+for each of nine abilities. Every one is on until you turn it off. Turn one off and the agent
 stops offering it, and each message you send costs a little less. Ask it for the thing anyway and
 it tells you which screen turns it back on, rather than pretending it never could."
 
-**The eight, in the words on the screen.** Under *Jobs it does for you*: set reminders; save files
+**The nine, in the words on the screen.** Under *Jobs it does for you*: set reminders; save files
 to this computer; look up what it has been doing; read the web. Under *Changes it can make to
 itself*: build new skills and routines; add and remove add-ons; start and pause routines when you
-ask; change which AI answers. Each row names where the job still gets done with the switch off (a
+ask; change which AI answers; change its own settings when you ask (from 0.3.16, released November
+2, 2026; eight before it). Each row names where the job still gets done with the switch off (a
 routine for a repeating nudge, the Jobs tab for the record, the Marketplace for add-ons, the Build
 a skill tab for a skill, each routine's own card, Response quality for the AI settings).
 
-**Why it's true:** seven are fields on `archie_domain::AgentAbilities`
+**Why it's true:** eight are fields on `archie_domain::AgentAbilities`
 (`crates/archie-domain/src/skill.rs`), stored on the agent's own manifest and every one defaulting
-to on, so an `agent.json` written before the screen existed has all of them. The eighth, the web
+to on, so an `agent.json` written before the screen existed has all of them. The ninth, the web
 switch, is the older `AgentBundleManifest::no_web_access` and is the one field stored in the
 negative, because renaming a field every agent on disk already carries is a data migration; the
 screen draws it positive like the rest. Both are written by `agent_abilities_set` and
@@ -1042,10 +1043,10 @@ screen.
 - **No figure for the saving may be quoted anywhere, by anybody, yet.** Nobody has run a live agent
   for a month with switches off and priced it. Until `cost_bench` does, the claim is "a little less", and "a little
   less" is the ceiling.
-- **Never call this a safety feature in general.** One of the eight is about safety and seven are
+- **Never call this a safety feature in general.** One of the nine is about safety and eight are
   about an ability not being wanted. The web switch's own claim is the one in the websites section.
   Switching an ability off withholds its tools and `execute_tool` refuses what was never offered,
-  but that is not what any of the other seven are for.
+  but that is not what any of the other eight are for.
 - **Never say it turns off a skill you installed.** It does not. It narrows what the agent offers
   in conversation; the Skills tab is where an add-on is removed.
 - **Never say the agent loses the job.** Every row names where the job still happens, and the claim
@@ -4837,7 +4838,7 @@ it through the same install as any chat install (`evening_offer` and `evening_ye
 
 - ⚠️ **Personal edition only.** Archie for Teams has no journal and is never offered it.
 - ⚠️ **Evening Reflection is an AI call each evening**, and the offer says so. Never "free" for it.
-  (From the release after 0.3.15, Archie `66a18551`: a night whose journal row already has an entry,
+  (From 0.3.16, released November 2, 2026, Archie `66a18551`: a night whose journal row already has an entry,
   a mood and the good things makes no call, on an agent without Habit Tracker. Every other night is
   still a call, so the sentence above stays true; never say it is free on nights left unwritten.)
 
@@ -9407,7 +9408,7 @@ are then deleted on purpose: an agent's browser sign-ins and its Signal link are
 in the bundle, and on a **different** computer both are worse than missing (the browser opens
 signed out of everything while looking fine, and one Signal link on two computers is a state
 Signal does not expect). `CopyManifest::machine_id` is what separates a rescue from a move, and
-`notes()` names every dropped item on screen. (From the release after 0.3.15, Archie `d9bf3f71`: the
+`notes()` names every dropped item on screen. (From 0.3.16, released November 2, 2026, Archie `d9bf3f71`: the
 text watch's place in Messages is dropped too on a different computer, however fresh the copy,
 because it is a row number in the old Mac's own Messages; on the new Mac the watch starts from the
 newest text. Before that, an agent moved within a day could wait on a number the new Mac had not
@@ -10739,7 +10740,7 @@ on disk. Still no model call anywhere in it.
   Morning Task Checklist when it is on, through the same switch as "pause the checklist" in chat, and
   says so: "I paused your 8:00am Morning Task Checklist too. This list has your to-dos on it and uses
   none of your AI, and the checklist used some every morning. To have both, press Keep both." (From
-  the release after 0.3.15, Archie `7a62e651` and `f804526a`: the checklist posts with no AI, and the
+  0.3.16, released November 2, 2026, Archie `7a62e651` and `f804526a`: the checklist posts with no AI, and the
   sentence reads "I paused your 8:00am Morning Task Checklist too, since this list has your to-dos on
   it." Do not say the checklist costs AI of that build. The same yes also pauses Today's Calendar
   while it reads only the calendar, since the list has today's calendar on it, and says both, with
@@ -10747,7 +10748,7 @@ on disk. Still no model call anywhere in it.
   and from Archie `ded44e54` its row offers Today's Calendar with the checklist: "Your morning list
   has your to-dos and today's calendar in it too." with Pause the checklist and calendar, on the
   computer and in Archie Mobile (archie-mobile `91e4460`). An Archie Mobile from before that pauses
-  the checklist alone under the same words. Both in no release yet.)
+  the checklist alone under the same words. Both in 0.3.16, released November 2, 2026.)
   Keep
   both turns it back on (`replace_the_checklist`, `keep_both`). Test:
   `yes_pauses_the_morning_checklist_and_keep_both_puts_it_back`. **A screen never pauses it by
@@ -14315,7 +14316,7 @@ in `crates/archie-runtime/src/texts/replies/triage.rs`, Archie `35d51ff4`). What
 panel's When it writes as you box moves there when Archie starts (`migrate_text_rules`, Archie
 `51f5a19f`). In 0.3.15 on a Mac since November 1, 2026.)*
 
-*(Amended November 1, 2026, in no release yet (Archie `db5aadb4`): **every start checks the tool
+*(Amended November 1, 2026, in 0.3.16, released November 2, 2026 (Archie `db5aadb4`): **every start checks the tool
 that reads Messages.** On a Mac where any agent has Text Replies, Archie downloads its own copy of
 the reading tool when it is missing or older than the version that build was made for, in the
 background, through the same checked download as a press (`ensure_in_use` in
@@ -17593,7 +17594,7 @@ Monday in bold and "pending" set as code, and "[Open the invoices](...) to send 
 
 *Built October 27, 2026 (Archie `6f44f9a4` and `ce10fbf5`; Archie Mobile `7184cdc`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
-*(Amended November 1, 2026, in no release yet, Archie `0fccc447`. Jett's call that day: on by
+*(Amended November 1, 2026, in 0.3.16, released November 2, 2026, Archie `0fccc447`. Jett's call that day: on by
 default. An agent whose Email Manager or Text Replies settings are first saved from that build has
 all three on, and the first card one of them changes says what they do, with one button, Stop, which
 turns them all off and says where the switches are. Settings saved before then keep the catches off,
@@ -19228,7 +19229,7 @@ Shop only when you ask, it never buys anything, and your email still sends the a
   (`shop.com/references/sign-in.md`): under Shop's own public client id for agents, Archie asks Shop
   for a short code, shows it, and opens Shop's page in the browser, where the person checks that the
   codes match and approves. The same page shows as a QR code beside the code, to approve on a phone
-  instead (`qr_svg` on `DeviceSignInStart`; built November 1, 2026, in no release yet, Archie
+  instead (`qr_svg` on `DeviceSignInStart`; built November 1, 2026, released in 0.3.16 on November 2, 2026, Archie
   `b18f3eb2`). Archie names itself to Shop as "Archie: " and the agent's name. Shop's
   addresses and client id are `DEVICE_SIGN_INS` in `crates/archie-domain/src/connectors.rs`; the
   asking and waiting are `device_authorize` and `device_poll` in `crates/archie-net/src/oauth2.rs`,
@@ -19433,7 +19434,7 @@ reply says so, with a button that turns it on."
   (`planTileRows` in `src/app/tile-rows.ts`); the Routines tab says which job each routine is part
   of. The words are `PART_WORDS` in `src/app/vocab.ts`, and the rules are in
   `docs/SKILL-ROUTINE-CONTROLS.md`. **What an extra brings is under its own switch** (built
-  November 1, 2026, in no release yet, Archie `1891c72a` and archie-mobile `0a66064`): a list it
+  November 1, 2026, released in 0.3.16 on November 2, 2026, Archie `1891c72a` and archie-mobile `0a66064`): a list it
   needs started, its answers and its routines sit right under "Remember birthdays and
   anniversaries", not in the row's own checklist, answers and On its own (`partInside` in
   `src/app/skill-config.tsx`). Do not say this of 0.3.15, which spreads an extra's pieces over the
@@ -19473,10 +19474,10 @@ reply says so, with a button that turns it on."
 - ⚠️ **Not yet used by an owner.** Built and tested on October 31, 2026; nobody has added a job from
   a tile, moved one to another app, or pressed Turn it on, with a real agent.
 
-### 🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, in no release yet, not yet used by an owner
+### 🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, RELEASED in 0.3.16, 2026-11-02, not yet used by an owner
 
 *Built November 1, 2026 (Archie `15561c92`, `293fa360`, `a65ad122`, `2b030e32`, `0c72dea8` and
-`6d39802d`, archie-mobile `5ee231b`; in no release yet). Jett's call, November 1: "by default give the most
+`6d39802d`, archie-mobile `5ee231b`; released in 0.3.16 on November 2, 2026). Jett's call, November 1: "by default give the most
 automation so the user feels the true value of the agent rather than having to do busy work for it
 to work."*
 
@@ -19526,7 +19527,7 @@ you tell it."
   date forward on its own run (`bill-reminders.json` 1.5.0), and Receipt Sweep is not run at all
   when there is no mailbox it can read (`can_read_mail` in
   `crates/archie-runtime/src/gateway/routines.rs`).
-- **Four add-ons offer to do their first step** (Archie `2425941a`, in no release yet). An empty
+- **Four add-ons offer to do their first step** (Archie `2425941a`, in 0.3.16). An empty
   to-do list offers to look through the last two weeks of the owner's email for things people asked
   them to do, and shows those to keep, when the agent can search the mailbox. Calendar Manager asks
   which time zone the owner is in and saves it from the chat. Email Manager, with no signature
@@ -19562,9 +19563,9 @@ you tell it."
 - ⚠️ **Nothing here has run live.** The tests prove each rule; no owner has added an add-on and
   answered the question yet, and the phone's receipt has not been looked at on a phone.
 
-### 🚧 Ask your agent to change its own setup: an add-on's setting, a line in how it talks, or a line in who it serves: BUILT 2026-11-01, in no release yet, not yet used by an owner
+### 🚧 Ask your agent to change its own setup: an add-on's setting, a line in how it talks, or a line in who it serves: BUILT 2026-11-01, RELEASED in 0.3.16, 2026-11-02, not yet used by an owner
 
-*Built November 1, 2026 (Archie `4333f4d1` and `bd0aaff5`; in no release yet). Jett's call,
+*Built November 1, 2026 (Archie `4333f4d1` and `bd0aaff5`; released in 0.3.16 on November 2, 2026). Jett's call,
 November 1: "yes with receipt and undo, and also things like changing personality or
 adding/removing things from who it serves".*
 
@@ -19617,8 +19618,6 @@ routine never changes it, and a switch on the Setup tab turns it off."
   paragraphs, so asked to drop something inside one, the agent adds a line saying the opposite.
 - ⚠️ **Undo is a second change**, made by the agent from the receipt it gave. Nothing keeps a copy
   of the old setup.
-- ⚠️ **The What it can do entry says eight switches.** From this release there are nine; that
-  entry's wording changes when the release ships.
 - ⚠️ **Not run with a real AI yet.** The tests prove the matching, the writes and the receipt.
 
 ## Known Weaknesses — disclose, don't hide

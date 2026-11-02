@@ -1807,11 +1807,11 @@
       "id": "mail-and-text-watch-catches",
       "name": "What the mail and text watches point out",
       "area": "email",
-      "summary": "Once you say yes, Email Manager and Text Replies point out someone new still waiting an hour, a reply you owe, and an email asking to change where a payment goes.",
+      "summary": "Email Manager and Text Replies point out someone new still waiting an hour, a reply you owe, and an email asking to change where a payment goes.",
       "where": "In your chat with your agent, on the reply's card, and in your morning list.",
       "how": [],
       "limits": [
-        "Only on an AI account of your own, and only once you say yes. Each one has its own switch.",
+        "Only on an AI account of your own. A new agent has them on, with Stop under the first card one of them changes; one set up before 0.3.16 asks first. Each one has its own switch.",
         "Nothing is sent for you. A reply goes only when you press Send.",
         "Replies you owe are found in Gmail only.",
         "It cannot stop a payment scam. It tells you to call them at a number you already have."
@@ -5173,12 +5173,12 @@
       ],
       "phone": "In Archie Mobile, the same question appears after you press Add, with the Recommended answer picked.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.16",
       "claimable": false,
-      "hold": "In no release yet (Archie 293fa360, a65ad122, 2b030e32, 0c72dea8 and 6d39802d, archie-mobile 5ee231b). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
-        "🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, in no release yet, not yet used by an owner"
+        "🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, RELEASED in 0.3.16, 2026-11-02, not yet used by an owner"
       ],
       "wording": "When an add-on can work more than one way, it starts out the way that does the most on its own. When you add it, it asks once which way you want, with that one marked Recommended and already picked. If the way you picked needs something you have not given it yet, it works the next best way in the meantime and tells you the one thing to press.",
       "guide": ""
@@ -5552,12 +5552,12 @@
       ],
       "phone": "You can ask from Archie Mobile or a chat app, since it is a request in a conversation.",
       "editions": "both",
-      "released": "",
+      "released": "0.3.16",
       "claimable": false,
-      "hold": "In no release yet (Archie 4333f4d1 and bd0aaff5). The proposed wording is Jett's to approve.",
+      "hold": "The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
-        "🚧 Ask your agent to change its own setup: an add-on's setting, a line in how it talks, or a line in who it serves: BUILT 2026-11-01, in no release yet, not yet used by an owner"
+        "🚧 Ask your agent to change its own setup: an add-on's setting, a line in how it talks, or a line in who it serves: BUILT 2026-11-01, RELEASED in 0.3.16, 2026-11-02, not yet used by an owner"
       ],
       "wording": "Ask your agent to change how it is set up and it does: an add-on's setting, a line in how it talks, or a line in who it serves. It says in one line what changed, and saying undo puts it back. Only you can ask, and a switch on the Setup tab turns it off.",
       "guide": ""
@@ -5987,7 +5987,7 @@
       "trust": [
         "✅ You choose what your agent can do, and what it stops carrying (SHIPPED 2026-09-18)"
       ],
-      "wording": "Your agent's Setup tab has a section called 'What it can do', with a switch for each of eight abilities. Every one is on until you turn it off. Turn one off and the agent stops offering it, and each message you send costs a little less. Ask it for the thing anyway and it tells you which screen turns it back on, rather than pretending it never could.",
+      "wording": "Your agent's Setup tab has a section called 'What it can do', with a switch for each of nine abilities. Every one is on until you turn it off. Turn one off and the agent stops offering it, and each message you send costs a little less. Ask it for the thing anyway and it tells you which screen turns it back on, rather than pretending it never could.",
       "guide": ""
     },
     {

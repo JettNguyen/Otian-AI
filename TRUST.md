@@ -10743,7 +10743,11 @@ on disk. Still no model call anywhere in it.
   sentence reads "I paused your 8:00am Morning Task Checklist too, since this list has your to-dos on
   it." Do not say the checklist costs AI of that build. The same yes also pauses Today's Calendar
   while it reads only the calendar, since the list has today's calendar on it, and says both, with
-  Keep all three (Archie `196b3f9e`). A Routines tab switching the list on still pauses nothing.)
+  Keep all three (Archie `196b3f9e`). A Routines tab switching the list on still pauses nothing,
+  and from Archie `ded44e54` its row offers Today's Calendar with the checklist: "Your morning list
+  has your to-dos and today's calendar in it too." with Pause the checklist and calendar, on the
+  computer and in Archie Mobile (archie-mobile `91e4460`). An Archie Mobile from before that pauses
+  the checklist alone under the same words. Both in no release yet.)
   Keep
   both turns it back on (`replace_the_checklist`, `keep_both`). Test:
   `yes_pauses_the_morning_checklist_and_keep_both_puts_it_back`. **A screen never pauses it by

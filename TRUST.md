@@ -17555,6 +17555,13 @@ Monday in bold and "pending" set as code, and "[Open the invoices](...) to send 
 
 *Built October 27, 2026 (Archie `6f44f9a4` and `ce10fbf5`; Archie Mobile `7184cdc`; in 0.3.13 on a Mac since October 30, 2026, with Windows still on 0.3.12, the Archie Mobile half not dated here).*
 
+*(Amended November 1, 2026, in no release yet, Archie `0fccc447`. Jett's call that day: on by
+default. An agent whose Email Manager or Text Replies settings are first saved from that build has
+all three on, and the first card one of them changes says what they do, with one button, Stop, which
+turns them all off and says where the switches are. Settings saved before then keep the catches off,
+as saved, and still get the offer below with Yes and No thanks. Do not say "on by default" of 0.3.15
+or earlier, and never say an owner's saved settings were changed: they were not.)*
+
 **Proposed wording, Jett's to approve:** "On an AI account of your own, Email Manager and Text
 Replies can watch for three more things, once you say yes. If someone new to you is still waiting an
 hour after their card, Archie posts the card again at the bottom of your chat, with the reply it

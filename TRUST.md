@@ -19559,7 +19559,12 @@ routine never changes it, and a switch on the Setup tab turns it off."
   Replies named and no change, the same tool reads this computer's own answers in code: whether
   Archie can read Messages, whether the watch is on and when it last ran, which AI account pays,
   how new this Mac's newest message is, and whether the watch's place is ahead of it
-  (`texts::health` in `crates/archie-runtime/src/texts/mod.rs`). A newest message over a day old
+  (`texts::health` in `crates/archie-runtime/src/texts/mod.rs`), and first of all, when the watch
+  has been failing, since when and the reason it gave (Archie `b0239ee1`). A copy of the reading
+  tool from outside Archie that cannot take the watch's options is no longer used, so Archie offers
+  its own download (`find_imsg` in `crates/archie-net/src/imessage.rs`): on November 1, 2026 an old
+  Homebrew copy (0.5.0) had failed every five seconds on Jett's Mac while every check read fine.
+  A newest message over a day old
   is said with what it usually means: texts are not reaching this Mac, so Messages here has to be
   signed in, and Android texts need Text Message Forwarding on the iPhone.
 - **A switch** on the agent's Setup tab, under What it can do, in Changes it can make to itself:

@@ -14311,6 +14311,27 @@ in `crates/archie-runtime/src/texts/replies/triage.rs`, Archie `35d51ff4`). What
 panel's When it writes as you box moves there when Archie starts (`migrate_text_rules`, Archie
 `51f5a19f`). In 0.3.15 on a Mac since November 1, 2026.)*
 
+*(Amended November 1, 2026, in no release yet (Archie `db5aadb4`): **every start checks the tool
+that reads Messages.** On a Mac where any agent has Text Replies, Archie downloads its own copy of
+the reading tool when it is missing or older than the version that build was made for, in the
+background, through the same checked download as a press (`ensure_in_use` in
+`src-tauri/src/assets.rs`, called from `src-tauri/src/lib.rs`). An update is a start, so an update
+brings the tool along. The same start does it for voice, hearing and Python when some version is
+already downloaded, and for every installed add-on's own tools. A copy from outside Archie that
+cannot take the watch's options is passed over for Archie's own (`find_imsg` and `WATCH_FLAGS` in
+`crates/archie-net/src/imessage.rs`), and a release stops if the version it pins cannot take them
+(`scripts/check-imsg-flags.py`, run by `scripts/release.sh`). Found on Jett's always-on Mac, where a
+Homebrew copy ten versions old failed every five seconds while every check said Messages read fine.
+**When Archie was started from a terminal**, macOS asks whether that terminal may read Messages
+rather than Archie, so the Full Disk Access message names the terminal and says to switch it on
+(`started_from_a_terminal` in `crates/archie-net/src/texts.rs`). That is a developer's case: opened
+from the Dock or Finder, it is Archie's own switch.*
+
+*Boundaries of this amendment: ⛔ never "Archie keeps every tool up to date". It checks at start
+only, only what an agent uses, and never touches a copy installed some other way (a Homebrew copy
+stays as it was; Archie stops using it). ⚠️ Not yet seen on a Mac that had the old copy: the tests
+prove which agents count and which version is picked.)*
+
 The one feature that reads messages **other people** wrote, so every sentence about it is held
 to the strictest form the code supports. Mac only, off until installed, and it refuses to run
 on the free starter credits at all (`crates/archie-runtime/src/texts/mod.rs`,

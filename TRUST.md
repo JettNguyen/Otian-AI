@@ -4837,6 +4837,9 @@ it through the same install as any chat install (`evening_offer` and `evening_ye
 
 - ⚠️ **Personal edition only.** Archie for Teams has no journal and is never offered it.
 - ⚠️ **Evening Reflection is an AI call each evening**, and the offer says so. Never "free" for it.
+  (From the release after 0.3.15, Archie `66a18551`: a night whose journal row already has an entry,
+  a mood and the good things makes no call, on an agent without Habit Tracker. Every other night is
+  still a call, so the sentence above stays true; never say it is free on nights left unwritten.)
 
 ### ✅ The first questions end by asking where you keep your work, and the goodbye brings it in: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -10734,7 +10737,10 @@ on disk. Still no model call anywhere in it.
   none of your AI, and the checklist used some every morning. To have both, press Keep both." (From
   the release after 0.3.15, Archie `7a62e651` and `f804526a`: the checklist posts with no AI, and the
   sentence reads "I paused your 8:00am Morning Task Checklist too, since this list has your to-dos on
-  it." Do not say the checklist costs AI of that build.) Keep
+  it." Do not say the checklist costs AI of that build. The same yes also pauses Today's Calendar
+  while it reads only the calendar, since the list has today's calendar on it, and says both, with
+  Keep all three (Archie `196b3f9e`). A Routines tab switching the list on still pauses nothing.)
+  Keep
   both turns it back on (`replace_the_checklist`, `keep_both`). Test:
   `yes_pauses_the_morning_checklist_and_keep_both_puts_it_back`. **A screen never pauses it by
   itself:** switched on from a Routines tab, the list leaves the checklist on, and the row says "Your

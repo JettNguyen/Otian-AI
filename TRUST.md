@@ -19526,6 +19526,16 @@ you tell it."
   date forward on its own run (`bill-reminders.json` 1.5.0), and Receipt Sweep is not run at all
   when there is no mailbox it can read (`can_read_mail` in
   `crates/archie-runtime/src/gateway/routines.rs`).
+- **Four add-ons offer to do their first step** (Archie `2425941a`, in no release yet). An empty
+  to-do list offers to look through the last two weeks of the owner's email for things people asked
+  them to do, and shows those to keep, when the agent can search the mailbox. Calendar Manager asks
+  which time zone the owner is in and saves it from the chat. Email Manager, with no signature
+  saved, offers one copied from how the owner signs their last few sent emails, and saves it once
+  they say it looks right. The journal's look back says how many days it draws on, and a deleted
+  entry can be brought back right after. These are the add-ons' own instructions
+  (`data/marketplace/skills/task-manager.json` 1.8.0, `calendar-management.json` 1.4.0,
+  `email-manager.json` 1.14.0, `personal-journal.json` 2.2.0), so the agent offers them and nothing
+  in code makes it; never "it always does".
 - **Kept true for every add-on** by a free catalog check, `scripts/check-addon-defaults.py`, run in
   `scripts/preflight-marketplace.py`: a new add-on fails when its first answer is not its default,
   its last answer needs something, a setting has no answer, a setup step is something the card

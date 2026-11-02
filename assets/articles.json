@@ -1,5 +1,19 @@
 [
   {
+    "title": "When Your AI Finds Nothing, Make It Say So",
+    "summary": "A short AI report can mean a quiet week or a check that never ran. Give every check its own line, including \"nothing found.\"",
+    "author": "Jett Nguyen",
+    "date": "2026-11-02",
+    "readTime": "4 min read",
+    "category": "Team Stories",
+    "tags": [
+      "AI agents",
+      "Recurring jobs",
+      "Reviewing output"
+    ],
+    "url": "when-your-ai-finds-nothing-make-it-say-so/"
+  },
+  {
     "title": "Your AI Agent's Messages Go Out Under Your Name",
     "summary": "Matt Robb tried letting Meta's Muse run Facebook Marketplace for a day. A buyer got Matt's address, a lowball price and \"Yep I'm here!\", all from Matt's account. Anything an agent sends to someone else should wait for your yes.",
     "author": "Jett Nguyen",

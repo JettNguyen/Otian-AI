@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>When Your AI Finds Nothing, Make It Say So | Otian AI</title>
+  <meta name="description" content="A short AI report can mean a quiet week or a check that never ran. Give every check its own line, including "nothing found."" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Don&rsquo;t rent your agent. Own it.<span class="tm" aria-hidden="true">&trade;</span></span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+            <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
+            <a href="../../archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
+            <a href="../../how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
+            <a href="../../archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
+            <a href="../../archie/install/" role="menuitem"><span class="nav-row-ico nav-ico-download" aria-hidden="true"></span>Download Archie</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../../skills-marketplace/browse/" role="menuitem"><span class="nav-row-ico nav-ico-grid" aria-hidden="true"></span>Browse All</a>
+            <a href="../../skills-marketplace/find/" role="menuitem"><span class="nav-row-ico nav-ico-search" aria-hidden="true"></span>Find an Add-on</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navTrust">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navTrustMenu" type="button">Trust</button>
+          <div class="nav-more-menu" id="navTrustMenu" role="menu" aria-label="Trust">
+            <a href="../../trust/" role="menuitem"><span class="nav-row-ico nav-ico-eye" aria-hidden="true"></span>What We Can and Can&rsquo;t See</a>
+            <a href="../../trust/proof/" role="menuitem"><span class="nav-row-ico nav-ico-check" aria-hidden="true"></span>Run the Checks Yourself</a>
+            <a href="../../trust/if-you-want-to-stop/" role="menuitem"><span class="nav-row-ico nav-ico-power" aria-hidden="true"></span>If You Want to Stop</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../compare/" role="menuitem"><span class="nav-row-ico nav-ico-scale" aria-hidden="true"></span>Comparisons</a>
+            <a href="../../compare/questions-to-ask/" role="menuitem"><span class="nav-row-ico nav-ico-question" aria-hidden="true"></span>Check the Agent You Have</a>
+            <a href="../../docs/" role="menuitem"><span class="nav-row-ico nav-ico-contents" aria-hidden="true"></span>Archie Docs</a>
+            <a href="../../faq/" role="menuitem"><span class="nav-row-ico nav-ico-chat" aria-hidden="true"></span>FAQ</a>
+            <a href="../../blog/" role="menuitem"><span class="nav-row-ico nav-ico-doc" aria-hidden="true"></span>Blog</a>
+            <a href="../../ai-explained/" role="menuitem"><span class="nav-row-ico nav-ico-book" aria-hidden="true"></span>AI Explained</a>
+            <a href="../../learn/getting-your-computer-ready/" role="menuitem"><span class="nav-row-ico nav-ico-play" aria-hidden="true"></span>Learning Library</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navConsulting">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navConsultingMenu" type="button">Consulting</button>
+          <div class="nav-more-menu" id="navConsultingMenu" role="menu" aria-label="Consulting">
+            <a href="https://consulting.otianai.com/" role="menuitem"><span class="nav-row-ico nav-ico-briefcase" aria-hidden="true"></span>Otian AI Consulting</a>
+            <a href="../../questionnaire/" role="menuitem"><span class="nav-row-ico nav-ico-chat" aria-hidden="true"></span>Book a Free Call</a>
+            <a href="https://consulting.otianai.com/#pricing" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Consulting Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">About</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="About">
+            <a href="../../our-story/" role="menuitem"><span class="nav-row-ico nav-ico-people" aria-hidden="true"></span>Our Story</a>
+            <a href="../../testimonials/" role="menuitem"><span class="nav-row-ico nav-ico-quote" aria-hidden="true"></span>Testimonials</a>
+            <a href="../../contact/" role="menuitem"><span class="nav-row-ico nav-ico-mail" aria-hidden="true"></span>Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../archie/install/" class="btn btn-primary btn-sm nav-cta">Download Archie</a>
+      <div class="nav-account" id="navAccount">
+        <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
+          <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu" role="menu" aria-label="Account"></div>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutTrust" aria-expanded="false" aria-controls="navDrawerFlyout">Trust</button>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutConsulting" aria-expanded="false" aria-controls="navDrawerFlyout">Consulting</button>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
+
+
+    <a href="../../archie/install/" class="btn btn-primary nav-drawer-cta">Download Archie</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+      <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
+      <a href="../../archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
+      <a href="../../how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
+      <a href="../../archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
+      <a href="../../archie/install/"><span class="nav-row-ico nav-ico-download" aria-hidden="true"></span>Download Archie</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../../skills-marketplace/browse/"><span class="nav-row-ico nav-ico-grid" aria-hidden="true"></span>Browse All</a>
+      <a href="../../skills-marketplace/find/"><span class="nav-row-ico nav-ico-search" aria-hidden="true"></span>Find an Add-on</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutTrust">
+      <a href="../../trust/"><span class="nav-row-ico nav-ico-eye" aria-hidden="true"></span>What We Can and Can&rsquo;t See</a>
+      <a href="../../trust/proof/"><span class="nav-row-ico nav-ico-check" aria-hidden="true"></span>Run the Checks Yourself</a>
+      <a href="../../trust/if-you-want-to-stop/"><span class="nav-row-ico nav-ico-power" aria-hidden="true"></span>If You Want to Stop</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../compare/"><span class="nav-row-ico nav-ico-scale" aria-hidden="true"></span>Comparisons</a>
+      <a href="../../compare/questions-to-ask/"><span class="nav-row-ico nav-ico-question" aria-hidden="true"></span>Check the Agent You Have</a>
+      <a href="../../docs/"><span class="nav-row-ico nav-ico-contents" aria-hidden="true"></span>Archie Docs</a>
+      <a href="../../faq/"><span class="nav-row-ico nav-ico-chat" aria-hidden="true"></span>FAQ</a>
+      <a href="../../blog/"><span class="nav-row-ico nav-ico-doc" aria-hidden="true"></span>Blog</a>
+      <a href="../../ai-explained/"><span class="nav-row-ico nav-ico-book" aria-hidden="true"></span>AI Explained</a>
+      <a href="../../learn/getting-your-computer-ready/"><span class="nav-row-ico nav-ico-play" aria-hidden="true"></span>Learning Library</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutConsulting">
+      <a href="https://consulting.otianai.com/"><span class="nav-row-ico nav-ico-briefcase" aria-hidden="true"></span>Otian AI Consulting</a>
+      <a href="../../questionnaire/"><span class="nav-row-ico nav-ico-chat" aria-hidden="true"></span>Book a Free Call</a>
+      <a href="https://consulting.otianai.com/#pricing"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Consulting Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../our-story/"><span class="nav-row-ico nav-ico-people" aria-hidden="true"></span>Our Story</a>
+      <a href="../../testimonials/"><span class="nav-row-ico nav-ico-quote" aria-hidden="true"></span>Testimonials</a>
+      <a href="../../contact/"><span class="nav-row-ico nav-ico-mail" aria-hidden="true"></span>Contact</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="page-hero article-hero" aria-label="Article introduction">
+      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+        <div class="breadcrumb-bar-inner">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">When Your AI Finds Nothing, Make It Say So</li>
+          </ol>
+        </div>
+      </nav>
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Team Story</span>
+        <h1 class="fade-up delay-1">When Your AI Finds Nothing, Make It Say So</h1>
+        <div class="article-byline fade-up delay-2">
+          <strong><a href="https://www.linkedin.com/in/jett-nguyen/" class="byline-author" target="_blank" rel="noopener" aria-label="Jett Nguyen on LinkedIn">Jett Nguyen</a></strong>
+          <span>&middot;</span>
+          <span>November 2, 2026</span>
+          <span>&middot;</span>
+          <span>4 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="article-body fade-up delay-1">
+
+<p>A short report from your AI is only good news if you know what it checked. "Two clients are waiting on you, nothing else needs attention" makes for a lovely Monday, as long as the AI actually looked at everything else.</p>
+
+<p>Most AI output gives you no way to tell whether it did. The fix is to make it say "nothing found" out loud, every time, for every item it was supposed to check.</p>
+
+<h2>Two kinds of nothing</h2>
+
+<p>Say you've asked an AI to go through your email every Monday and flag any client who's waiting on a reply from you. You have six active clients. This week it comes back with two names and a sentence about each. Both are right. You answer both and get on with your morning.</p>
+
+<p>Then there are the other four. Maybe they were quiet. Maybe one wrote from a personal address the search didn't match. Maybe the search only went back five days and last Wednesday's email fell outside it. Maybe the AI read "no rush, whenever you get a chance" and decided that didn't count as waiting. Every one of those produces the same report: two names, and nothing about the rest.</p>
+
+<blockquote class="article-pullquote">An empty result and a skipped check look exactly the same on the page.</blockquote>
+
+<p>In a one-off chat you can live with this, because you're right there and you'd probably ask. A recurring report gets read differently. The whole point of having one is that you can skim it and move on, and skimming is exactly when an unexplained gap gets taken as good news.</p>
+
+<h2>Why the empty parts get cut</h2>
+
+<p>Nobody tells the model to hide things. It drops the empty parts because they look like filler. A line like "no email from this client this week" reads as clutter in a report that's meant to be useful, and a model writing toward a useful-looking answer cuts clutter first. If you've ever told ChatGPT to keep it short, you've asked for exactly this, and it did what you asked.</p>
+
+<p>The second reason matters more. Unless the job spells out what to check, the AI has no list of its own to work through. It goes through what it finds and reports what stood out. Nothing in that process makes it notice that it never got to the client who emails from a personal Gmail, so a sentence like "I didn't check this one" never comes up.</p>
+
+<h2>Give every check its own line</h2>
+
+<p>The fix is boring, and it holds up. Write down what gets checked, as a list, and require a line for every item on every run, including the ones where nothing happened. Then add the line people forget: anything it tried and couldn't reach. That one goes first.</p>
+
+<p>The Monday report turns into something like this:</p>
+
+<p>- Couldn't check Fenwick. The search returned an error. - Acme: you replied Tuesday. Nothing waiting. - Birch: waiting on you since Thursday, a question about the second invoice. - Calder: no email this week. - Dunmore: waiting since Friday, wants to move the review call. - Ellis: last message was yours. Ball's in their court.</p>
+
+<p>That's six lines where there used to be two, and it's faster to read. The clients come in the same order every week, so your eye goes straight to the two that need you and slides past the rest. You also aren't left with a low hum of doubt about four names nobody mentioned.</p>
+
+<blockquote class="article-pullquote">The line that says "couldn't check" is the most useful line in the report.</blockquote>
+
+<p>Without it, a broken search and a quiet client leave the same blank. With it, the failure shows up as a plain fact you can act on: open Fenwick's thread yourself this week, or sort out the search before next Monday. It sits above the good news because it's the only line that changes how much you should trust everything below it.</p>
+
+<h2>A missing line means something now</h2>
+
+<p>Once every check has a slot, the report has a shape, and the shape repeats. That changes what silence means. If Calder's line is simply gone one Monday, you're no longer looking at a quiet week. Something broke, and you can see it in two seconds because there's a gap where a line always sits.</p>
+
+<p>This trade is worth making. An agent that reports its empty checks looks less impressive than one that only reports what it found, because most of what it says is "nothing here." But you can believe the quiet parts without checking them again yourself, and that checking was the time you were trying to save in the first place.</p>
+
+<p>It does depend on the list staying put. If you paste a prompt into a fresh chat each Monday, the wording drifts, and sooner or later a client falls off the list without anyone noticing. A recurring job written once, run by an agent you own on your own machine, keeps its shape because the instructions don't change between runs. When a seventh client signs on, you add one line to the list, and the next report has seven slots.</p>
+
+        </article>
+
+        <div class="cta-banner fade-up article-cta">
+          <h2>Reach out to Otian AI</h2>
+          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+
+        <div class="text-center mt-40">
+          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="footer-logo" href="../../"><img src="../../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /></a>
+          <p class="footer-tagline">Don&rsquo;t rent your agent. Own it.<br />Yours to shape &amp; yours to keep. Never ours.</p>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+          <div class="social-links" aria-label="Otian AI on social media">
+            <a href="https://x.com/OtianAI" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/otian-ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <a href="https://www.instagram.com/otian.ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Archie</h4>
+          <nav class="footer-nav-links" aria-label="Archie">
+            <a href="../../archie/personal/">For One Person</a>
+            <a href="../../archie/business/">For a Team</a>
+            <a href="../../archie/mobile/">Archie Mobile</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../archie/pricing/">Pricing</a>
+            <a href="../../archie/install/">Download Archie</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Add-ons</h4>
+          <nav class="footer-nav-links" aria-label="Add-ons">
+            <a href="../../skills-marketplace/browse/">Browse All</a>
+            <a href="../../skills-marketplace/find/">Find an Add-on</a>
+            <a href="../../skills-marketplace/for-developers/">Build an Add-on</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Trust</h4>
+          <nav class="footer-nav-links" aria-label="Trust">
+            <a href="../../trust/">What We Can and Can&rsquo;t See</a>
+            <a href="../../trust/proof/">Run the Checks Yourself</a>
+            <a href="../../trust/if-you-want-to-stop/">If You Want to Stop</a>
+            <a href="../../trust/it-review/">For an IT Review</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Learn</h4>
+          <nav class="footer-nav-links" aria-label="Learn">
+            <a href="../../compare/">Comparisons</a>
+            <a href="../../compare/questions-to-ask/">Check the Agent You Have</a>
+            <a href="../../docs/">Archie Docs</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../learn/getting-your-computer-ready/">Learning Library</a>
+            <a href="../../help/">Troubleshooting</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">About</h4>
+          <nav class="footer-nav-links" aria-label="About">
+            <a href="../../our-story/">Our Story</a>
+            <a href="../../testimonials/">Testimonials</a>
+            <a href="https://consulting.otianai.com/">Consulting</a>
+            <a href="../../contact/">Contact</a>
+            <a href="../../standard/">The Otian Standard</a>
+            <a class="footer-doc-link" href="../../assets/Archie-Overview-Public.pdf" download><span>Archie Overview (PDF)</span></a>
+            <a class="footer-doc-link" href="../../assets/Otian-Standard.pdf" download><span>The Otian Standard (PDF)</span></a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-marks-note">Archie drafts with AI, and AI can be wrong. Read anything it writes for you before you send it.</p>
+        <p>&copy; 2026 Otian AI LLC. All rights reserved. Otian&trade;, Archie&trade; and &ldquo;Don&rsquo;t rent your agent. Own it.&rdquo;&trade; are trademarks of Otian AI LLC.</p>
+        <p class="footer-marks-note">All other product names, logos, and brands belong to their respective owners and appear here only to identify the products Archie works with, or is compared to; their use does not imply endorsement or affiliation, and no comparison on this site is endorsed by the company it names.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+          <a href="../../security/">Security</a>
+        </nav>
+      </div>
+    </div>
+  </footer><script src="../../js/nav.js?v=20261030-1"></script><script type="module" src="../../js/account-nav.js?v=20261030-1"></script></body>
+</html>

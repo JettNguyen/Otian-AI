@@ -10731,7 +10731,10 @@ on disk. Still no model call anywhere in it.
 - **It takes the place of the AI's morning checklist.** Yes, pressed or said, pauses the store's
   Morning Task Checklist when it is on, through the same switch as "pause the checklist" in chat, and
   says so: "I paused your 8:00am Morning Task Checklist too. This list has your to-dos on it and uses
-  none of your AI, and the checklist used some every morning. To have both, press Keep both." Keep
+  none of your AI, and the checklist used some every morning. To have both, press Keep both." (From
+  the release after 0.3.15, Archie `7a62e651` and `f804526a`: the checklist posts with no AI, and the
+  sentence reads "I paused your 8:00am Morning Task Checklist too, since this list has your to-dos on
+  it." Do not say the checklist costs AI of that build.) Keep
   both turns it back on (`replace_the_checklist`, `keep_both`). Test:
   `yes_pauses_the_morning_checklist_and_keep_both_puts_it_back`. **A screen never pauses it by
   itself:** switched on from a Routines tab, the list leaves the checklist on, and the row says "Your

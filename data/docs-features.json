@@ -5167,7 +5167,7 @@
         "Change the way any time on the add-on's settings, on the Skills tab."
       ],
       "limits": [
-        "Four add-ons have a choice like this so far: Spending Record, Package Tracker, Booking Watch and Revenue Watch.",
+        "Five add-ons have a choice like this so far: Spending Record, Bills & Subscriptions, Package Tracker, Booking Watch, and Revenue Watch.",
         "Adding an add-on by asking your agent does not ask the question yet. The add-on starts on its Recommended way.",
         "When it picks the next best way, it checks only your email connection and other add-ons."
       ],
@@ -5175,7 +5175,7 @@
       "editions": "both",
       "released": "",
       "claimable": false,
-      "hold": "In no release yet (Archie 293fa360, a65ad122, 2b030e32 and 0c72dea8, archie-mobile 5ee231b). The proposed wording is Jett's to approve.",
+      "hold": "In no release yet (Archie 293fa360, a65ad122, 2b030e32, 0c72dea8 and 6d39802d, archie-mobile 5ee231b). The proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
         "🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, in no release yet, not yet used by an owner"

@@ -19430,8 +19430,8 @@ reply says so, with a button that turns it on."
 
 ### 🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, in no release yet, not yet used by an owner
 
-*Built November 1, 2026 (Archie `15561c92`, `293fa360`, `a65ad122`, `2b030e32` and `0c72dea8`,
-archie-mobile `5ee231b`; in no release yet). Jett's call, November 1: "by default give the most
+*Built November 1, 2026 (Archie `15561c92`, `293fa360`, `a65ad122`, `2b030e32`, `0c72dea8` and
+`6d39802d`, archie-mobile `5ee231b`; in no release yet). Jett's call, November 1: "by default give the most
 automation so the user feels the true value of the agent rather than having to do busy work for it
 to work."*
 
@@ -19441,7 +19441,10 @@ one marked Recommended and already picked, and closing the question keeps it. If
 needs something you have not given it yet, like your email or another add-on, it works the next best
 way in the meantime and tells you the one thing to press. Spending Record starts out getting each
 card's statement from your bank's website on its own, through Statement Collector, and it can
-instead read your statement emails or your purchase alerts, or take statements you send it."
+instead read your statement emails or your purchase alerts, or take statements you send it. Bills &
+Subscriptions starts out finding your bills in your receipts and renewal emails and showing what
+repeats on one card to check, and it can look in Spending Record's purchases instead, or take what
+you tell it."
 
 **Why it's true**, paths in the Archie repo unless named:
 
@@ -19471,6 +19474,13 @@ instead read your statement emails or your purchase alerts, or take statements y
   files a statement (`data/marketplace/routines/statement-round.json`), and with Statement emails a
   routine wakes on the day the next one is due (`statement-day.json`). With nothing saved yet, the
   agent says what the owner's own setting needs next.
+- **Bills & Subscriptions' three ways** (`data/marketplace/skills/bill-tracker.json`, version
+  3.2.0): Found in your email (the default), From your card purchases (through Spending Record), and
+  You tell me. With nothing saved yet it looks for bills itself and puts what repeats on one card
+  (`records_propose_rows`) rather than asking for a list. Bill Reminders now rolls an autopay bill's
+  date forward on its own run (`bill-reminders.json` 1.5.0), and Receipt Sweep is not run at all
+  when there is no mailbox it can read (`can_read_mail` in
+  `crates/archie-runtime/src/gateway/routines.rs`).
 - **Kept true for every add-on** by a free catalog check, `scripts/check-addon-defaults.py`, run in
   `scripts/preflight-marketplace.py`: a new add-on fails when its first answer is not its default,
   its last answer needs something, a setting has no answer, a setup step is something the card
@@ -19480,8 +19490,8 @@ instead read your statement emails or your purchase alerts, or take statements y
 
 **The boundaries.**
 
-- ⛔ **Never "every add-on works this way".** Four add-ons have a setting like this today: Spending
-  Record, Package Tracker, Booking Watch and Revenue Watch. The rest meet the rules the next time
+- ⛔ **Never "every add-on works this way".** Five add-ons have a setting like this today: Spending
+  Record, Bills & Subscriptions, Package Tracker, Booking Watch, and Revenue Watch. The rest meet the rules the next time
   they are changed, and 61 exceptions are listed.
 - ⚠️ **Only the email connection and add-ons are checked** when picking the way that runs. A way
   that needs anything else is taken as ready.
@@ -19490,8 +19500,10 @@ instead read your statement emails or your purchase alerts, or take statements y
   attach it, so Statement emails mostly tells the agent the day to look.
 - ⚠️ **The chat does not ask the question yet.** Adding an add-on by asking the agent skips it, and
   the add-on starts on its Recommended way.
-- ⚠️ **Spending Record 1.4.0 waits for the release** that carries this (its `min_app_version` is
-  0.3.16), so the store does not offer it to 0.3.15.
+- ⚠️ **Spending Record 1.4.0 and Bills & Subscriptions 3.2.0 wait for the release** that carries
+  this (their `min_app_version` is 0.3.16), so the store does not offer them to 0.3.15.
+- ⚠️ **Bills' email way never adds a bill on its own.** What it finds waits on the card for the
+  owner to keep, and a cadence the email does not state is asked, never guessed.
 - ⚠️ **Nothing here has run live.** The tests prove each rule; no owner has added an add-on and
   answered the question yet, and the phone's receipt has not been looked at on a phone.
 

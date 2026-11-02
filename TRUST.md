@@ -19428,6 +19428,120 @@ reply says so, with a button that turns it on."
 - ⚠️ **Not yet used by an owner.** Built and tested on October 31, 2026; nobody has added a job from
   a tile, moved one to another app, or pressed Turn it on, with a real agent.
 
+### 🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, in no release yet, not yet used by an owner
+
+*Built November 1, 2026 (Archie `15561c92`, `293fa360`, `a65ad122`, `2b030e32` and `0c72dea8`,
+archie-mobile `5ee231b`; in no release yet). Jett's call, November 1: "by default give the most
+automation so the user feels the true value of the agent rather than having to do busy work for it
+to work."*
+
+**Proposed wording, Jett's to approve:** "When an add-on can work more than one way, it starts out
+the way that does the most on its own. When you add it, it asks once which way you want, with that
+one marked Recommended and already picked, and closing the question keeps it. If the way you picked
+needs something you have not given it yet, like your email or another add-on, it works the next best
+way in the meantime and tells you the one thing to press. Spending Record starts out getting each
+card's statement from your bank's website on its own, through Statement Collector, and it can
+instead read your statement emails or your purchase alerts, or take statements you send it."
+
+**Why it's true**, paths in the Archie repo unless named:
+
+- **The ways, in order.** An add-on with more than one way has one setting that picks it, its
+  answers listed most automatic first and the first one the default (`source_setting` in
+  `crates/archie-domain/src/marketplace.rs`). An answer can name the connection it reads (`reads`)
+  and the add-ons it works through (`needs_addons`); the manifest is refused when either names
+  something it does not have.
+- **The question when it is added.** On the computer, the setup window that opens when a skill is
+  added asks that setting first, with the default marked Recommended and picked, and a note under
+  the picked answer saying what it does (`choiceOf` and `choose` in `src/app/skill-setup.tsx`).
+  Skip keeps what is saved. The rest of the setup is then laid out from the answer: an add-on the
+  answer works through, or the connection it reads, becomes a step. In Archie Mobile, the same
+  question is in the receipt after Add (archie-mobile `FirstQuestion` in
+  `src/screens/StoreSheet.tsx`), saved through the computer (`set_variables`). Neither asks it when
+  the job's tile already asked Where it lives in that same setting.
+- **The next best way.** When the agent starts, code picks the first answer at or below the one
+  picked whose connection is there and whose add-ons are on, and the last answer always runs
+  (`running_way`). The agent's instructions for that add-on are written for the way that runs, and
+  end with one line saying what was picked, what it waits on, and where to press
+  (`Bundle::skills_as_running` and `waiting_line` in `crates/archie-core/src/bundle/skills.rs`). The
+  file on disk keeps what the owner picked. An answer a newer version takes out goes back to the
+  default (`settle_answers_no_longer_offered`).
+- **Spending Record's four ways** (`data/marketplace/skills/spending-record.json`, version 1.4.0):
+  Statements it downloads (the default, through Statement Collector), Statement emails, Purchase
+  alerts, and Statements you send. Statement Collector's monthly round saves the purchases once it
+  files a statement (`data/marketplace/routines/statement-round.json`), and with Statement emails a
+  routine wakes on the day the next one is due (`statement-day.json`). With nothing saved yet, the
+  agent says what the owner's own setting needs next.
+- **Kept true for every add-on** by a free catalog check, `scripts/check-addon-defaults.py`, run in
+  `scripts/preflight-marketplace.py`: a new add-on fails when its first answer is not its default,
+  its last answer needs something, a setting has no answer, a setup step is something the card
+  already draws as a button, or a routine that arrives with it wakes on a clock. The add-ons that
+  broke a rule on November 1 are listed in `data/addon-defaults-baseline.json`, and that list can
+  only get shorter.
+
+**The boundaries.**
+
+- ⛔ **Never "every add-on works this way".** Four add-ons have a setting like this today: Spending
+  Record, Package Tracker, Booking Watch and Revenue Watch. The rest meet the rules the next time
+  they are changed, and 61 exceptions are listed.
+- ⚠️ **Only the email connection and add-ons are checked** when picking the way that runs. A way
+  that needs anything else is taken as ready.
+- ⚠️ **Statement Collector needs your email connected** to learn which accounts you have, and you
+  sign in once on each bank's website. US banks email a note when a statement is ready and do not
+  attach it, so Statement emails mostly tells the agent the day to look.
+- ⚠️ **The chat does not ask the question yet.** Adding an add-on by asking the agent skips it, and
+  the add-on starts on its Recommended way.
+- ⚠️ **Spending Record 1.4.0 waits for the release** that carries this (its `min_app_version` is
+  0.3.16), so the store does not offer it to 0.3.15.
+- ⚠️ **Nothing here has run live.** The tests prove each rule; no owner has added an add-on and
+  answered the question yet, and the phone's receipt has not been looked at on a phone.
+
+### 🚧 Ask your agent to change its own setup: an add-on's setting, a line in how it talks, or a line in who it serves: BUILT 2026-11-01, in no release yet, not yet used by an owner
+
+*Built November 1, 2026 (Archie `4333f4d1` and `bd0aaff5`; in no release yet). Jett's call,
+November 1: "yes with receipt and undo, and also things like changing personality or
+adding/removing things from who it serves".*
+
+**Proposed wording, Jett's to approve:** "Ask your agent to change how it is set up and it does.
+'Switch Spending Record to purchase alerts', 'stop using emojis', 'I don't work at Brightside
+anymore'. It says in one line what changed, and saying undo puts it back. Only you can ask, a
+routine never changes it, and a switch on the Setup tab turns it off."
+
+**Why it's true**, paths in the Archie repo unless named:
+
+- **One tool**, `setup_change` (`crates/archie-runtime/src/gateway/tools_setup.rs`): an add-on's
+  setting, a line added to or taken out of how the agent talks, or of who it serves. Asked with
+  only an add-on, it reads back that add-on's settings and their answers, which is how the agent
+  answers "what is Spending Record set to".
+- **Written through the same commands the agent page uses** (`src-tauri/src/own_setup.rs`):
+  `skill_config_update` for a setting, `persona_set` for how it talks, and `user_context_set` for
+  the Who this agent serves box. Names are matched loosely ("spending record", "how it gets my
+  purchases"); when two things could be meant, nothing is written and the agent asks which. An
+  answer must be one the setting offers.
+- **A receipt, then undo.** The reply names what changed, from what to what; undo is the same tool
+  with the old answer, or the line taken back out. The change also goes on the agent's record of
+  what it did (`setup_change` in `crates/archie-domain/src/journal.rs`).
+- **The owner only.** A guest or teammate does not have the tool, and is told the owner can make
+  the change (`withheld_from` and the dispatch in `crates/archie-runtime/src/gateway/turn.rs`).
+  Routines never have it. A change restarts the agent, which takes a few seconds.
+- **A switch** on the agent's Setup tab, under What it can do, in Changes it can make to itself:
+  Change its own settings when you ask (`change_setup` in `crates/archie-domain/src/skill.rs`,
+  `src/app/agent-detail.tsx`). It is on until turned off.
+
+**The boundaries.**
+
+- ⛔ **Never "it can change anything about itself".** It reaches the settings on a store add-on's
+  card and those two boxes. A skill written in the chat, a built-in, and Email Manager's own page
+  are not reachable, and the agent says where to change them instead.
+- ⚠️ **Switching to a different personality from the store** is adding an add-on, which still asks
+  for a yes (`marketplace_install_pending`). This tool edits the lines of the one it has.
+- ⚠️ **It takes out a line, never part of a paragraph.** A store personality is written in
+  paragraphs, so asked to drop something inside one, the agent adds a line saying the opposite.
+- ⚠️ **Undo is a second change**, made by the agent from the receipt it gave. Nothing keeps a copy
+  of the old setup.
+- ⚠️ **The What it can do entry says eight switches.** From this release there are nine; that
+  entry's wording changes when the release ships.
+- ⚠️ **Not run with a real AI yet.** The tests prove the matching, the writes and the receipt.
+
 ## Known Weaknesses — disclose, don't hide
 
 These are true and unflattering. They go on the Trust page anyway.

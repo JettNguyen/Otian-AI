@@ -5155,6 +5155,35 @@
       "guide": "skills-specialists-routines"
     },
     {
+      "id": "an-add-on-starts-on-its-most-automatic-way",
+      "name": "An add-on starts out doing the most it can",
+      "area": "addons",
+      "summary": "When an add-on can work more than one way, it starts on the way that does the most on its own, asks once which way you want, and works the next best way until what that way needs is ready.",
+      "where": "In the setup window that opens when you add an add-on, and on its settings on the Skills tab.",
+      "how": [
+        "Add an add-on that can work more than one way, such as Spending Record.",
+        "The first question asks which way you want. The Recommended one is already picked, so press Save, or pick another.",
+        "If the way you picked needs something, like your email or another add-on, the next step asks for it. Until then, the agent works the next best way and says the one thing to press.",
+        "Change the way any time on the add-on's settings, on the Skills tab."
+      ],
+      "limits": [
+        "Four add-ons have a choice like this so far: Spending Record, Package Tracker, Booking Watch and Revenue Watch.",
+        "Adding an add-on by asking your agent does not ask the question yet. The add-on starts on its Recommended way.",
+        "When it picks the next best way, it checks only your email connection and other add-ons."
+      ],
+      "phone": "In Archie Mobile, the same question appears after you press Add, with the Recommended answer picked.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 293fa360, a65ad122, 2b030e32 and 0c72dea8, archie-mobile 5ee231b). The proposed wording is Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 An add-on starts out doing the most it can on its own: it asks once which way you want when you add it, and works the next best way while it waits: BUILT 2026-11-01, in no release yet, not yet used by an owner"
+      ],
+      "wording": "When an add-on can work more than one way, it starts out the way that does the most on its own. When you add it, it asks once which way you want, with that one marked Recommended and already picked. If the way you picked needs something you have not given it yet, it works the next best way in the meantime and tells you the one thing to press.",
+      "guide": ""
+    },
+    {
       "id": "six-more-apps",
       "name": "Cal.com, Granola, Otter, TickTick, Monarch Money and PayPal",
       "area": "connections",
@@ -5502,6 +5531,36 @@
       ],
       "wording": "Ask your agent to use a different AI company and it does. 'Use ChatGPT instead' is the whole of it. If you have not saved a key for the one you asked for, it says where to paste one rather than just refusing.",
       "guide": "picking-your-ai-account"
+    },
+    {
+      "id": "ask-your-agent-to-change-its-setup",
+      "name": "Ask your agent to change its own setup",
+      "area": "control",
+      "summary": "Ask your agent to change one of its add-on's settings, or a line in how it talks or who it serves, and it does, says what changed, and puts it back if you say undo.",
+      "where": "",
+      "how": [
+        "In a chat, ask for the change, such as \"switch Spending Record to purchase alerts\" or \"stop using emojis\".",
+        "Read the one line it sends back about what changed.",
+        "To put it back, say undo."
+      ],
+      "limits": [
+        "Only the agent's owner can ask. A routine never changes it.",
+        "It reaches a store add-on's settings, how it talks, and Who this agent serves. A skill you wrote in the chat and Email Manager's own page are changed on their own screens.",
+        "It takes out a whole line, never part of a paragraph. Inside a paragraph, it adds a line saying the opposite instead.",
+        "A change restarts your agent, which takes a few seconds.",
+        "You can turn it off on the agent's Setup tab, under What it can do, with Change its own settings when you ask."
+      ],
+      "phone": "You can ask from Archie Mobile or a chat app, since it is a request in a conversation.",
+      "editions": "both",
+      "released": "",
+      "claimable": false,
+      "hold": "In no release yet (Archie 4333f4d1 and bd0aaff5). The proposed wording is Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Ask your agent to change its own setup: an add-on's setting, a line in how it talks, or a line in who it serves: BUILT 2026-11-01, in no release yet, not yet used by an owner"
+      ],
+      "wording": "Ask your agent to change how it is set up and it does: an add-on's setting, a line in how it talks, or a line in who it serves. It says in one line what changed, and saying undo puts it back. Only you can ask, and a switch on the Setup tab turns it off.",
+      "guide": ""
     },
     {
       "id": "model-on-your-computer",

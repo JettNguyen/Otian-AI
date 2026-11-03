@@ -5467,11 +5467,14 @@ phone's `undo_steps`; tests `a_replys_undo_all_takes_back_its_saves_and_nothing_
 stands for"). Never "Undo all takes back everything the agent did": filed mail, a sent draft or a
 reminder from the same turn stay as they are. Not pressed on a real window or phone yet.
 
-**Amended November 3, 2026: two or more saves fold behind one line** (Archie `1332406b`,
-archie-mobile `145bb0b`, in no release yet). Under a reply that saved two or more entries to the
+**Amended November 3, 2026: two or more saves fold behind one line** (Archie `1332406b` and
+`6e04b5af`, archie-mobile `145bb0b` and `aa26cbe`, in no release yet). Under a reply that saved two or more entries to the
 lists, both apps show one line that counts them by list, "Saved 6 in Rentals and 1 in Bookings", with
 Show, which opens each save with its own Open and Undo, and Undo all, which takes back every save the
-line stands for and nothing else the turn did. A single save keeps its own line. Undo all is on that
+line stands for and nothing else the turn did. When a date on any of them is one the agent filled in
+with a day nobody gave it ("Closing is my reading"), the saves are shown already, so that date is
+never behind Show; a date left blank does not do this (`savesStartOpen`). A single save keeps its own
+line. Undo all is on that
 line for any two or more saves, where before it came only when saves past six were counted. A list
 the turn made, a note kept in memory, a change made in another app, what it looked at, and the
 empty-list sentence are not folded (`foldSaves`, `savedSummary` and `undoAll` in Archie's

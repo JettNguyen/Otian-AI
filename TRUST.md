@@ -19972,6 +19972,26 @@ citation of the provider's own current policy, linked inline. Verification statu
   Their models are open weight, so a self-hosted copy reached through "Another provider" sends
   DeepSeek nothing; that is the only form of DeepSeek use this file will describe as safe.
 
+**Added 2026-11-03: how long Anthropic keeps what the API is sent.** Written for the James Hart
+write-up, whose company has confidentiality agreements, so "Anthropic doesn't train on it" was not
+the whole answer. Anthropic's Privacy Center, read 2026-11-03 through a search reader (open the pages
+in a browser before the site quotes them): for API customers, inputs and outputs are deleted from
+Anthropic's back end within 30 days, unless the customer uses a feature that keeps data (the Files
+API), has agreed otherwise (zero data retention, which takes Anthropic's approval), or Anthropic must
+keep them to enforce its Usage Policy or to comply with the law. A request its safety systems flag is
+kept up to 2 years, and its classifier scores up to 7. Paid API customers can't ask for an early
+deletion. <https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data>,
+<https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training>,
+<https://docs.anthropic.com/en/docs/build-with-claude/zero-data-retention>.
+- Approved wording: "Anthropic says it doesn't train on what comes through its API, and deletes it
+  within 30 days unless its safety systems flag it."
+- ⛔ Never "deleted right away", "never stored", "zero retention" or "Anthropic never sees it" for an
+  owner on an ordinary key. Zero retention is an agreement between whoever owns the key and
+  Anthropic, and Archie can't make one for them.
+- ⛔ This is Anthropic's word about Anthropic and covers no other provider in this entry. An owner on
+  Archie's free credits or AI-included plan goes through Otian's proxy on the way
+  (`crates/archie-net/src/llm/trial.rs` in the Archie repo), which this paragraph does not describe.
+
 **Added 2026-08-25: the roster on this page was five and the product has seven.** Reconciliation
 item 3 at the top of this file recorded the roster as seven in August and this block was not
 updated with it, so `trust/index.html` listed Anthropic, OpenAI, Google, Groq and xAI while the

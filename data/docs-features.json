@@ -2,7 +2,7 @@
   "about": "Every Archie feature for Archie Docs: published when claimable, held with the reason otherwise. Read by scripts/gen-docs.mjs; node scripts/gen-docs.mjs --report lists it all. Every TRUST.md entry outside its Known Weaknesses, Settled Decisions and Competitor claims sections has a row here, or is listed under not_features (with why) or owed (a row not written yet), and gen-docs stops otherwise.",
   "not_features": [
     {
-      "trust": "Apple's Siri button stays off Archie's message box on a Mac: BUILT November 2, 2026 (Archie `e71793b7`), in no release yet",
+      "trust": "Apple's Siri button stays off Archie's message box on a Mac: BUILT November 2, 2026 (Archie `e71793b7`), RELEASED in 0.3.17, 2026-11-04",
       "why": "A fix to something Apple draws, with nothing in Archie to use."
     },
     {

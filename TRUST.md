@@ -5468,7 +5468,8 @@ stands for"). Never "Undo all takes back everything the agent did": filed mail, 
 reminder from the same turn stay as they are. Not pressed on a real window or phone yet.
 
 **Amended November 3, 2026: two or more saves fold behind one line** (Archie `1332406b` and
-`6e04b5af`, archie-mobile `145bb0b` and `aa26cbe`, in no release yet). Under a reply that saved two or more entries to the
+`6e04b5af`, RELEASED in 0.3.17, 2026-11-04; archie-mobile `145bb0b` and `aa26cbe`, the Archie Mobile
+half on iPhone in 1.7, sent to App Review on November 4, 2026). Under a reply that saved two or more entries to the
 lists, both apps show one line that counts them by list, "Saved 6 in Rentals and 1 in Bookings", with
 Show, which opens each save with its own Open and Undo, and Undo all, which takes back every save the
 line stands for and nothing else the turn did. When a date on any of them is one the agent filled in
@@ -5481,8 +5482,9 @@ empty-list sentence are not folded (`foldSaves`, `savedSummary` and `undoAll` in
 `src/app/saved-words.ts` and archie-mobile's `src/words.ts`; tests in `src/app/saved-words.test.mjs`
 and archie-mobile's `src/kept.test.ts`). Not pressed on a real window or phone yet.
 
-**Amended November 4, 2026: the small choices are drawn as buttons** (Archie `68df64a6`, in no release
-yet; archie-mobile `b2c1a29`, the Archie Mobile half on iPhone in 1.7, not on Android yet). Show, Open,
+**Amended November 4, 2026: the small choices are drawn as buttons** (Archie `68df64a6`, RELEASED in
+0.3.17, 2026-11-04; archie-mobile `b2c1a29`, the Archie Mobile half on iPhone in 1.7, sent to App Review
+on November 4, 2026, not on Android yet). Show, Open,
 Undo and Undo all under a reply, and "2 waiting to send" and the day's line over the message box, are
 small buttons in the accent's wash, not colored words, and sit closer under the reply. Nothing they do
 changed. The computer's look was checked from a render in the app's own styles, on the Mac and Windows
@@ -5753,7 +5755,7 @@ archie-mobile's `src/kept.test.ts`. What the line says it saved, and its Undo, a
 - ⚠️ **Shut by default.** Anybody describing the line should say what it read is one press away,
   not that every read is listed under every answer.
 
-### Apple's Siri button stays off Archie's message box on a Mac: BUILT November 2, 2026 (Archie `e71793b7`), in no release yet
+### Apple's Siri button stays off Archie's message box on a Mac: BUILT November 2, 2026 (Archie `e71793b7`), RELEASED in 0.3.17, 2026-11-04
 
 macOS puts a Siri button beside the cursor in a text field it could rewrite. In Archie that field was
 the message box, where the button sat on the box as if it were part of Archie. Archie's windows now
@@ -6668,8 +6670,8 @@ sends your message again, so you don't have to type it again."
   staged before the cut-off can still show.
 - ⚠️ **A press after the conversation has moved on** hands the agent the words with the error
   reply's last line quoted in front ("About what you asked earlier (...): ..."), the rule every late
-  press follows (`tapped_message` in `decide.rs`). Since Archie `528b31bc` (November 3, 2026, in no
-  release yet) a press that arrives that way stays with the agent, where before a web helper could
+  press follows (`tapped_message` in `decide.rs`). Since Archie `528b31bc` (November 3, 2026, RELEASED
+  in 0.3.17, 2026-11-04) a press that arrives that way stays with the agent, where before a web helper could
   take it, could not see the conversation, and said it could not see what it had asked.
 - ⚠️ **The words ride the card,** so they are written into the agent's folder with it
   (`memory/decisions.json`) for its two weeks, beside the conversation they are already in.

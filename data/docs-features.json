@@ -2,6 +2,10 @@
   "about": "Every Archie feature for Archie Docs: published when claimable, held with the reason otherwise. Read by scripts/gen-docs.mjs; node scripts/gen-docs.mjs --report lists it all. Every TRUST.md entry outside its Known Weaknesses, Settled Decisions and Competitor claims sections has a row here, or is listed under not_features (with why) or owed (a row not written yet), and gen-docs stops otherwise.",
   "not_features": [
     {
+      "trust": "Apple's Siri button stays off Archie's message box on a Mac: BUILT November 2, 2026 (Archie `e71793b7`), in no release yet",
+      "why": "A fix to something Apple draws, with nothing in Archie to use."
+    },
+    {
       "trust": "✅ We are paid by the people who use Archie, and by nobody else",
       "why": "A claim about how Otian AI is paid, not something in Archie."
     },

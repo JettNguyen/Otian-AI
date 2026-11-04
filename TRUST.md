@@ -5481,6 +5481,13 @@ empty-list sentence are not folded (`foldSaves`, `savedSummary` and `undoAll` in
 `src/app/saved-words.ts` and archie-mobile's `src/words.ts`; tests in `src/app/saved-words.test.mjs`
 and archie-mobile's `src/kept.test.ts`). Not pressed on a real window or phone yet.
 
+**Amended November 4, 2026: the small choices are drawn as buttons** (Archie `68df64a6`, in no release
+yet; archie-mobile `b2c1a29`, the Archie Mobile half on iPhone in 1.7, not on Android yet). Show, Open,
+Undo and Undo all under a reply, and "2 waiting to send" and the day's line over the message box, are
+small buttons in the accent's wash, not colored words, and sit closer under the reply. Nothing they do
+changed. The computer's look was checked from a render in the app's own styles, on the Mac and Windows
+looks in both themes, and not in the running app.
+
 **Amended October 11, 2026:** on the October 11 journeys agents answered from empty lists as if they
 were whole: owners with nothing entered were told nothing was due. What changed, all in code:
 
@@ -5745,6 +5752,17 @@ archie-mobile's `src/kept.test.ts`. What the line says it saved, and its Undo, a
 
 - ⚠️ **Shut by default.** Anybody describing the line should say what it read is one press away,
   not that every read is listed under every answer.
+
+### Apple's Siri button stays off Archie's message box on a Mac: BUILT November 2, 2026 (Archie `e71793b7`), in no release yet
+
+macOS puts a Siri button beside the cursor in a text field it could rewrite. In Archie that field was
+the message box, where the button sat on the box as if it were part of Archie. Archie's windows now
+answer no when WebKit asks whether to build it (`allowsWritingToolsAffordance`, `src-tauri/src/mac_siri.rs`),
+once on their class, so every window is covered.
+
+- ⛔ **Never "turns off Writing Tools" or "turns off Siri".** Only this button, in Archie's own windows.
+  The rest of the Mac is left alone.
+- ⚠️ **A Mac only.** Nothing changed on Windows.
 
 ### 🚧 A line over the message box says what changed and what went out today: BUILT 2026-10-18 (Archie `ee4e8260`, `5a7ffc8c`, `7cd3a478`; archie-mobile `e6a171f`, `6fc955a`, merged as `63c427a`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4
 
@@ -6650,7 +6668,9 @@ sends your message again, so you don't have to type it again."
   staged before the cut-off can still show.
 - ⚠️ **A press after the conversation has moved on** hands the agent the words with the error
   reply's last line quoted in front ("About what you asked earlier (...): ..."), the rule every late
-  press follows (`tapped_message` in `decide.rs`).
+  press follows (`tapped_message` in `decide.rs`). Since Archie `528b31bc` (November 3, 2026, in no
+  release yet) a press that arrives that way stays with the agent, where before a web helper could
+  take it, could not see the conversation, and said it could not see what it had asked.
 - ⚠️ **The words ride the card,** so they are written into the agent's folder with it
   (`memory/decisions.json`) for its two weeks, beside the conversation they are already in.
 - ⚠️ **A failed wake has no button.** Its sentence says something came in, without naming it, and

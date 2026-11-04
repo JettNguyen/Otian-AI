@@ -30,6 +30,23 @@ jobs:
           # Discovery dates come from each page's last commit, so the generator needs history.
           fetch-depth: 0
 
+      # TRUST.md, FACTS.md and the other internal docs moved to the private Otian-Internal repo on
+      # November 4, 2026, because this repo has to stay public for Pages. The checks below still
+      # read them at their old paths, so they are fetched with a read-only key and linked into
+      # place for this run. They go to the runner's temp folder so that no script walking this
+      # repo finds them, and stage-site.py's allowlist keeps them off the site either way.
+      - name: Fetch the internal docs
+        uses: actions/checkout@v7
+        with:
+          repository: JettNguyen/Otian-Internal
+          ssh-key: ${{ secrets.OTIAN_INTERNAL_DEPLOY_KEY }}
+          path: .otian-internal
+
+      - name: Link the internal docs
+        run: |
+          mv .otian-internal "${RUNNER_TEMP}/otian-internal"
+          sh scripts/link-internal.sh "${RUNNER_TEMP}/otian-internal"
+
       # This workflow is the only door between an edit and otianai.com: it runs on a push to main
       # and deploys, with no review in between. So the accessibility checks run here rather than in
       # a PR workflow nobody opens.

@@ -22,3 +22,16 @@ firebase-debug.log
 _csp-selftest.html
 _site/
 scripts/__pycache__/
+
+# Internal docs live in the private Otian-Internal repo. scripts/link-internal.sh links them into
+# these paths on a computer and on a deploy, and this keeps the links from being committed here.
+/CLAUDE.md
+/TRUST.md
+/FACTS.md
+/WAR-ROOM.md
+/HUDSON-DASHBOARD.md
+/RESTYLE.md
+/SIMPLIFY.md
+/BRAND.md
+/data/docs-features.json
+/.claude/settings.json

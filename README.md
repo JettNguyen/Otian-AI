@@ -170,10 +170,12 @@ js/                     one small module per page that needs one
 assets/                 logos, screenshots, demo video, diagrams
 data/public-catalog.json the public add-ons the store pages are written from
 scripts/                the checks (check-*) and the generators (gen-*)
-TRUST.md                every privacy claim we are allowed to make, with code pointers
-FACTS.md                every money figure and count on the site, with its source
-CLAUDE.md               the house rules below, in full
 ```
+
+The house rules, the list of claims we may make and the list of figures we may print are kept in a
+private repo, `Otian-Internal`. Every deploy reads them, and on a computer that has that repo,
+`sh scripts/link-internal.sh` links them in as `CLAUDE.md`, `TRUST.md` and `FACTS.md`. The checks
+below that read them need that step first.
 
 There is no templating, so the nav is written out three times in every page (the desktop
 dropdown, the mobile drawer and the footer column). Nav changes have to be scripted across all
@@ -186,9 +188,9 @@ has a `--check` mode, and the deploy fails when a committed copy has drifted fro
 
 ### If you edit copy
 
-Four rules carry most of the weight. [CLAUDE.md](CLAUDE.md) has the rest.
+Four rules carry most of the weight. `CLAUDE.md` has the rest.
 
-1. **Read [TRUST.md](TRUST.md) before writing any sentence about privacy, security, data handling,
+1. **Read `TRUST.md` before writing any sentence about privacy, security, data handling,
    or what the agent will and won't do without asking.** It lists every claim we are allowed to
    make, in approved wording, each pointing at the code that makes it true. If a claim is not in
    there, it does not ship until it is verified and added. The test: could you defend this exact

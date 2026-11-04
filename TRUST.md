@@ -20008,9 +20008,9 @@ citation of the provider's own current policy, linked inline. Verification statu
   Their models are open weight, so a self-hosted copy reached through "Another provider" sends
   DeepSeek nothing; that is the only form of DeepSeek use this file will describe as safe.
 
-**Added 2026-11-03: how long Anthropic keeps what the API is sent.** Written for the James Hart
-write-up, whose company has confidentiality agreements, so "Anthropic doesn't train on it" was not
-the whole answer. Anthropic's Privacy Center, read 2026-11-03 through a search reader (open the pages
+**Added 2026-11-03: how long Anthropic keeps what the API is sent.** Written for a business with
+confidentiality agreements, where "Anthropic doesn't train on it" was not the whole answer.
+Anthropic's Privacy Center, read 2026-11-03 through a search reader (open the pages
 in a browser before the site quotes them): for API customers, inputs and outputs are deleted from
 Anthropic's back end within 30 days, unless the customer uses a feature that keeps data (the Files
 API), has agreed otherwise (zero data retention, which takes Anthropic's approval), or Anthropic must

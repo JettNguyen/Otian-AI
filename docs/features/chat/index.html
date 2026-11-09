@@ -431,8 +431,8 @@
           <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.1</li></ul>
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>In the chat.</dd></div>
-            <div><dt>From your phone</dt><dd>On a chat app, Matrix draws a table, Telegram and Slack show it as a labeled list, and Discord, Signal and iMessage get a list instead.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Your agent writes a table only when every screen reading the conversation can draw one.</li><li>On Discord, Signal and iMessage your agent writes labeled lists instead of tables.</li></ul></dd></div>
+            <div><dt>From your phone</dt><dd>On a chat app, Matrix draws a table, Telegram and Slack show it as a labeled list, and Discord and iMessage get a list instead.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Your agent writes a table only when every screen reading the conversation can draw one.</li><li>On Discord and iMessage your agent writes labeled lists instead of tables.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="new-chat" aria-labelledby="new-chat-h">
@@ -537,7 +537,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>On your side of the conversation, in your chat with your agent.</dd></div>
             <div><dt>From your phone</dt><dd>On an iPhone, Archie Mobile shows your press the same way. On Telegram, Slack and Discord the button you pressed stays on the card with a tick.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Cards Archie writes itself, like a reminder, a time to move, or an email or text draft, still change their own status line when pressed.</li><li>When a change has no short summary, Confirm says only what kind of change it applies.</li><li>A button that would ask for a second thing its label does not say is not offered. This matches words, so it can miss one.</li><li>On Telegram and Slack a ticked button can still be pressed. It says so and does nothing. Signal, iMessage and Matrix have no buttons.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Cards Archie writes itself, like a reminder, a time to move, or an email or text draft, still change their own status line when pressed.</li><li>When a change has no short summary, Confirm says only what kind of change it applies.</li><li>A button that would ask for a second thing its label does not say is not offered. This matches words, so it can miss one.</li><li>On Telegram and Slack a ticked button can still be pressed. It says so and does nothing. iMessage and Matrix have no buttons.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="replies-use-the-names-on-your-lists" aria-labelledby="replies-use-the-names-on-your-lists-h">
@@ -584,7 +584,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Type /pending in your chat with your agent.</dd></div>
             <div><dt>How to use it</dt><dd><ol><li>Type /pending and send it.</li></ol></dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Not on Signal or iMessage, which cannot change a message once it is sent. There the old copy stays, and a press on it is answered once.</li><li>Every copy of a draft is the same draft, so one already sent answers &quot;Already handled.&quot;</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Not on iMessage, which cannot change a message once it is sent. There the old copy stays, and a press on it is answered once.</li><li>Every copy of a draft is the same draft, so one already sent answers &quot;Already handled.&quot;</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="rooms-several-of-your-agents-in-one-conversation" aria-labelledby="rooms-several-of-your-agents-in-one-conversation-h">
@@ -634,7 +634,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Chat</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile has a Stop button while your agent works.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Only for something you send. A routine has its own time limit and no check-ins.</li><li>On iMessage and Signal it checks in once, at 45 seconds, and so does Archie's window on an agent connected to one of them.</li><li>Stopping, at the limit or with /stop, does not undo what it already finished.</li><li>A voice note you send gets no check-ins when the answer is spoken back, or when it is answered on Telegram, Slack, Discord or Matrix. The time limit still applies.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Only for something you send. A routine has its own time limit and no check-ins.</li><li>On iMessage it checks in once, at 45 seconds, and so does Archie's window on an agent connected to it.</li><li>Stopping, at the limit or with /stop, does not undo what it already finished.</li><li>A voice note you send gets no check-ins when the answer is spoken back, or when it is answered on Telegram, Slack, Discord or Matrix. The time limit still applies.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="ask-what-your-agent-got-done" aria-labelledby="ask-what-your-agent-got-done-h">

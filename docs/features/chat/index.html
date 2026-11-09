@@ -590,11 +590,10 @@
         <section class="dx-feat" id="rooms-several-of-your-agents-in-one-conversation" aria-labelledby="rooms-several-of-your-agents-in-one-conversation-h">
           <h2 id="rooms-several-of-your-agents-in-one-conversation-h">Rooms: several of your agents in one conversation<a class="dx-hash" href="#rooms-several-of-your-agents-in-one-conversation" aria-label="Link to Rooms: several of your agents in one conversation">#</a></h2>
           <p class="dx-feat-sum">Put two or more of your agents in one conversation, called a room. The one you name answers and the others stay quiet, and a message that names nobody goes to whichever agent answered last.</p>
-          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Not in Archie for Teams</li><li>Since 0.2.5</li></ul>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li>Not in Archie for Teams</li><li>Since 0.2.5</li></ul>
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>The agent list at the top of the left column, under Rooms: New room. In a room, Who is in here.</dd></div>
-            <div><dt>From your phone</dt><dd>Archie Mobile does not show rooms.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>A room holds two to eight agents.</li><li>Rooms are in Archie's window only, not on a chat app.</li><li>An agent that is switched off does not hear the room. The room names it above the message box.</li><li>A command like /new reaches every agent in the room.</li><li>Saving a room restarts the agents in it.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>A room holds two to eight agents.</li><li>Rooms are in Archie's window only, not on a chat app or in Archie Mobile.</li><li>An agent that is switched off does not hear the room. The room names it above the message box.</li><li>A command like /new reaches every agent in the room.</li><li>Saving a room restarts the agents in it.</li><li>Nobody has watched a room working yet.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="answers-appear-as-they-are-written" aria-labelledby="answers-appear-as-they-are-written-h">
@@ -603,8 +602,8 @@
           <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.0</li></ul>
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Chat in the Archie window</dd></div>
-            <div><dt>From your phone</dt><dd>Archie Mobile is not built for it. The computer sends the phone an answer that is still being written at most once every four seconds.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Only on an Anthropic key of your own. Not on the starter credits, the plan with AI included, another AI company, or a model on this computer.</li><li>Not on an agent with a chat app connected, even in the Archie window.</li><li>Not on a chat app, and not in Archie Mobile.</li><li>Not on an answer that will be spoken back to you.</li></ul></dd></div>
+            <div><dt>From your phone</dt><dd>Archie Mobile shows the answer growing too, a piece at a time rather than word by word.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Only on an Anthropic key of your own. Not on the starter credits, the plan with AI included, another AI company, or a model on this computer.</li><li>Not on an agent with a chat app connected, even in the Archie window.</li><li>Not on a chat app.</li><li>Not on an answer that will be spoken back to you.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="suggested-asks-in-an-empty-chat" aria-labelledby="suggested-asks-in-an-empty-chat-h">
@@ -625,7 +624,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Message box: Message &lt;agent&gt;, or type / for commands. Setup tab, Chat app: What you can type in chat.</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile lists the same commands when you type /, from iPhone 1.0 and in the Android download.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>/invite makes a code only on Archie for Teams, on an agent with a chat app. On Archie it says the agent answers only you.</li><li>/new, /quiet and /invite are the owner's alone.</li><li>/voice and /text need a computer that can speak. Where it can't, /help leaves them out.</li><li>Archie's window, Archie Mobile and Telegram list the commands as you type. On other chat apps, send /help for the list.</li><li>In a room, a command reaches every agent in it.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>/invite makes a code only on Archie for Teams, on an agent with a chat app. On Archie it says the agent answers only you.</li><li>/new, /quiet and /invite are the owner's alone.</li><li>/voice and /text need a computer that can speak. Where it can't, /help leaves them out.</li><li>Archie's window, Archie Mobile and Telegram list the commands as you type. On other chat apps, send /help for the list. On Slack, put a space before the /, because Slack does not pass on a message that starts with /.</li><li>In a room, a command reaches every agent in it.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="a-long-job-checks-in-and-stops-at-eight-minutes" aria-labelledby="a-long-job-checks-in-and-stops-at-eight-minutes-h">
@@ -635,7 +634,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Chat</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile has a Stop button while your agent works.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Only for something you send. A routine has its own time limit and no check-ins.</li><li>On iMessage and Signal it checks in once, at 45 seconds.</li><li>Stopping, at the limit or with /stop, does not undo what it already finished.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Only for something you send. A routine has its own time limit and no check-ins.</li><li>On iMessage and Signal it checks in once, at 45 seconds, and so does Archie's window on an agent connected to one of them.</li><li>Stopping, at the limit or with /stop, does not undo what it already finished.</li><li>A voice note you send gets no check-ins when the answer is spoken back, or when it is answered on Telegram, Slack, Discord or Matrix. The time limit still applies.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="ask-what-your-agent-got-done" aria-labelledby="ask-what-your-agent-got-done-h">
@@ -645,7 +644,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Chat. The switch is on the Setup tab, under What it can do: Look up what it has been doing.</dd></div>
             <div><dt>From your phone</dt><dd>Ask from Archie Mobile and the answer is the same.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>It looks at the last two days unless you say how far back, up to 30 days, and at the newest 20 jobs.</li><li>Only jobs that changed something are on record, so a question it answered is not.</li><li>On an agent other people message, a teammate hears only the jobs they asked for.</li><li>What each job changed, and whether each draft went out, are said from 0.3.5. Before that, each job was read back by what was asked.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It looks at the last two days unless you say how far back, up to 30 days, and at the newest 20 jobs.</li><li>Only jobs that changed something are on record, so a question it answered is not.</li><li>On an agent other people message, a teammate hears only the jobs they asked for.</li><li>What each job changed, and whether each draft went out, are said from 0.3.5. Before that, each job was read back by what was asked.</li><li>Whether a draft went out is known for a day after it was made. For an older one, your agent says to look in your sent mail.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="copy-chat" aria-labelledby="copy-chat-h">
@@ -655,7 +654,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Chat tab, at the top: Copy chat</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile copies one message at a time: hold the message, then press Copy.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>It copies the newest 500 messages, which is what the window keeps.</li><li>Words only. A picture or a file is named in brackets, not copied.</li><li>It copies your own conversation on the Chat tab, not a room.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It copies the newest 500 messages, which is what the window keeps.</li><li>Words only. A picture or a file is named in parentheses, not copied.</li><li>It copies your own conversation on the Chat tab, not a room.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="a-reply-shows-the-message-it-answers" aria-labelledby="a-reply-shows-the-message-it-answers-h">
@@ -664,8 +663,8 @@
           <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.10</li></ul>
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Chat tab: the reply arrow beside a message. Archie Mobile: drag a message aside.</dd></div>
-            <div><dt>From your phone</dt><dd>On iPhone from Archie Mobile 1.4, drag a message aside to reply to it. Not on Android yet.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Only a message you send as a reply shows a quote. Your agent's answers carry none.</li><li>The quote is the first line, up to 90 characters.</li><li>In Archie's window and Archie Mobile, not on a chat app.</li></ul></dd></div>
+            <div><dt>From your phone</dt><dd>Drag a message aside to reply to it. On iPhone from Archie Mobile 1.4, your reply shows the start of the message it answers. The Android download does not show it yet.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Only a message you send as a reply shows a quote. Your agent's answers carry none.</li><li>The quote is the first line, up to 90 characters.</li><li>In Archie's window, and in Archie Mobile on iPhone. Not on a chat app.</li></ul></dd></div>
           </dl>
         </section>
         <nav class="dx-step" aria-label="Previous and next area">

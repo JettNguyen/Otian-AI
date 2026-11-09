@@ -548,7 +548,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Routines tab: Runs when something comes due. Choose when to hear about it.</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile shows when it checks, and says when its list is empty.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>Only the store's routines that come with it, such as Bill Reminders and Return Window Watch. You can't build one yourself.</li><li>It checks once a day, at the time you pick, while the computer running Archie is on.</li><li>It tells you once, and once more if the date goes by.</li><li>It knows the date, not whether the bill was paid.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Only the store's routines that come with it, such as Bill Reminders and Return Window Watch. You can't build one yourself. Return Window Watch is not in Archie for Teams.</li><li>It checks once a day, at the time you pick, while the computer running Archie is on.</li><li>It tells you once, and once more if the date goes by.</li><li>It knows the date, not whether the bill was paid.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="routines-that-run-before-or-after-a-meeting" aria-labelledby="routines-that-run-before-or-after-a-meeting-h">
@@ -556,9 +556,9 @@
           <p class="dx-feat-sum">A routine can run a set time before each meeting on your calendar, or when a new meeting recording is ready in Fireflies, so a briefing or a recap arrives without being asked.</p>
           <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.1.3</li></ul>
           <dl class="dx-dl">
-            <div><dt>Where it is</dt><dd>Routines tab, a routine's schedule: Before each meeting. Meeting Recap and Call Filing in the store.</dd></div>
+            <div><dt>Where it is</dt><dd>Routines tab, a routine's schedule: Before each meeting. Meeting Briefing and Meeting Recap in the store.</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile shows the routine and switches it on or off. The minutes are changed on the computer.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>From 1 minute to 4 hours before.</li><li>One calendar, and only meetings with a start time. A meeting already under way is not briefed.</li><li>The recording one is Fireflies only, checked every 15 minutes. A Zoom recording on this computer does not start it.</li><li>Only while the computer running Archie is on.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>From 1 minute to 4 hours before.</li><li>One calendar, and only meetings with a start time. A meeting already under way is not briefed.</li><li>The recording one comes only with Meeting Recap from the store, and is Fireflies only, checked every 15 minutes. A Zoom recording on this computer does not start it.</li><li>Only while the computer running Archie is on.</li><li>Before each meeting shows once a calendar is connected, with Calendar checked on the Connections tab, under Email, calendar, files.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="quiet-hours" aria-labelledby="quiet-hours-h">
@@ -578,7 +578,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Routines tab: open a routine, under When it runs</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile has no switch for it. The message arrives wherever your agent's reports go.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>It rides only another routine's report, not a reminder or an answer.</li><li>It goes out alone after six hours, checked each half hour.</li><li>The switch shows once a second routine sends messages.</li><li>Held reports wait out quiet hours.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It rides only another routine's report, not the morning list, a reminder or an answer.</li><li>It goes out alone after six hours, checked each half hour.</li><li>The switch shows once a second routine sends messages.</li><li>Held reports wait out quiet hours.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="where-unasked-messages-go-and-whether-a-routine-ran" aria-labelledby="where-unasked-messages-go-and-whether-a-routine-ran-h">
@@ -588,7 +588,7 @@
           <dl class="dx-dl">
             <div><dt>Where it is</dt><dd>Routines tab: Reports, at the top, and Sends to in a routine's settings. Ask in Chat.</dd></div>
             <div><dt>From your phone</dt><dd>Archie Mobile shows each routine's Last run, and whether it sent you anything. It does not say where reports go.</dd></div>
-            <div><dt>Limits</dt><dd><ul><li>There is nothing to pick. It is your own chat with the agent, learned from your first message.</li><li>Your agent knows when a routine ran, not whether you got its message. The Routines tab shows whether a run sent you anything.</li><li>A group chat is never used on Telegram, Slack and Discord. On iMessage, Signal and Matrix it is whichever chat you first wrote from, since those apps cannot say which chats are groups.</li><li>A teammate's own reminder, and a mailbox assigned to a teammate, go to that teammate.</li></ul></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>There is nothing to pick. It is your own chat with the agent, learned from your first message.</li><li>Your agent knows when a routine ran, not whether you got its message. The Routines tab shows whether a run sent you anything.</li><li>A group chat is never used on Telegram, Slack, Discord, iMessage or Signal. On Matrix it is whichever room you first wrote from, since Archie does not check who else is in it.</li><li>A guest's own reminder, and a mailbox assigned to a guest, go to that guest (a teammate, on Archie for Teams).</li></ul></dd></div>
           </dl>
         </section>
         <nav class="dx-step" aria-label="Previous and next area">

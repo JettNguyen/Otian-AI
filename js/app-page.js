@@ -45,7 +45,7 @@ const JOIN_PREFIX = "t1.";
 /** Where each phone gets the app. The same two addresses as archie/install/ and archie/mobile/. */
 const STORE = {
   ios: "https://apps.apple.com/app/archie-mobile/id6810899666",
-  android: "https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk",
+  android: "https://github.com/Otian-AI/archie-releases/releases/latest/download/Archie-latest.apk",
 };
 
 /** Which phone this is, or "" for anything else. An iPad counts as an iPhone here, because the

@@ -38,7 +38,7 @@ jobs:
       - name: Fetch the internal docs
         uses: actions/checkout@v7
         with:
-          repository: JettNguyen/Otian-Internal
+          repository: Otian-AI/Otian-Internal
           ssh-key: ${{ secrets.OTIAN_INTERNAL_DEPLOY_KEY }}
           path: .otian-internal
 

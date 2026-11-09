@@ -8,7 +8,7 @@
 Yours to shape & yours to keep. Never ours.
 
 [![Live site](https://img.shields.io/badge/otianai.com-live-E08A5B?style=flat-square&labelColor=2A211C)](https://otianai.com)
-[![Deploy](https://img.shields.io/github/actions/workflow/status/JettNguyen/Otian-AI/deploy.yml?branch=main&style=flat-square&label=pages%20deploy&labelColor=2A211C&color=E08A5B)](https://github.com/JettNguyen/Otian-AI/actions/workflows/deploy.yml)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/Otian-AI/Otian-AI/deploy.yml?branch=main&style=flat-square&label=pages%20deploy&labelColor=2A211C&color=E08A5B)](https://github.com/Otian-AI/Otian-AI/actions/workflows/deploy.yml)
 [![Build step](https://img.shields.io/badge/build_step-none-8C7A6B?style=flat-square&labelColor=2A211C)](#running-the-site-locally)
 [![Archie](https://img.shields.io/badge/Archie-in_beta-E08A5B?style=flat-square&labelColor=2A211C)](https://otianai.com/archie/personal/#status)
 
@@ -139,7 +139,7 @@ excluded by default.
 ### Running the site locally
 
 ```bash
-git clone https://github.com/JettNguyen/Otian-AI.git
+git clone https://github.com/Otian-AI/Otian-AI.git
 cd Otian-AI
 python3 scripts/dev-server.py
 ```

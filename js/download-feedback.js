@@ -157,7 +157,7 @@
     return "Your browser shows it in its downloads list, usually at the top right of the window.";
   }
 
-  var RELEASES = "https://github.com/JettNguyen/archie-releases/releases/latest";
+  var RELEASES = "https://github.com/Otian-AI/archie-releases/releases/latest";
 
   /* The Android button is the one download meant for a phone, so it must not get the phone's
      "this is a desktop app" line: until 2026-10-04 it did, under the button for the phone app. */

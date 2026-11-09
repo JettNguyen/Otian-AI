@@ -415,7 +415,17 @@
           <h1>Staying in control</h1>
           <p class="dx-lede">What waits for your yes, what it will not do, and how to undo or stop it.</p>
         </header>
-        <details class="dx-toc-m"><summary>On this page</summary><ul><li><a href="#what-it-can-do">Choose what your agent can do</a></li><li><a href="#what-it-will-not-do">What your agent will never do</a></li><li><a href="#crisis-floor">The crisis floor</a></li></ul></details>
+        <details class="dx-toc-m"><summary>On this page</summary><ul><li><a href="#ask-your-agent-to-change-its-setup">Ask your agent to change its own setup</a></li><li><a href="#what-it-can-do">Choose what your agent can do</a></li><li><a href="#what-it-will-not-do">What your agent will never do</a></li><li><a href="#crisis-floor">The crisis floor</a></li><li><a href="#who-stopped-an-agent">Who stopped an agent, and when</a></li><li><a href="#payment-instructions-held">Payment instructions are never passed on</a></li><li><a href="#a-change-you-did-not-ask-for-is-offered">A change you did not ask for is offered, not made</a></li><li><a href="#undo-that-names-what-was-changed">Undo that, answered with what was changed</a></li></ul></details>
+        <section class="dx-feat" id="ask-your-agent-to-change-its-setup" aria-labelledby="ask-your-agent-to-change-its-setup-h">
+          <h2 id="ask-your-agent-to-change-its-setup-h">Ask your agent to change its own setup<a class="dx-hash" href="#ask-your-agent-to-change-its-setup" aria-label="Link to Ask your agent to change its own setup">#</a></h2>
+          <p class="dx-feat-sum">Ask your agent to change one of its add-on's settings, or a line in how it talks or who it serves, and it does, says what changed, and puts it back if you say undo.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.16</li></ul>
+          <dl class="dx-dl">
+            <div><dt>How to use it</dt><dd><ol><li>In a chat, ask for the change, such as &quot;switch Spending Record to purchase alerts&quot; or &quot;stop using emojis&quot;.</li><li>Read the one line it sends back about what changed.</li><li>To put it back, say undo.</li></ol></dd></div>
+            <div><dt>From your phone</dt><dd>You can ask from Archie Mobile or a chat app, since you ask for it in a conversation.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Only the agent's owner can ask. A routine never changes it.</li><li>It reaches a store add-on's settings, how it talks, and Who this agent serves. A skill you wrote in the chat and Email Manager's own page are changed on their own screens.</li><li>It takes out a whole line, never part of a paragraph. Inside a paragraph, it adds a line saying the opposite instead.</li><li>A change restarts your agent, which takes a few seconds.</li><li>You can turn it off on the agent's Setup tab, under What it can do, with Change its own settings when you ask.</li></ul></dd></div>
+          </dl>
+        </section>
         <section class="dx-feat" id="what-it-can-do" aria-labelledby="what-it-can-do-h">
           <h2 id="what-it-can-do-h">Choose what your agent can do<a class="dx-hash" href="#what-it-can-do" aria-label="Link to Choose what your agent can do">#</a></h2>
           <p class="dx-feat-sum">Switches decide what your agent offers, such as setting reminders or reading the web; turn one off and each message costs a little less.</p>
@@ -446,12 +456,56 @@
             <div><dt>Limits</dt><dd><ul><li>In the US it names 988, to call or text. Elsewhere it names your local crisis line, your emergency number, or your doctor.</li><li>Nobody at Otian AI sees the conversation, and nothing is reported.</li><li>It is a language model reading text, so it can miss someone who does not say it plainly.</li><li>It offers no counseling. It stops, says it cannot be the one to help, and names who can.</li></ul></dd></div>
           </dl>
         </section>
+        <section class="dx-feat" id="who-stopped-an-agent" aria-labelledby="who-stopped-an-agent-h">
+          <h2 id="who-stopped-an-agent-h">Who stopped an agent, and when<a class="dx-hash" href="#who-stopped-an-agent" aria-label="Link to Who stopped an agent, and when">#</a></h2>
+          <p class="dx-feat-sum">A stopped agent says who stopped it and when, such as &quot;You stopped Ember yesterday at 11:34 PM&quot;, in Archie and in Archie Mobile.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.8</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>On the agent's Dashboard, and in its Chat above Switch on Ember.</dd></div>
+            <div><dt>From your phone</dt><dd>On an iPhone, from Archie Mobile 1.3, the same line shows on the agent's Dashboard above Switch on, and in its chat above Switch on Ember.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It says who and when, never why.</li><li>An agent that could not start, or one restarted for a change, has no line. One whose run ended by itself says so, like &quot;Ember stopped on its own today at 8:00 AM&quot; (from 0.3.12).</li><li>&quot;From your phone&quot; means any phone paired with that computer.</li><li>A stop made before Archie 0.3.8 has no line.</li></ul></dd></div>
+            <div><dt>Guide</dt><dd><a href="../../guides/when-it-goes-quiet/">Your agent stopped replying</a></dd></div>
+          </dl>
+        </section>
+        <section class="dx-feat" id="payment-instructions-held" aria-labelledby="payment-instructions-held-h">
+          <h2 id="payment-instructions-held-h">Payment instructions are never passed on<a class="dx-hash" href="#payment-instructions-held" aria-label="Link to Payment instructions are never passed on">#</a></h2>
+          <p class="dx-feat-sum">If an email, document, or message gives new or changed payment or wiring instructions, your agent is told never to pass them on, even if you ask.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.8</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>Written down in the guide What your agent will never do, under Payment and wiring instructions. Press Resources in the left sidebar to find it.</dd></div>
+            <div><dt>From your phone</dt><dd>It holds the same way in Archie Mobile and on a chat app.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It is an instruction to the AI, and an AI can get it wrong, so read anything about moving money yourself.</li><li>A typed message asking to forward new wiring or bank details gets a fixed answer. One worded another way reaches the AI.</li><li>A question about such instructions is left to your agent.</li><li>Buying is a separate switch, and this does not change it.</li></ul></dd></div>
+            <div><dt>Guide</dt><dd><a href="../../guides/what-it-will-not-do/">What your agent will never do</a></dd></div>
+          </dl>
+        </section>
+        <section class="dx-feat" id="a-change-you-did-not-ask-for-is-offered" aria-labelledby="a-change-you-did-not-ask-for-is-offered-h">
+          <h2 id="a-change-you-did-not-ask-for-is-offered-h">A change you did not ask for is offered, not made<a class="dx-hash" href="#a-change-you-did-not-ask-for-is-offered" aria-label="Link to A change you did not ask for is offered, not made">#</a></h2>
+          <p class="dx-feat-sum">Ask your agent to change one thing on a list and it changes that. If it also wants to move something you didn't mention, like a client to Past client, it asks first, with buttons like Change it to Past client and Keep Active. A payment that could belong to either of two entries waits for you to say which.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.13</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>In your chat with your agent, under its reply.</dd></div>
+            <div><dt>How to use it</dt><dd><ol><li>Press the button you want, like Change it to Past client or Keep Active, or say which.</li></ol></dd></div>
+            <div><dt>From your phone</dt><dd>A message typed in Archie Mobile is held the same way, with the same buttons.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Only a column where you pick one choice, like a stage or a status. A date, a number or words changed beside what you asked for are changed at once, unless the change would clear something already filled in or move a filled date to a day nothing you said gave. Those ask first.</li><li>It goes by the words you typed. Changes made by a routine or the mail watch are not held this way, and a button you press goes through as pressed.</li><li>A question that asks for no change, like &quot;Is that the only pickup today?&quot;, writes nothing to an entry it doesn't name. Your agent answers, then offers Update with the entry's name, or Leave it.</li><li>It goes by words, not meaning, so a question with can or will in it can still change an entry.</li></ul></dd></div>
+          </dl>
+        </section>
+        <section class="dx-feat" id="undo-that-names-what-was-changed" aria-labelledby="undo-that-names-what-was-changed-h">
+          <h2 id="undo-that-names-what-was-changed-h">Undo that, answered with what was changed<a class="dx-hash" href="#undo-that-names-what-was-changed" aria-label="Link to Undo that, answered with what was changed">#</a></h2>
+          <p class="dx-feat-sum">Type undo that, and Archie says exactly what your agent changed the last time you asked it for something, with an Undo button for each change. Nothing is put back until you press one.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.13</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>In your chat with your agent. The Undo buttons are on the line under the answer.</dd></div>
+            <div><dt>How to use it</dt><dd><ol><li>Type undo that, undo it, or put it back.</li><li>Press Undo beside each change you want put back. From 0.3.17, two or more are folded into one line: press Show to see each one, or Undo all.</li></ol></dd></div>
+            <div><dt>From your phone</dt><dd>Archie Mobile shows the same answer, with the same Undo buttons, folded the same way from Archie Mobile 1.7.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It names the last job you asked for in the last day. Older work, and anything a routine or the mail watch did, is on the agent's Jobs tab.</li><li>Only a message that asks for an undo and nothing else. &quot;Undo the Henderson change&quot; goes to your agent, which can get it wrong.</li><li>A sent email or text can't be taken back, and the answer says so. A calendar event, a file, or mail filed away has its Undo on the Jobs tab, not under the answer.</li><li>In 0.3.18 and earlier, a to-do it added in Todoist or Google Tasks has its Undo on the Jobs tab only.</li><li>A chat app has no line under the answer, so there it points you to the Jobs tab.</li><li>On Archie for Teams, a teammate's undo that goes to your agent.</li></ul></dd></div>
+          </dl>
+        </section>
         <nav class="dx-step" aria-label="Previous and next area">
           <a class="dx-step-prev" rel="prev" href="../ai/"><span class="dx-step-w"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/arrow-left.svg&quot;)" aria-hidden="true"></span>Previous</span><span class="dx-step-t">Your AI account and cost</span></a>
           <a class="dx-step-next" rel="next" href="../privacy/"><span class="dx-step-w">Next<span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/arrow-right.svg&quot;)" aria-hidden="true"></span></span><span class="dx-step-t">Privacy and security</span></a>
         </nav>
       </article>
-      <nav class="dx-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#what-it-can-do">Choose what your agent can do</a></li><li><a href="#what-it-will-not-do">What your agent will never do</a></li><li><a href="#crisis-floor">The crisis floor</a></li></ul></nav>
+      <nav class="dx-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#ask-your-agent-to-change-its-setup">Ask your agent to change its own setup</a></li><li><a href="#what-it-can-do">Choose what your agent can do</a></li><li><a href="#what-it-will-not-do">What your agent will never do</a></li><li><a href="#crisis-floor">The crisis floor</a></li><li><a href="#who-stopped-an-agent">Who stopped an agent, and when</a></li><li><a href="#payment-instructions-held">Payment instructions are never passed on</a></li><li><a href="#a-change-you-did-not-ask-for-is-offered">A change you did not ask for is offered, not made</a></li><li><a href="#undo-that-names-what-was-changed">Undo that, answered with what was changed</a></li></ul></nav>
       <nav class="dx-side" id="dx-side" aria-label="Archie Docs">
         <ul>
           <li><a href="../../"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/contents.svg&quot;)" aria-hidden="true"></span>Docs home</a></li>
@@ -468,25 +522,25 @@
         </ul>
         <p class="dx-side-t">Features</p>
         <ul>
-          <li><a href="../../features/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Every feature</span><span class="dx-n">224</span></a></li>
+          <li><a href="../../features/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Every feature</span><span class="dx-n">273</span></a></li>
           <li><a href="../../features/chat/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/chat.svg&quot;)" aria-hidden="true"></span><span>Talking to your agent</span><span class="dx-n">25</span></a></li>
-          <li><a href="../../features/voice/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/mic.svg&quot;)" aria-hidden="true"></span><span>Voice</span><span class="dx-n">2</span></a></li>
+          <li><a href="../../features/voice/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/mic.svg&quot;)" aria-hidden="true"></span><span>Voice</span><span class="dx-n">4</span></a></li>
           <li><a href="../../features/phone/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span><span>Your phone</span><span class="dx-n">10</span></a></li>
-          <li><a href="../../features/email/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/mail.svg&quot;)" aria-hidden="true"></span><span>Email</span><span class="dx-n">22</span></a></li>
-          <li><a href="../../features/calendar/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/calendar.svg&quot;)" aria-hidden="true"></span><span>Calendar</span><span class="dx-n">8</span></a></li>
-          <li><a href="../../features/lists/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/contents.svg&quot;)" aria-hidden="true"></span><span>Lists and to-dos</span><span class="dx-n">26</span></a></li>
-          <li><a href="../../features/routines/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/clock.svg&quot;)" aria-hidden="true"></span><span>Routines and reminders</span><span class="dx-n">17</span></a></li>
-          <li><a href="../../features/memory/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/notes.svg&quot;)" aria-hidden="true"></span><span>Memory and knowledge</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/files/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/doc.svg&quot;)" aria-hidden="true"></span><span>Files and pictures</span><span class="dx-n">10</span></a></li>
-          <li><a href="../../features/web/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/globe.svg&quot;)" aria-hidden="true"></span><span>Websites and apps</span><span class="dx-n">8</span></a></li>
-          <li><a href="../../features/addons/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Skills and the store</span><span class="dx-n">17</span></a></li>
-          <li><a href="../../features/connections/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/plug.svg&quot;)" aria-hidden="true"></span><span>Connections</span><span class="dx-n">9</span></a></li>
-          <li><a href="../../features/ai/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/spark.svg&quot;)" aria-hidden="true"></span><span>Your AI account and cost</span><span class="dx-n">14</span></a></li>
-          <li><a href="../../features/control/" aria-current="page"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/check.svg&quot;)" aria-hidden="true"></span><span>Staying in control</span><span class="dx-n">3</span></a></li>
-          <li><a href="../../features/privacy/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/shield.svg&quot;)" aria-hidden="true"></span><span>Privacy and security</span><span class="dx-n">11</span></a></li>
-          <li><a href="../../features/plans/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/tag.svg&quot;)" aria-hidden="true"></span><span>Plans</span><span class="dx-n">9</span></a></li>
-          <li><a href="../../features/teams/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/people.svg&quot;)" aria-hidden="true"></span><span>Archie for Teams</span><span class="dx-n">12</span></a></li>
-          <li><a href="../../features/app/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span><span>Archie on your computer</span><span class="dx-n">14</span></a></li>
+          <li><a href="../../features/email/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/mail.svg&quot;)" aria-hidden="true"></span><span>Email</span><span class="dx-n">25</span></a></li>
+          <li><a href="../../features/calendar/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/calendar.svg&quot;)" aria-hidden="true"></span><span>Calendar</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/lists/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/contents.svg&quot;)" aria-hidden="true"></span><span>Lists and to-dos</span><span class="dx-n">28</span></a></li>
+          <li><a href="../../features/routines/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/clock.svg&quot;)" aria-hidden="true"></span><span>Routines and reminders</span><span class="dx-n">23</span></a></li>
+          <li><a href="../../features/memory/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/notes.svg&quot;)" aria-hidden="true"></span><span>Memory and knowledge</span><span class="dx-n">11</span></a></li>
+          <li><a href="../../features/files/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/doc.svg&quot;)" aria-hidden="true"></span><span>Files and pictures</span><span class="dx-n">12</span></a></li>
+          <li><a href="../../features/web/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/globe.svg&quot;)" aria-hidden="true"></span><span>Websites and apps</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/addons/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Skills and the store</span><span class="dx-n">18</span></a></li>
+          <li><a href="../../features/connections/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/plug.svg&quot;)" aria-hidden="true"></span><span>Connections</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/ai/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/spark.svg&quot;)" aria-hidden="true"></span><span>Your AI account and cost</span><span class="dx-n">18</span></a></li>
+          <li><a href="../../features/control/" aria-current="page"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/check.svg&quot;)" aria-hidden="true"></span><span>Staying in control</span><span class="dx-n">8</span></a></li>
+          <li><a href="../../features/privacy/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/shield.svg&quot;)" aria-hidden="true"></span><span>Privacy and security</span><span class="dx-n">18</span></a></li>
+          <li><a href="../../features/plans/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/tag.svg&quot;)" aria-hidden="true"></span><span>Plans</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/teams/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/people.svg&quot;)" aria-hidden="true"></span><span>Archie for Teams</span><span class="dx-n">18</span></a></li>
+          <li><a href="../../features/app/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span><span>Archie on your computer</span><span class="dx-n">15</span></a></li>
         </ul>
         <p class="dx-side-t">More help</p>
         <ul>

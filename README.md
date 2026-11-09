@@ -121,7 +121,7 @@ The AI bill is usually $13 to $31 a month, and up to $206 for a heavy agent. The
 | **Add-ons** | [Browse All](https://otianai.com/skills-marketplace/browse/) · [Find an Add-on](https://otianai.com/skills-marketplace/find/) · [Build an Add-on](https://otianai.com/skills-marketplace/for-developers/) |
 | **Trust** | [What We Can and Can't See](https://otianai.com/trust/) · [Run the Checks Yourself](https://otianai.com/trust/proof/) · [If You Want to Stop](https://otianai.com/trust/if-you-want-to-stop/) |
 | **Learn** | [Comparisons](https://otianai.com/compare/) · [Check the Agent You Have](https://otianai.com/compare/questions-to-ask/) · [FAQ](https://otianai.com/faq/) · [Blog](https://otianai.com/blog/) · [AI Explained](https://otianai.com/ai-explained/) · [Learning Library](https://otianai.com/learn/getting-your-computer-ready/) · [Troubleshooting](https://otianai.com/help/) |
-| **Consulting** | [Otian AI Consulting](https://consulting.otianai.com/) · [Book a Free Call](https://otianai.com/questionnaire/) · [Consulting Pricing](https://consulting.otianai.com/#pricing) |
+| **Consulting** | [Otian AI Consulting](https://consulting.otianai.com/) · [Claude Code Lessons](https://consulting.otianai.com/#lessons) · [Book a Free Call](https://otianai.com/questionnaire/) · [Consulting Pricing](https://consulting.otianai.com/#pricing) |
 | **About** | [Our Story](https://otianai.com/our-story/) · [Testimonials](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) |
 
 ---

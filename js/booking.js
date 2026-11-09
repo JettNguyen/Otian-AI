@@ -122,7 +122,11 @@ function picker(root) {
       }
       days = [...byDay.values()];
       page = 0; dayIdx = 0; chosen = null;
-      if (!days.length) {
+      if (data.closed && kind === "setup") {
+        // The billing service answers `closed` with no times once the setup call has ended, at 50
+        // owners or on the setup_call_closed lever. These are the words it gives a Book press then.
+        show(h("p", { class: "bk-status" }, "Free setup calls have ended. For help getting set up, email ", h("a", { href: `mailto:${MAIL}`, text: MAIL }), "."));
+      } else if (!days.length) {
         show(h("p", { class: "bk-status" }, "No open times right now. Email ", h("a", { href: `mailto:${MAIL}`, text: MAIL }), " and we'll find one."));
       } else {
         render();

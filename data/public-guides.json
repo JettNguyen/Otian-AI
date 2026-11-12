@@ -2435,7 +2435,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-10-31",
+      "updated_at": "2026-11-12",
       "section": "set_up_what_agent_does",
       "setup_key": "",
       "video": "",
@@ -2471,7 +2471,7 @@
           "type": "list",
           "items": [
             "Results arrive in the wrong chat: they go to the first chat that ever messaged your agent, usually where you claimed it. Only switching chat app or pasting a new connection code moves them.",
-            "A routine only describes calendar changes, on purpose, since nobody is there to approve them. Ask in the chat instead and confirm there."
+            "A change it wanted to make has not happened yet: it waits for your yes on a card under the routine's report, for up to 14 days. Press Confirm on that card, on your phone or on this computer. If your chat app shows no buttons, open Archie, go to the Jobs tab, and press Approve under Needs you."
           ]
         },
         {

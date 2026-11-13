@@ -174,6 +174,9 @@ ALLOW = [
     ("index.html", "heading-two-sentences", "Own it.",
      "The tagline h1. Jett, 2026-09-27: keep the tagline as the homepage h1. It is the company's "
      "line, set on 2026-09-16, not a sentence of page copy."),
+    ("docs/guides/password-manager/index.html", "machine-word", "The vault is unlocked whenever your computer is",
+     "Jett, 2026-11-13: keep it. It is the literal state of the Keychain or Credential Manager, a "
+     "security fact, and no other word says the same thing."),
 ]
 
 HEADINGS = {"h1", "h2", "h3", "h4"}

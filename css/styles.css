@@ -1715,11 +1715,18 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
      you close a menu and find the article underneath has moved. Contains the chain to the drawer. */
   overscroll-behavior: contain;
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  /* Hidden as well as moved, the way the flyout below is. Moved alone, a closed drawer kept its
+     seven controls in the tab order, so on every page, desktop included, Tab went from the account
+     button into buttons off the right edge that nobody could see and a screen reader was told did
+     not exist (aria-hidden). Visibility waits out the slide on the way out and is immediate on the
+     way in, so the drawer still slides both ways. */
+  visibility: hidden;
+  transition: transform 0.3s ease, visibility 0.3s ease;
 }
 
 .nav-drawer.open {
   transform: translateX(0);
+  visibility: visible;
 }
 
 .nav-drawer a,

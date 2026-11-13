@@ -844,13 +844,16 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 }
 .explain-svg--mobile { max-width: 340px; font-family: inherit; }
 
+/* Text in the accent takes --accent-ink, which is the bright accent itself on the dark page and a
+   deeper terracotta on the light one: #E08A5B as text measured 2.1 to 2.6:1 on the light grounds.
+   Buttons, fills, borders and drawings keep --accent (Jett, 11/12/2026). */
 .section-label {
   display: inline-block;
   font-size: var(--fs-xs);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-bottom: 12px;
 }
 
@@ -1123,7 +1126,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 }
 
 .nav-links a.active {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .nav-more {
@@ -1167,12 +1170,12 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
    persistent underline, deliberately different from the hover/open highlight above, so
    "you are here" never looks the same as "this menu is open". */
 .nav-more-toggle.active {
-  color: var(--accent);
+  color: var(--accent-ink);
   background: transparent;
 }
 .nav-more-toggle.active:hover,
 .nav-more.open .nav-more-toggle.active {
-  color: var(--accent); /* keep the current-section accent even while hovering or open */
+  color: var(--accent-ink); /* keep the current-section accent even while hovering or open */
 }
 .nav-more-toggle.active::before {
   content: '';
@@ -1306,7 +1309,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 }
 
 .nav-more-menu a.active {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .nav-cta {
@@ -1596,7 +1599,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 /* The dropdown item for the page you're on */
-.nav-account-menu a.active { color: var(--accent); font-weight: 600; }
+.nav-account-menu a.active { color: var(--accent-ink); font-weight: 600; }
 
 .nav-account-divider {
   height: 1px;
@@ -1751,7 +1754,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 .nav-drawer a.active,
 .nav-drawer-flyout a.active {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .nav-drawer-cat {
@@ -1781,7 +1784,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 .nav-drawer-cat.active {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .nav-drawer-cat.open {
@@ -1879,7 +1882,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 .nav-drawer-back:hover,
 .nav-drawer-back:focus-visible {
-  color: var(--accent);
+  color: var(--accent-ink);
   background: none;
   border-color: var(--field-border-strong);
 }
@@ -2057,7 +2060,7 @@ summary,
    the way home and the way in. */
 .nav-logo:hover .nav-logo-title,
 .nav-logo:focus-visible .nav-logo-title {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .nav-hamburger:hover span,
@@ -2066,7 +2069,7 @@ summary,
 }
 
 .glossary-trigger:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* Three more with no hover at all. .act-remove, .acct-delete-link and .auth-textlink looked
@@ -2331,7 +2334,7 @@ summary,
 }
 
 .footer-contact-email:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* Four stacked rows at every width: the AI note, copyright, the third-party marks note, then
@@ -2609,7 +2612,7 @@ summary,
 
 .hero h1 em {
   font-style: normal;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hero-subtitle {
@@ -4254,7 +4257,7 @@ fieldset .checkbox-group {
 }
 
 .chat-book-first a {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -4816,7 +4819,7 @@ fieldset .checkbox-group {
   font-weight: 600;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-bottom: 14px;
 }
 
@@ -4946,7 +4949,7 @@ fieldset .checkbox-group {
 }
 
 .contact-info-value a:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .contact-response-note {
@@ -5122,7 +5125,7 @@ fieldset .checkbox-group {
 }
 
 .arch-panel-title--accent {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .arch-panel-desc {
@@ -5659,7 +5662,7 @@ fieldset .checkbox-group {
 }
 
 .glossary-entry-redirect a {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* ========================================
@@ -5745,7 +5748,7 @@ fieldset .checkbox-group {
   font-size: var(--fs-2xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 700;
 }
 
@@ -5771,7 +5774,7 @@ fieldset .checkbox-group {
   font-size: var(--fs-xs);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-bottom: 8px;
   font-weight: 700;
 }
@@ -5797,7 +5800,7 @@ fieldset .checkbox-group {
 
 .resource-featured h3 a:hover,
 .resource-card h3 a:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* Blue at rest, ember on hover. This line is the supporting layer, not the top one: the card's
@@ -5820,7 +5823,7 @@ fieldset .checkbox-group {
 .resource-read-more:hover,
 .resource-card--linked:hover .resource-read-more,
 .resource-card--linked:focus-within .resource-read-more {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* A card whose whole face is the link. The <h3><a> stays the only real link, so the heading
@@ -6021,7 +6024,7 @@ fieldset .checkbox-group {
 }
 
 .article-body a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
 }
 
@@ -6664,7 +6667,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .booking-note a {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 500;
   transition: color var(--transition);
 }
@@ -7018,7 +7021,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .checklist-reset-btn:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .checklist-group {
@@ -7497,7 +7500,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .before-after-card.is-after .before-after-label {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .before-after-list {
@@ -8266,7 +8269,7 @@ html.js .fade-up:not(.visible) {
   font-size: var(--fs-sm);
   white-space: nowrap;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-ink);
   transition: color var(--transition);
 }
 
@@ -8564,7 +8567,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .mp-breadcrumb a {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 500;
 }
 
@@ -8600,7 +8603,7 @@ html.js .fade-up:not(.visible) {
 .mp-detail-tagline {
   font-size: var(--fs-2xl);
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-bottom: 16px;
 }
 
@@ -8824,7 +8827,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .mp-back-link:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 
@@ -9100,7 +9103,7 @@ html.js .fade-up:not(.visible) {
 
 .hero-kicker em {
   font-style: normal;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* Availability notice under the hero CTA. The facts themselves live in one place
@@ -10003,7 +10006,7 @@ html.js .fade-up:not(.visible) {
 .qr-box svg { display: block; width: auto; height: auto; max-width: 100%; }
 .totp-manual { margin-top: 12px; }
 .totp-manual > summary { font-size: var(--fs-sm); color: var(--text-secondary); cursor: pointer; list-style: revert; transition: color var(--transition-quick); }
-.totp-manual > summary:hover { color: var(--accent); }
+.totp-manual > summary:hover { color: var(--accent-ink); }
 
 
 .acct-hidden { display: none !important; }
@@ -10704,7 +10707,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .contact-info-link:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .contact-info-link svg {
@@ -10728,7 +10731,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .byline-author:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration-color: var(--accent);
 }
 
@@ -13417,7 +13420,7 @@ html.js .fade-up:not(.visible) {
   text-decoration: none;
 }
 .std-toc-list a:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
 }
 
@@ -13746,7 +13749,7 @@ html.js .fade-up:not(.visible) {
 }
 
 .install-req a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -13816,7 +13819,7 @@ html.js .fade-up:not(.visible) {
 
 /* The base anchor inherits its colour, which inside a note would hide the fallback link. */
 .download-note a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -16216,7 +16219,7 @@ html.js .fade-up:not(.visible) {
   place-items: center;
   border-radius: 50%;
   border: 2px solid var(--accent);
-  color: var(--accent);
+  color: var(--accent-ink);
   background: var(--bg-card);
   font-weight: 700;
   font-size: var(--fs-sm);

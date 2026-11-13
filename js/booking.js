@@ -16,7 +16,7 @@
 // leaving the page. questionnaire.js sets data-name and data-email on its picker, and the form
 // starts from them.
 
-import { postJson } from "./service-api.js?v=20261112-1";
+import { postJson } from "./service-api.js?v=20261112-2";
 
 const LOCALE = "en-US";
 const DAYS_SHOWN = 5;

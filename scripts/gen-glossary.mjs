@@ -51,7 +51,7 @@ const REGIONS = [
   { open: '<div id="azJumpNav" class="az-jump-nav" aria-label="Jump to letter">', close: "</div>", render: makeJumpNav },
   { open: '<div id="startHereList" class="start-here-list">', close: "</div>", render: makeStartHere },
   { open: '<div id="bigPictureList" class="big-picture-list">', close: "</div>", render: makeBigPicture },
-  { open: '<div id="glossaryEntries" class="glossary-entries fade-up delay-2" role="list">', close: "</div>", render: makeEntries },
+  { open: '<div id="glossaryEntries" class="glossary-entries fade-up delay-2">', close: "</div>", render: makeEntries },
 ];
 
 const COUNT_RE = /(<span id="glossaryCount">)(\d+)(<\/span>)/;

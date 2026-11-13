@@ -25,9 +25,19 @@ EXTRA = {'assets/articles.json', 'assets/ai-glossary-final.md', 'data/public-cat
          # address is the app's client id (archie_net::mcp_auth::CLIENT_DOCUMENT), and a server
          # fetches it on every sign-in. Moving or editing it breaks every one of those sign-ins.
          'archie/oauth-client.json'}
+# Images no page, stylesheet, script or generator uses (checked 2026-11-13): old screenshots, and
+# the portraits' full-size originals, which the 300px cuts replaced on 2026-11-12. They stay in the
+# repo and off the site, where they were 15 MB of every deploy. stage() stops if a page names one.
+NOT_SERVED = {'assets/Archie-Chat-SS.png', 'assets/Archie-Name-SS.png', 'assets/Archie-Overview-SS.png',
+              'assets/api.png', 'assets/business-calendar-ss.png', 'assets/business-inquiry-ss.png',
+              'assets/evening-ss.png', 'assets/hevy-appt-ss.png', 'assets/jack-portrait.PNG',
+              'assets/jett-portrait.png', 'assets/jett-portrait square.png'}
+TEXT_TYPES = {'.html', '.css', '.js', '.json', '.md', '.txt', '.xml', '.webmanifest'}
 
 def public_file(rel):
     p = Path(rel)
+    if rel in NOT_SERVED:
+        return False
     if any(part.startswith('.') for part in p.parts) and rel not in ROOT_FILES | EXTRA:
         return False
     if rel in ROOT_FILES | EXTRA:
@@ -59,6 +69,14 @@ def stage(destination):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
         count += 1
+    kept_off = {r for rel in NOT_SERVED for r in (rel, rel.replace(' ', '%20'))}
+    for staged in destination.rglob('*'):
+        if staged.suffix in TEXT_TYPES:
+            text = staged.read_text(encoding='utf-8', errors='ignore')
+            used = sorted(r for r in kept_off if r in text)
+            if used:
+                raise ValueError(f'{staged.relative_to(destination)} uses {used[0]}, which NOT_SERVED '
+                                 'keeps off the site; take it off that list to publish it again')
     revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     (destination / 'deployment.json').write_text(json.dumps({'revision': revision}) + '\n')
     print(f'Staged {count} public files in {destination}')

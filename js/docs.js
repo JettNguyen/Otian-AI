@@ -47,7 +47,6 @@
 
     function close() {
       box.hidden = true;
-      input.setAttribute("aria-expanded", "false");
     }
 
     function show() {
@@ -77,7 +76,6 @@
         ? (hits.length === 1 ? "1 match" : hits.length + " matches")
         : "Nothing matches “" + input.value.trim() + "”. Try one word, such as email or Telegram.";
       box.hidden = false;
-      input.setAttribute("aria-expanded", "true");
     }
 
     input.addEventListener("focus", load);

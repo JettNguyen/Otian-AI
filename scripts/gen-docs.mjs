@@ -591,7 +591,7 @@ function searchBox(ctx) {
   return `<div class="dx-search" role="search">
             ${ico("nav/search.svg").replace("{P}", ctx.P)}
             <label class="sr-only" for="dx-q">Search the docs</label>
-            <input id="dx-q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" data-index="${ctx.D}search.json" data-root="${ctx.D}" aria-controls="dx-hits" aria-expanded="false" />
+            <input id="dx-q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" data-index="${ctx.D}search.json" data-root="${ctx.D}" aria-controls="dx-hits" />
             <kbd class="dx-kbd" aria-hidden="true">/</kbd>
             <div class="dx-hits" id="dx-hits" hidden><p class="dx-hits-n" aria-live="polite"></p><ul></ul></div>
           </div>`;

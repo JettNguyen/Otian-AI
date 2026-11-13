@@ -29,7 +29,7 @@ EXTRA = {'assets/articles.json', 'assets/ai-glossary-final.md', 'data/public-cat
 # the portraits' full-size originals, which the 300px cuts replaced on 2026-11-12. They stay in the
 # repo and off the site, where they were 15 MB of every deploy. stage() stops if a page names one.
 NOT_SERVED = {'assets/Archie-Chat-SS.png', 'assets/Archie-Name-SS.png', 'assets/Archie-Overview-SS.png',
-              'assets/api.png', 'assets/business-calendar-ss.png', 'assets/business-inquiry-ss.png',
+              'assets/business-calendar-ss.png', 'assets/business-inquiry-ss.png',
               'assets/evening-ss.png', 'assets/hevy-appt-ss.png', 'assets/jack-portrait.PNG',
               'assets/jett-portrait.png', 'assets/jett-portrait square.png'}
 TEXT_TYPES = {'.html', '.css', '.js', '.json', '.md', '.txt', '.xml', '.webmanifest'}

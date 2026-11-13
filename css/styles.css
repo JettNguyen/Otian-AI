@@ -17511,6 +17511,21 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    which is what made the wrap a stacking context. */
 .day-scene-wrap { isolation: isolate; }
 .day-scene-wrap::before, .day-scene-wrap::after { z-index: -1; }
+/* HIDDEN UNTIL THE FIRST FRAME HAS FITTED IT (2026-11-13). The page paints before js/home.js runs,
+   so the scene was drawn at its design size first, then jumped to the size and pose the first frame
+   gave it: 0.174 of the page's 0.181 layout shift at 1440 by 900. That frame writes the fit and the
+   poses and then adds is-driven, so the scene is now drawn once, where it stays. Behind html.js, as
+   .fade-up is, so a page that runs no script shows it from the start, and the animation shows it
+   after two seconds if home.js never runs. Opacity and not visibility, because the phone's job
+   card sets its own visibility and showed through a hidden wrap, alone on an empty stage.
+   AND HELD A BEAT PAST is-driven, because the fit is not done in one frame everywhere: a phone
+   settles on the second, once is-driven has changed its rows, and the dinner card on the third.
+   150ms covers that at 20 frames a second. The dinner card waits the same way, after its own two
+   blocks. */
+html.js .day-stage:not(.is-driven) .day-scene-wrap { opacity: 0; animation: day-scene-late 0s 2s forwards; }
+html.js .day-stage.is-driven .day-scene-wrap { animation: day-scene-hold .15s; }
+@keyframes day-scene-late { to { opacity: 1; } }
+@keyframes day-scene-hold { from, to { opacity: 0; } }
 /* The lamp behind the objects grows and warms with the room instead of being turned down for it.
    It used to drop to 9% on .is-night, which left the two mockups cut out of a dark ground with
    nothing under them, and the phone going light with the page made that plainer. Both the size and
@@ -21372,6 +21387,13 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
   .day-stage.is-driven .hm-evening-slot { margin: 0; padding: 0; transform: none; }
   .day-stage.is-driven .day-cap[data-act="0"] .hm-evening-slot.day-beat:not(.is-on) { margin-top: 0; }
   .day-stage.is-driven .hm-evening { position: absolute; left: 0; right: 0; top: var(--dn-y, 0px); width: fit-content; max-width: 100%; margin: 0 auto; }
+}
+/* At both widths the card waits for the first frame, as the scene does and for its reason (see
+   .day-scene-wrap): is-driven moves it out of its caption to stand over the mockups, and wide, that
+   move was the biggest shift on load after the scene's own (2026-11-13). */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .day-stage:not(.is-driven) .hm-evening { opacity: 0; animation: day-scene-late 0s 2s forwards; }
+  html.js .day-stage.is-driven .hm-evening { animation: day-scene-hold .15s; }
 }
 .day-cap .hm-hero-story { font-size: var(--fs-sm); font-weight: 600; color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: .18em; }
 /* The line under the button and the three promises under it (2026-10-05). Both were small gray

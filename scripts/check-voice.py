@@ -310,8 +310,9 @@ def scan(rel, src, soft=False):
         for rule, name, rx in PATTERNS + (SOFT if soft else []):
             if rx.search(text) and not allowed(rel, name, text):
                 hits.append((rule, name, tag, text))
-        # A question answered in the same heading ("Hit a ceiling? Tell us") is one thought.
-        heading_ss = sentences(text)
+        # A question answered in the same heading ("Hit a ceiling? Tell us") is one thought, and a
+        # step's number is not a sentence ("2. The agent is switched off" is one).
+        heading_ss = sentences(re.sub(r"^\d{1,2}\.\s+", "", text))
         if (tag in HEADINGS and len(heading_ss) > 1 and not heading_ss[0].rstrip().endswith("?")
                 and not allowed(rel, "heading-two-sentences", text)):
             hits.append(("APHORISM", "heading-two-sentences", tag, text))

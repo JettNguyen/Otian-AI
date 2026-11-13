@@ -151,7 +151,7 @@ function page(s, all, levels, C, preview) {
   /* This level's videos as a row of numbered stops: where you are, and every other one a press away. */
   const mates = all.filter((x) => x.level === s.level);
   const dots = mates.map((x, k) =>
-    `<li><a href="../${x.slug}/" data-slug="${x.slug}" title="${attr(named(x))}" aria-label="${attr(named(x))}"${x === s ? ' aria-current="page"' : ""}>${k + 1}</a></li>`).join("\n            ");
+    `<li><a href="../${x.slug}/" data-slug="${x.slug}" title="${attr(named(x))}" aria-label="${k + 1}. ${attr(named(x))}"${x === s ? ' aria-current="page"' : ""}>${k + 1}</a></li>`).join("\n            ");
 
   const notes = s.notes && s.notes.length
     ? `
@@ -164,7 +164,9 @@ function page(s, all, levels, C, preview) {
     : "";
 
   const words = s.words.map((p) => `<p>${esc(p)}</p>`).join("\n            ");
-  const playLabel = `Play the video: ${plain(s.title)}, ${length(s)}`;
+  /* Starts with the words on the button, the length chip, so the name a voice user hears and the
+     one they read match (WCAG 2.5.3). */
+  const playLabel = `${short(s)}: play the video ${plain(s.title)}`;
 
   const main = `  <main id="main" class="lib">
     ${BANNER}

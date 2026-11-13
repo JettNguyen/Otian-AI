@@ -9,7 +9,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-10-20",
-      "updated_at": "2026-10-20",
+      "updated_at": "2026-11-13",
       "section": "good_to_know",
       "setup_key": "",
       "video": "",
@@ -17,7 +17,7 @@
       "body": [
         {
           "type": "text",
-          "text": "Your agent runs on the computer Archie is on, so it pauses whenever that computer sleeps, shuts down, or goes in a bag. If you have a computer that can stay plugged in at home (a desktop, or an older Mac or PC you no longer carry), Archie can live there instead, and your agent answers all day and night."
+          "text": "Your agent runs on the computer Archie is on, so it pauses whenever that computer sleeps, shuts down, or goes in a bag. If you have a computer that can stay plugged in at home (a desktop, or an older Mac or PC you no longer carry), Archie can live there instead. Then your agent answers all day and night."
         },
         {
           "type": "heading",
@@ -44,10 +44,10 @@
           "type": "steps",
           "items": [
             "On the computer you use now, open the Account page, then Backups in the left sidebar, and press Save a backup. Save it somewhere the other computer can open, like a USB stick or your cloud drive.",
-            "Archie then asks whether you are moving. Press Switch off the agents here, so the two computers never both answer the same message.",
+            "Archie then asks if you are moving. Press Switch off the agents here, so the two computers never both answer the same message.",
             "Install Archie on the home computer and sign in. If it asks whether you have used Archie on another computer, press Open a backup to pick the file. If it doesn't ask, open the Account page, then Backups, and under Restore a backup press Choose a file.",
             "Press Restore and restart Archie. Your agents come back with their memory, skills, routines, and documents.",
-            "Archie then lists what to connect again, because a backup never holds passwords or keys: your own AI account if you use one, your chat app, your email, your calendar, and any website your agent was signed in to. Go down the list one row at a time.",
+            "Archie then lists what to connect again, because a backup never holds passwords or keys. The list names your own AI account if you use one, your chat app, your email, your calendar, and any website your agent was signed in to. Go down the list one row at a time.",
             "Connect your phone again: on your agent's Setup tab, under Chat app, press Archie Mobile, then Show the code, and scan it from Archie Mobile.",
             "On a Mac, allow anything macOS asks for again (reading Messages, notifications, and the microphone), because those permissions belong to each computer."
           ]
@@ -236,7 +236,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-08-15",
-      "updated_at": "2026-09-16",
+      "updated_at": "2026-11-13",
       "section": "connect_ai_account",
       "setup_key": "provider:custom",
       "video": "api-key.mp4",
@@ -271,7 +271,7 @@
             },
             {
               "text": "Find the model you want and copy its exact name into the Model box.",
-              "note": "Use the technical id from their code examples, not the marketing name."
+              "note": "Use the technical id from their code examples instead of the marketing name."
             },
             {
               "text": "Make an API key on their site, usually under API Keys, and give it a name.",
@@ -300,7 +300,7 @@
         {
           "type": "list",
           "items": [
-            "Refused right away: check the address first. It must be the API address from the docs, including the version part (usually /v1), not the provider's homepage.",
+            "Refused right away: check the address first. It must be the API address from the docs, including the version part (usually /v1), rather than the provider's homepage.",
             "The key works but replies mention the model: copy the model name again, with every dash and dot.",
             "Saved, but no answers: the account may have no credit, which Archie can't check. Add credit on their site."
           ]
@@ -488,7 +488,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-08-24",
-      "updated_at": "2026-10-17",
+      "updated_at": "2026-11-13",
       "section": "set_up_what_agent_does",
       "setup_key": "",
       "video": "",
@@ -505,7 +505,7 @@
         {
           "type": "list",
           "items": [
-            "What it reads: when you ask about your mail, the messages your question is about. If you add Email Manager or Package Tracker and press Start reading my mail when your agent asks, it also reads new mail in your inbox every few minutes, skipping newsletters, promotions, and mail from no-reply addresses before the AI sees them.",
+            "What it reads: when you ask about your mail, the messages your question is about. If you add Email Manager or Package Tracker and press Start reading my mail when your agent asks, it also reads new mail in your inbox every few minutes. It skips newsletters, promotions, and mail from no-reply addresses before the AI sees them.",
             "Where it goes: from this computer straight to the AI company on your own AI account, the way everything it thinks about does. On our AI (free credits, or a plan with the AI included) it reads none of your mail, so none of it reaches our server.",
             "What it never does: delete your mail, or send an email you have not approved. It sends one only after you approve its draft, and only if you checked Let it send replies.",
             "To switch it off: on this agent's Connections tab, under Email, calendar, files, press the trash can on its row. Your mail stays where it is, and your agent stops reading it."
@@ -752,7 +752,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-08-16",
-      "updated_at": "2026-10-19",
+      "updated_at": "2026-11-13",
       "section": "connect_messaging_app",
       "setup_key": "channel:imessage",
       "read_minutes": 3,
@@ -833,7 +833,7 @@
             "Make an Apple ID for your agent at account.apple.com. On the Mac running Archie, open Messages, click Messages in the menu bar, then Settings, then iMessage, sign out of yours and sign in with the new one.",
             "On Archie’s Chat app card, pick iMessage, choose An Apple ID of its own, and type the phone number or email you'll text it from. Press Connect.",
             "Text your agent's Apple ID once from your phone. Then switch on your agent and send the six-digit code in that conversation.",
-            "Text Replies reads whichever Apple ID Messages on this Mac is signed into, so on this setup it reads your agent's texts, not yours."
+            "Text Replies reads whichever Apple ID Messages on this Mac is signed into, so on this setup it reads only your agent's texts."
           ]
         },
         {
@@ -1114,7 +1114,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-09-21",
+      "updated_at": "2026-11-13",
       "section": "connect_messaging_app",
       "setup_key": "channel:slack",
       "video": "channel-slack.mp4",
@@ -1161,8 +1161,8 @@
               "text": "Open Features → Event Subscriptions and enable it. Expand “Subscribe to bot events”, click Add Bot User Event, add message.channels, message.groups, message.im, and message.mpim (leave one out and it can’t hear you there), then click Save Changes (bottom right)."
             },
             {
-              "text": "Open Features → OAuth & Permissions, scroll to Scopes → Bot Token Scopes, click Add an OAuth Scope, and add each of these: chat:write, channels:history, groups:history, im:history, mpim:history, files:read, files:write, users:read.",
-              "note": "The four history scopes are the places it can be spoken to: public channels, private channels, direct messages, and group messages. files:write lets a file it makes arrive in Slack; users:read lets it call you by name."
+              "text": "Open Features → OAuth & Permissions, then scroll to Scopes → Bot Token Scopes and click Add an OAuth Scope. Add each of these: chat:write, channels:history, groups:history, im:history, mpim:history, files:read, files:write, users:read.",
+              "note": "The four history scopes are the places it can be spoken to: public channels, private channels, direct messages, and group messages. The files:write scope lets a file it makes arrive in Slack, and users:read lets it call you by name."
             },
             {
               "text": "Scroll back to the top of that page, click Install to Workspace, then Allow. Copy the Bot User OAuth Token (it starts with xoxb-) into the Bot token box on Archie’s Chat app card."
@@ -2435,7 +2435,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-11-12",
+      "updated_at": "2026-11-13",
       "section": "set_up_what_agent_does",
       "setup_key": "",
       "video": "",
@@ -2461,7 +2461,7 @@
         },
         {
           "type": "note",
-          "text": "Routines run only while your agent is running on this computer. If the computer is asleep or Archie has been quit when one is due, it runs once they are back, unless it is too late to be worth it, and the Routines tab says when one was missed. It also offers to wake the computer a few minutes before each."
+          "text": "Routines run only while your agent is running on this computer. If the computer is asleep or Archie has been quit when one is due, it runs once they are back, unless it is too late to be worth it. The Routines tab says when one was missed. It also offers to wake the computer a few minutes before each."
         },
         {
           "type": "heading",
@@ -2492,7 +2492,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-10-31",
+      "updated_at": "2026-11-13",
       "section": "set_up_what_agent_does",
       "setup_key": "",
       "video": "",
@@ -2518,7 +2518,7 @@
         },
         {
           "type": "text",
-          "text": "About 10 cents a look-up, the searches and the pages they bring back included, billed to your AI account, with no separate subscription. At most five searches a job unless a skill's page says otherwise; a deeper run, from the Researcher's Dig deeper switch, asks for twenty, so it is slower and comes to about 40 cents a run."
+          "text": "About 10 cents a look-up, the searches and the pages they bring back included, billed to your AI account, with no separate subscription. At most five searches a job unless a skill's page says otherwise. A deeper run, from the Researcher's Dig deeper switch, asks for twenty, so it is slower and comes to about 40 cents a run."
         },
         {
           "type": "note",
@@ -2647,7 +2647,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-10-10",
-      "updated_at": "2026-10-18",
+      "updated_at": "2026-11-13",
       "section": "getting_started",
       "read_minutes": 3,
       "body": [
@@ -2717,7 +2717,11 @@
         },
         {
           "type": "text",
-          "text": "Follow Up Boss connects with a key. In Follow Up Boss, open Admin, then API, press Create API Key, and paste the key on the Connections tab, under Apps. Then ask your agent to bring in your people, deals, or tasks. They come in on a card you look over, nothing is added to your lists until you press Add, and nothing in Follow Up Boss is changed. GoHighLevel connects directly. Make a token for it in your GoHighLevel sub-account's Settings, under Private Integrations, and paste it on the Connections tab, under Apps."
+          "text": "Follow Up Boss connects with a key. In Follow Up Boss, open Admin, then API, press Create API Key, and paste the key on the Connections tab, under Apps. Then ask your agent to bring in your people, deals, or tasks. They come in on a card you look over, nothing is added to your lists until you press Add, and nothing in Follow Up Boss is changed."
+        },
+        {
+          "type": "text",
+          "text": "GoHighLevel connects directly. Make a token for it in your GoHighLevel sub-account's Settings, under Private Integrations, and paste it on the Connections tab, under Apps."
         },
         {
           "type": "text",
@@ -2729,7 +2733,11 @@
         },
         {
           "type": "text",
-          "text": "Texting works only on a Mac, through its Messages app; Windows has no texting. The Text Replies add-on reads the texts that arrive there and writes a reply to each one that needs it, and nothing goes out until you press Send. It needs an AI account of your own, so it does not run on the free trial's credits or a plan with the AI included. Phone calls are a switch of their own: with Call businesses on, on the Setup tab under What it can do, your agent can phone a business on your own Bland account, after you press Place the call."
+          "text": "Texting works only on a Mac, through its Messages app; Windows has no texting. The Text Replies add-on reads the texts that arrive there and writes a reply to each one that needs it, and nothing goes out until you press Send. It needs an AI account of your own, so it does not run on the free trial's credits or a plan with the AI included."
+        },
+        {
+          "type": "text",
+          "text": "Phone calls are a switch of their own. With Call businesses on, on the Setup tab under What it can do, your agent can phone a business on your own Bland account, after you press Place the call."
         },
         {
           "type": "heading",
@@ -2753,7 +2761,11 @@
         },
         {
           "type": "text",
-          "text": "The Apps list on the Connections tab has more, with a search box. Most of those were built from each company's published instructions and have not yet been tried on a real account. For an app that is not there, press Something else, give it a name, the web address of its API and the key that app gave you, then write a skill that uses it. This works only with an app that hands out a key."
+          "text": "The Apps list on the Connections tab has more, with a search box. Most of those were built from each company's published instructions and have not yet been tried on a real account."
+        },
+        {
+          "type": "text",
+          "text": "For an app that is not there, press Something else, give it a name, the web address of its API and the key that app gave you, then write a skill that uses it. This works only with an app that hands out a key."
         },
         {
           "type": "note",
@@ -2839,7 +2851,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-09-09",
-      "updated_at": "2026-10-21",
+      "updated_at": "2026-11-13",
       "section": "getting_started",
       "read_minutes": 3,
       "body": [
@@ -2869,7 +2881,11 @@
         },
         {
           "type": "text",
-          "text": "Your agent cannot run a command or a script on this computer. It has a fixed list of actions, like reading a file you added or writing a draft. The only code it writes is a short Python program it runs inside Archie on a Mac, with no internet, seeing only copies of files you gave it, and the program is under its answer. With Computer control on, it can also use websites, and on a Mac the apps you allow. It never uses a terminal or any app that runs commands, on a Mac or Windows, and none can be added."
+          "text": "Your agent cannot run a command or a script on this computer. It has a fixed list of actions, like reading a file you added or writing a draft. The only code it writes is a short Python program it runs inside Archie on a Mac, with no internet, seeing only copies of files you gave it, and the program is under its answer."
+        },
+        {
+          "type": "text",
+          "text": "With Computer control on, it can also use websites, and on a Mac the apps you allow. It never uses a terminal or any app that runs commands, on a Mac or Windows, and none can be added."
         },
         {
           "type": "heading",
@@ -2878,7 +2894,7 @@
         {
           "type": "list",
           "items": [
-            "No text messages of its own, and no phone calls unless you switch Call businesses on, on the Setup tab under What it can do: then only to businesses, on your own Bland account, after you press Place the call on a card that shows the words first.",
+            "No text messages of its own, and no phone calls unless you switch Call businesses on, on the Setup tab under What it can do. Then it calls only businesses, on your own Bland account, after you press Place the call on a card that shows the words first.",
             "No spending unless you switch Buying on, under Computer control: then only at shops you list, up to amounts you set, after you tap Press it for me. Every add-on is included, so nothing inside Archie is for sale.",
             "No sending on its own. An email or text reply goes out when you press Send, or at a time you set.",
             "On a website, it stops before any press it could not undo (submit, pay, book, order, sign up, delete, cancel) and shows you the page. Tap Press it for me, or press it in the window.",
@@ -2891,7 +2907,11 @@
         },
         {
           "type": "text",
-          "text": "If an email, document, or message gives new or changed payment or wiring instructions, your agent is told never to pass them on, forward them, or act on them, even if you ask, and to tell you to confirm by phone at a number you already have, such as the title company's. Unlike the other limits here, this one is an instruction the AI follows, and an AI can get it wrong, so read anything about moving money yourself."
+          "text": "If an email, document, or message gives new or changed payment or wiring instructions, your agent is told never to pass them on, forward them, or act on them, even if you ask. It is also told to tell you to confirm by phone at a number you already have, such as the title company's."
+        },
+        {
+          "type": "text",
+          "text": "Unlike the other limits here, this one is an instruction the AI follows, and an AI can get it wrong, so read anything about moving money yourself."
         },
         {
           "type": "heading",
@@ -2992,7 +3012,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-10-19",
+      "updated_at": "2026-11-13",
       "section": "getting_started",
       "setup_key": "",
       "video": "",
@@ -3006,7 +3026,7 @@
           "type": "list",
           "items": [
             "A Mac or Windows computer that stays on and plugged in. Your agent answers only while it is awake; the guide \"Your agent stopped replying\" shows how to stop it sleeping.",
-            "An Otian account and a plan, signed in through a browser window: $30 a month or $299 a year, or $59 a month or $599 a year with the AI included (then skip the next item). Switch or stop any time. New accounts start on free credits. That account is the only one on our side, and it holds your email address and which plan you're on. Never a conversation we can read.",
+            "An Otian account and a plan, signed in through your browser: $30 a month or $299 a year. Or $59 a month or $599 a year with the AI included (then skip the next item). Switch or stop any time. New accounts start on free credits. That account is the only one on our side, and it holds your email address and your plan. Never a conversation we can read.",
             "An AI account with a key, from a company in the guide Picking your AI account. Your agent thinks with it, and you pay that company directly. With the free credits you need none on your first day. Groq is very cheap after that, but needs a card.",
             "Internet on that computer: every reply is a round trip to the AI company. A cable from your router is steadier than Wi-Fi.",
             "Optional: a chat app (Telegram, Discord, Slack, or Matrix; on a Mac, iMessage needs no account), to reach you on your phone. Without one, your agent answers in Archie's Chat tab."
@@ -3096,7 +3116,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-10-20",
+      "updated_at": "2026-11-13",
       "section": "good_to_know",
       "setup_key": "",
       "video": "",
@@ -3108,7 +3128,7 @@
         },
         {
           "type": "text",
-          "text": "Your agent pauses when Archie closes or the computer sleeps. Nothing is lost, but a 7:30am briefing needs the computer awake then, or, after a routine was missed while it slept, the Wake this computer button on that routine's row, which wakes it before each routine from then on."
+          "text": "Your agent pauses when Archie closes or the computer sleeps. Nothing is lost, but a 7:30am briefing needs the computer awake then. If a routine was missed while it slept, its row has a Wake this computer button, which wakes it before each routine from then on."
         },
         {
           "type": "text",
@@ -3130,7 +3150,7 @@
           "items": [
             "On Windows: open Control Panel, then Power Options, then \"Choose what closing the lid does\", and set \"When I close the lid\" to \"Do nothing\" for Plugged in.",
             "On a Mac: a closed lid sleeps it unless it is plugged in with an external display connected (clamshell mode). Otherwise macOS has no supported way to keep it awake shut, so leave the lid open.",
-            "Either way, leave it where it can shed heat, not in a drawer or under a cushion."
+            "Either way, leave it where it can shed heat instead of in a drawer or under a cushion."
           ]
         },
         {
@@ -3183,7 +3203,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-10-10",
-      "updated_at": "2026-10-28",
+      "updated_at": "2026-11-13",
       "section": "getting_started",
       "read_minutes": 4,
       "body": [
@@ -3201,11 +3221,11 @@
         },
         {
           "type": "text",
-          "text": "To answer you, your agent sends the AI company you connected your message, the recent conversation, what it knows about you, and what it read for you, such as an email, straight from this computer on your account. Web searches run on that company's servers."
+          "text": "To answer you, your agent sends the AI company you connected your message, the recent conversation, what it knows about you, and what it read for you, such as an email. It sends them straight from this computer on your account. Web searches run on that company's servers."
         },
         {
           "type": "text",
-          "text": "Until you connect an AI account of your own, the AI is ours (the free trial's credits, or a plan with the AI included): each request passes through our server, which writes down what it cost, never what it said, keeps no copy, and sends it on to Anthropic. Your agent reads no email or texts on our AI. Connecting your own account stops this from your agent's next start."
+          "text": "Until you connect an AI account of your own, the AI is ours (the free trial's credits, or a plan with the AI included). Each request passes through our server, which writes down what it cost, never what it said, keeps no copy, and sends it on to Anthropic. Your agent reads no email or texts on our AI. Connecting your own account stops this from your agent's next start."
         },
         {
           "type": "heading",
@@ -3302,7 +3322,7 @@
       "author": "Otian AI",
       "visibility": "public",
       "created_at": "2026-07-27",
-      "updated_at": "2026-10-14",
+      "updated_at": "2026-11-13",
       "section": "bring_agent_online",
       "setup_key": "",
       "video": "",
@@ -3393,7 +3413,7 @@
         {
           "type": "list",
           "items": [
-            "Each chat app keeps its own approved list. Only three things reset one: pasting a different connection code for that app, pressing Disconnect on it on the Setup tab under Chat app (which resets this agent only), or removing its saved code on the Settings page, under Saved keys (which resets every agent using it).",
+            "Each chat app keeps its own approved list. Only three things reset one. The first is pasting a different connection code for that app. The second is pressing Disconnect on it on the Setup tab under Chat app (which resets this agent only). The third is removing its saved code on the Settings page, under Saved keys (which resets every agent using it).",
             "Someone got no reply: they are told once that they aren’t approved, then your agent stays quiet for about an hour. Approve them and ask them to write again.",
             "Reset access makes the agent forget its owner and every guest, and issues a new code. It answers nobody until it is claimed again."
           ]

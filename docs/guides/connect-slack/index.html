@@ -414,7 +414,7 @@
           <p class="dx-kicker">Connect your chat app</p>
           <h1>Connecting Slack</h1>
           <p class="dx-lede">Create a Slack app, switch on what Slack needs, install it in your workspace, and paste its two tokens into Archie.</p>
-          <p class="dx-meta"><span><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/clock.svg&quot;)" aria-hidden="true"></span>3 min read</span><span>Last checked September 21, 2026</span></p>
+          <p class="dx-meta"><span><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/clock.svg&quot;)" aria-hidden="true"></span>3 min read</span><span>Last checked November 13, 2026</span></p>
         </header>
         <p class="dx-same">This guide is also in Archie: press Resources in the sidebar, then Guides.</p>
         <details class="dx-toc-m"><summary>On this page</summary><ul><li><a href="#before-you-start">Before you start</a></li><li><a href="#youll-know-it-worked-when">You’ll know it worked when</a></li><li><a href="#if-something-goes-wrong">If something goes wrong</a></li></ul></details>
@@ -440,8 +440,8 @@
           </li><li>
             <p>Open Features → Event Subscriptions and enable it. Expand “Subscribe to bot events”, click Add Bot User Event, add message.channels, message.groups, message.im, and message.mpim (leave one out and it can’t hear you there), then click Save Changes (bottom right).</p>
           </li><li>
-            <p>Open Features → OAuth &amp; Permissions, scroll to Scopes → Bot Token Scopes, click Add an OAuth Scope, and add each of these: chat:write, channels:history, groups:history, im:history, mpim:history, files:read, files:write, users:read.</p>
-            <p class="dx-aside">The four history scopes are the places it can be spoken to: public channels, private channels, direct messages, and group messages. files:write lets a file it makes arrive in Slack; users:read lets it call you by name.</p>
+            <p>Open Features → OAuth &amp; Permissions, then scroll to Scopes → Bot Token Scopes and click Add an OAuth Scope. Add each of these: chat:write, channels:history, groups:history, im:history, mpim:history, files:read, files:write, users:read.</p>
+            <p class="dx-aside">The four history scopes are the places it can be spoken to: public channels, private channels, direct messages, and group messages. The files:write scope lets a file it makes arrive in Slack, and users:read lets it call you by name.</p>
           </li><li>
             <p>Scroll back to the top of that page, click Install to Workspace, then Allow. Copy the Bot User OAuth Token (it starts with xoxb-) into the Bot token box on Archie’s Chat app card.</p>
           </li><li>

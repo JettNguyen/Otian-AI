@@ -2290,7 +2290,10 @@ summary,
    is what they are evidence for, and they are not in the nav: a nav entry promises a page, and
    clicking one of these puts a file in your downloads folder instead. The icon and the (PDF)
    both say so, because one of them is the only warning a reader on a phone plan gets. */
-.footer-nav-links a.footer-doc-link {
+/* Only while the link carries its icon. The 2026-09-14 menu rewrite dropped the svg from all three
+   copies and left this grid, so the label sat alone in the 14px icon column and broke after every
+   word ("The / Otian / Standard / (PDF)"). Without an icon the link is an ordinary footer row. */
+.footer-nav-links a.footer-doc-link:has(svg) {
   display: grid;
   grid-template-columns: 14px 1fr;
   align-items: start;

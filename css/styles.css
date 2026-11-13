@@ -3570,6 +3570,11 @@ summary,
   color: var(--c-gold-ink);
 }
 
+/* Light only: at 10px the two inks on their own washes measured 4.21:1 (green) and 4.45:1 (gold).
+   A fifth of the page's ink in each lands them at 4.9 and 5.1. Dark already clears it. */
+html:not([data-theme="dark"]) .help-verdict-fine { color: color-mix(in srgb, var(--c-green-ink) 80%, var(--text-primary)); }
+html:not([data-theme="dark"]) .help-verdict-fix { color: color-mix(in srgb, var(--c-gold-ink) 80%, var(--text-primary)); }
+
 /* The filter, which is the page arguing its own case: the counts on the buttons say nine to five
    before anybody presses anything. */
 .help-filters {
@@ -3628,9 +3633,10 @@ summary,
 .help-dot-fine { background: var(--c-green); }
 .help-dot-fix { background: var(--c-gold); }
 
+/* Full ink, not faded. At 0.65 opacity the counts measured 2.6 to 3.5:1 in both themes, worst on
+   the pressed filter, and a number a reader is meant to compare has to be readable. */
 .help-count {
   font-variant-numeric: tabular-nums;
-  opacity: 0.65;
 }
 
 .help-group-note {
@@ -7304,6 +7310,10 @@ html.js .fade-up:not(.visible) {
    with: the pricing table's cards are already lifted and the homepage's three are barely off
    the band. */
 .plan-card.plan-card--lead { box-shadow: var(--lift-lg); }
+/* On the dark lead card the muted ink measures 4.35:1 against the warmed ground, so the price's
+   "a month" and the fine print take the secondary ink there (4.9:1). */
+[data-theme="dark"] .plan-card--lead .plan-fine,
+[data-theme="dark"] .plan-card--lead .price-card-amount span { color: var(--text-secondary); }
 .hm-plan.hm-plan--lead { box-shadow: var(--lift-md); }
 .plan-flag {
   position: absolute;
@@ -17542,6 +17552,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-clock-time i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
 .day-hint { position: relative; grid-column: 2; grid-row: 1; justify-self: center; align-self: end; margin-bottom: 14px; font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; gap: 7px; z-index: 3; }
 .day-hint.is-off { opacity: 0; }
+/* The dark hero's glow puts a warm brown under the cue, where the secondary ink is 3.9:1. */
+[data-theme="dark"] .day-hint { color: var(--text-primary); }
 /* The in-flow cue is the phone's, and the one in the stage's grid is the wide screen's. Each is
    display:none at the other's width rather than moved, because they sit in different boxes: one
    under the scene, one under the button. See index.html beside the second one. */
